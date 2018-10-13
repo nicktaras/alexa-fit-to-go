@@ -1,4 +1,4 @@
-# Alexa-Fit-2-Go
+# Alexa-Fit-to-Go
 An Alexa Skill to enable better fitness
 
 # Usage of App
