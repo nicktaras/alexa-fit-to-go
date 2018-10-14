@@ -64,6 +64,8 @@ const LaunchRequestHandler = {
 // Monetise:
 // Exercise routines
 // Advertisement?
+// Extend using Fitbit, Garmin, Apple Watch to track progress
+// Create UI to demonstract exercises
 
 // Handle alternative responses
 // Cancel, Help and help areas (make help sub trees)
