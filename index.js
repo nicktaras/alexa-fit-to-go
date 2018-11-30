@@ -9,8 +9,25 @@
 const Alexa = require('ask-sdk-core');
 const https = require('https');
 
-// Custom Handlers
-const JokeIntentHandler = require('./JokeIntentHandler');
+// Add Stores
+const tipStore = require('./tipStore');
+const jokeStore = require('./jokeStore');
+
+// Common Util Methods
+const { getRandomItemFromArr } = require('./utils');
+
+// // Application state 
+// const { getApplicationState, 
+//         setApplicationState, 
+//         setToNextSubState 
+//       } = require('./applicationState/applicationState');
+// // apply store state
+// {
+//   nameRef: 'init', 
+//   id: 0, 
+//   step: 0;
+// }
+// const applicationState = getApplicationState();
 
 // Application Launch handler.
 const LaunchRequestHandler = {
@@ -26,6 +43,8 @@ const LaunchRequestHandler = {
         .withLinkAccountCard()
         .getResponse();
     } else {
+
+      // if the application is in its initial state and the user is logged in.
       try {
         const accessToken = handlerInput.requestEnvelope.context.System.user.accessToken;
         const fbUserName = await getFbUser(accessToken);
@@ -43,6 +62,15 @@ const LaunchRequestHandler = {
           .withLinkAccountCard()
           .getResponse();
       }
+      // } else  {
+      //   // TODO jump to last state.
+      //   // e.g. if the user was doing an exercise let them return or restart the app.
+      //   let speechText = "It looks like you didn't complete your previous warm up exercise, would you like to return?";
+      //     return handlerInput.responseBuilder
+      //       .speak(speechText)
+      //       .withLinkAccountCard()
+      //       .getResponse();
+      // }
     }
   }
 };
@@ -73,43 +101,63 @@ const getFbUser = (accessToken) => {
   });
 };
 
-// Responds to the initial user request.
-const ActivityIntentHandler = {
+// Responds to a user who is going to do sport such as soccer.
+const SportIntentHandler = {
   canHandle(handlerInput) {
-     return handlerInput.requestEnvelope.request.type === 'IntentRequest'
-      && handlerInput.requestEnvelope.request.intent.name === 'activity_intent';
+     return handlerInput.requestEnvelope.request.type === 'IntentRequest' && 
+       handlerInput.requestEnvelope.request.intent.name === 'sport_intent'
   },
   handle(handlerInput) {
-    // <amazon:effect name="whispered">I am not a real human.</amazon:effect>
-    let speechText = "Great, would you like to do some warm up exercises, learn some tips, or hear a related joke?";
+    let speechText = "Great, would you like to do some warm up exercises?";
     return handlerInput.responseBuilder
       .speak(speechText)
       .getResponse();
   }
 };
 
-const TestIntentHandler = {
+// Responds to a user who is going to do an activity like weights or walk the dog.
+const ActivityIntentHandler = {
   canHandle(handlerInput) {
-    return handlerInput.requestEnvelope.request.type === 'IntentRequest'
-      && handlerInput.requestEnvelope.request.intent.name === 'test';
+     return handlerInput.requestEnvelope.request.type === 'IntentRequest' && 
+      handlerInput.requestEnvelope.request.intent.name === 'activity_intent'
   },
   handle(handlerInput) {
-    const speechText = 'Hello World!';
+    let speechText = "Great, would you like to do some warm up exercises?";
     return handlerInput.responseBuilder
       .speak(speechText)
+      .getResponse();
+  }
+};
+
+// aim: Great, did you know .... Would you like to do some warm up exercises, a joke or some tips?
+// request.intent.slots.exercise.resolutions.resolutionsPerAuthority[0].values[0].value.name
+
+const JokeIntentHandler = {
+  canHandle(handlerInput) {
+    return handlerInput.requestEnvelope.request.type === 'IntentRequest'
+      && handlerInput.requestEnvelope.request.intent.name === 'joke_intent';
+  },
+  handle(handlerInput) {
+    const speechText = getRandomItemFromArr(jokeStore);
+    return handlerInput.responseBuilder
+      .speak(speechText)
+      .reprompt(speechText)
+      .withSimpleCard('Hello World', speechText)
       .getResponse();
   },
 };
 
-const SportIntentHandler = {
+const TipIntentHandler = {
   canHandle(handlerInput) {
     return handlerInput.requestEnvelope.request.type === 'IntentRequest'
-      && handlerInput.requestEnvelope.request.intent.name === 'sport_intent';
+      && handlerInput.requestEnvelope.request.intent.name === 'tip_intent';
   },
   handle(handlerInput) {
-    const speechText = 'Hello World!';
+    const speechText = getRandomItemFromArr(tipStore);
     return handlerInput.responseBuilder
       .speak(speechText)
+      .reprompt(speechText)
+      .withSimpleCard('Hello World', speechText)
       .getResponse();
   },
 };
@@ -173,40 +221,12 @@ exports.handler = skillBuilder
   .addRequestHandlers(
     LaunchRequestHandler,
     JokeIntentHandler,
-    SportIntentHandler,
+    TipIntentHandler,
     ActivityIntentHandler,
-    TestIntentHandler,
+    SportIntentHandler,
     HelpIntentHandler,
     CancelAndStopIntentHandler,
     SessionEndedRequestHandler
   )
   .addErrorHandlers(ErrorHandler)
   .lambda();
-
-
-// util methods to get data.
-// const getRandomTypeTip = (key) => {
-//   let randomTip = tips[key][Math.floor((Math.random() * tips[key].length) + 0)];
-//   return randomTip;
-// }
-// const getRandomTip = () => {
-//   let randomKey = Object.keys(tips)[Math.floor((Math.random() * Object.keys(tips).length) + 0)]; 
-//   let randomTip = tips[randomKey][Math.floor((Math.random() * tips[randomKey].length) + 0)];
-//   return randomTip;
-// }
-// const tipStore = {
-//   "RANDOM": {
-//     type: 'text',
-//     config: {
-//       responseType: ':tell',
-//       text: getRandomTip()
-//     }
-//   },
-//   "RANDOM_GYM": {
-//     type: 'text',
-//     config: {
-//       responseType: ':tell',
-//       text: getRandomTypeTip('GYM')
-//     }
-//   }
-// }
