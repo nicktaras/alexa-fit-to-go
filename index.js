@@ -27,7 +27,7 @@ const { getRandomItemFromArr } = require('./utils');
 //   id: 0, 
 //   step: 0;
 // }
-// const applicationState = getApplicationState();
+const applicationState = getApplicationState();
 
 // Application Launch handler.
 const LaunchRequestHandler = {
@@ -43,34 +43,35 @@ const LaunchRequestHandler = {
         .withLinkAccountCard()
         .getResponse();
     } else {
-
       // if the application is in its initial state and the user is logged in.
-      try {
-        const accessToken = handlerInput.requestEnvelope.context.System.user.accessToken;
-        const fbUserName = await getFbUser(accessToken);
-        let speechText = "Welcome, " +  fbUserName + " what type of activity or sport will you be doing today?";
-        return handlerInput.responseBuilder
-          .speak(speechText)
-          .reprompt(speechText)
-          .withSimpleCard('fit to go', speechText)
-          .getResponse();
-      } catch (error) {
-        let speechText = "There was an error with fit to go, try again.";
-        console.log('error found:', error);
-        return handlerInput.responseBuilder
-          .speak(speechText)
-          .withLinkAccountCard()
-          .getResponse();
+      if (applicationState.state === 'INIT') {
+        try {
+          const accessToken = handlerInput.requestEnvelope.context.System.user.accessToken;
+          const fbUserName = await getFbUser(accessToken);
+          let speechText = "Welcome, " +  fbUserName + " what type of activity or sport will you be doing today?";
+          return handlerInput.responseBuilder
+            .speak(speechText)
+            .reprompt(speechText)
+            .withSimpleCard('fit to go', speechText)
+            .getResponse();
+        } catch (error) {
+          let speechText = "There was an error with fit to go, try again.";
+          console.log('error found:', error);
+          return handlerInput.responseBuilder
+            .speak(speechText)
+            .withLinkAccountCard()
+            .getResponse();
+        }
+      } else  {
+        // TODO jump to last state.
+        // e.g. if the user was doing an exercise let them return or restart the app.
+        // let speechText = "It looks like you didn't complete your previous warm up exercise, would you like to return?";
+        let speechText = "TO DO. User has loaded application and it is beyond the INIT state.";
+          return handlerInput.responseBuilder
+            .speak(speechText)
+            .withLinkAccountCard()
+            .getResponse();
       }
-      // } else  {
-      //   // TODO jump to last state.
-      //   // e.g. if the user was doing an exercise let them return or restart the app.
-      //   let speechText = "It looks like you didn't complete your previous warm up exercise, would you like to return?";
-      //     return handlerInput.responseBuilder
-      //       .speak(speechText)
-      //       .withLinkAccountCard()
-      //       .getResponse();
-      // }
     }
   }
 };
@@ -122,12 +123,23 @@ const ActivityIntentHandler = {
       handlerInput.requestEnvelope.request.intent.name === 'activity_intent'
   },
   handle(handlerInput) {
-    let speechText = "Great, would you like to do some warm up exercises?";
+    // user says, 'a jog'
+    applicationState.setState({
+      state: 'ACTIVITY',
+      substate: undefined
+    });
+    let speechText = "Great, would you like any tips or warm up exercises?";
     return handlerInput.responseBuilder
       .speak(speechText)
       .getResponse();
   }
 };
+
+// TODO add to Alexa
+// tips please, I would like some tips please, tips.
+// We should make these relevant
+// warm up exercises, I would like some warm up exercises please.
+// JOG warm up exercises on the way.. :) 
 
 // aim: Great, did you know .... Would you like to do some warm up exercises, a joke or some tips?
 // request.intent.slots.exercise.resolutions.resolutionsPerAuthority[0].values[0].value.name
