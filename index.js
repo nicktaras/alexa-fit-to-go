@@ -135,14 +135,20 @@ const ActivityIntentHandler = {
   }
 };
 
-// TODO add to Alexa
+// TODO add to Alexa:
+
 // tips please, I would like some tips please, tips.
-// We should make these relevant
 // warm up exercises, I would like some warm up exercises please.
 // JOG warm up exercises on the way.. :) 
+// We should make these items relevant to the conversation
 
+// TODO make a function to store current intent e.g. going for a jog.
 // aim: Great, did you know .... Would you like to do some warm up exercises, a joke or some tips?
 // request.intent.slots.exercise.resolutions.resolutionsPerAuthority[0].values[0].value.name
+
+// Add conversation handlers for:
+// Warm Up Exercises Please
+// Ready / Next
 
 const JokeIntentHandler = {
   canHandle(handlerInput) {
