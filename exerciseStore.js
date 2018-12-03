@@ -19,14 +19,12 @@ const exerciseStore = {
     type: 'syncMethod',
     config: {
       method: 'repeatedMiddleStep',
-      params: {
-        repetitions: 2,
-        responseType: ':ask',
-        initialInstruction: 'With your legs inline with your hips in a standing position, slowly raise both your heals. ',
-        instruction: 'Hold for one, two, three, seconds. Now raise both heals again. Hold for one, two, three, seconds. Then lower them slowly so they are close to touching the ground. ',
-        finalInstruction: 'Hold for one, two, three, seconds. Now raise both heals again. Hold for one, two, three, seconds. Then lower them to the ground. And rest. ',
-        congratulate: 'Well done! To continue to the next exercise, please tell me when you are ready. Or to re do this exercise say repeat and the number of times you would like to do the exercise. '
-      }
+      responseType: ':ask',
+      repetitions: 2,
+      initialInstruction: 'With your legs inline with your hips in a standing position, slowly raise both your heals. ',
+      instruction: 'Hold for one, two, three, seconds. Now raise both heals again. Hold for one, two, three, seconds. Then lower them slowly so they are close to touching the ground. ',
+      finalInstruction: 'Hold for one, two, three, seconds. Now raise both heals again. Hold for one, two, three, seconds. Then lower them to the ground. And rest. ',
+      congratulate: 'Well done! To continue to the next exercise, please tell me when you are ready. Or to re do this exercise say repeat and the number of times you would like to do the exercise. '
     }
   },
   'LEG_RAISES_INIT': {
