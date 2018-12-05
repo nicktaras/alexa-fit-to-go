@@ -32,9 +32,9 @@ To re-deploy remeber to re-zip the code.
 - can hop between conversations (Needs to be tested)
 - can drive different exercises based on the level of difficulty (TODO)
 - can apply a bit of random fun to the experience, throw in a joke, tell a fact, ask a question and reply with a witty answer (TODO)
-- Utilise Facebook somemore (TODO) Image API / Invite Friends intent.
-- Log exercise time of user each session (TODO)
-- Log all user responses for review (TODO)
-- Deploy to store (TODO)
-- Create deployment package using Webpack or similar to uglify, minify, zip + push code to AWS
+- utilise Facebook somemore (TODO) Image API / Invite Friends intent.
+- log exercise time of user each session (TODO)
+- log all user responses for review (TODO)
+- deploy to store (TODO)
+- create deployment package using Webpack or similar to uglify, minify, zip + push code to AWS
 
