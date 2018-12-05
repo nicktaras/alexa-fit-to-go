@@ -2,25 +2,34 @@
 // and return the correct text.
 
 const exerciseStore = require('./../exerciseStore');
+const congratulateStore = require('./../congratulateStore');
+const continueStore = require('./../continueStore');
+const { getRandomItemFromArr } = require('./../utils');
 
 // TODO seperate and test this method
 const exerciseMethods = {
   repeatedMiddleStep: function (config) {
     let { repetitions,
           initialInstruction,  
-          instruction,
+          repeatedInstruction,
           finalInstruction,
           congratulate
     } = config;
     let output = initialInstruction;
+    // Build repeated steps and final instruction.
     for (var i = 1; i < repetitions; i++) {
       if (i < repetitions - 1) {
-        output += instruction;
+        output += repeatedInstruction;
       } else {
         output += finalInstruction;
-        output += congratulate;
       }
     }
+    // Add a congratulate when true.
+    if (congratulate) {
+      output += getRandomItemFromArr(congratulateStore);
+    }
+    // add navigation hint to help the user to continue.
+    output += getRandomItemFromArr(continueStore);
     return output;
   },
 }
@@ -40,7 +49,7 @@ const conversationHandler = (applicationState) => {
       text: responseData.config.text
     }
   }
-  if (responseData.type === 'syncMethod') {
+  if (responseData.type === 'exerciseMethod') {
     /*
       returns:
       {

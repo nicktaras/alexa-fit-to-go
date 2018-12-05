@@ -135,6 +135,24 @@ const ActivityIntentHandler = {
   }
 };
 
+// When user asks to have a warm up.
+// TODO find out if they are doing, light, med, hard type of exercise.
+const exerciseIntentHandler = {
+  canHandle(handlerInput) {
+     return handlerInput.requestEnvelope.request.type === 'IntentRequest' && 
+       handlerInput.requestEnvelope.request.intent.name === 'exercise_intent'
+  },
+  handle(handlerInput) {
+    
+    // conversationHandler.
+    // TO CONSIDER - should we congratulate here?
+
+    return handlerInput.responseBuilder
+      .speak(speechText)
+      .getResponse();
+  }
+};
+
 // TODO add to Alexa:
 
 // tips please, I would like some tips please, tips.
