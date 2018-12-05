@@ -36,5 +36,5 @@ To re-deploy remeber to re-zip the code.
 - Log exercise time of user each session (TODO)
 - Log all user responses for review (TODO)
 - Deploy to store (TODO)
-- Create deployment package using Webpack or similar to uglify, minift, zip + push code to AWS
+- Create deployment package using Webpack or similar to uglify, minify, zip + push code to AWS
 
