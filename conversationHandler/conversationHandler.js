@@ -12,8 +12,7 @@ const exerciseMethods = {
     let { repetitions,
           initialInstruction,  
           repeatedInstruction,
-          finalInstruction,
-          congratulate
+          finalInstruction
     } = config;
     let output = initialInstruction;
     // Build repeated steps and final instruction.
@@ -24,16 +23,13 @@ const exerciseMethods = {
         output += finalInstruction;
       }
     }
-    // Add a congratulate when true.
-    if (congratulate) {
-      output += getRandomItemFromArr(congratulateStore);
-    }
-    // add navigation hint to help the user to continue.
-    output += getRandomItemFromArr(continueStore);
     return output;
   },
 }
 
+
+// TODO as the app scales look to break this into seperate functions
+// e.g. conversation, exercise, activity...
 const conversationHandler = (applicationState) => {
   const responseData = exerciseStore[applicationState.exerciseState.type];
   if (responseData.type === 'text') {
@@ -57,9 +53,15 @@ const conversationHandler = (applicationState) => {
         text: (string) 
       }
     */
+    // apply exercise routine text. 
+    var outputText = exerciseMethods[responseData.config.method](responseData.config);
+    // congratulate when config is true
+    if (responseData.config.congratulate) outputText += getRandomItemFromArr(congratulateStore);
+    // add navigation hint to help the user to continue.
+    outputText += getRandomItemFromArr(continueStore);
     return {
       responseType: responseData.config.responseType,
-      text: exerciseMethods[responseData.config.method](responseData.config)
+      text: outputText
     }
   }
 }

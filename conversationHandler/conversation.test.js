@@ -1,5 +1,10 @@
 const conversationHandler = require('./conversationHandler');
 
+// Apply a constant math random value for the purpose of this test.
+const mockMath = Object.create(global.Math);
+mockMath.random = () => 0;
+global.Math = mockMath;
+
 test('ensures application can locate the correct text for a simple response', () => { 
   var mockState = {
     stateArray: [
@@ -50,6 +55,6 @@ test('ensures application can locate the correct text for a compicated exercise 
   const output = conversationHandler(mockState.stateArray[0]);
   expect(output).toEqual({
     "responseType": ":ask",
-    "text": "With your legs inline with your hips in a standing position, slowly raise both your heals. Hold for one, two, three, seconds. Now raise both heals again. Hold for one, two, three, seconds. Then lower them to the ground. And rest. Well done! To continue to the next exercise, please tell me when you are ready. Or to re do this exercise say repeat and the number of times you would like to do the exercise. "
+    "text": "With your legs inline with your hips in a standing position, slowly raise both your heals. Hold for one, two, three, seconds. Now raise both heals again. Hold for one, two, three, seconds. Then lower them to the ground. And rest. Nice work. To continue say next or repeat to do the step again. "
   });
 });

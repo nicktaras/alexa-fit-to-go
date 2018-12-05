@@ -144,8 +144,7 @@ const exerciseIntentHandler = {
   },
   handle(handlerInput) {
     
-    // conversationHandler.
-    // TO CONSIDER - should we congratulate here?
+    // conversationHandler goes here.
 
     return handlerInput.responseBuilder
       .speak(speechText)
