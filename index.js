@@ -16,6 +16,9 @@ const jokeStore = require('./jokeStore');
 // Common Util Methods
 const { getRandomItemFromArr } = require('./utils');
 
+// Custom
+const { conversationHandler } = require('./conversationHandler/conversationHandler');
+
 // // Application state 
 // const { getApplicationState, 
 //         setApplicationState, 
@@ -109,6 +112,10 @@ const SportIntentHandler = {
        handlerInput.requestEnvelope.request.intent.name === 'sport_intent'
   },
   handle(handlerInput) {
+    
+    // store exercise intent here.
+    // request.intent.slots.exercise.resolutions.resolutionsPerAuthority[0].values[0].value.name
+
     let speechText = "Great, would you like to do some warm up exercises?";
     return handlerInput.responseBuilder
       .speak(speechText)
@@ -123,11 +130,14 @@ const ActivityIntentHandler = {
       handlerInput.requestEnvelope.request.intent.name === 'activity_intent'
   },
   handle(handlerInput) {
-    // user says, 'a jog'
-    applicationState.setState({
-      state: 'ACTIVITY',
-      substate: undefined
-    });
+    
+    // store exercise intent here.
+    // request.intent.slots.exercise.resolutions.resolutionsPerAuthority[0].values[0].value.name
+    // applicationState.setState({
+    //   state: 'ACTIVITY',
+    //   substate: undefined
+    // });
+
     let speechText = "Great, would you like any tips or warm up exercises?";
     return handlerInput.responseBuilder
       .speak(speechText)
@@ -140,32 +150,18 @@ const ActivityIntentHandler = {
 const exerciseIntentHandler = {
   canHandle(handlerInput) {
      return handlerInput.requestEnvelope.request.type === 'IntentRequest' && 
-       handlerInput.requestEnvelope.request.intent.name === 'exercise_intent'
+       (handlerInput.requestEnvelope.request.intent.name === 'exercise_intent' ||
+        handlerInput.requestEnvelope.request.intent.name === 'ready_intent')
   },
   handle(handlerInput) {
-    
-    // conversationHandler goes here.
-
+    // TODO make sure the exercise is known at this point
+    // e.g. 'JOG_LIGHT'
+    const speechText = conversationHandler(applicationState);
     return handlerInput.responseBuilder
       .speak(speechText)
       .getResponse();
   }
 };
-
-// TODO add to Alexa:
-
-// tips please, I would like some tips please, tips.
-// warm up exercises, I would like some warm up exercises please.
-// JOG warm up exercises on the way.. :) 
-// We should make these items relevant to the conversation
-
-// TODO make a function to store current intent e.g. going for a jog.
-// aim: Great, did you know .... Would you like to do some warm up exercises, a joke or some tips?
-// request.intent.slots.exercise.resolutions.resolutionsPerAuthority[0].values[0].value.name
-
-// Add conversation handlers for:
-// Warm Up Exercises Please
-// Ready / Next
 
 const JokeIntentHandler = {
   canHandle(handlerInput) {
@@ -260,6 +256,8 @@ exports.handler = skillBuilder
     ActivityIntentHandler,
     SportIntentHandler,
     HelpIntentHandler,
+    exerciseIntentHandler,
+    repeatIntentHandler,
     CancelAndStopIntentHandler,
     SessionEndedRequestHandler
   )
