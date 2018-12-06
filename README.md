@@ -16,7 +16,7 @@ List all lamda functions:
 - aws lambda list-functions
 
 Deploy to aws:
-- aws lambda update-function-code --function-name your-func-name-here --zip-file fileb://archive.zip --publish
+- aws lambda update-function-code --function-name the-func-name-here --zip-file fileb://archive.zip --publish
 
 To re-deploy remeber to re-zip the code.
 

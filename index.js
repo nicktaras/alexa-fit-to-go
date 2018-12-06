@@ -1,5 +1,6 @@
 //
-// alexa-fit-to-go
+// Alexa-Fit-To-Go
+// author: Nick Taras
 // For more infromation please visit: https://github.com/nicktaras/alexa-fit-to-go
 //
 
@@ -12,24 +13,21 @@ const https = require('https');
 // Add Stores
 const tipStore = require('./tipStore');
 const jokeStore = require('./jokeStore');
+const routineStore = require('./routineStore');
 
 // Common Util Methods
 const { getRandomItemFromArr } = require('./utils');
 
 // Custom
 const { conversationHandler } = require('./conversationHandler/conversationHandler');
+const { 
+  getApplicationState, 
+  setState,
+  setNextExerciseState, 
+  getNextExerciseState
+} = require('./applicationState/applicationState');
 
-// // Application state 
-// const { getApplicationState, 
-//         setApplicationState, 
-//         setToNextSubState 
-//       } = require('./applicationState/applicationState');
-// // apply store state
-// {
-//   nameRef: 'init', 
-//   id: 0, 
-//   step: 0;
-// }
+// App state
 const applicationState = getApplicationState();
 
 // Application Launch handler.
@@ -47,7 +45,7 @@ const LaunchRequestHandler = {
         .getResponse();
     } else {
       // if the application is in its initial state and the user is logged in.
-      if (applicationState.state === 'INIT') {
+      if (applicationState.state.type === 'INIT') {
         try {
           const accessToken = handlerInput.requestEnvelope.context.System.user.accessToken;
           const fbUserName = await getFbUser(accessToken);
@@ -59,7 +57,6 @@ const LaunchRequestHandler = {
             .getResponse();
         } catch (error) {
           let speechText = "There was an error with fit to go, try again.";
-          console.log('error found:', error);
           return handlerInput.responseBuilder
             .speak(speechText)
             .withLinkAccountCard()
@@ -112,11 +109,14 @@ const SportIntentHandler = {
        handlerInput.requestEnvelope.request.intent.name === 'sport_intent'
   },
   handle(handlerInput) {
-    
-    // store exercise intent here.
-    // request.intent.slots.exercise.resolutions.resolutionsPerAuthority[0].values[0].value.name
-
-    let speechText = "Great, would you like to do some warm up exercises?";
+    // console.log('fit to go: SportIntentHandler');
+    // var userSport = request.intent.slots.exercise.resolutions.resolutionsPerAuthority[0].values[0].value.name;
+    // setState(applicationState, 'SPORT', { activity: userSport.toUpperCase(), difficulty: 'LIGHT' });
+    // let speechText = "Great, would you like to do some warm up exercises?";
+    // return handlerInput.responseBuilder
+    //   .speak(speechText)
+    //   .getResponse();
+    const speechText = 'hello from SportIntentHandler';
     return handlerInput.responseBuilder
       .speak(speechText)
       .getResponse();
@@ -130,15 +130,14 @@ const ActivityIntentHandler = {
       handlerInput.requestEnvelope.request.intent.name === 'activity_intent'
   },
   handle(handlerInput) {
-    
-    // store exercise intent here.
-    // request.intent.slots.exercise.resolutions.resolutionsPerAuthority[0].values[0].value.name
-    // applicationState.setState({
-    //   state: 'ACTIVITY',
-    //   substate: undefined
-    // });
-
-    let speechText = "Great, would you like any tips or warm up exercises?";
+    console.log('fit to go: ActivityIntentHandler');
+    var userActivity = handlerInput.requestEnvelope.request.intent.slots.exercise.resolutions.resolutionsPerAuthority[0].values[0].value.name;
+    // setState(applicationState, 'ACTIVITY', { activity: userActivity.toUpperCase(), difficulty: 'LIGHT' });
+    // let speechText = "Great, would you like any tips or warm up exercises?";
+    // return handlerInput.responseBuilder
+    //   .speak(speechText)
+    //   .getResponse();
+    const speechText = userActivity;
     return handlerInput.responseBuilder
       .speak(speechText)
       .getResponse();
@@ -146,17 +145,51 @@ const ActivityIntentHandler = {
 };
 
 // When user asks to have a warm up.
-// TODO find out if they are doing, light, med, hard type of exercise.
-const exerciseIntentHandler = {
+// TODO: find out if they are doing, light, med, hard type of exercise.
+const ExerciseIntentHandler = {
   canHandle(handlerInput) {
      return handlerInput.requestEnvelope.request.type === 'IntentRequest' && 
-       (handlerInput.requestEnvelope.request.intent.name === 'exercise_intent' ||
-        handlerInput.requestEnvelope.request.intent.name === 'ready_intent')
+       handlerInput.requestEnvelope.request.intent.name === 'exercise_intent'
   },
   handle(handlerInput) {
-    // TODO make sure the exercise is known at this point
-    // e.g. 'JOG_LIGHT'
-    const speechText = conversationHandler(applicationState);
+    console.log('fit to go: exerciseIntentHandler');
+    // applicationState = getApplicationState();
+    // const speechText = conversationHandler(applicationState);
+    // return handlerInput.responseBuilder
+    //   .speak(speechText)
+    //   .getResponse();
+    const speechText = 'hello from ExerciseIntentHandler';
+    return handlerInput.responseBuilder
+      .speak(speechText)
+      .getResponse();
+  }
+};
+
+const ReadyIntentHandler = {
+  canHandle(handlerInput) {
+     return handlerInput.requestEnvelope.request.type === 'IntentRequest' && 
+     handlerInput.requestEnvelope.request.intent.name === 'ready_intent'
+  },
+  handle(handlerInput) {
+    console.log('fit to go: readyIntentHandler');
+    // const nextExerciseState = getNextExerciseState(applicationState, routineStore);
+    // setNextExerciseState(applicationState, nextExerciseState);
+    // applicationState = getApplicationState();
+    // const speechText = conversationHandler(applicationState);
+    const speechText = 'hello from ReadyIntentHandler';
+    return handlerInput.responseBuilder
+      .speak(speechText)
+      .getResponse();
+  }
+};
+
+const RepeatIntentHandler = {
+  canHandle(handlerInput) {
+    return handlerInput.requestEnvelope.request.type === 'IntentRequest' && 
+    handlerInput.requestEnvelope.request.intent.name === 'repeat_intent'
+  },
+  handle(handlerInput) {
+    const speechText = 'to do';
     return handlerInput.responseBuilder
       .speak(speechText)
       .getResponse();
@@ -256,8 +289,9 @@ exports.handler = skillBuilder
     ActivityIntentHandler,
     SportIntentHandler,
     HelpIntentHandler,
-    exerciseIntentHandler,
-    repeatIntentHandler,
+    ReadyIntentHandler,
+    ExerciseIntentHandler,
+    RepeatIntentHandler,
     CancelAndStopIntentHandler,
     SessionEndedRequestHandler
   )
