@@ -14,6 +14,7 @@ const https = require('https');
 const tipStore = require('./tipStore');
 const jokeStore = require('./jokeStore');
 const routineStore = require('./routineStore');
+const chitChatExerciseStore = require('./chitChatExerciseStore');
 
 // Common Util Methods
 const { getRandomItemFromArr } = require('./utils');
@@ -132,12 +133,12 @@ const ActivityIntentHandler = {
   handle(handlerInput) {
     console.log('fit to go: ActivityIntentHandler');
     var userActivity = handlerInput.requestEnvelope.request.intent.slots.exercise.resolutions.resolutionsPerAuthority[0].values[0].value.name;
-    // setState(applicationState, 'ACTIVITY', { activity: userActivity.toUpperCase(), difficulty: 'LIGHT' });
-    // let speechText = "Great, would you like any tips or warm up exercises?";
-    // return handlerInput.responseBuilder
-    //   .speak(speechText)
-    //   .getResponse();
-    const speechText = userActivity;
+    
+    setState(applicationState, 'ACTIVITY', { difficulty: 'LIGHT', activity: userActivity.toUpperCase() } );
+    
+    var speechText = "Great, ";
+    speechText += getRandomItemFromArr(chitChatExerciseStore[userActivity.toUpperCase()]);
+    speechText += "So, would you like some tips or warm up exercises?";
     return handlerInput.responseBuilder
       .speak(speechText)
       .getResponse();

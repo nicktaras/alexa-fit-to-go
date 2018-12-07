@@ -9,10 +9,8 @@ const applicationState = {
     {
       state: {
         type: 'INIT', // 'ACTIVITY'
-        data: {
-          difficulty: undefined, // 'LIGHT', 'MEDIUM', 'HARD'
-          activity: undefined, // 'JOG'
-        }
+        difficulty: 'LIGHT', // 'LIGHT', 'MEDIUM', 'HARD'
+        activity: undefined, // 'JOG'
       },
       routineState: {
         type: undefined, // 'JOG_LIGHT'
@@ -27,24 +25,24 @@ const applicationState = {
 };
 
 // Set top level app state 'ACTIVITY', 'EXERCISE'
-exports.setState = (appState={}, state=undefined, data) => {
-  const copyOfAppState = JSON.parse(JSON.stringify(appState.stateArray[appState.stateArray.length -1]));
-  copyOfAppState.state.type = state;
-  copyOfAppState.state.data = data;
+exports.setState = (appState={}, state=undefined, data={}) => {
+  const newState = JSON.parse(JSON.stringify(appState.stateArray[appState.stateArray.length -1]));
+  newState.state.type = state;
+  newState.state.data = data;
+  // If the activity is defined, we will set the routine
   if (data.difficulty && data.activity) {
-    copyOfAppState.routineState.type = data.activity + '_' + data.difficulty;
+    newState.routineState.type = data.activity + '_' + data.difficulty;
   }
-  console.log('routine state type: ', copyOfAppState.routineState.type);
-  appState.stateArray.push(copyOfAppState);
-  applicationState = appState;
+  appState.stateArray.push(newState);
+  return appState;
 };
 
 // update and return new exercise state
 exports.setNextExerciseState = (appState={}, nextExerciseState=undefined) => {
-  const copyOfAppState = JSON.parse(JSON.stringify(appState.stateArray[appState.stateArray.length -1]));
-  copyOfAppState.exerciseState.type = nextExerciseState;
-  appState.stateArray.push(copyOfAppState);
-  applicationState = appState;
+  var newState = JSON.parse(JSON.stringify(appState.stateArray[appState.stateArray.length -1]));
+  newState.exerciseState.type = nextExerciseState;
+  appState.stateArray.push(newState);
+  return appState;
 };
 
 // get next exercise state
@@ -56,7 +54,11 @@ exports.getNextExerciseState = (currentState, routineStore) => {
   // find out which step in the routine they have reached
   const currentExerciseStateIndex = currentRoutineSteps.indexOf(currentState.exerciseState.type);
   // return state
-  return currentRoutineSteps[currentExerciseStateIndex + 1] || undefined;
+  if (currentExerciseStateIndex > -1) {
+    return currentRoutineSteps[currentExerciseStateIndex + 1];
+  } else {
+    return currentRoutineSteps[0];
+  }
 };
 
 // get most recent state
