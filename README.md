@@ -18,6 +18,8 @@ List all lamda functions:
 Deploy to aws:
 - aws lambda update-function-code --function-name the-func-name-here --zip-file fileb://archive.zip --publish
 
+- aws configure (if you haven't set up the cli)
+
 To re-deploy remeber to re-zip the code.
 
 # Project Checklist
