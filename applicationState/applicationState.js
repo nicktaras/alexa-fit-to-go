@@ -20,13 +20,13 @@ var applicationStateModel = {
   ]
 };
 
-// push new state (side effect to update store)
+// push new state - side effect to update store when a new state is added.
 const pushNewState = (newState) => {
   applicationStateModel.stateArray.push(newState);  
 };
 
 // Update the applications main state - e.g. 'ACTIVITY'
-exports.updateState = ({ state=undefined, stateName=undefined, update=this.pushNewState }) => {
+exports.updateState = ({ state=undefined, stateName=undefined, update=pushNewState }) => {
   if (state && stateName) {
     var newState = JSON.parse(JSON.stringify(state));
     newState.state.type = stateName;
@@ -38,7 +38,7 @@ exports.updateState = ({ state=undefined, stateName=undefined, update=this.pushN
 };
 
 // Assigns and returns the routine state - e.g. 'JOG_LIGHT'
-exports.updateRoutineState = ({ state=null, data={}, update=this.pushNewState }) => {
+exports.updateRoutineState = ({ state=null, data={}, update=pushNewState }) => {
   if (state && data.activity && data.difficulty) {
     var newState = JSON.parse(JSON.stringify(state));
     newState.routineState.data = data;
@@ -51,7 +51,7 @@ exports.updateRoutineState = ({ state=null, data={}, update=this.pushNewState })
 };
 
 // Assigns and returns the exercise state - e.g. 'STEP_UPS_INIT'
-exports.updateExerciseState = ({ state=null, exerciseStateName=undefined, update=this.pushNewState }) => {
+exports.updateExerciseState = ({ state=null, exerciseStateName=undefined, update=pushNewState }) => {
   if (state && exerciseStateName) {
     var newState = JSON.parse(JSON.stringify(state));
     newState.exerciseState.type = exerciseStateName;
