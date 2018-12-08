@@ -224,6 +224,10 @@ const ReadyIntentHandler = {
      handlerInput.requestEnvelope.request.intent.name === 'ready_intent'
   },
   handle(handlerInput) {
+
+    // TODO add new flow from changes made.
+    // ...
+
     // console.log('fit to go: readyIntentHandler');
     // TODO - Tidy this up, there is too much effort to make changes.
     // Get latest state.
