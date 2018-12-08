@@ -1,4 +1,4 @@
-const { getNextExerciseState, setNextExerciseState, setState } = require('./applicationState');
+const { getNextExerciseState, updateExerciseState, updateState } = require('./applicationState');
 const routineStore = require('./../routineStore');
 
 test('ensures application can update state', () => { 
@@ -24,7 +24,7 @@ test('ensures application can update state', () => {
     ]
   };
   var userActivity = "jog";
-  var nextState = setState(mockState, 'ACTIVITY', { difficulty: 'LIGHT', activity: userActivity.toUpperCase()});
+  var nextState = updateState(mockState, 'ACTIVITY', { difficulty: 'LIGHT', activity: userActivity.toUpperCase()});
   expect(nextState.stateArray).toEqual([
     {
       state: {
@@ -120,7 +120,7 @@ test('ensures application can get the next state name and apply the new state to
     stateArray: [
       {
         state: {
-          type: 'INIT', // 'ACTIVITY'
+          type: 'ACTIVITY', // 'ACTIVITY'
           data: {
             difficulty: 'LIGHT', // 'LIGHT', 'MEDIUM', 'HARD'
             activity: 'JOG', // 'JOG'
@@ -138,39 +138,41 @@ test('ensures application can get the next state name and apply the new state to
     ]
   };
   const nextExercise = getNextExerciseState(mockState.stateArray[0], routineStore);
-  const updatedState = setNextExerciseState(mockState, nextExercise);
-  // expect(updatedState.stateArray).toEqual([
-  //   {
-  //     state: {
-  //       type: 'ACTIVITY', // 'ACTIVITY'
-  //       data: {
-  //         difficulty: 'LIGHT', // 'LIGHT', 'MEDIUM', 'HARD'
-  //         activity: 'JOG', // 'JOG'
-  //       }
-  //     },
-  //     routineState: {
-  //       type: 'JOG_LIGHT', // 'JOG_LIGHT'
-  //       completed: []  
-  //     },
-  //     exerciseState: {
-  //       type: 'INTRO_JOG_LIGHT', // 'JOG_LIGHT_INIT'
-  //       data: null
-  //     }
-  //   },
-  //   { 
-  //     state: {  
-  //       type: 'EXERCISE',
-  //       data: null
-  //     },
-  //     routineState: {
-  //       type: 'JOG_LIGHT',
-  //       data: null,
-  //       completed: []  
-  //     },
-  //     exerciseState: {
-  //       type: 'DOUBLE_HEAL_LIFTS_INIT',
-  //       data: null
-  //     }
-  //   }
-  // ]);
+  const updatedState = updateExerciseState(mockState, nextExercise);
+  expect(updatedState.stateArray).toEqual([
+    {
+      state: {
+        type: 'ACTIVITY', // 'ACTIVITY'
+        data: {
+          difficulty: 'LIGHT', // 'LIGHT', 'MEDIUM', 'HARD'
+          activity: 'JOG', // 'JOG'
+        }
+      },
+      routineState: {
+        type: 'JOG_LIGHT', // 'JOG_LIGHT'
+        completed: []  
+      },
+      exerciseState: {
+        type: undefined, // 'JOG_LIGHT_INIT'
+        data: null
+      }
+    },
+    { 
+      state: {  
+        type: 'ACTIVITY',
+        data: {
+          difficulty: 'LIGHT', // 'LIGHT', 'MEDIUM', 'HARD'
+          activity: 'JOG', // 'JOG'
+        }
+      },
+      routineState: {
+        type: 'JOG_LIGHT',
+        completed: []  
+      },
+      exerciseState: {
+        type: 'INTRO_JOG_LIGHT',
+        data: null
+      }
+    }
+  ]);
 });

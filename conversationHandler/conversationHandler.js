@@ -6,9 +6,30 @@ const congratulateStore = require('./../congratulateStore');
 const continueStore = require('./../continueStore');
 const { getRandomItemFromArr, exerciseMethods } = require('./../utils');
 
+
+{
+  state: {
+    type: 'ACTIVITY', // 'ACTIVITY'
+    data: {
+      difficulty: 'LIGHT', // 'LIGHT', 'MEDIUM', 'HARD'
+      activity: 'JOG', // 'JOG'
+    }
+  },
+  routineState: {
+    type: 'JOG_LIGHT', // 'JOG_LIGHT'
+    completed: []  
+  },
+  exerciseState: {
+    type: undefined, // 'JOG_LIGHT_INIT'
+    data: null
+  }
+},
+
 // TODO as the app scales look to break this into seperate functions
 // e.g. conversation, exercise, activity...
-const conversationHandler = (applicationState) => {
+exports.conversationHandler = (applicationState) => {
+  console.log('applicationState.exerciseState.type', applicationState.exerciseState);
+  console.log('exerciseStore', exerciseStore);
   const responseData = exerciseStore[applicationState.exerciseState.type];
   switch(responseData.type) {
     case 'text':
@@ -45,5 +66,3 @@ const conversationHandler = (applicationState) => {
       return 'I need to work out which exercise you are doing to ensure I give you the correct routine'
   }
 }
-
-module.exports = conversationHandler;
