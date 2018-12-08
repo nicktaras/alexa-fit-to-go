@@ -29,10 +29,13 @@ test('ensures application can update state', () => {
       }
     ]
   };
+  // mock function to update the internal store.
+  const mockUpdateFn = jest.fn();
   var nextState = updateState(
     {
       state: mockState.stateArray[0], 
-      stateName: 'ACTIVITY'
+      stateName: 'ACTIVITY',
+      update: mockUpdateFn
     }
   );
   expect(nextState).toEqual(
@@ -77,10 +80,12 @@ test('ensures application can locate and return the initial routine exercise', (
       }
     ]
   };
+  const mockUpdateFn = jest.fn();
   var nextExercise = getNextExerciseState({ 
     state: mockState.stateArray[0], 
-    routineStore: routineStore } 
-  );
+    routineStore: routineStore,
+    update: mockUpdateFn 
+  });
   expect(nextExercise).toBe("INTRO_JOG_LIGHT");
 });
 
@@ -106,9 +111,11 @@ test('ensures application can locate and return next routine exercise state from
       }
     ]
   };
+  const mockUpdateFn = jest.fn();
   var nextExercise = getNextExerciseState({
     state: mockState.stateArray[0], 
-    routineStore: routineStore
+    routineStore: routineStore,
+    update: mockUpdateFn 
   });
   expect(nextExercise).toBe("DOUBLE_HEAL_LIFTS_INIT");
 });
@@ -139,9 +146,11 @@ test('ensures application can get the next state name and apply the new state to
     state: mockState.stateArray[0], 
     routineStore: routineStore
   });
+  const mockUpdateFn = jest.fn();
   const updatedState = updateExerciseState({
     state: mockState.stateArray[0], 
-    exerciseStateName: nextExercise
+    exerciseStateName: nextExercise,
+    update: mockUpdateFn 
   });
   expect(updatedState).toEqual(
     { 
@@ -188,6 +197,7 @@ test('ensures application can get state', () => {
 });  
 
 test('ensures application can update routine state', () => { 
+  const mockUpdateFn = jest.fn();
   var appState = updateRoutineState({
     state: {
       state: {
@@ -209,7 +219,8 @@ test('ensures application can update routine state', () => {
     data: { 
       activity: 'JOG', 
       difficulty: 'LIGHT' 
-    }
+    },
+    update: mockUpdateFn 
   });
   expect(appState).toEqual(
     { 

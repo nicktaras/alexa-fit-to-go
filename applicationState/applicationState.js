@@ -20,16 +20,17 @@ var applicationStateModel = {
   ]
 };
 
-// push new state
+// push new state (side effect to update store)
 const pushNewState = (newState) => {
-  this.applicationStateModel.stateArray.push(newState);  
+  applicationStateModel.stateArray.push(newState);  
 };
 
 // Update the applications main state - e.g. 'ACTIVITY'
-exports.updateState = ({ state=undefined, stateName=undefined }) => {
+exports.updateState = ({ state=undefined, stateName=undefined, update=this.pushNewState }) => {
   if (state && stateName) {
     var newState = JSON.parse(JSON.stringify(state));
     newState.state.type = stateName;
+    update(newState);
     return newState;
   }
   console.warn('updateState: state or stateName were missing');
@@ -37,12 +38,12 @@ exports.updateState = ({ state=undefined, stateName=undefined }) => {
 };
 
 // Assigns and returns the routine state - e.g. 'JOG_LIGHT'
-exports.updateRoutineState = ({ state=null, data={} }) => {
+exports.updateRoutineState = ({ state=null, data={}, update=this.pushNewState }) => {
   if (state && data.activity && data.difficulty) {
     var newState = JSON.parse(JSON.stringify(state));
     newState.routineState.data = data;
     newState.routineState.type = data.activity + '_' + data.difficulty;
-    console.log('yaar', newState);
+    update(newState);
     return newState;
   }
   console.warn('updateRoutineState: data was missing', data);
@@ -50,10 +51,11 @@ exports.updateRoutineState = ({ state=null, data={} }) => {
 };
 
 // Assigns and returns the exercise state - e.g. 'STEP_UPS_INIT'
-exports.updateExerciseState = ({state=null, exerciseStateName=undefined}) => {
+exports.updateExerciseState = ({ state=null, exerciseStateName=undefined, update=this.pushNewState }) => {
   if (state && exerciseStateName) {
     var newState = JSON.parse(JSON.stringify(state));
     newState.exerciseState.type = exerciseStateName;
+    update(newState);
     return newState;
   } else {
     console.warn('updateExerciseState: state or exerciseStateName were missing');
