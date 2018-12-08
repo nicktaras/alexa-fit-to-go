@@ -1,5 +1,10 @@
-// const { getNextExerciseState, updateExerciseState, updateState } = require('./applicationState');
-const { appStateMachine } = require('./applicationState');
+const { 
+  updateExerciseState,
+  updateRoutineState,
+  getApplicationState,
+  getNextExerciseState,
+  updateState,
+} = require('./applicationState');
 const routineStore = require('./../routineStore');
 
 test('ensures application can update state', () => { 
@@ -24,7 +29,7 @@ test('ensures application can update state', () => {
       }
     ]
   };
-  var nextState = appStateMachine.updateState(
+  var nextState = updateState(
     {
       state: mockState.stateArray[0], 
       stateName: 'ACTIVITY'
@@ -72,7 +77,7 @@ test('ensures application can locate and return the initial routine exercise', (
       }
     ]
   };
-  var nextExercise = appStateMachine.getNextExerciseState({ 
+  var nextExercise = getNextExerciseState({ 
     state: mockState.stateArray[0], 
     routineStore: routineStore } 
   );
@@ -101,7 +106,7 @@ test('ensures application can locate and return next routine exercise state from
       }
     ]
   };
-  var nextExercise = appStateMachine.getNextExerciseState({
+  var nextExercise = getNextExerciseState({
     state: mockState.stateArray[0], 
     routineStore: routineStore
   });
@@ -130,11 +135,11 @@ test('ensures application can get the next state name and apply the new state to
       }
     ]
   };
-  const nextExercise = appStateMachine.getNextExerciseState({
+  const nextExercise = getNextExerciseState({
     state: mockState.stateArray[0], 
     routineStore: routineStore
   });
-  const updatedState = appStateMachine.updateExerciseState({
+  const updatedState = updateExerciseState({
     state: mockState.stateArray[0], 
     exerciseStateName: nextExercise
   });
@@ -158,3 +163,71 @@ test('ensures application can get the next state name and apply the new state to
     }
   );
 });
+
+test('ensures application can get state', () => { 
+  var appState = getApplicationState();
+  expect(appState).toEqual(
+    {
+      state: {
+        type: 'INIT', 
+        data: null
+      },
+      routineState: {
+        type: undefined, 
+        data: {
+          difficulty: undefined,
+          activity: undefined
+        }
+      },
+      exerciseState: {
+        type: undefined,
+        data: null
+      }
+    }
+  );
+});  
+
+test('ensures application can update routine state', () => { 
+  var appState = updateRoutineState({
+    state: {
+      state: {
+        type: 'ACTIVITY', 
+        data: null
+      },
+      routineState: {
+        type: undefined, 
+        data: {
+          difficulty: undefined,
+          activity: undefined
+        }
+      },
+      exerciseState: {
+        type: undefined,
+        data: null
+      }
+    }, 
+    data: { 
+      activity: 'JOG', 
+      difficulty: 'LIGHT' 
+    }
+  });
+  expect(appState).toEqual(
+    { 
+      state: {  
+        type: 'ACTIVITY',
+        data: null,
+      },
+      routineState: {
+        type: 'JOG_LIGHT',
+        data: {
+          difficulty: 'LIGHT',
+          activity: 'JOG',
+        }
+      },
+      exerciseState: {
+        type: undefined,
+        data: null
+      }
+    }
+  );
+});  
