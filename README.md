@@ -43,4 +43,5 @@ To re-deploy remeber to re-zip the code.
 - log all user responses for review (TODO)
 - deploy to store (TODO)
 - create deployment package using Webpack or similar to uglify, minify, zip + push code to AWS
+- streamline cli effort to deploy (zip, deploy - one command)
 
