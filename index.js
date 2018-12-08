@@ -1,8 +1,9 @@
-//
-// Alexa-Fit-To-Go
-// author: Nick Taras
-// For more infromation please visit: https://github.com/nicktaras/alexa-fit-to-go
-//
+/*
+  Alexa-Fit-To-Go
+  author: Nick Taras
+  For more infromation please visit: 
+  https://github.com/nicktaras/alexa-fit-to-go
+*/
 
 /* eslint-disable  func-names */
 /* eslint-disable  no-console */
@@ -24,17 +25,15 @@ const {
 } = require('./conversationHandler/conversationHandler');
 
 const { 
-  applicationStateModel,
   getApplicationState, 
   updateState,
+  updateRoutineState,
   updateExerciseState, 
   getNextExerciseState
 } = require('./applicationState/applicationState');
 
-// Create a local var of entire app state model history.
-var appStateModel = applicationStateModel;
 // Get the latest app state from model.
-var applicationState = getApplicationState(appStateModel);
+var applicationState = getApplicationState();
 
 // Application Launch handler.
 const LaunchRequestHandler = {
@@ -104,7 +103,8 @@ const getFbUser = (accessToken) => {
   });
 };
 
-// Responds to a user who is going to do sport such as soccer.
+// Init handler is to allow the user to go back to the start of the application.
+// TODO - Move the state back to 'INIT'.
 const InitIntentHandler = {
   canHandle(handlerInput) {
      return handlerInput.requestEnvelope.request.type === 'IntentRequest' && 
@@ -119,7 +119,8 @@ const InitIntentHandler = {
   }
 };
 
-// Responds to a user who is going to do sport such as soccer.
+// Sport handler, responds to a user who is going to do sport such as soccer.
+// TODO - 
 const SportIntentHandler = {
   canHandle(handlerInput) {
      return handlerInput.requestEnvelope.request.type === 'IntentRequest' && 
@@ -134,7 +135,8 @@ const SportIntentHandler = {
   }
 };
 
-// Responds to a user who is going to do an activity like weights or walk the dog.
+// Activity handler, responds to a user who is going to do an activity like weights or walk the dog.
+// TODO -
 const ActivityIntentHandler = {
   canHandle(handlerInput) {
      return handlerInput.requestEnvelope.request.type === 'IntentRequest' && 
@@ -142,31 +144,47 @@ const ActivityIntentHandler = {
   },
   handle(handlerInput) {
     console.log('fit to go: ActivityIntentHandler');
+
+    // TODO look at this flow from the usage of the state machine.
+
+    // update application state with new data.
+    appStateModel = updateState({ 
+      state: applicationState, 
+      stateName: 'ACTIVITY'
+    });
+
+    // TODO ensure JOG is defined - and work out how to make sure it is before moving on.
     // handlerInput.requestEnvelope.request.intent.slots.exercise.resolutions.resolutionsPerAuthority[0].values[0].value.name;
     var userActivity = 'jog';
-    // update application state with new data.
-    appStateModel = updateState(appStateModel, 'ACTIVITY', { difficulty: 'LIGHT', activity: userActivity.toUpperCase() } );    
-    // ask following question.
+
+    // then update routine with userActivity
+    appStateModel = updateRoutineState({ 
+      state: applicationState, 
+      data: { 
+        difficulty: 'LIGHT', // hard code for now
+        activity: userActivity.toUpperCase() 
+      }
+    });
+
+    // TODO make a store to store a list of speech starters.
     var speechText = "Great, ";
+    // TODO Create a function that will build a response correctly here.
     speechText += getRandomItemFromArr(chitChatExerciseStore[userActivity.toUpperCase()]);
     speechText += "So, would you like some tips or warm up exercises before todays " + userActivity;
+    // TODO Elicit extra conversation when required.
     return handlerInput.responseBuilder
       .speak(speechText)
       .withShouldEndSession(false)
+      // .addElicitSlotDirective(difficulty, difficultyIntent) :) 
       .getResponse();
-
-    // const speechText = 'hello from ActivityIntentHandler';
-    // return handlerInput.responseBuilder
-    //   .speak(speechText)
-    //   .withShouldEndSession(false)
-    //   .getResponse();
-
   }
 };
 
 // When user asks to have a warm up.
 // TODO: find out if they are doing, light, med, hard type of exercise.
 
+// Exercise handler
+// TODO -
 const ExerciseIntentHandler = {
   canHandle(handlerInput) {
      return handlerInput.requestEnvelope.request.type === 'IntentRequest' && 
@@ -176,7 +194,7 @@ const ExerciseIntentHandler = {
     console.log('fit to go: exercise_intent');
     // Update state to say they want to do exercises.. not get tips etc.
     // get current state.
-    applicationState = getApplicationState(appStateModel);
+    applicationState = getApplicationState();
     var speechText = '';
     // if the user tries to hop straight to this point without
     // any exercise defined, let's ask first.
@@ -198,6 +216,8 @@ const ExerciseIntentHandler = {
   }
 };
 
+// Ready handler, is used to allow the user to move to the next stage within the applications flow
+// TODO - ensure the conversation handler can manage all types of conversation flow.
 const ReadyIntentHandler = {
   canHandle(handlerInput) {
      return handlerInput.requestEnvelope.request.type === 'IntentRequest' && 
@@ -207,7 +227,7 @@ const ReadyIntentHandler = {
     // console.log('fit to go: readyIntentHandler');
     // TODO - Tidy this up, there is too much effort to make changes.
     // Get latest state.
-    // applicationState = getApplicationState(appStateModel);
+    // applicationState = getApplicationState();
     // var speechText = '';
     // if the user tries to hop straight to this point without
     // any exercise defined, let's ask first.
@@ -234,6 +254,8 @@ const ReadyIntentHandler = {
   }
 };
 
+// Repeat handler, allows user to redo a step
+// TODO - implement
 const RepeatIntentHandler = {
   canHandle(handlerInput) {
     return handlerInput.requestEnvelope.request.type === 'IntentRequest' && 
@@ -248,6 +270,7 @@ const RepeatIntentHandler = {
   }
 };
 
+// Joke handler, gives some random jokes
 const JokeIntentHandler = {
   canHandle(handlerInput) {
     return handlerInput.requestEnvelope.request.type === 'IntentRequest'
@@ -262,6 +285,7 @@ const JokeIntentHandler = {
   },
 };
 
+// Tip handler, gives some random tips
 const TipIntentHandler = {
   canHandle(handlerInput) {
     return handlerInput.requestEnvelope.request.type === 'IntentRequest'
@@ -276,6 +300,8 @@ const TipIntentHandler = {
   },
 };
 
+// Help handler, helps user find their way
+// TODO - build out from insights. log user activity.
 const HelpIntentHandler = {
   canHandle(handlerInput) {
     return handlerInput.requestEnvelope.request.type === 'IntentRequest'
@@ -290,10 +316,14 @@ const HelpIntentHandler = {
   },
 };
 
+// updateRoutineState,
+// updateExerciseState, 
+// getNextExerciseState
 // handlerInput.responseBuilder options:
 // .withSimpleCard('Hello World', speechText)
 // .reprompt(speechText) || .withShouldEndSession(false)
 
+// Cancel handler, allow user to leave the app
 const CancelAndStopIntentHandler = {
   canHandle(handlerInput) {
     return handlerInput.requestEnvelope.request.type === 'IntentRequest'
@@ -304,7 +334,6 @@ const CancelAndStopIntentHandler = {
     const speechText = 'Goodbye!';
     return handlerInput.responseBuilder
       .speak(speechText)
-      .withShouldEndSession(false)
       .getResponse();
   },
 };
@@ -319,6 +348,8 @@ const SessionEndedRequestHandler = {
   },
 };
 
+// Error handler, catches application errors
+// TODO - improve effort to catch errors so fixes can be made
 const ErrorHandler = {
   canHandle() {
     return true;
@@ -334,6 +365,7 @@ const ErrorHandler = {
 
 const skillBuilder = Alexa.SkillBuilders.custom();
 
+// Assign all app handlers
 exports.handler = skillBuilder
   .addRequestHandlers(
     LaunchRequestHandler,

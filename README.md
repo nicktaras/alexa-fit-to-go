@@ -1,6 +1,10 @@
 # Alexa-Fit-to-Go
 An Alexa Skill to enable better fitness
 
+# doc / api
+
+http://ask-sdk-java-javadocs.s3-website-us-west-2.amazonaws.com/com/amazon/ask/response/ResponseBuilder.html
+
 # Usage of App
 
 This application is designed to provide a set of exercises as preparation for additional activities such as sport.
