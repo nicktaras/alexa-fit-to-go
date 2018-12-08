@@ -6,25 +6,6 @@ const congratulateStore = require('./../congratulateStore');
 const continueStore = require('./../continueStore');
 const { getRandomItemFromArr, exerciseMethods } = require('./../utils');
 
-
-{
-  state: {
-    type: 'ACTIVITY', // 'ACTIVITY'
-    data: {
-      difficulty: 'LIGHT', // 'LIGHT', 'MEDIUM', 'HARD'
-      activity: 'JOG', // 'JOG'
-    }
-  },
-  routineState: {
-    type: 'JOG_LIGHT', // 'JOG_LIGHT'
-    completed: []  
-  },
-  exerciseState: {
-    type: undefined, // 'JOG_LIGHT_INIT'
-    data: null
-  }
-},
-
 // TODO as the app scales look to break this into seperate functions
 // e.g. conversation, exercise, activity...
 exports.conversationHandler = (applicationState) => {
