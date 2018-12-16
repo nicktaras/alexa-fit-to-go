@@ -26,6 +26,7 @@ const pushNewState = (newState) => {
 };
 
 // Update the applications main state - e.g. 'ACTIVITY'
+// Do not send the last param in API.
 exports.updateState = ({ state=undefined, stateName=undefined, update=pushNewState }) => {
   if (state && stateName) {
     var newState = JSON.parse(JSON.stringify(state));
@@ -34,7 +35,7 @@ exports.updateState = ({ state=undefined, stateName=undefined, update=pushNewSta
     return newState;
   }
   console.warn('updateState: state or stateName were missing');
-  return;
+  return null;
 };
 
 // Assigns and returns the routine state - e.g. 'JOG_LIGHT'

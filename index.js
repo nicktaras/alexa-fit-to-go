@@ -198,17 +198,40 @@ const ExerciseIntentHandler = {
     var speechText = '';
     // if the user tries to hop straight to this point without
     // any exercise defined, let's ask first.
-    console.log('applicationState', applicationState);
-    if (applicationState.state.type !== 'ACTIVITY') {
-      speechText += 'Great, what type of activity or sport will you be doing today';
-    } else {
+    console.log('try to log applicationState');
+    console.log(applicationState);
 
+    if (!applicationState) { 
+      speechText += 'Something went wrong. ApplicationState is not defined';
+    }
+
+    if (applicationState && 
+        applicationState.state &&
+        applicationState.state.type !== 'ACTIVITY'
+    ) { 
+      speechText += 'Something went wrong, it appears you to to this stage to early.';
+    } 
+
+    if (applicationState && 
+      applicationState.state &&
+      applicationState.state.type === 'ACTIVITY'
+    ) { 
+      
       // TODO! updateExerciseState must be run before we know the exercise.
       // Thing about a pattern for state management.
+      applicationState = updateExerciseState({
+        state: applicationState,
+        exerciseStateName: undefined,
+      });
 
+      console.log('try to log activity applicationState');
+      console.log(applicationState);
+      
       speechText = conversationHandler(applicationState);
       console.log('speechText', speechText);
-    }
+      
+    } 
+    
     return handlerInput.responseBuilder
       .speak(speechText)
       .withShouldEndSession(false)
