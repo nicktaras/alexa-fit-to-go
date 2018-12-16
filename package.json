@@ -3,14 +3,10 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
-  "scripts": {
-    "test": "jest"
-  },
   "author": "Nicholas Taras",
   "license": "UNLICENSED",
   "dependencies": {
     "ask-sdk-core": "^2.0.0",
-    "ask-sdk-model": "^1.0.0",
-    "jest": "^23.6.0"
+    "ask-sdk-model": "^1.0.0"
   }
 }
