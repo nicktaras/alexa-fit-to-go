@@ -9,6 +9,9 @@ const { getRandomItemFromArr, exerciseMethods } = require('./../utils');
 // TODO as the app scales look to break this into seperate functions
 // e.g. conversation, exercise, activity...
 exports.conversationHandler = ({ state=null }) => {
+
+  if (!state) return console.warn('conversationHandler: no state found');
+
   const responseData = exerciseStore[state.exerciseState.type];
   switch(responseData.type) {
     case 'text':

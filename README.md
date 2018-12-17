@@ -11,6 +11,14 @@ See the tests folder.
 
 Run 'yarn test'.
 
+# Build
+
+TODO utilise node or similar to zip up files
+
+For now
+
+To publish, compress all files accept from the test folder (this is too large in size).
+
 # Usage of App
 
 This application is designed to provide a set of exercises as preparation for additional activities such as sport.

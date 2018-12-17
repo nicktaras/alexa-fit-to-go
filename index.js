@@ -30,7 +30,7 @@ const {
   updateRoutineState,
   updateExerciseState, 
   getNextExerciseState
-} = require('./applicationState/applicationState');
+} = new (require('./applicationState/applicationState'));
 
 // Get the latest app state from model.
 var applicationState = getApplicationState();
@@ -157,6 +157,9 @@ const ActivityIntentHandler = {
     // handlerInput.requestEnvelope.request.intent.slots.exercise.resolutions.resolutionsPerAuthority[0].values[0].value.name;
     var userActivity = 'jog';
 
+    console.log('try to log applicationState now it should have ACTIVITY');
+    console.log(applicationState);
+
     // then update routine with userActivity
     appStateModel = updateRoutineState({ 
       state: applicationState, 
@@ -183,23 +186,15 @@ const ActivityIntentHandler = {
 // When user asks to have a warm up.
 // TODO: find out if they are doing, light, med, hard type of exercise.
 
-// Exercise handler
-// TODO -
 const ExerciseIntentHandler = {
   canHandle(handlerInput) {
      return handlerInput.requestEnvelope.request.type === 'IntentRequest' && 
        handlerInput.requestEnvelope.request.intent.name === 'exercise_intent'
   },
   handle(handlerInput) {
-    console.log('fit to go: exercise_intent');
-    // Update state to say they want to do exercises.. not get tips etc.
-    // get current state.
+
     applicationState = getApplicationState();
     var speechText = '';
-    // if the user tries to hop straight to this point without
-    // any exercise defined, let's ask first.
-    console.log('try to log applicationState');
-    console.log(applicationState);
 
     if (!applicationState) { 
       speechText += 'Something went wrong. ApplicationState is not defined';
@@ -209,7 +204,7 @@ const ExerciseIntentHandler = {
         applicationState.state &&
         applicationState.state.type !== 'ACTIVITY'
     ) { 
-      speechText += 'Something went wrong, it appears you to to this stage to early.';
+      speechText += 'Something went wrong, it appears you got to this stage to early.';
     } 
 
     if (applicationState && 
@@ -217,19 +212,13 @@ const ExerciseIntentHandler = {
       applicationState.state.type === 'ACTIVITY'
     ) { 
       
-      // TODO! updateExerciseState must be run before we know the exercise.
-      // Thing about a pattern for state management.
-      applicationState = updateExerciseState({
+      applicationState = getNextExerciseState({
         state: applicationState,
-        exerciseStateName: undefined,
+        routineStore: routineStore
       });
 
-      console.log('try to log activity applicationState');
-      console.log(applicationState);
-      
       speechText = conversationHandler(applicationState);
-      console.log('speechText', speechText);
-      
+    
     } 
     
     return handlerInput.responseBuilder
@@ -247,33 +236,13 @@ const ReadyIntentHandler = {
      handlerInput.requestEnvelope.request.intent.name === 'ready_intent'
   },
   handle(handlerInput) {
-
-    // TODO add new flow from changes made.
-    // ...
-
-    // console.log('fit to go: readyIntentHandler');
-    // TODO - Tidy this up, there is too much effort to make changes.
-    // Get latest state.
-    // applicationState = getApplicationState();
-    // var speechText = '';
-    // if the user tries to hop straight to this point without
-    // any exercise defined, let's ask first.
-    // if (applicationState.state !== 'ACTIVITY') {
-    //   speechText += 'Great, what type of activity or sport will you be doing today';
-    // } else {
-    //   // Use latest state to get next exercise state
-    //   var nextExerciseState = getNextExerciseState(applicationState, routineStore);
-    //   // Update app state model to contain the next exercise state
-    //   appStateModel = updateExerciseState(appStateModel, nextExerciseState);
-    //   // Get the latest state from changes
-    //   applicationState = getApplicationState(appStateModel);
-    //   // define speech text from application state
-    //   speechText = conversationHandler(applicationState);
-    // }
-    // return handlerInput.responseBuilder
-    //   .speak(speechText)
-    //   .getResponse();
-    const speechText = 'hello from ReadyIntentHandler';
+    applicationState = getApplicationState();
+    var speechText = '';
+    if (applicationState.state !== 'ACTIVITY') {
+      speechText += 'Great, what type of activity or sport will you be doing today';
+    } else {
+      speechText = 'get exercise text from conversation handler';
+    }
     return handlerInput.responseBuilder
       .speak(speechText)
       .withShouldEndSession(false)
@@ -281,8 +250,6 @@ const ReadyIntentHandler = {
   }
 };
 
-// Repeat handler, allows user to redo a step
-// TODO - implement
 const RepeatIntentHandler = {
   canHandle(handlerInput) {
     return handlerInput.requestEnvelope.request.type === 'IntentRequest' && 

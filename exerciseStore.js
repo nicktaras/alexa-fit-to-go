@@ -35,16 +35,15 @@ const exerciseStore = {
     }
   },
   'LEG_RAISES': {
-    type: 'text',
+    type: 'exerciseMethod',
     config: {
       method: 'repeatedMiddleStep',
-      params: {
-        repetitions: 2,
-        responseType: ':ask',
-        initialInstruction: 'With your legs inline with your hips in a standing position. Begin to',
-        repeatedInstruction: 'Slowly lift you\'re leg off the floor until your thigh is parellel to the ground. Hold for one, two, three, seconds. Then bring it down to the floor. Then',
-        finalInstruction: 'We\'ll do this one last time. Slowly lift you\'re leg off the floor until your thigh is parellel to the ground. Hold for one, two, three, seconds. Then bring it down to the floor.'
-      }
+      repetitions: 2,
+      responseType: ':ask',
+      initialInstruction: 'With your legs inline with your hips in a standing position. Begin to ',
+      repeatedInstruction: 'Slowly lift you\'re leg off the floor until your thigh is parellel to the ground. Hold for one, two, three, seconds. Then bring it down to the floor. Then ',
+      finalInstruction: 'We\'ll do this one last time. Slowly lift you\'re leg off the floor until your thigh is parellel to the ground. Hold for one, two, three, seconds. Then bring it down to the floor. ',
+      congratulate: true
     }
   },
   'SINGLE_HEAL_LIFTS_INIT': {
