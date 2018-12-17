@@ -1,63 +1,67 @@
-const { 
-  updateExerciseState,
-  updateRoutineState,
-  getApplicationState,
-  getNextExerciseState,
-  updateState,
-} = require('./../applicationState/applicationState');
 const routineStore = require('./../routineStore');
+const ApplicationStateModelStore = require('./../applicationState/applicationState');
+var applicationStateModelStore = new ApplicationStateModelStore();
+
+test('ensures application can get state', () => { 
+  var appState = applicationStateModelStore.getApplicationState();
+  expect(appState).toEqual(
+    {
+      state: {
+        type: 'INIT'
+      },
+      routineState: {
+        type: undefined, 
+        difficulty: undefined,
+        activity: undefined
+      },
+      exerciseState: {
+        type: undefined
+      }
+    }
+  );
+});  
 
 test('ensures application can update state', () => { 
   var mockState = {
     stateArray: [
       {
         state: {
-          type: 'INIT', 
-          data: null
+          type: 'INIT'
         },
         routineState: {
           type: undefined, 
-          data: {
-            difficulty: undefined,
-            activity: undefined
-          }
+          difficulty: undefined,
+          activity: undefined
         },
         exerciseState: {
-          type: undefined,
-          data: null
+          type: undefined
         }
       }
     ]
   };
-  // mock function to update the internal store.
-  const mockUpdateFn = jest.fn();
-  var nextState = updateState(
+  var nextState = applicationStateModelStore.updateState(
     {
       state: mockState.stateArray[0], 
-      stateName: 'ACTIVITY',
-      update: mockUpdateFn
+      stateName: 'ACTIVITY'
     }
   );
   expect(nextState).toEqual(
     {
       state: {
-        type: 'ACTIVITY', 
-        data: null
+        type: 'ACTIVITY'
       },
       routineState: {
         type: undefined, 
-        data: {
-          difficulty: undefined,
-          activity: undefined
-        }
+        difficulty: undefined,
+        activity: undefined
       },
       exerciseState: {
-        type: undefined,
-        data: null
+        type: undefined
       }
     }
   );
-});  
+}); 
+
 
 test('ensures application can locate and return the initial routine exercise', () => { 
   var mockState = {
@@ -68,25 +72,34 @@ test('ensures application can locate and return the initial routine exercise', (
         },
         routineState: {
           type: 'JOG_LIGHT',
-          data: {
-            difficulty: 'LIGHT',
-            activity: 'JOG',
-          }
+          difficulty: 'LIGHT',
+          activity: 'JOG'
         },
         exerciseState: {
-          type: undefined,
-          data: null
+          type: undefined
         }
       }
     ]
   };
-  const mockUpdateFn = jest.fn();
-  var nextExercise = getNextExerciseState({ 
+  var nextExercise = applicationStateModelStore.getNextExerciseState({ 
     state: mockState.stateArray[0], 
-    routineStore: routineStore,
-    update: mockUpdateFn 
+    routineStore: routineStore
   });
-  expect(nextExercise).toBe("INTRO_JOG_LIGHT");
+  expect(nextExercise).toEqual(
+    {
+      state: {
+        type: 'ACTIVITY'
+      },
+      routineState: {
+        type: 'JOG_LIGHT',
+        difficulty: 'LIGHT',
+        activity: 'JOG'
+      },
+      exerciseState: {
+        type: "INTRO_JOG_LIGHT"
+      }
+    }
+  );
 });
 
 test('ensures application can locate and return next routine exercise state from array of steps', () => { 
@@ -94,151 +107,72 @@ test('ensures application can locate and return next routine exercise state from
     stateArray: [
       {
         state: {
-          type: 'ACTIVITY',
-          data: null
+          type: 'ACTIVITY'
         },
         routineState: {
           type: 'JOG_LIGHT', 
-          data: {
-            difficulty: 'LIGHT',
-            activity: 'JOG', 
-          }
+          difficulty: 'LIGHT',
+          activity: 'JOG'
         },
         exerciseState: {
-          type: 'INTRO_JOG_LIGHT',
-          data: null
+          type: 'INTRO_JOG_LIGHT'
         }
       }
     ]
   };
-  const mockUpdateFn = jest.fn();
-  var nextExercise = getNextExerciseState({
-    state: mockState.stateArray[0], 
-    routineStore: routineStore,
-    update: mockUpdateFn 
-  });
-  expect(nextExercise).toBe("DOUBLE_HEAL_LIFTS_INIT");
-});
-
-test('ensures application can get the next state name and apply the new state to the application state with no mutation of other properties', () => {
-  var mockState = {
-    stateArray: [
-      {
-        state: {
-          type: 'ACTIVITY',
-          data: null
-        },
-        routineState: {
-          type: 'JOG_LIGHT',
-          data: {
-            difficulty: 'LIGHT', 
-            activity: 'JOG', 
-          }
-        },
-        exerciseState: {
-          type: undefined,
-          data: null
-        }
-      }
-    ]
-  };
-  const nextExercise = getNextExerciseState({
+  var nextExercise = applicationStateModelStore.getNextExerciseState({
     state: mockState.stateArray[0], 
     routineStore: routineStore
   });
-  const mockUpdateFn = jest.fn();
-  const updatedState = updateExerciseState({
-    state: mockState.stateArray[0], 
-    exerciseStateName: nextExercise,
-    update: mockUpdateFn 
-  });
-  expect(updatedState).toEqual(
-    { 
-      state: {  
-        type: 'ACTIVITY',
-        data: null,
-      },
-      routineState: {
-        type: 'JOG_LIGHT',
-        data: {
-          difficulty: 'LIGHT',
-          activity: 'JOG',
-        }
-      },
-      exerciseState: {
-        type: 'INTRO_JOG_LIGHT',
-        data: null
-      }
-    }
-  );
-});
-
-test('ensures application can get state', () => { 
-  var appState = getApplicationState();
-  expect(appState).toEqual(
+  expect(nextExercise).toEqual(
     {
       state: {
-        type: 'INIT', 
-        data: null
+        type: 'ACTIVITY'
+      },
+      routineState: {
+        type: 'JOG_LIGHT',
+        difficulty: 'LIGHT',
+        activity: 'JOG'
+      },
+      exerciseState: {
+        type: "DOUBLE_HEAL_LIFTS_INIT"
+      }
+    });
+});
+
+test('ensures application can update routine state', () => { 
+
+  var appState = applicationStateModelStore.updateRoutineState({
+    state: {
+      state: {
+        type: 'ACTIVITY'
       },
       routineState: {
         type: undefined, 
-        data: {
-          difficulty: undefined,
-          activity: undefined
-        }
+        difficulty: undefined,
+        activity: undefined
       },
       exerciseState: {
-        type: undefined,
-        data: null
+        type: undefined
+      }
+    },
+    activity: 'JOG',
+    difficulty: 'LIGHT'
+  });
+  expect(appState).toEqual(
+    { 
+      state: {  
+        type: 'ACTIVITY'
+      },
+      routineState: {
+        type: 'JOG_LIGHT',
+        difficulty: 'LIGHT',
+        activity: 'JOG'
+      },
+      exerciseState: {
+        type: undefined
       }
     }
   );
 });  
 
-test('ensures application can update routine state', () => { 
-  const mockUpdateFn = jest.fn();
-  var appState = updateRoutineState({
-    state: {
-      state: {
-        type: 'ACTIVITY', 
-        data: null
-      },
-      routineState: {
-        type: undefined, 
-        data: {
-          difficulty: undefined,
-          activity: undefined
-        }
-      },
-      exerciseState: {
-        type: undefined,
-        data: null
-      }
-    }, 
-    data: { 
-      activity: 'JOG', 
-      difficulty: 'LIGHT' 
-    },
-    update: mockUpdateFn 
-  });
-  expect(appState).toEqual(
-    { 
-      state: {  
-        type: 'ACTIVITY',
-        data: null,
-      },
-      routineState: {
-        type: 'JOG_LIGHT',
-        data: {
-          difficulty: 'LIGHT',
-          activity: 'JOG',
-        }
-      },
-      exerciseState: {
-        type: undefined,
-        data: null
-      }
-    }
-  );
-});  
