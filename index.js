@@ -15,6 +15,7 @@ const tipStore = require('./tipStore');
 const jokeStore = require('./jokeStore');
 const routineStore = require('./routineStore');
 const chitChatExerciseStore = require('./chitChatExerciseStore');
+const startSpeechStore = require('./startSpeechStore');
 
 // Common Util Methods
 const { getRandomItemFromArr } = require('./utils');
@@ -133,52 +134,61 @@ const SportIntentHandler = {
   }
 };
 
-// Activity handler, for example responds to a user who is going for a jog.
+// Collect data.
+const ActivityIntentHandlerInit = {
+  canHandle(handlerInput) {
+    return handlerInput.requestEnvelope.request.type === 'IntentRequest' && 
+      handlerInput.requestEnvelope.request.intent.name === 'activity_intent' &&
+      handlerInput.requestEnvelope.request.dialogState !== 'COMPLETED';
+  },
+  handle(handlerInput) {
+    return handlerInput.responseBuilder
+      .addDelegateDirective()
+      .withShouldEndSession(false) // TODO test this is a good idea.
+      .getResponse();
+  }
+}
+
+// Ask if the user would like exercises, tips, or jokes.
 const ActivityIntentHandler = {
   canHandle(handlerInput) {
      return handlerInput.requestEnvelope.request.type === 'IntentRequest' && 
-      handlerInput.requestEnvelope.request.intent.name === 'activity_intent'
+      handlerInput.requestEnvelope.request.intent.name === 'activity_intent' &&
+      handlerInput.requestEnvelope.request.intent.slots.exercise.value &&
+      handlerInput.requestEnvelope.request.intent.slots.size.value
   },
   handle(handlerInput) {
-    console.log('fit to go: ActivityIntentHandler');
     
+    // Update State to 'ACTIVITY'
     applicationState = applicationStateModelStore.updateState({ 
       state: applicationState, 
       stateName: 'ACTIVITY'
     });
 
-    var userActivity = 'JOG'; // default
-    // if (handlerInput.requestEnvelope.request.intent.slots.exercise.resolutions.resolutionsPerAuthority[0].values[0].value.name){
-    //   userActivity = handlerInput.requestEnvelope.request.intent.slots.exercise.resolutions.resolutionsPerAuthority[0].values[0].value.name;
-    // } 
+    // Create var reference to difficulty and exercise type.
+    var userActivity = handlerInput.requestEnvelope.request.intent.slots.exercise.value.toUpperCase();
+    var difficulty = handlerInput.requestEnvelope.request.intent.slots.size.value.toUpperCase();
 
-    // TODO consider merge state keys with main state? This may help reduce the code effort.
+    // Update 'ACTIVITY' routine state incase they choose to exercise
     applicationState = applicationStateModelStore.updateRoutineState({ 
       state: applicationState, 
-      difficulty: 'HARD',
+      difficulty: difficulty,
       activity: userActivity
     });
 
-
-    // FIXME!
+    // BUG FIXME! Try to replicate this.
     // undefinedTo continue say next or repeat to do the step again.
     
-    // TODO make a store to store a list of speech starters.
-    var speechText = "Great, ";
-    // TODO Create a function that will build a response correctly here.
+    var speechText = '';
+    speechText += getRandomItemFromArr(startSpeechStore);
     speechText += getRandomItemFromArr(chitChatExerciseStore[userActivity.toUpperCase()]);
     speechText += "So, would you like some tips or warm up exercises before todays " + userActivity;
-    // TODO Elicit extra conversation when required.
     return handlerInput.responseBuilder
       .speak(speechText)
       .withShouldEndSession(false)
-      // .addElicitSlotDirective(difficulty, difficultyIntent);
       .getResponse();
   }
 };
-
-// When user asks to have a warm up.
-// TODO: find out if they are doing, light, med, hard type of exercise.
 
 const ExerciseIntentHandler = {
   canHandle(handlerInput) {
@@ -202,7 +212,7 @@ const ExerciseIntentHandler = {
       applicationState.state &&
       applicationState.state.type === 'ACTIVITY'
     ) { 
-            
+      
       applicationState = applicationStateModelStore.getNextExerciseState({
         state: applicationState,
         routineStore: routineStore
@@ -260,7 +270,7 @@ const RepeatIntentHandler = {
   handle(handlerInput) {
     // TODO if the user is at the end of the routine,
     // take them back to the first step.
-    // For MVP we could just finish here.
+    // For MVP we could just finish here?
     const speechText = conversationHandler({ state: applicationState }).text;
     return handlerInput.responseBuilder
       .speak(speechText)
@@ -317,13 +327,6 @@ const HelpIntentHandler = {
   },
 };
 
-// updateRoutineState,
-// updateExerciseState, 
-// getNextExerciseState
-// handlerInput.responseBuilder options:
-// .withSimpleCard('Hello World', speechText)
-// .reprompt(speechText) || .withShouldEndSession(false)
-
 // Cancel handler, allow user to leave the app
 const CancelAndStopIntentHandler = {
   canHandle(handlerInput) {
@@ -373,6 +376,7 @@ exports.handler = skillBuilder
     InitIntentHandler,
     JokeIntentHandler,
     TipIntentHandler,
+    ActivityIntentHandlerInit,
     ActivityIntentHandler,
     SportIntentHandler,
     HelpIntentHandler,
@@ -384,3 +388,34 @@ exports.handler = skillBuilder
   )
   .addErrorHandlers(ErrorHandler)
   .lambda();
+
+// Dev API options:
+// speak(speechOutput: string): this;
+// reprompt(repromptSpeechOutput: string): this;
+// withSimpleCard(cardTitle: string, cardContent: string): this;
+// withStandardCard(cardTitle: string, cardContent: string, smallImageUrl?: string, largeImageUrl?: string): this;
+// withLinkAccountCard(): this;
+// withAskForPermissionsConsentCard(permissionArray: string[]): this;
+// withCanFulfillIntent(canFulfillIntent : CanFulfillIntent) : this;
+// addDelegateDirective(updatedIntent?: Intent): this;
+// addElicitSlotDirective(slotToElicit: string, updatedIntent?: Intent): this;
+// addConfirmSlotDirective(slotToConfirm: string, updatedIntent?: Intent): this;
+// addConfirmIntentDirective(updatedIntent?: Intent): this;
+// addAudioPlayerPlayDirective(playBehavior: interfaces.audioplayer.PlayBehavior, url: string, token: string, offsetInMilliseconds: number, expectedPreviousToken?: string, audioItemMetadata? : AudioItemMetadata): this;
+// addAudioPlayerStopDirective(): this;
+// addAudioPlayerClearQueueDirective(clearBehavior: interfaces.audioplayer.ClearBehavior): this;
+// addRenderTemplateDirective(template: interfaces.display.Template): this;
+// addHintDirective(text: string): this;
+// addVideoAppLaunchDirective(source: string, title?: string, subtitle?: string): this;
+// withShouldEndSession(val: boolean): this;
+// addDirective(directive: Directive): this;
+// getResponse(): Response;
+// updateRoutineState,
+// updateExerciseState, 
+// getNextExerciseState
+// handlerInput.responseBuilder options:
+// .withSimpleCard('Hello World', speechText)
+// .reprompt(speechText) || .withShouldEndSession(false)
+
+// ideas: 
+// Send gifs / video to card when exercise of events are complete e.g. linked account.
