@@ -10,8 +10,6 @@ const { getRandomItemFromArr, exerciseMethods } = require('./../utils');
 // e.g. conversation, exercise, activity...
 exports.conversationHandler = ({ state=null }) => {
 
-  if (!state) return console.warn('conversationHandler: no state found');
-
   const responseData = exerciseStore[state.exerciseState.type];
   switch(responseData.type) {
     case 'text':

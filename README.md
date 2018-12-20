@@ -1,6 +1,8 @@
 # Alexa-Fit-to-Go
 An Alexa Skill to enable better fitness
 
+aws lambda update-function-code --function-name ask-custom-Hello_World-cli-user --zip-file fileb://archive.zip --publish
+
 # doc / api
 
 http://ask-sdk-java-javadocs.s3-website-us-west-2.amazonaws.com/com/amazon/ask/response/ResponseBuilder.html

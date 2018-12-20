@@ -24,16 +24,13 @@ const {
   conversationHandler 
 } = require('./conversationHandler/conversationHandler');
 
-const { 
-  getApplicationState, 
-  updateState,
-  updateRoutineState,
-  updateExerciseState, 
-  getNextExerciseState
-} = new (require('./applicationState/applicationState'));
+const ApplicationStateModelStore = require('./applicationState/applicationState');
 
-// Get the latest app state from model.
-var applicationState = getApplicationState();
+// Create instance of state machine class.
+var applicationStateModelStore = new ApplicationStateModelStore();
+
+// Define the initial application state.
+var applicationState = applicationStateModelStore.getApplicationState();
 
 // Application Launch handler.
 const LaunchRequestHandler = {
@@ -63,6 +60,7 @@ const LaunchRequestHandler = {
           let speechText = "There was an error with fit to go, try again.";
           return handlerInput.responseBuilder
             .speak(speechText)
+            .withSimpleCard('Error', speechText)
             .withShouldEndSession(false)
             .getResponse();
         }
@@ -135,8 +133,7 @@ const SportIntentHandler = {
   }
 };
 
-// Activity handler, responds to a user who is going to do an activity like weights or walk the dog.
-// TODO -
+// Activity handler, for example responds to a user who is going for a jog.
 const ActivityIntentHandler = {
   canHandle(handlerInput) {
      return handlerInput.requestEnvelope.request.type === 'IntentRequest' && 
@@ -144,31 +141,28 @@ const ActivityIntentHandler = {
   },
   handle(handlerInput) {
     console.log('fit to go: ActivityIntentHandler');
-
-    // TODO look at this flow from the usage of the state machine.
-
-    // update application state with new data.
-    appStateModel = updateState({ 
+    
+    applicationState = applicationStateModelStore.updateState({ 
       state: applicationState, 
       stateName: 'ACTIVITY'
     });
 
-    // TODO ensure JOG is defined - and work out how to make sure it is before moving on.
-    // handlerInput.requestEnvelope.request.intent.slots.exercise.resolutions.resolutionsPerAuthority[0].values[0].value.name;
-    var userActivity = 'jog';
+    var userActivity = 'JOG'; // default
+    // if (handlerInput.requestEnvelope.request.intent.slots.exercise.resolutions.resolutionsPerAuthority[0].values[0].value.name){
+    //   userActivity = handlerInput.requestEnvelope.request.intent.slots.exercise.resolutions.resolutionsPerAuthority[0].values[0].value.name;
+    // } 
 
-    console.log('try to log applicationState now it should have ACTIVITY');
-    console.log(applicationState);
-
-    // then update routine with userActivity
-    appStateModel = updateRoutineState({ 
+    // TODO consider merge state keys with main state? This may help reduce the code effort.
+    applicationState = applicationStateModelStore.updateRoutineState({ 
       state: applicationState, 
-      data: { 
-        difficulty: 'LIGHT', // hard code for now
-        activity: userActivity.toUpperCase() 
-      }
+      difficulty: 'HARD',
+      activity: userActivity
     });
 
+
+    // FIXME!
+    // undefinedTo continue say next or repeat to do the step again.
+    
     // TODO make a store to store a list of speech starters.
     var speechText = "Great, ";
     // TODO Create a function that will build a response correctly here.
@@ -178,7 +172,7 @@ const ActivityIntentHandler = {
     return handlerInput.responseBuilder
       .speak(speechText)
       .withShouldEndSession(false)
-      // .addElicitSlotDirective(difficulty, difficultyIntent) :) 
+      // .addElicitSlotDirective(difficulty, difficultyIntent);
       .getResponse();
   }
 };
@@ -193,9 +187,6 @@ const ExerciseIntentHandler = {
   },
   handle(handlerInput) {
 
-    applicationState = getApplicationState();
-    var speechText = '';
-
     if (!applicationState) { 
       speechText += 'Something went wrong. ApplicationState is not defined';
     }
@@ -205,20 +196,20 @@ const ExerciseIntentHandler = {
         applicationState.state.type !== 'ACTIVITY'
     ) { 
       speechText += 'Something went wrong, it appears you got to this stage to early.';
-    } 
+    }
 
     if (applicationState && 
       applicationState.state &&
       applicationState.state.type === 'ACTIVITY'
     ) { 
-      
-      applicationState = getNextExerciseState({
+            
+      applicationState = applicationStateModelStore.getNextExerciseState({
         state: applicationState,
         routineStore: routineStore
       });
 
-      speechText = conversationHandler(applicationState);
-    
+      var speechText = conversationHandler({ state: applicationState }).text;
+      
     } 
     
     return handlerInput.responseBuilder
@@ -236,13 +227,24 @@ const ReadyIntentHandler = {
      handlerInput.requestEnvelope.request.intent.name === 'ready_intent'
   },
   handle(handlerInput) {
-    applicationState = getApplicationState();
+    
     var speechText = '';
-    if (applicationState.state !== 'ACTIVITY') {
-      speechText += 'Great, what type of activity or sport will you be doing today';
+
+    if (applicationState.state.type === 'ACTIVITY') {
+
+      applicationState = applicationStateModelStore.getNextExerciseState({
+        state: applicationState,
+        routineStore: routineStore
+      });
+
+      speechText = conversationHandler({ state: applicationState }).text;
+    
     } else {
-      speechText = 'get exercise text from conversation handler';
+      
+      speechText += 'Handle user flow here. What are they ready to do?';
+      
     }
+
     return handlerInput.responseBuilder
       .speak(speechText)
       .withShouldEndSession(false)
@@ -256,7 +258,10 @@ const RepeatIntentHandler = {
     handlerInput.requestEnvelope.request.intent.name === 'repeat_intent'
   },
   handle(handlerInput) {
-    const speechText = 'to do repeat_intent';
+    // TODO if the user is at the end of the routine,
+    // take them back to the first step.
+    // For MVP we could just finish here.
+    const speechText = conversationHandler({ state: applicationState }).text;
     return handlerInput.responseBuilder
       .speak(speechText)
       .withShouldEndSession(false)
@@ -275,6 +280,7 @@ const JokeIntentHandler = {
     return handlerInput.responseBuilder
       .speak(speechText)
       .withShouldEndSession(false)
+      .withSimpleCard('Joke', speechText)
       .getResponse();
   },
 };
@@ -290,6 +296,7 @@ const TipIntentHandler = {
     return handlerInput.responseBuilder
       .speak(speechText)
       .withShouldEndSession(false)
+      .withSimpleCard('Tip', speechText)
       .getResponse();
   },
 };
