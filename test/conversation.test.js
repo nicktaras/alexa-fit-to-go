@@ -26,7 +26,7 @@ test('ensures application can locate the correct text for a simple response', ()
   const output = conversationHandler({ state: mockState });
   expect(output).toEqual({
     "responseType": ":ask", 
-    "text": "We're going to start by doing some heal lifts. Just tell me when you're ready."
+    "text": "We are going to start by doing some heal lifts. Just tell me when you are ready."
   });
 });
 
