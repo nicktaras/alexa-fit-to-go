@@ -27,6 +27,290 @@ const routineStore = {
     'BOTTOM_LIFTS',
     'END'
   ],
+  RUN_LIGHT: [
+    'INTRO_RUN_LIGHT',
+    'END'
+  ],
+  RUN_MEDIUM: [
+    'INTRO_RUN_MEDIUM',
+    'END'
+  ],
+  RUN_HARD: [
+    'INTRO_RUN_HARD',
+    'END'
+  ],
+  SOCCER_LIGHT: [
+    'INTRO_SOCCER_LIGHT',
+    'END'
+  ],
+  SOCCER_MEDIUM: [
+    'INTRO_SOCCER_LIGHT',
+    'END'
+  ],
+  SOCCER_HARD: [
+    'INTRO_SOCCER_LIGHT',
+    'END'
+  ],
+  TENNIS_LIGHT: [
+    'INTRO_TENNIS_LIGHT',
+    'END'
+  ],
+  TENNIS_MEDIUM: [
+    'INTRO_TENNIS_LIGHT',
+    'END'
+  ],
+  TENNIS_HARD: [
+    'INTRO_TENNIS_LIGHT',
+    'END'
+  ],
+  WEGIHTS_LIGHT: [
+    'INTRO_WEGIHTS_LIGHT',
+    'END'
+  ],
+  WEGIHTS_MEDIUM: [
+    'INTRO_WEGIHTS_LIGHT',
+    'END'
+  ],
+  WEGIHTS_HARD: [
+    'INTRO_WEGIHTS_LIGHT',
+    'END'
+  ],
+  GOLF_LIGHT: [
+    'INTRO_GOLF_LIGHT',
+    'END'
+  ],
+  GOLF_MEDIUM: [
+    'INTRO_GOLF_LIGHT',
+    'END'
+  ],
+  GOLF_HARD: [
+    'INTRO_GOLF_LIGHT',
+    'END'
+  ],
+  BASKETBALL_LIGHT: [
+    'INTRO_BASKETBALL_LIGHT',
+    'END'
+  ],
+  BASKETBALL_MEDIUM: [
+    'INTRO_BASKETBALL_LIGHT',
+    'END'
+  ],
+  BASKETBALL_HARD: [
+    'INTRO_BASKETBALL_LIGHT',
+    'END'
+  ],
+  CRICKET_LIGHT: [
+    'INTRO_CRICKET_LIGHT',
+    'END'
+  ],
+  CRICKET_MEDIUM: [
+    'INTRO_CRICKET_LIGHT',
+    'END'
+  ],
+  CRICKET_HARD: [
+    'INTRO_CRICKET_LIGHT',
+    'END'
+  ],
+  BOX_LIGHT: [
+    'INTRO_BOX_LIGHT',
+    'END'
+  ],
+  BOX_MEDIUM: [
+    'INTRO_BOX_LIGHT',
+    'END'
+  ],
+  BOX_HARD: [
+    'INTRO_BOX_LIGHT',
+    'END'
+  ],
+  KAYAK_LIGHT: [
+    'INTRO_KAYAK_LIGHT',
+    'END'
+  ],
+  KAYAK_MEDIUM: [
+    'INTRO_KAYAK_LIGHT',
+    'END'
+  ],
+  KAYAK_HARD: [
+    'INTRO_KAYAK_LIGHT',
+    'END'
+  ],
+  SURF_LIGHT: [
+    'INTRO_SURF_LIGHT',
+    'END'
+  ],
+  SURF_MEDIUM: [
+    'INTRO_SURF_LIGHT',
+    'END'
+  ],
+  SURF_HARD: [
+    'INTRO_SURF_LIGHT',
+    'END'
+  ],
+  FRISBEE_LIGHT: [
+    'INTRO_FRISBEE_LIGHT',
+    'END'
+  ],
+  FRISBEE_MEDIUM: [
+    'INTRO_FRISBEE_LIGHT',
+    'END'
+  ],
+  FRISBEE_HARD: [
+    'INTRO_FRISBEE_LIGHT',
+    'END'
+  ],
+  CYCLE_LIGHT: [
+    'INTRO_CYCLE_LIGHT',
+    'END'
+  ],
+  CYCLE_MEDIUM: [
+    'INTRO_CYCLE_LIGHT',
+    'END'
+  ],
+  CYCLE_HARD: [
+    'INTRO_CYCLE_LIGHT',
+    'END'
+  ],
+  DANCING_LIGHT: [
+    'INTRO_DANCING_LIGHT',
+    'END'
+  ],
+  DANCING_MEDIUM: [
+    'INTRO_DANCING_LIGHT',
+    'END'
+  ],
+  DANCING_HARD: [
+    'INTRO_DANCING_LIGHT',
+    'END'
+  ],
+  GARDENING_LIGHT: [
+    'INTRO_GARDENING_LIGHT',
+    'END'
+  ],
+  GARDENING_MEDIUM: [
+    'INTRO_GARDENING_LIGHT',
+    'END'
+  ],
+  GARDENING_HARD: [
+    'INTRO_GARDENING_LIGHT',
+    'END'
+  ],
+  NETBALL_LIGHT: [
+    'INTRO_NETBALL_LIGHT',
+    'END'
+  ],
+  NETBALL_MEDIUM: [
+    'INTRO_NETBALL_LIGHT',
+    'END'
+  ],
+  NETBALL_HARD: [
+    'INTRO_NETBALL_LIGHT',
+    'END'
+  ],
+  YOGA_LIGHT: [
+    'INTRO_YOGA_LIGHT',
+    'END'
+  ],
+  YOGA_MEDIUM: [
+    'INTRO_YOGA_LIGHT',
+    'END'
+  ],
+  YOGA_HARD: [
+    'INTRO_YOGA_LIGHT',
+    'END'
+  ],
+  PADDLE_BOARD_LIGHT: [
+    'INTRO_PADDLE_BOARD_LIGHT',
+    'END'
+  ],
+  PADDLE_BOARD_MEDIUM: [
+    'INTRO_PADDLE_BOARD_LIGHT',
+    'END'
+  ],
+  PADDLE_BOARD_HARD: [
+    'INTRO_PADDLE_BOARD_LIGHT',
+    'END'
+  ],
+  HIKING_LIGHT: [
+    'INTRO_HIKING_LIGHT',
+    'END'
+  ],
+  HIKING_MEDIUM: [
+    'INTRO_HIKING_LIGHT',
+    'END'
+  ],
+  HIKING_HARD: [
+    'INTRO_HIKING_LIGHT',
+    'END'
+  ],
+  ROCK_CLIMBING_LIGHT: [
+    'INTRO_ROCK_CLIMBING_LIGHT',
+    'END'
+  ],
+  ROCK_CLIMBING_MEDIUM: [
+    'INTRO_ROCK_CLIMBING_LIGHT',
+    'END'
+  ],
+  ROCK_CLIMBING_HARD: [
+    'INTRO_ROCK_CLIMBING_LIGHT',
+    'END'
+  ],
+  CROSS_TRAINING_LIGHT: [
+    'INTRO_CROSS_TRAINING_LIGHT',
+    'END'
+  ],
+  CROSS_TRAINING_MEDIUM: [
+    'INTRO_CROSS_TRAINING_LIGHT',
+    'END'
+  ],
+  CROSS_TRAINING_HARD: [
+    'INTRO_CROSS_TRAINING_LIGHT',
+    'END'
+  ],
+  HORSE_RIDING_LIGHT: [
+    'INTRO_HORSE_RIDING_LIGHT',
+    'END'
+  ],
+  HORSE_RIDING_MEDIUM: [
+    'INTRO_HORSE_RIDING_LIGHT',
+    'END'
+  ],
+  HORSE_RIDING_HARD: [
+    'INTRO_HORSE_RIDING_LIGHT',
+    'END'
+  ],
+  SKATING_LIGHT: [
+    'INTRO_SKATING_LIGHT',
+    'END'
+  ],
+  SKATING_MEDIUM: [
+    'INTRO_SKATING_LIGHT',
+    'END'
+  ],
+  SKATING_HARD: [
+    'INTRO_SKATING_LIGHT',
+    'END'
+  ],
+  ARMS: [
+    'INTRO_ARMS',
+    'END'
+  ],
+  LOWER_LEGS: [
+    'INTRO_LOWER_LEGS',
+    'END'
+  ],
+  UPPER_LEGS: [
+    'INTRO_UPPER_LEGS',
+    'END'
+  ],
+  STOMACH: [
+    'INTRO_STOMACH',
+    'END'
+  ],
+  CORE_STRENGTH: [
+    'INTRO_CORE_STRENGTH',
+    'END'
+  ],
 };
 
 module.exports = routineStore;

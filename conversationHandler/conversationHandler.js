@@ -8,6 +8,7 @@ const { getRandomItemFromArr, exerciseMethods } = require('./../utils');
 
 // TODO as the app scales look to break this into seperate functions
 // e.g. conversation, exercise, activity...
+// TODO Rename this as exerciseConversationHandler
 exports.conversationHandler = ({ state=null }) => {
 
   const responseData = exerciseStore[state.exerciseState.type];

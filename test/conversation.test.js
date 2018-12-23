@@ -51,6 +51,6 @@ test('ensures application can locate the correct text for a compicated exercise 
   const output = conversationHandler({ state: mockState });
   expect(output).toEqual({
     "responseType": ":ask",
-    "text": "With your legs inline with your hips in a standing position, slowly raise both your heals. Hold for one, two, three, seconds. Now raise both heals again. Hold for one, two, three, seconds. Then lower them to the ground. And rest. Nice work. To continue say next or repeat to do the step again. "
+    "text": "With your legs inline with your hips in a standing position, slowly raise both your heals. <break time=\"1s\"/>Lastly, raise your heals one last time, and hold for one <break time=\"1s\"/> two <break time=\"1s\"/> three <break time=\"1s\"/>. Then lower them to the ground <break time=\"500ms\"/> And rest. Nice work. To continue say next or repeat to do the step again. "
   });
 });

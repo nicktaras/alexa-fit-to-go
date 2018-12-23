@@ -20,10 +20,15 @@ const startSpeechStore = require('./startSpeechStore');
 // Common Util Methods
 const { getRandomItemFromArr } = require('./utils');
 
-// Custom
+// TODO rename to exerciseConversationHandler
 const { 
   conversationHandler 
 } = require('./conversationHandler/conversationHandler');
+
+// Help Conversation Handler
+const { 
+  helpConversationHandler 
+} = require('./helpConversationHandler/helpConversationHandler');
 
 const ApplicationStateModelStore = require('./applicationState/applicationState');
 
@@ -158,27 +163,22 @@ const ActivityIntentHandler = {
       handlerInput.requestEnvelope.request.intent.slots.size.value
   },
   handle(handlerInput) {
-    
     // Update State to 'ACTIVITY'
     applicationState = applicationStateModelStore.updateState({ 
       state: applicationState, 
       stateName: 'ACTIVITY'
     });
-
     // Create var reference to difficulty and exercise type.
     var userActivity = handlerInput.requestEnvelope.request.intent.slots.exercise.value.toUpperCase();
     var difficulty = handlerInput.requestEnvelope.request.intent.slots.size.value.toUpperCase();
-
     // Update 'ACTIVITY' routine state incase they choose to exercise
     applicationState = applicationStateModelStore.updateRoutineState({ 
       state: applicationState, 
       difficulty: difficulty,
       activity: userActivity
     });
-
     // BUG FIXME! Try to replicate this.
     // undefinedTo continue say next or repeat to do the step again.
-    
     var speechText = '';
     speechText += getRandomItemFromArr(startSpeechStore);
     speechText += getRandomItemFromArr(chitChatExerciseStore[userActivity.toUpperCase()]);
@@ -196,32 +196,25 @@ const ExerciseIntentHandler = {
        handlerInput.requestEnvelope.request.intent.name === 'exercise_intent'
   },
   handle(handlerInput) {
-
     if (!applicationState) { 
       speechText += 'Something went wrong. ApplicationState is not defined';
     }
-
     if (applicationState && 
         applicationState.state &&
         applicationState.state.type !== 'ACTIVITY'
     ) { 
       speechText += 'Something went wrong, it appears you got to this stage to early.';
     }
-
     if (applicationState && 
       applicationState.state &&
       applicationState.state.type === 'ACTIVITY'
     ) { 
-      
       applicationState = applicationStateModelStore.getNextExerciseState({
         state: applicationState,
         routineStore: routineStore
       });
-
       var speechText = conversationHandler({ state: applicationState }).text;
-      
     } 
-    
     return handlerInput.responseBuilder
       .speak(speechText)
       .withShouldEndSession(false)
@@ -237,24 +230,16 @@ const ReadyIntentHandler = {
      handlerInput.requestEnvelope.request.intent.name === 'ready_intent'
   },
   handle(handlerInput) {
-    
     var speechText = '';
-
     if (applicationState.state.type === 'ACTIVITY') {
-
       applicationState = applicationStateModelStore.getNextExerciseState({
         state: applicationState,
         routineStore: routineStore
       });
-
       speechText = conversationHandler({ state: applicationState }).text;
-    
     } else {
-      
       speechText += 'Handle user flow here. What are they ready to do?';
-      
     }
-
     return handlerInput.responseBuilder
       .speak(speechText)
       .withShouldEndSession(false)
@@ -311,6 +296,57 @@ const TipIntentHandler = {
   },
 };
 
+// app_function_intent
+// How do I use this App || Tell me how to use this App
+// What does this Application do | How can this Application help me
+const AppFunctionIntentHandler = {
+  canHandle(handlerInput) {
+    return handlerInput.requestEnvelope.request.type === 'IntentRequest'
+      && handlerInput.requestEnvelope.request.intent.name === 'app_function_intent';
+  },
+  handle(handlerInput) {
+    var speechText = "Fit to Go is here to help keep you fit and reduce the chances of injury. ";
+    speechText += "You can ask for a tip, joke and follow sets of exercises that have been designed to help prepare you for further activities and sports. ";
+    speechText += "However, do not follow any instruction of this application if it will put you at risk of hurting yourself, others or damaging objects within your home."
+    return handlerInput.responseBuilder
+      .speak(speechText)
+      .withShouldEndSession(false)
+      .getResponse();
+  },
+};
+
+const AuthorIntentHandler = {
+  canHandle(handlerInput) {
+    return handlerInput.requestEnvelope.request.type === 'IntentRequest'
+      && handlerInput.requestEnvelope.request.intent.name === 'author_intent';
+  },
+  handle(handlerInput) {
+    var speechText = "A web developer based in Sydney, Australia. ";
+    speechText += "He loves sport and exercise, however sometimes struggles to stay fit and has obtained a few injuries from sport. ";
+    speechText += "He designed this application for you, to help with your health and fitness. ";
+    speechText += "We hope you have a long and enjoyable relationship with sport and exercise."
+    return handlerInput.responseBuilder
+      .speak(speechText)
+      .withShouldEndSession(false)
+      .getResponse();
+  },
+};
+
+// What are the terms of using this App?
+const TermsIntentHandler = {
+  canHandle(handlerInput) {
+    return handlerInput.requestEnvelope.request.type === 'IntentRequest'
+      && handlerInput.requestEnvelope.request.intent.name === 'terms_intent';
+  },
+  handle(handlerInput) {
+    var speechText = "For terms and conditions please see the Fit To Go skill page.";
+    return handlerInput.responseBuilder
+      .speak(speechText)
+      .withShouldEndSession(false)
+      .getResponse();
+  },
+};
+  
 // Help handler, helps user find their way
 // TODO - build out from insights. log user activity.
 const HelpIntentHandler = {
@@ -319,7 +355,14 @@ const HelpIntentHandler = {
       && handlerInput.requestEnvelope.request.intent.name === 'AMAZON.HelpIntent';
   },
   handle(handlerInput) {
-    const speechText = 'Here to help.';
+    
+    var speechText = "How can I help?";
+
+    if (applicationState){
+      speechText = helpConversationHandler({
+        applicationState: applicationState
+      }).text;
+    } 
     return handlerInput.responseBuilder
       .speak(speechText)
       .withShouldEndSession(false)
@@ -359,7 +402,8 @@ const ErrorHandler = {
     return true;
   },
   handle(handlerInput, error) {
-    console.log(`Error handled: ${error.message}`);
+    console.log(handlerInput, error);
+    // Send mishandled text to DynamoDB. Or logs. Read best practice.
     return handlerInput.responseBuilder
       .speak('Sorry, fit to go can\'t understand the command. Please say again.')
       .withShouldEndSession(false)
@@ -383,6 +427,9 @@ exports.handler = skillBuilder
     ReadyIntentHandler,
     ExerciseIntentHandler,
     RepeatIntentHandler,
+    AuthorIntentHandler,
+    AppFunctionIntentHandler,
+    TermsIntentHandler,
     CancelAndStopIntentHandler,
     SessionEndedRequestHandler
   )
@@ -416,6 +463,5 @@ exports.handler = skillBuilder
 // handlerInput.responseBuilder options:
 // .withSimpleCard('Hello World', speechText)
 // .reprompt(speechText) || .withShouldEndSession(false)
-
 // ideas: 
 // Send gifs / video to card when exercise of events are complete e.g. linked account.

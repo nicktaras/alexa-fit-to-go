@@ -44,21 +44,121 @@ To re-deploy remeber to re-zip the code.
 
 # Project Checklist
 
-- create a dynamically built exercise sentence (done)
-- tell a joke (done)
-- give a tip (done)
-- can elicit for difficulty of exercise (todo)
-- can progress through a sequence of exercises (done)
-- can utilise data to provide a user data related tip (TODO)
-- can utilise data to provide a user data related joke (TODO)
-- can help a user when lost (TODO)
-- can hop between conversations (Needs to be tested)
-- can drive different exercises based on the level of difficulty (done)
-- can apply a bit of random fun to the experience, throw in a joke, tell a fact, ask a question and reply with a witty answer (TODO)
-- utilise Facebook somemore (TODO) Image API / Invite Friends intent.
-- log exercise time of user each session (TODO)
-- log all user responses for review (TODO)
-- deploy to store (TODO)
+DONE:
+
+- create a dynamically built exercise sentence
+- tell a joke
+- give a tip
+- can elicit for difficulty of exercise 
+- can progress through a sequence of exercises
+- can drive different exercises based on the level of difficulty 
+- can help a user when lost
+- context switching, allow user to get tip, then go back to their exercise
+
+TODO:
+
+- If repeat, and last step of exercise, take them to the start.
+- Allow them to try something else, think of what the user might want to do
+- Slow down exercises
+- can utilise data to provide a user data related tip
+- can utilise data to provide a user data related joke 
+- can apply a bit of random fun to the experience, throw in a joke, tell a fact, ask a question and reply with a witty answer
+- utilise Facebook somemore / Image API / Invite Friends intent.
+- log exercise time of user each session
+- log all user responses for review 
+- deploy to store
 - create deployment package using Webpack or similar to uglify, minify, zip + push code to AWS
 - streamline cli effort to deploy (zip, deploy - one command)
 
+
+DevPost: 
+
+https://devpost.com/software/fit-to-go
+
+APL:
+
+//https://developer.amazon.com/docs/alexa-presentation-language/apl-support-for-the-nodejs-2-0-sdk-in-your-skill.html
+
+- Adding APL template example:
+const LaunchHandler = (input) => {
+    const speechText = 'Welcome';
+    const repromptText = 'Try to say hello!';
+    return input.responseBuilder
+        .speak(speechText)
+        .reprompt(repromptText)
+        .addDirective({
+            type: 'Alexa.Presentation.APL.RenderDocument',
+            version: '1.0',
+            document: myDocument,
+            datasources: {}
+        })
+        .getResponse();
+  },
+};
+
+// see: https://developer.amazon.com/docs/alexa-presentation-language/apl-text.html
+https://developer.amazon.com/docs/alexa-presentation-language/apl-image.html
+
+// Example of APL Document type.
+
+{
+  "type": "APL",
+  "version": "1.0",
+  "import": [
+    {
+      "name": "alexa-layouts",
+      "version": "1.0.0"
+    }
+  ],
+  "mainTemplate": {
+    "parameters": [
+      "payload"
+    ],
+    "items": [
+      {
+        "type": "Text",
+        "text": "Hello World"
+      }
+    ]
+  }
+}
+
+// SSML:
+https://developer.amazon.com/docs/custom-skills/speech-synthesis-markup-language-ssml-reference.html
+
+"outputSpeech": {
+    "type": "SSML",
+    "ssml": "<speak>This output speech uses SSML.</speak>"
+}
+
+Examples:
+
+Add Audio
+<audio src="soundbank://soundlibrary/transportation/amzn_sfx_car_accelerate_01" />
+
+Add Pause
+<break time="3s"/>
+
+Emphasise Speech
+<emphasis level="strong">really like</emphasis> 
+
+Lang
+<lang xml:lang="fr-FR">Paris</lang>
+
+Prosody, speed, pitch, volume of speech
+<prosody rate="x-slow">I speak quite slowly</prosody>
+<prosody pitch="x-high"> but also with a much higher pitch </prosody>
+
+Interpret text as
+<say-as interpret-as="digits">12345</say-as>
+
+Switch Voices in a conversation
+<speak>
+    Here's a surprise you did not expect.  
+    <voice name="Kendra"><lang xml:lang="en-US">I want to tell you a secret.</lang></voice>
+    <voice name="Brian"><lang xml:lang="en-GB">Your secret is safe with me!</lang></voice>	
+    <voice name="Kendra"><lang xml:lang="en-US">I am not a real human.</lang></voice>.
+    Can you believe it?
+</speak>
+
+<amazon:effect name="whispered">I am not a real human.</amazon:effect>
