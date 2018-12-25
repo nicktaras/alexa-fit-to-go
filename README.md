@@ -162,3 +162,47 @@ Switch Voices in a conversation
 </speak>
 
 <amazon:effect name="whispered">I am not a real human.</amazon:effect>
+
+Steps, to enable APL. CUSTOM > INTERFACE > APL ACTIVATION
+https://developer.amazon.com/docs/alexa-presentation-language/apl-support-for-your-skill.html
+
+example from, https://github.com/alexa/skill-sample-nodejs-berry-bash/blob/master/lambda/custom/index.js
+
+ response.addRenderTemplateDirective({
+        type: pListTemplateType,
+        backButton: 'hidden',
+        backgroundImage,
+        title,
+        listItems: itemList,
+    });
+
+// test?
+response.addHintDirective(pHint);
+
+// has display check
+function supportsDisplay(handlerInput) {
+    var hasDisplay =
+        handlerInput.requestEnvelope.context &&
+        handlerInput.requestEnvelope.context.System &&
+        handlerInput.requestEnvelope.context.System.device &&
+        handlerInput.requestEnvelope.context.System.device.supportedInterfaces &&
+        handlerInput.requestEnvelope.context.System.device.supportedInterfaces.Display
+    return hasDisplay;
+}
+
+const myImage = new Alexa.ImageHelper()
+  .withDescription('FooDescription')
+  .addImageInstance('http://BarImageSource')
+  .getImage();
+  
+const myTextContent = new Alexa.PlainTextContentHelper()
+  .withPrimaryText('Foo')
+  .withSecondaryText('Bar')
+  .withTertiaryText('Baz')
+  .getTextContent();
+
+???
+https://ask-sdk-for-nodejs.readthedocs.io/en/latest/Building-Response.html
+
+//
+if (supportsDisplay(handlerInput) && !testingOnSim) {

@@ -38,6 +38,17 @@ var applicationStateModelStore = new ApplicationStateModelStore();
 // Define the initial application state.
 var applicationState = applicationStateModelStore.getApplicationState();
 
+// Does app support the display
+function supportsDisplay(handlerInput) {
+  var hasDisplay =
+    handlerInput.requestEnvelope.context &&
+    handlerInput.requestEnvelope.context.System &&
+    handlerInput.requestEnvelope.context.System.device &&
+    handlerInput.requestEnvelope.context.System.device.supportedInterfaces &&
+    handlerInput.requestEnvelope.context.System.device.supportedInterfaces.Display
+  return hasDisplay;
+}
+
 // Application Launch handler.
 const LaunchRequestHandler = {
   canHandle(handlerInput) {
@@ -58,10 +69,34 @@ const LaunchRequestHandler = {
           const accessToken = handlerInput.requestEnvelope.context.System.user.accessToken;
           const fbUserName = await getFbUser(accessToken);
           let speechText = "Welcome, " +  fbUserName + " what type of activity or sport will you be doing today?";
+
+          if (supportsDisplay) {
+
+            const myImage = new Alexa.ImageHelper()
+            .addImageInstance('https://media.giphy.com/media/l1J9sqWg6hZnMKrBK/giphy.gif')
+            .getImage();
+
+            const primaryText = new Alexa.RichTextContentHelper()
+              .withPrimaryText(speechText)
+              .getTextContent();
+
+            handlerInput.responseBuilder
+            .addRenderTemplateDirective({
+              type: 'BodyTemplate1',
+              token: 'string',
+              backButton: 'HIDDEN',
+              backgroundImage: myImage,
+              title: "Fit to Go",
+              textContent: primaryText,
+            })
+
+          } 
+
           return handlerInput.responseBuilder
-            .speak(speechText)
-            .withShouldEndSession(false)
-            .getResponse();
+          .speak(speechText)
+          .withShouldEndSession(false)
+          .getResponse();
+
         } catch (error) {
           let speechText = "There was an error with fit to go, try again.";
           return handlerInput.responseBuilder
@@ -411,6 +446,8 @@ const ErrorHandler = {
   },
 };
 
+// What's the difference?
+// const skillBuilder = Alexa.SkillBuilders.standard();
 const skillBuilder = Alexa.SkillBuilders.custom();
 
 // Assign all app handlers
