@@ -5,9 +5,10 @@
   https://github.com/nicktaras/alexa-fit-to-go
 */
 
-const { conversationHandler } = require('./../conversationHandler/conversationHandler');
-const routineStore = require('./../routineStore');
-const ApplicationStateModelStore = require('./../applicationState/applicationState');
+const appPath = './../app/';
+const { conversationHandler } = require(appPath + 'conversationHandler/conversationHandler');
+const routineStore = require(appPath + 'routineStore');
+const ApplicationStateModelStore = require(appPath + 'applicationState/applicationState');
 var applicationStateModelStore = new ApplicationStateModelStore();
 var applicationState = applicationStateModelStore.getApplicationState();
 
@@ -16,17 +17,46 @@ applicationState = applicationStateModelStore.updateState({
   state: applicationState, 
   stateName: 'ACTIVITY'
 });
-
-console.log('applicationState', applicationState);
+// console.log('applicationState', applicationState);
 
 // Test to ensure updateRoutineState is functioning correctly.
 applicationState = applicationStateModelStore.updateRoutineState({ 
   state: applicationState, 
-  difficulty: 'MEDIUM',
+  difficulty: 'LIGHT',
   activity: 'JOG'
 });
+// console.log('applicationState', applicationState);
 
-console.log('applicationState', applicationState);
+// Test to ensure getNextExerciseState returns the correct next state
+// applicationState = applicationStateModelStore.getNextExerciseState({
+//   state: applicationState,
+//   routineStore: routineStore
+// });
+// console.log('applicationState', applicationState);
+
+// Test that conversation handler can return the correct text.
+// console.log(conversationHandler({ state: applicationState }));
+
+// Test to ensure getNextExerciseState returns the correct next state
+// applicationState = applicationStateModelStore.getNextExerciseState({
+//   state: applicationState,
+//   routineStore: routineStore
+// });
+// console.log(conversationHandler({ state: applicationState }));
+
+// Test to ensure getNextExerciseState returns the correct next state
+// applicationState = applicationStateModelStore.getNextExerciseState({
+//   state: applicationState,
+//   routineStore: routineStore
+// });
+// console.log(conversationHandler({ state: applicationState }));
+
+// Test to ensure getNextExerciseState returns the correct next state
+// applicationState = applicationStateModelStore.getNextExerciseState({
+//   state: applicationState,
+//   routineStore: routineStore
+// });
+// console.log(conversationHandler({ state: applicationState }));
 
 // Test to ensure getNextExerciseState returns the correct next state
 applicationState = applicationStateModelStore.getNextExerciseState({
@@ -34,64 +64,29 @@ applicationState = applicationStateModelStore.getNextExerciseState({
   routineStore: routineStore
 });
 
-console.log('applicationState', applicationState);
-
-// Test that conversation handler can return the correct text.
-console.log(conversationHandler({ state: applicationState }));
-
-// Test to ensure getNextExerciseState returns the correct next state
 applicationState = applicationStateModelStore.getNextExerciseState({
   state: applicationState,
   routineStore: routineStore
 });
 
-// Test that conversation handler can return the correct text.
-console.log(conversationHandler({ state: applicationState }));
-
-// Test to ensure getNextExerciseState returns the correct next state
 applicationState = applicationStateModelStore.getNextExerciseState({
   state: applicationState,
   routineStore: routineStore
 });
 
-// Test that conversation handler can return the correct text.
-console.log(conversationHandler({ state: applicationState }));
-
-
-// Test to ensure getNextExerciseState returns the correct next state
 applicationState = applicationStateModelStore.getNextExerciseState({
   state: applicationState,
   routineStore: routineStore
 });
 
-// Test that conversation handler can return the correct text.
-console.log(conversationHandler({ state: applicationState }));
-
-
-// Test to ensure getNextExerciseState returns the correct next state
 applicationState = applicationStateModelStore.getNextExerciseState({
   state: applicationState,
   routineStore: routineStore
 });
 
-// Test that conversation handler can return the correct text.
-console.log(conversationHandler({ state: applicationState }));
-
-// Test to ensure getNextExerciseState returns the correct next state
 applicationState = applicationStateModelStore.getNextExerciseState({
   state: applicationState,
   routineStore: routineStore
 });
 
-// Test that conversation handler can return the correct text.
-console.log(conversationHandler({ state: applicationState }));
-
-
-// Test to ensure getNextExerciseState returns the correct next state
-applicationState = applicationStateModelStore.getNextExerciseState({
-  state: applicationState,
-  routineStore: routineStore
-});
-
-// Test that conversation handler can return the correct text.
 console.log(conversationHandler({ state: applicationState }));

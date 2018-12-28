@@ -1,4 +1,4 @@
-const { conversationHandler } = require('./../conversationHandler/conversationHandler');
+const { conversationHandler } = require('./../app/conversationHandler/conversationHandler');
 
 // Apply a constant math random value for the purpose of this test.
 const mockMath = Object.create(global.Math);
@@ -51,6 +51,6 @@ test('ensures application can locate the correct text for a compicated exercise 
   const output = conversationHandler({ state: mockState });
   expect(output).toEqual({
     "responseType": ":ask",
-    "text": "With your legs inline with your hips in a standing position, slowly raise both your heals. <break time=\"1s\"/>Lastly, raise your heals one last time, and hold for one <break time=\"1s\"/> two <break time=\"1s\"/> three <break time=\"1s\"/>. Then lower them to the ground <break time=\"500ms\"/> And rest. Nice work. To continue say next or repeat to do the step again. "
+    "text": "With your legs inline with your hips in a standing position, Slowly raise both your heals. <break time=\"1s\"/> Hold for one <break time=\"1s\"/> two <break time=\"1s\"/> three <break time=\"1s\"/> now lower your heals slowly so they are almost touching the ground and hold. rest. Nice work. To continue say next or repeat to do the step again. "
   });
 });

@@ -2,8 +2,6 @@
 // and return the correct text.
 
 const exerciseStore = require('./../exerciseStore');
-const congratulateStore = require('./../congratulateStore');
-const continueStore = require('./../continueStore');
 const { getRandomItemFromArr, exerciseMethods } = require('./../utils');
 
 // TODO as the app scales look to break this into seperate functions
@@ -34,11 +32,7 @@ exports.conversationHandler = ({ state=null }) => {
       }
       */
       // apply exercise routine text. 
-      var outputText = exerciseMethods[responseData.config.method](responseData.config);
-      // congratulate when config is true
-      if (responseData.config.congratulate) outputText += getRandomItemFromArr(congratulateStore);
-      // add navigation hint to help the user to continue.
-      outputText += getRandomItemFromArr(continueStore);
+      var outputText = exerciseMethods[responseData.config.method](responseData.config);      
       return {
         responseType: responseData.config.responseType,
         text: outputText
