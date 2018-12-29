@@ -22,11 +22,22 @@ exports.exerciseMethods = {
     let { text } = config;
     let output = '';
     const dirArr = ['left', 'right'];
-    for (var i = 0; i < repetitions; i++) {
-      var newText = text;
-      var newTextReplace = newText.replace(/DIRECTION/g, dirArr[i]);
-      output += newTextReplace;
+    for (var i = 0; i < dirArr.length; i++) {
+      // Switch out any text 'DIRECTION' with left or right
+      var dirText = text;
+      var dirTextReplace = dirText.replace(/DIRECTION/g, dirArr[i]);
+      var modText = dirTextReplace;
+      var modInx = (i + 1) % dirArr.length;
+      // Switch out any text 'OPPOSITE' with left or right
+      var modTextReplace = modText.replace(/OPPOSITE/g, dirArr[modInx]);
+      output += modTextReplace;
     }
+    // Rest store.
+    output += getRandomItemFromArr(restStore);
+    // Congratulate store.
+    output += getRandomItemFromArr(congratulateStore);
+    // Continue store.
+    output += getRandomItemFromArr(continueStore);
     return output;
   },
   // Repeats middle step of exercise

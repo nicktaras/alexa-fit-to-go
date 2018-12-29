@@ -1,6 +1,14 @@
 // Stores all routines of exercises
 
 const routineStore = {
+  SWIM_LIGHT: [
+    'INTRO_SWIM_LIGHT',
+    'ELBOW_PULL_INIT',
+    'ELBOW_PULL',
+    'BUTTERFLY_GROIN_STRETCH_INIT',
+    'BUTTERFLY_GROIN_STRETCH',
+    'END'
+  ],
   JOG_LIGHT: [
     'INTRO_JOG_LIGHT',
     'DOUBLE_HEAL_LIFTS_INIT', 

@@ -17,76 +17,78 @@ applicationState = applicationStateModelStore.updateState({
   state: applicationState, 
   stateName: 'ACTIVITY'
 });
-// console.log('applicationState', applicationState);
+console.log('applicationState', applicationState);
 
 // Test to ensure updateRoutineState is functioning correctly.
 applicationState = applicationStateModelStore.updateRoutineState({ 
   state: applicationState, 
   difficulty: 'LIGHT',
-  activity: 'JOG'
+  activity: 'SWIM'
 });
-// console.log('applicationState', applicationState);
+console.log('applicationState', applicationState);
 
 // Test to ensure getNextExerciseState returns the correct next state
-// applicationState = applicationStateModelStore.getNextExerciseState({
-//   state: applicationState,
-//   routineStore: routineStore
-// });
-// console.log('applicationState', applicationState);
+applicationState = applicationStateModelStore.getNextExerciseState({
+  state: applicationState,
+  routineStore: routineStore
+});
+console.log('applicationState', applicationState);
 
 // Test that conversation handler can return the correct text.
-// console.log(conversationHandler({ state: applicationState }));
-
-// Test to ensure getNextExerciseState returns the correct next state
-// applicationState = applicationStateModelStore.getNextExerciseState({
-//   state: applicationState,
-//   routineStore: routineStore
-// });
-// console.log(conversationHandler({ state: applicationState }));
-
-// Test to ensure getNextExerciseState returns the correct next state
-// applicationState = applicationStateModelStore.getNextExerciseState({
-//   state: applicationState,
-//   routineStore: routineStore
-// });
-// console.log(conversationHandler({ state: applicationState }));
-
-// Test to ensure getNextExerciseState returns the correct next state
-// applicationState = applicationStateModelStore.getNextExerciseState({
-//   state: applicationState,
-//   routineStore: routineStore
-// });
-// console.log(conversationHandler({ state: applicationState }));
-
-// Test to ensure getNextExerciseState returns the correct next state
-applicationState = applicationStateModelStore.getNextExerciseState({
-  state: applicationState,
-  routineStore: routineStore
-});
-
-applicationState = applicationStateModelStore.getNextExerciseState({
-  state: applicationState,
-  routineStore: routineStore
-});
-
-applicationState = applicationStateModelStore.getNextExerciseState({
-  state: applicationState,
-  routineStore: routineStore
-});
-
-applicationState = applicationStateModelStore.getNextExerciseState({
-  state: applicationState,
-  routineStore: routineStore
-});
-
-applicationState = applicationStateModelStore.getNextExerciseState({
-  state: applicationState,
-  routineStore: routineStore
-});
-
-applicationState = applicationStateModelStore.getNextExerciseState({
-  state: applicationState,
-  routineStore: routineStore
-});
-
 console.log(conversationHandler({ state: applicationState }));
+
+// Test to ensure getNextExerciseState returns the correct next state
+applicationState = applicationStateModelStore.getNextExerciseState({
+  state: applicationState,
+  routineStore: routineStore
+});
+console.log(conversationHandler({ state: applicationState }));
+
+// Test to ensure getNextExerciseState returns the correct next state
+applicationState = applicationStateModelStore.getNextExerciseState({
+  state: applicationState,
+  routineStore: routineStore
+});
+console.log(conversationHandler({ state: applicationState }));
+
+// Test to ensure getNextExerciseState returns the correct next state
+applicationState = applicationStateModelStore.getNextExerciseState({
+  state: applicationState,
+  routineStore: routineStore
+});
+console.log(conversationHandler({ state: applicationState }));
+
+// Test to ensure getNextExerciseState returns the correct next state
+applicationState = applicationStateModelStore.getNextExerciseState({
+  state: applicationState,
+  routineStore: routineStore
+});
+console.log(conversationHandler({ state: applicationState }));
+
+applicationState = applicationStateModelStore.getNextExerciseState({
+  state: applicationState,
+  routineStore: routineStore
+});
+console.log(conversationHandler({ state: applicationState }));
+
+// applicationState = applicationStateModelStore.getNextExerciseState({
+//   state: applicationState,
+//   routineStore: routineStore
+// });
+
+// applicationState = applicationStateModelStore.getNextExerciseState({
+//   state: applicationState,
+//   routineStore: routineStore
+// });
+
+// applicationState = applicationStateModelStore.getNextExerciseState({
+//   state: applicationState,
+//   routineStore: routineStore
+// });
+
+// applicationState = applicationStateModelStore.getNextExerciseState({
+//   state: applicationState,
+//   routineStore: routineStore
+// });
+
+// console.log(conversationHandler({ state: applicationState }));

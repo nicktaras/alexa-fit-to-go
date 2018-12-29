@@ -9,7 +9,9 @@ const tipStore = [
   "Be weather aware. Take it easier in hot weather and wear clothing and sunscreen to protect yourself from the elements.",
   "Do it right. Try to get the technique right from the beginning, to ensure you are using your muscles correctly.",
   "Check your gear. Make sure your shoes and equipment fit properly and are right for the activity. Look after your equipment and check it regularly for safety.",
-  "Be sensible, especially at night or in secluded areas. Take a friend or your dog, stick to well-lit areas and wear bright or light-reflective clothing so drivers can see you."
+  "Be sensible, especially at night or in secluded areas. Take a friend or your dog, stick to well-lit areas and wear bright or light-reflective clothing so drivers can see you.",
+  "When swimmig it is possible to gain groin injuries, especially in breaststroke. To help prevent such an injury make sure you stretch your lower body well.",
+  "It’s just as important to stretch after exercise. When you’re done with any type of exercise or workout, take just a few minutes to stretch out your muscles. Think about it as a warm-down. Stretching after practice will help you loosen up, and let your body repair for your next workout. You’ll feel great for your next practice!"
 ]
 
 module.exports = tipStore;
