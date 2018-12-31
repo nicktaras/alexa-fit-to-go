@@ -6,6 +6,12 @@
 // images to recreate:
 // https://www.swimoutlet.com/guides/stretches-for-swimming
 
+// TODO:
+// Add moves for more activities.
+// Add background music during each workout to make it more fun, or use spotify?
+// Work out how we can add images for each exercise, maybe static for first release?
+// We need to make a nice look and feel to them etc.
+
 const exerciseStore = {
   'BUTTERFLY_GROIN_STRETCH_INIT': {
     type: 'text',

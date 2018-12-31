@@ -6,7 +6,7 @@
 */
 
 const appPath = './../app/';
-const { conversationHandler } = require(appPath + 'conversationHandler/conversationHandler');
+const { exerciseConversationHandler } = require(appPath + 'exerciseConversationHandler/exerciseConversationHandler');
 const routineStore = require(appPath + 'routineStore');
 const ApplicationStateModelStore = require(appPath + 'applicationState/applicationState');
 var applicationStateModelStore = new ApplicationStateModelStore();
@@ -35,41 +35,41 @@ applicationState = applicationStateModelStore.getNextExerciseState({
 console.log('applicationState', applicationState);
 
 // Test that conversation handler can return the correct text.
-console.log(conversationHandler({ state: applicationState }));
+console.log(exerciseConversationHandler({ state: applicationState }));
 
 // Test to ensure getNextExerciseState returns the correct next state
 applicationState = applicationStateModelStore.getNextExerciseState({
   state: applicationState,
   routineStore: routineStore
 });
-console.log(conversationHandler({ state: applicationState }));
+console.log(exerciseConversationHandler({ state: applicationState }));
 
 // Test to ensure getNextExerciseState returns the correct next state
 applicationState = applicationStateModelStore.getNextExerciseState({
   state: applicationState,
   routineStore: routineStore
 });
-console.log(conversationHandler({ state: applicationState }));
+console.log(exerciseConversationHandler({ state: applicationState }));
 
 // Test to ensure getNextExerciseState returns the correct next state
 applicationState = applicationStateModelStore.getNextExerciseState({
   state: applicationState,
   routineStore: routineStore
 });
-console.log(conversationHandler({ state: applicationState }));
+console.log(exerciseConversationHandler({ state: applicationState }));
 
 // Test to ensure getNextExerciseState returns the correct next state
 applicationState = applicationStateModelStore.getNextExerciseState({
   state: applicationState,
   routineStore: routineStore
 });
-console.log(conversationHandler({ state: applicationState }));
+console.log(exerciseConversationHandler({ state: applicationState }));
 
 applicationState = applicationStateModelStore.getNextExerciseState({
   state: applicationState,
   routineStore: routineStore
 });
-console.log(conversationHandler({ state: applicationState }));
+console.log(exerciseConversationHandler({ state: applicationState }));
 
 // applicationState = applicationStateModelStore.getNextExerciseState({
 //   state: applicationState,
@@ -91,4 +91,4 @@ console.log(conversationHandler({ state: applicationState }));
 //   routineStore: routineStore
 // });
 
-// console.log(conversationHandler({ state: applicationState }));
+// console.log(exerciseConversationHandler({ state: applicationState }));

@@ -22,8 +22,8 @@ const { getRandomItemFromArr } = require('./utils');
 
 // TODO rename to exerciseConversationHandler
 const { 
-  conversationHandler 
-} = require('./conversationHandler/conversationHandler');
+  exerciseConversationHandler 
+} = require('./exerciseConversationHandler/exerciseConversationHandler');
 
 // Help Conversation Handler
 const { 
@@ -248,7 +248,7 @@ const ExerciseIntentHandler = {
         state: applicationState,
         routineStore: routineStore
       });
-      var speechText = conversationHandler({ state: applicationState }).text;
+      var speechText = exerciseConversationHandler({ state: applicationState }).text;
     } 
     return handlerInput.responseBuilder
       .speak(speechText)
@@ -271,7 +271,7 @@ const ReadyIntentHandler = {
         state: applicationState,
         routineStore: routineStore
       });
-      speechText = conversationHandler({ state: applicationState }).text;
+      speechText = exerciseConversationHandler({ state: applicationState }).text;
     } else {
       speechText += 'Handle user flow here. What are they ready to do?';
     }
@@ -291,7 +291,7 @@ const RepeatIntentHandler = {
     // TODO if the user is at the end of the routine,
     // take them back to the first step.
     // For MVP we could just finish here?
-    const speechText = conversationHandler({ state: applicationState }).text;
+    const speechText = exerciseConversationHandler({ state: applicationState }).text;
     return handlerInput.responseBuilder
       .speak(speechText)
       .withShouldEndSession(false)
