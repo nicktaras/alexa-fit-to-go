@@ -71,6 +71,26 @@ applicationState = applicationStateModelStore.getNextExerciseState({
 });
 console.log(exerciseConversationHandler({ state: applicationState }));
 
+var isLastExercise = applicationStateModelStore.isLastExercise({
+  state: applicationState,
+  routineStore: routineStore
+});
+
+console.log(isLastExercise);
+
+applicationState = applicationStateModelStore.getNextExerciseState({
+  state: applicationState,
+  routineStore: routineStore
+});
+console.log(exerciseConversationHandler({ state: applicationState }));
+
+var isLastExercise = applicationStateModelStore.isLastExercise({
+  state: applicationState,
+  routineStore: routineStore
+});
+
+console.log(isLastExercise);
+
 // applicationState = applicationStateModelStore.getNextExerciseState({
 //   state: applicationState,
 //   routineStore: routineStore

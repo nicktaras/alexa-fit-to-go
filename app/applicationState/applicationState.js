@@ -58,6 +58,22 @@ module.exports = class ApplicationStateModelStore {
     }
     return;
   }
+  isLastExercise({ state=null, routineStore=routineStore }){
+    if (state && routineStore) {
+      // find the list of steps within the current exercise
+      var currentRoutineSteps = routineStore[state.routineState.type];
+      // find out which step in the routine they have reached
+      var currentExerciseStateIndex = currentRoutineSteps.indexOf(state.exerciseState.type) || 0;
+      // return true or false
+      if(currentExerciseStateIndex > -1 && currentExerciseStateIndex !== currentRoutineSteps.length -1) {
+        return false;
+      } else {
+        return true;
+      }
+    } 
+    console.warn('getNextExerciseState: state or routineStore were missing');
+    return;
+  }
   getNextExerciseState({ state=null, routineStore=routineStore }) {
     if (state && routineStore) {
       var exerciseStateName;
@@ -71,8 +87,8 @@ module.exports = class ApplicationStateModelStore {
         // If there is a next step, return it.
         if (currentRoutineSteps[currentExerciseStateIndex + 1]) {
           exerciseStateName = currentRoutineSteps[currentExerciseStateIndex + 1];
-        } else { // Otherwise return the last step for now.
-          exerciseStateName = currentRoutineSteps[currentExerciseStateIndex];
+        } else { // Otherwise return the first step
+          exerciseStateName = currentRoutineSteps[0];
         }
       } else {
         exerciseStateName = currentRoutineSteps[0];

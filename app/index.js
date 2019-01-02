@@ -20,7 +20,6 @@ const startSpeechStore = require('./startSpeechStore');
 // Common Util Methods
 const { getRandomItemFromArr } = require('./utils');
 
-// TODO rename to exerciseConversationHandler
 const { 
   exerciseConversationHandler 
 } = require('./exerciseConversationHandler/exerciseConversationHandler');
@@ -184,7 +183,7 @@ const ActivityIntentHandlerInit = {
   handle(handlerInput) {
     return handlerInput.responseBuilder
       .addDelegateDirective()
-      .withShouldEndSession(false) // TODO test this is a good idea.
+      .withShouldEndSession(false)
       .getResponse();
   }
 }
@@ -259,6 +258,7 @@ const ExerciseIntentHandler = {
 
 // Ready handler, is used to allow the user to move to the next stage within the applications flow
 // TODO - ensure the conversation handler can manage all types of conversation flow.
+// TODO - Add other ways to allow the user to continue, ready, lets go, yo, fun ways.
 const ReadyIntentHandler = {
   canHandle(handlerInput) {
      return handlerInput.requestEnvelope.request.type === 'IntentRequest' && 
@@ -282,16 +282,33 @@ const ReadyIntentHandler = {
   }
 };
 
+// TOOD should be repeat exercise handler.
 const RepeatIntentHandler = {
   canHandle(handlerInput) {
     return handlerInput.requestEnvelope.request.type === 'IntentRequest' && 
     handlerInput.requestEnvelope.request.intent.name === 'repeat_intent'
   },
   handle(handlerInput) {
-    // TODO if the user is at the end of the routine,
-    // take them back to the first step.
-    // For MVP we could just finish here?
-    const speechText = exerciseConversationHandler({ state: applicationState }).text;
+
+    // Check if its the last exercise
+    var isLastExercise = ApplicationStateModelStore.isLastExercise({
+      state: applicationState,
+      routineStore: routineStore
+    });
+
+    var speechText;
+
+    // Exercise reset
+    if(isLastExercise) {
+      applicationState = applicationStateModelStore.getNextExerciseState({
+        state: applicationState,
+        routineStore: routineStore
+      });
+      speechText = exerciseConversationHandler({ state: applicationState }).text;
+    } else {
+      speechText = exerciseConversationHandler({ state: applicationState }).text;
+    }
+
     return handlerInput.responseBuilder
       .speak(speechText)
       .withShouldEndSession(false)

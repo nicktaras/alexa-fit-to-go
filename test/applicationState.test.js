@@ -102,6 +102,33 @@ test('ensures application can locate and return the initial routine exercise', (
   );
 });
 
+test('ensures application can determine if we are at the last exercise in the routine', () => { 
+
+  var mockState = {
+    stateArray: [
+       {
+        state: {
+          type: 'ACTIVITY'
+        },
+        routineState: {
+          type: 'JOG_LIGHT',
+          difficulty: 'LIGHT',
+          activity: 'JOG'
+        },
+        exerciseState: {
+          type: "INTRO_JOG_LIGHT"
+        }
+      }
+    ]
+  };
+
+  var isLastExercise = applicationStateModelStore.isLastExercise({
+    state: mockState.stateArray[0], 
+    routineStore: routineStore
+  });
+  expect(isLastExercise).toEqual(false);
+});
+
 test('ensures application can locate and return next routine exercise state from array of steps', () => { 
   var mockState = {
     stateArray: [

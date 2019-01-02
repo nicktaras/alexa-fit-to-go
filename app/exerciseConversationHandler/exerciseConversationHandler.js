@@ -2,11 +2,8 @@
 // and return the correct text.
 
 const exerciseStore = require('./../exerciseStore');
-const { getRandomItemFromArr, exerciseMethods } = require('./../utils');
+const { exerciseMethods } = require('./../utils');
 
-// TODO as the app scales look to break this into seperate functions
-// e.g. conversation, exercise, activity...
-// TODO Rename this as exerciseConversationHandler
 exports.exerciseConversationHandler = ({ state=null }) => {
 
   const responseData = exerciseStore[state.exerciseState.type];
@@ -31,7 +28,8 @@ exports.exerciseConversationHandler = ({ state=null }) => {
         text: (string) 
       }
       */
-      // apply exercise routine text. 
+      // apply exercise routine text.
+      // E.g. exerciseMethods['leftAndRight'](data);
       var outputText = exerciseMethods[responseData.config.method](responseData.config);      
       return {
         responseType: responseData.config.responseType,
