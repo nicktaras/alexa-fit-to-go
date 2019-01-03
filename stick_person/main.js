@@ -2,14 +2,33 @@
   var canvas = this.__canvas = new fabric.Canvas('c', { selection: false });
   fabric.Object.prototype.originX = fabric.Object.prototype.originY = 'center';
 
+  var colour = '#457870';
+  var stroke = '#457879';
+  var lineColor = 'purple'; // '#58adaf';
+
+  function makeCircleHead(left, top, line1, line2) {
+    var c = new fabric.Circle({
+      left: left,
+      top: top,
+      strokeWidth: 3,
+      radius: 15,
+      fill: '#fff',
+      stroke: colour
+    });
+    c.hasControls = c.hasBorders = false;
+    c.line1 = line1;
+    c.line2 = line2;
+    return c;
+  }
+
   function makeCircle(left, top, line1, line2, line3, line4) {
     var c = new fabric.Circle({
       left: left,
       top: top,
-      strokeWidth: 5,
-      radius: 9,
+      strokeWidth: 2,
+      radius: 5,
       fill: '#fff',
-      stroke: '#457870'
+      stroke: colour
     });
 
     c.hasControls = c.hasBorders = false;
@@ -24,17 +43,17 @@
 
   function makeLine(coords) {
     return new fabric.Line(coords, {
-      fill: '#457879',
-      stroke: '#58adaf',
+      fill: stroke,
+      stroke: lineColor,
       strokeWidth: 5,
       selectable: false,
       evented: false,
     });
   }
+
   //                         sx   sy  ex    ey
-  var headLine = makeLine([ 250, 140, 250, 175 ])
-      hips = makeLine([ 180, 315, 150, 315]),
-      shoulder = makeLine([ 250, 175, 250, 250 ]),
+  var headLine = makeLine([ 250, 125, 250, 175 ])
+      hips = makeLine([ 250, 175, 250, 250 ]),
       rightElbow = makeLine([ 250, 175, 285, 200 ]),
       rightHand = makeLine([ 285, 200, 320, 225 ]),
       leftElbow = makeLine([ 250, 175, 215, 200 ]),
@@ -48,8 +67,7 @@
       
   canvas.add(
     headLine, 
-    hips,
-    shoulder, 
+    hips, 
     rightElbow, 
     rightHand, 
     leftElbow,
@@ -60,12 +78,12 @@
     leftKnee,
     leftAnkle,
     leftFoot
-  ); 
+  );
 
   canvas.add(
-    makeCircle(headLine.get('x1'), headLine.get('y1'), null, headLine),
-    makeCircle(headLine.get('x2'), headLine.get('y2'), headLine, shoulder, rightElbow, leftElbow),
-    makeCircle(hips.get('x1'), hips.get('y1'), null, hips),
+    makeCircleHead(headLine.get('x1'), headLine.get('y1'), null, headLine),
+    makeCircle(headLine.get('x2'), headLine.get('y2'), headLine, hips, rightElbow, leftElbow),
+    makeCircle(hips.get('x2'), hips.get('y2'), hips, rightKnee, leftKnee),
     makeCircle(rightElbow.get('x2'), rightElbow.get('y2'), rightElbow, rightHand),
     makeCircle(rightHand.get('x2'), rightHand.get('y2'), rightHand),
     makeCircle(leftElbow.get('x2'), leftElbow.get('y2'), leftElbow, leftHand),
