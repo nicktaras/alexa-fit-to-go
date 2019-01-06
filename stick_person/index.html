@@ -8,19 +8,23 @@
   <script src="node_modules/fabric/dist/fabric.js"></script>
 </head>
 <body>
-  <div style="float: right; margin: 50px;">
+
+  <div style="float: right; margin: 50px; position: relative; z-index: 100;">
     <p>Coords:</p>
-    <p><b>Head:</b><span id="head"></span></p>
-    <p><b>Shoulders:</b> <span id="shoulders"></span></p>
-    <p><b>Hips:</b> <span id="hips"></span></p>
-    <p><b>Left Elbow:</b> <span id="left-elbow"></span></p>
-    <p><b>Right Elbow:</b> <span id="right-elbow"></span></p>
-    <p><b>Right Hand:</b> <span id="right-hand"></span></p>
-    <p><b>Left Hand:</b> <span id="left-hand"></span></p>
-    <p><b>Left Knee:</b> <span id="left-knee"></span></p>
-    <p><b>Right Knee:</b> <span id="right-knee"></span></p>
-    <p><b>Left Foot:</b> <span id="left-foot"></span></p>
-    <p><b>Right Foot:</b> <span id="right-foot"></span></p>
+    <p><b>Head:</b><span id="headCircle"></span></p>
+    <p><b>Shoulders:</b> <span id="shoulderCircle"></span></p>
+    <p><b>Hips:</b> <span id="hipsCircle"></span></p>
+    <p><b>Left Elbow:</b> <span id="leftElbowCircle"></span></p>
+    <p><b>Right Elbow:</b> <span id="rightElbowCircle"></span></p>
+    <p><b>Right Hand:</b> <span id="rightHandCircle"></span></p>
+    <p><b>Left Hand:</b> <span id="leftHandCircle"></span></p>
+    <p><b>Left Knee:</b> <span id="leftKneeCircle"></span></p>
+    <p><b>Right Knee:</b> <span id="rightKneeCircle"></span></p>
+    <p><b>Left Foot:</b> <span id="leftFootCircle"></span></p>
+    <p><b>Left Ankle:</b> <span id="leftAnkleCircle"></span></p>
+    <p><b>Right Foot:</b> <span id="rightFootCircle"></span></p>
+    <p><b>Right Ankle:</b> <span id="rightAnkleCircle"></span></p>
+    <button onClick="exportData()">Export Data</button>
   </div>
   <canvas id="c" height="550px" width="550px"></canvas>
   <script src="main.js"></script>
