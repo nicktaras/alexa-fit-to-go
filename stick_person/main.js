@@ -218,29 +218,698 @@ function animLines (target){
 }
 
 var positionStateStore = {
-  ARM_RAISE: {
-    keys: ['leftElbowCircle', 'rightElbowCircle', 'rightHandCircle', 'leftHandCircle'],
-    leftElbowCircle: {
+  JEDI_1: [
+    {
+      "ref": "headCircle",
+      "left": 229,
+      "top": 158
+    },
+    {
+      "ref": "shoulderCircle",
+      "left": 233,
+      "top": 186
+    },
+    {
+      "ref": "hipsCircle",
+      "left": 217,
+      "top": 253
+    },
+    {
+      "ref": "rightElbowCircle",
+      "left": 169,
+      "top": 169
+    },
+    {
+      "ref": "rightHandCircle",
+      "left": 202,
+      "top": 143
+    },
+    {
+      "ref": "leftElbowCircle",
+      "left": 180,
+      "top": 164
+    },
+    {
+      "ref": "leftHandCircle",
+      "left": 201,
+      "top": 142
+    },
+    {
+      "ref": "rightKneeCircle",
+      "left": 242,
+      "top": 291
+    },
+    {
+      "ref": "rightAnkleCircle",
+      "left": 279,
+      "top": 321
+    },
+    {
+      "ref": "rightFootCircle",
+      "left": 260,
+      "top": 325
+    },
+    {
+      "ref": "leftKneeCircle",
+      "left": 179,
+      "top": 275
+    },
+    {
+      "ref": "leftAnkleCircle",
+      "left": 189,
+      "top": 315
+    },
+    {
+      "ref": "leftFootCircle",
+      "left": 171,
+      "top": 322
+    }
+  ],
+  JEDI_2: [
+    {
+      "ref": "headCircle",
+      "left": 234,
+      "top": 155
+    },
+    {
+      "ref": "shoulderCircle",
+      "left": 233,
+      "top": 186
+    },
+    {
+      "ref": "hipsCircle",
+      "left": 239,
+      "top": 239
+    },
+    {
+      "ref": "rightElbowCircle",
+      "left": 276,
+      "top": 160
+    },
+    {
+      "ref": "rightHandCircle",
+      "left": 307,
+      "top": 142
+    },
+    {
+      "ref": "leftElbowCircle",
+      "left": 291,
+      "top": 179
+    },
+    {
+      "ref": "leftHandCircle",
+      "left": 307,
+      "top": 143
+    },
+    {
+      "ref": "rightKneeCircle",
+      "left": 279,
+      "top": 264
+    },
+    {
+      "ref": "rightAnkleCircle",
+      "left": 286,
+      "top": 311
+    },
+    {
+      "ref": "rightFootCircle",
+      "left": 300,
+      "top": 315
+    },
+    {
+      "ref": "leftKneeCircle",
+      "left": 232,
+      "top": 283
+    },
+    {
+      "ref": "leftAnkleCircle",
+      "left": 203,
+      "top": 308
+    },
+    {
+      "ref": "leftFootCircle",
+      "left": 213,
+      "top": 324
+    }
+  ],
+  JEDI_3: [
+    {
+      "ref": "headCircle",
+      "left": 234,
+      "top": 155
+    },
+    {
+      "ref": "shoulderCircle",
+      "left": 233,
+      "top": 186
+    },
+    {
+      "ref": "hipsCircle",
+      "left": 239,
+      "top": 239
+    },
+    {
+      "ref": "rightElbowCircle",
+      "left": 209,
+      "top": 218
+    },
+    {
+      "ref": "rightHandCircle",
+      "left": 175,
+      "top": 226
+    },
+    {
+      "ref": "leftElbowCircle",
+      "left": 183,
+      "top": 202
+    },
+    {
+      "ref": "leftHandCircle",
+      "left": 173,
+      "top": 226
+    },
+    {
+      "ref": "rightKneeCircle",
+      "left": 276,
+      "top": 273
+    },
+    {
+      "ref": "rightAnkleCircle",
+      "left": 277,
+      "top": 316
+    },
+    {
+      "ref": "rightFootCircle",
+      "left": 300,
+      "top": 322
+    },
+    {
+      "ref": "leftKneeCircle",
+      "left": 196,
+      "top": 282
+    },
+    {
+      "ref": "leftAnkleCircle",
+      "left": 194,
+      "top": 315
+    },
+    {
+      "ref": "leftFootCircle",
+      "left": 180,
+      "top": 326
+    }
+  ],
+  KARATEKID: [
+    {
+      "ref": "headCircle",
+      "left": 250,
+      "top": 125
+    },
+    {
+      "ref": "shoulderCircle",
+      "left": 250,
+      "top": 175
+    },
+    {
+      "ref": "hipsCircle",
+      "left": 251,
+      "top": 233
+    },
+    {
+      "ref": "rightElbowCircle",
+      "left": 290,
+      "top": 111
+    },
+    {
+      "ref": "rightHandCircle",
+      "left": 304,
+      "top": 120
+    },
+    {
+      "ref": "leftElbowCircle",
+      "left": 209,
+      "top": 107
+    },
+    {
+      "ref": "leftHandCircle",
+      "left": 195,
+      "top": 121
+    },
+    {
+      "ref": "rightKneeCircle",
+      "left": 251,
+      "top": 283
+    },
+    {
+      "ref": "rightAnkleCircle",
+      "left": 251,
+      "top": 316
+    },
+    {
+      "ref": "rightFootCircle",
+      "left": 262,
+      "top": 317
+    },
+    {
+      "ref": "leftKneeCircle",
+      "left": 226,
+      "top": 222
+    },
+    {
+      "ref": "leftAnkleCircle",
+      "left": 220,
+      "top": 257
+    },
+    {
+      "ref": "leftFootCircle",
+      "left": 213,
+      "top": 270
+    }
+  ],
+  JACKIECHAN: [
+    {
+      "ref": "headCircle",
+      "left": 240,
+      "top": 144
+    },
+    {
+      "ref": "shoulderCircle",
+      "left": 250,
+      "top": 175
+    },
+    {
+      "ref": "hipsCircle",
+      "left": 240,
+      "top": 245
+    },
+    {
+      "ref": "rightElbowCircle",
+      "left": 290,
+      "top": 200
+    },
+    {
+      "ref": "rightHandCircle",
+      "left": 271,
+      "top": 194
+    },
+    {
+      "ref": "leftElbowCircle",
+      "left": 195,
+      "top": 198
+    },
+    {
+      "ref": "leftHandCircle",
+      "left": 163,
+      "top": 185
+    },
+    {
+      "ref": "rightKneeCircle",
+      "left": 281,
+      "top": 274
+    },
+    {
+      "ref": "rightAnkleCircle",
+      "left": 274,
+      "top": 307
+    },
+    {
+      "ref": "rightFootCircle",
+      "left": 289,
+      "top": 315
+    },
+    {
+      "ref": "leftKneeCircle",
+      "left": 205,
+      "top": 279
+    },
+    {
+      "ref": "leftAnkleCircle",
+      "left": 183,
+      "top": 315
+    },
+    {
+      "ref": "leftFootCircle",
+      "left": 165,
+      "top": 316
+    }
+  ],
+  MICHEALJACKSON:[
+    {
+      "ref": "headCircle",
+      "left": 234,
+      "top": 148
+    },
+    {
+      "ref": "shoulderCircle",
+      "left": 250,
+      "top": 175
+    },
+    {
+      "ref": "hipsCircle",
+      "left": 242,
+      "top": 254
+    },
+    {
+      "ref": "rightElbowCircle",
+      "left": 285,
+      "top": 207
+    },
+    {
+      "ref": "rightHandCircle",
+      "left": 320,
+      "top": 225
+    },
+    {
+      "ref": "leftElbowCircle",
+      "left": 196,
+      "top": 174
+    },
+    {
+      "ref": "leftHandCircle",
+      "left": 224,
+      "top": 137
+    },
+    {
+      "ref": "rightKneeCircle",
+      "left": 214,
+      "top": 278
+    },
+    {
+      "ref": "rightAnkleCircle",
+      "left": 237,
+      "top": 321
+    },
+    {
+      "ref": "rightFootCircle",
+      "left": 230,
+      "top": 343
+    },
+    {
+      "ref": "leftKneeCircle",
+      "left": 202,
+      "top": 275
+    },
+    {
+      "ref": "leftAnkleCircle",
+      "left": 223,
+      "top": 321
+    },
+    {
+      "ref": "leftFootCircle",
+      "left": 217,
+      "top": 342
+    }
+  ],
+  SUPERMAN: [
+    {
+      "ref": "headCircle",
+      "left": 249,
+      "top": 135
+    },
+    {
+      "ref": "shoulderCircle",
+      "left": 250,
+      "top": 175
+    },
+    {
+      "ref": "hipsCircle",
+      "left": 250,
+      "top": 237
+    },
+    {
+      "ref": "rightElbowCircle",
+      "left": 274,
+      "top": 187
+    },
+    {
+      "ref": "rightHandCircle",
+      "left": 274,
+      "top": 214
+    },
+    {
+      "ref": "leftElbowCircle",
+      "left": 219,
+      "top": 137
+    },
+    {
+      "ref": "leftHandCircle",
+      "left": 222,
+      "top": 95
+    },
+    {
+      "ref": "rightKneeCircle",
+      "left": 272,
+      "top": 238
+    },
+    {
+      "ref": "rightAnkleCircle",
+      "left": 272,
+      "top": 282
+    },
+    {
+      "ref": "rightFootCircle",
+      "left": 279,
+      "top": 300
+    },
+    {
+      "ref": "leftKneeCircle",
+      "left": 249,
+      "top": 276
+    },
+    {
+      "ref": "leftAnkleCircle",
+      "left": 247,
+      "top": 317
+    },
+    {
+      "ref": "leftFootCircle",
+      "left": 230,
+      "top": 318
+    }
+  ],
+  FREDDIE: [
+    {
+      "ref": "headCircle",
+      "left": 263,
+      "top": 154
+    },
+    {
+      "ref": "shoulderCircle",
+      "left": 250,
+      "top": 175
+    },
+    {
+      "ref": "hipsCircle",
+      "left": 246,
+      "top": 232
+    },
+    {
+      "ref": "rightElbowCircle",
+      "left": 270,
+      "top": 222
+    },
+    {
+      "ref": "rightHandCircle",
+      "left": 289,
+      "top": 248
+    },
+    {
+      "ref": "leftElbowCircle",
+      "left": 225,
+      "top": 146
+    },
+    {
+      "ref": "leftHandCircle",
+      "left": 209,
+      "top": 100
+    },
+    {
+      "ref": "rightKneeCircle",
+      "left": 283,
+      "top": 280
+    },
+    {
+      "ref": "rightAnkleCircle",
+      "left": 306,
+      "top": 316
+    },
+    {
+      "ref": "rightFootCircle",
+      "left": 316,
+      "top": 317
+    },
+    {
+      "ref": "leftKneeCircle",
+      "left": 225,
+      "top": 277
+    },
+    {
+      "ref": "leftAnkleCircle",
+      "left": 208,
+      "top": 315
+    },
+    {
+      "ref": "leftFootCircle",
+      "left": 193,
+      "top": 315
+    }
+  ],
+  HULK: [
+    {
+      "ref": "headCircle",
+      "left": 225,
+      "top": 159
+    },
+    {
+      "ref": "shoulderCircle",
+      "left": 231,
+      "top": 197
+    },
+    {
+      "ref": "hipsCircle",
+      "left": 250,
+      "top": 250
+    },
+    {
+      "ref": "rightElbowCircle",
+      "left": 276,
+      "top": 173
+    },
+    {
+      "ref": "rightHandCircle",
+      "left": 309,
+      "top": 154
+    },
+    {
+      "ref": "leftElbowCircle",
+      "left": 189,
+      "top": 196
+    },
+    {
+      "ref": "leftHandCircle",
+      "left": 199,
+      "top": 177
+    },
+    {
+      "ref": "rightKneeCircle",
+      "left": 270,
+      "top": 280
+    },
+    {
+      "ref": "rightAnkleCircle",
+      "left": 280,
+      "top": 315
+    },
+    {
+      "ref": "rightFootCircle",
+      "left": 300,
+      "top": 315
+    },
+    {
+      "ref": "leftKneeCircle",
+      "left": 235,
+      "top": 275
+    },
+    {
+      "ref": "leftAnkleCircle",
+      "left": 220,
+      "top": 315
+    },
+    {
+      "ref": "leftFootCircle",
+      "left": 200,
+      "top": 315
+    }
+  ],
+  BOLT: [
+    {
+      "ref": "headCircle",
+      "left": 237,
+      "top": 140
+    },
+    {
+      "ref": "shoulderCircle",
+      "left": 250,
+      "top": 175
+    },
+    {
+      "ref": "hipsCircle",
+      "left": 271,
+      "top": 248
+    },
+    {
+      "ref": "rightElbowCircle",
+      "left": 290,
+      "top": 139
+    },
+    {
+      "ref": "rightHandCircle",
+      "left": 314,
+      "top": 117
+    },
+    {
+      "ref": "leftElbowCircle",
+      "left": 214,
+      "top": 199
+    },
+    {
+      "ref": "leftHandCircle",
+      "left": 272,
+      "top": 181
+    },
+    {
+      "ref": "rightKneeCircle",
+      "left": 293,
+      "top": 265
+    },
+    {
+      "ref": "rightAnkleCircle",
+      "left": 305,
+      "top": 315
+    },
+    {
+      "ref": "rightFootCircle",
+      "left": 321,
+      "top": 315
+    },
+    {
+      "ref": "leftKneeCircle",
+      "left": 235,
+      "top": 275
+    },
+    {
+      "ref": "leftAnkleCircle",
+      "left": 235,
+      "top": 315
+    },
+    {
+      "ref": "leftFootCircle",
+      "left": 219,
+      "top": 317
+    }
+  ],
+  ARM_RAISE: [
+    {
       ref: 'leftElbowCircle',
       top: 152,
       left: 206
     },
-    rightElbowCircle: {
+    {
       ref: 'rightElbowCircle',
       top: 158,
       left: 286
     },
-    rightHandCircle: {
+    {
       ref: 'rightHandCircle',
       top: 110,
       left: 309
     },
-    leftHandCircle: {
+    {
       ref: 'leftHandCircle',
       top: 111,
       left: 191
     }
-  },
+  ],
   HEAL_LIFT: [
     {
       ref: 'headCircle',
@@ -383,11 +1052,11 @@ function ani(state) {
     var obj = positionStateStore[state][i];
     var ref = circles[obj.ref];
     ref.animate('top', obj.top, {
-      duration: 100,
+      duration: 400,
       easing: undefined,
       onChange: function (){ animLines(ref); }
     }).animate('left', obj.left, {
-      duration: 100,
+      duration: 400,
       easing: undefined,
       onChange: function (){
         animLines(ref);
@@ -402,47 +1071,33 @@ function ani(state) {
   }
 }
 
-// Jerky version
-// var i = 0;
-// function ani(state) {
-//   var objList = positionStateStore[state];
-//   var obj = positionStateStore[state][i];
-//   var ref = circles[obj.ref];
-//   ref.animate('top', obj.top, {
-//     duration: 100,
-//     easing: undefined,
-//     onChange: function (){ animLines(ref); }
-//   }).animate('left', obj.left, {
-//     duration: 100,
-//     easing: undefined,
-//     onChange: function (){
-//       animLines(ref);
-//     },
-//     onComplete: function() {
-//       if (i < objList.length -1){ 
-//         i++;
-//         ani(state);
-//       }
-//     }
-//   });
-// }
-
 setTimeout(() => {
-  i = 0;
-  ani('HEAL_LIFT');
+  ani('BOLT');
 }, 0);
 setTimeout(() => {
-  i = 0;
-  ani('IDLE');
+  ani('MICHEALJACKSON');
 }, 2000);
 setTimeout(() => {
-  i = 0;
-  ani('HEAL_LIFT');
+  ani('SUPERMAN');
 }, 4000);
 setTimeout(() => {
-  i = 0;
+  ani('JACKIECHAN');
+}, 8000);
+setTimeout(() => {
+  ani('KARATEKID');
+}, 10000);
+setTimeout(() => {
+  ani('JEDI_1');
+}, 12000);
+setTimeout(() => {
+  ani('JEDI_2');
+}, 14000);
+setTimeout(() => {
+  ani('JEDI_3');
+}, 16000);
+setTimeout(() => {
   ani('IDLE');
-}, 6000);
+}, 18000);
 
 var exportData = function () {
   var out = [];
