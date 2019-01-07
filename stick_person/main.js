@@ -217,7 +217,143 @@ function animLines (target){
   canvas.renderAll();
 }
 
+// BOTTOM_LIFTS
+
 var positionStateStore = {
+  HEAL_LIFT_LEFT_DOWN: [
+    {
+      "ref": "headCircle",
+      "left": 250,
+      "top": 125
+    },
+    {
+      "ref": "shoulderCircle",
+      "left": 250,
+      "top": 175
+    },
+    {
+      "ref": "hipsCircle",
+      "left": 250,
+      "top": 243
+    },
+    {
+      "ref": "rightElbowCircle",
+      "left": 285,
+      "top": 200
+    },
+    {
+      "ref": "rightHandCircle",
+      "left": 320,
+      "top": 225
+    },
+    {
+      "ref": "leftElbowCircle",
+      "left": 215,
+      "top": 200
+    },
+    {
+      "ref": "leftHandCircle",
+      "left": 180,
+      "top": 225
+    },
+    {
+      "ref": "rightKneeCircle",
+      "left": 268,
+      "top": 261
+    },
+    {
+      "ref": "rightAnkleCircle",
+      "left": 268,
+      "top": 302
+    },
+    {
+      "ref": "rightFootCircle",
+      "left": 284,
+      "top": 303
+    },
+    {
+      "ref": "leftKneeCircle",
+      "left": 249,
+      "top": 276
+    },
+    {
+      "ref": "leftAnkleCircle",
+      "left": 249,
+      "top": 315
+    },
+    {
+      "ref": "leftFootCircle",
+      "left": 234,
+      "top": 315
+    }
+  ],
+  HEAL_LIFT_LEFT_UP: [
+    {
+      "ref": "headCircle",
+      "left": 250,
+      "top": 115
+    },
+    {
+      "ref": "shoulderCircle",
+      "left": 250,
+      "top": 165
+    },
+    {
+      "ref": "hipsCircle",
+      "left": 250,
+      "top": 233
+    },
+    {
+      "ref": "rightElbowCircle",
+      "left": 285,
+      "top": 190
+    },
+    {
+      "ref": "rightHandCircle",
+      "left": 320,
+      "top": 215
+    },
+    {
+      "ref": "leftElbowCircle",
+      "left": 215,
+      "top": 190
+    },
+    {
+      "ref": "leftHandCircle",
+      "left": 180,
+      "top": 215
+    },
+    {
+      "ref": "rightKneeCircle",
+      "left": 268,
+      "top": 251
+    },
+    {
+      "ref": "rightAnkleCircle",
+      "left": 268,
+      "top": 292
+    },
+    {
+      "ref": "rightFootCircle",
+      "left": 284,
+      "top": 293
+    },
+    {
+      "ref": "leftKneeCircle",
+      "left": 249,
+      "top": 266
+    },
+    {
+      "ref": "leftAnkleCircle",
+      "left": 249,
+      "top": 305
+    },
+    {
+      "ref": "leftFootCircle",
+      "left": 234,
+      "top": 315
+    }
+  ],
   JEDI_1: [
     {
       "ref": "headCircle",
@@ -1071,33 +1207,48 @@ function ani(state) {
   }
 }
 
+
+
 setTimeout(() => {
-  ani('BOLT');
+  ani('HEAL_LIFT_LEFT_DOWN');
 }, 0);
 setTimeout(() => {
-  ani('MICHEALJACKSON');
+  ani('HEAL_LIFT_LEFT_UP');
 }, 2000);
 setTimeout(() => {
-  ani('SUPERMAN');
+  ani('HEAL_LIFT_LEFT_DOWN');
 }, 4000);
 setTimeout(() => {
-  ani('JACKIECHAN');
-}, 8000);
-setTimeout(() => {
-  ani('KARATEKID');
-}, 10000);
-setTimeout(() => {
-  ani('JEDI_1');
-}, 12000);
-setTimeout(() => {
-  ani('JEDI_2');
-}, 14000);
-setTimeout(() => {
-  ani('JEDI_3');
-}, 16000);
-setTimeout(() => {
-  ani('IDLE');
-}, 18000);
+  ani('HEAL_LIFT_LEFT_UP');
+}, 6000);
+
+// setTimeout(() => {
+//   ani('BOLT');
+// }, 0);
+// setTimeout(() => {
+//   ani('MICHEALJACKSON');
+// }, 2000);
+// setTimeout(() => {
+//   ani('SUPERMAN');
+// }, 4000);
+// setTimeout(() => {
+//   ani('JACKIECHAN');
+// }, 8000);
+// setTimeout(() => {
+//   ani('KARATEKID');
+// }, 10000);
+// setTimeout(() => {
+//   ani('JEDI_1');
+// }, 12000);
+// setTimeout(() => {
+//   ani('JEDI_2');
+// }, 14000);
+// setTimeout(() => {
+//   ani('JEDI_3');
+// }, 16000);
+// setTimeout(() => {
+//   ani('IDLE');
+// }, 18000);
 
 var exportData = function () {
   var out = [];
