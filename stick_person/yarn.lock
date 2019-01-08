@@ -185,6 +185,10 @@ getpass@^0.1.1:
   dependencies:
     assert-plus "^1.0.0"
 
+gif-capture-canvas@^1.0.1:
+  version "1.0.1"
+  resolved "https://registry.yarnpkg.com/gif-capture-canvas/-/gif-capture-canvas-1.0.1.tgz#28de991c9774a34fb31b4458b1806a3956de09ed"
+
 har-schema@^2.0.0:
   version "2.0.0"
   resolved "https://registry.yarnpkg.com/har-schema/-/har-schema-2.0.0.tgz#a94c2224ebcac04782a0d9035521f24735b7ec92"

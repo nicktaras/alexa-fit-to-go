@@ -5,7 +5,13 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <title>Stick Person</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
+  <script
+  src="https://code.jquery.com/jquery-3.3.1.min.js"
+  integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+  crossorigin="anonymous"></script>
   <script src="node_modules/fabric/dist/fabric.js"></script>
+  <script src="node_modules/file-saver/dist/FileSaver.min.js"></script>
+  <script src="node_modules/canvas-toBlob/canvas-toBlob.js"></script>
 </head>
 <body>
 
@@ -26,7 +32,36 @@
     <p><b>Right Ankle:</b> <span id="rightAnkleCircle"></span></p>
     <button onClick="exportData()">Export Data</button>
   </div>
+    
   <canvas id="c" height="550px" width="550px"></canvas>
   <script src="main.js"></script>
+  
+  <video id="recorded" playsinline loop></video>
+
+    <div>
+        <button id="record">Start Recording</button>
+        <button id="play" disabled>Play</button>
+        <button id="download" disabled>Download</button>
+    </div>
+
+    <p>The <code>canvas</code>, <code>video</code>, and <code>stream</code> variables are in global scope, so you can
+        inspect them from the browser console.</p>
+
+    <p>For more demos and information about <code>captureStream()</code>, see <a
+            href="https://docs.google.com/document/d/1JmWfOtUP6ZqsYJ--U8y0OtHkBt-VyjX4N-JqIjb1t78"
+            title="Implementation overview doc">Media Capture from Canvas Implementation</a>.</p>
+
+    <p>For more information see the MediaStream Recording API <a
+            href="http://w3c.github.io/mediacapture-record/MediaRecorder.html"
+            title="W3C MediaStream Recording API Editor's Draft">Editor's&nbsp;Draft</a>.</p>
+            
+    <a href="https://github.com/webrtc/samples/tree/gh-pages/src/content/capture/canvas-record"
+      title="View source for this page on GitHub" id="viewSource">View source on GitHub</a>
+
+  </div>
+  <script src="rtc.js"></script>
+  <!-- include adapter for srcObject shim -->
+  <script src="https://webrtc.github.io/adapter/adapter-latest.js"></script>
+  
 </body>
 </html>

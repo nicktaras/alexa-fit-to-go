@@ -1,5 +1,5 @@
-
 var canvas = this.__canvas = new fabric.Canvas('c', { selection: false });
+
 fabric.Object.prototype.originX = fabric.Object.prototype.originY = 'center';
 
 var colour = '#457870';
@@ -214,7 +214,14 @@ function animLines (target){
   });
 
   assignDebugCoords(p);
+
+  // render
   canvas.renderAll();
+
+  // $('#c').get(0).toBlob(function (blob) {
+    // saveAs(blob, 'f.png');
+  // }); 
+
 }
 
 // BOTTOM_LIFTS
@@ -1207,8 +1214,6 @@ function ani(state) {
   }
 }
 
-
-
 setTimeout(() => {
   ani('HEAL_LIFT_LEFT_DOWN');
 }, 0);
@@ -1261,4 +1266,3 @@ var exportData = function () {
   }
   console.log(out);
 }
-
