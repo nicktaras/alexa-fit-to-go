@@ -1,45 +1,20 @@
-SEE: http://jsfiddle.net/softvar/NuE78/1/
+// TODO's
 
+// Test video / gif via Alexa
+// Update design to look good on all devices
+// Add logo, move stickperson etc
 
-// function unGroupItems (){}
-// var tempGroup;
-// function groupItems (){
-//   var objs = [
-//     circles.headCircle, 
-//     circles.shoulderCircle,
-//     circles.hipsCircle, 
-//     circles.leftElbowCircle, 
-//     circles.rightElbowCircle, 
-//     circles.rightHandCircle, 
-//     circles.leftHandCircle,
-//     circles.leftKneeCircle, 
-//     circles.leftAnkleCircle, 
-//     circles.leftFootCircle,
-//     circles.rightKneeCircle, 
-//     circles.rightAnkleCircle, 
-//     circles.rightFootCircle, 
-//     lines.head, 
-//     lines.hips, 
-//     lines.leftElbow, 
-//     lines.rightElbow, 
-//     lines.rightHand, 
-//     lines.leftHand,
-//     lines.leftKnee, 
-//     lines.leftAnkle, 
-//     // lines.leftFoot,
-//     lines.rightKnee, 
-//     lines.rightAnkle, 
-//     // lines.rightFoot
-//   ];
-//   // group all the objects 
-//   tempGroup = new fabric.Group(
-//     objs, 
-//     {
-//       top: 0,
-//       left: 0
-//     }
-//   );
-//   canvas.add(tempGroup);
-//   tempGroup.setCoords(); 
-//   canvas.renderAll();
-// }
+// Set up recorder to record the correct length of time
+// and export the video automatically
+
+// Add timings to stick person animation
+// for recording and sync with voice
+ 
+// test anim sync with voice (not so important if we cannot do this for mvp)
+
+// Build out routines and exercises - anims and voice.
+
+// Make logo
+
+// Submit to store
+
