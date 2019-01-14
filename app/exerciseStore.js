@@ -110,18 +110,16 @@ const exerciseStore = {
     config: {
       type: "SSML",
       responseType: ':ask', 
-      text: 'Ok lets do some leg lifts. First find a bit of space where you can lift your legs in front of you. Tell me when you are ready.'
+      text: 'Ok lets do some leg lifts. First find a bit of space where you can lift your legs in front of you. Place your legs inline with your hips, with your arms by your side.<break time="1s"/> Tell me when you are ready.'
     }
   },
   'LEG_RAISES': {
     type: 'exerciseMethod',
     config: {
       type: "SSML",
-      method: 'repeatedMiddleStep',
-      repetitions: 1,
+      method: 'leftAndRight',
       responseType: ':ask',
-      initialInstruction: 'Place your legs inline with your hips, with your arms by your side.<break time="1s"/> ',
-      repeatedInstruction: 'Over the span of 5 around seconds, slowly start to lift your left leg from the floor, this until your thigh is parellel to your hip and hold <break time="3s"/>. Keeping holding for, one <break time="1s"/> two <break time="1s"/> three <break time="1s"/> seconds, then slowly bring your left leg down to the floor<break time="2s"/>. Next slowly lift your right leg, until your thigh is parellel to your hip and hold <break time="2s"/>. Lets hold for 3 more seconds, one <break time="1s"/> two <break time="1s"/> three <break time="1s"/>, now bring your right leg slowly down to the floor. Then '
+      text: 'Over the span of 5 around seconds, slowly start to lift your DIRECTION leg from the floor, this until your thigh is parellel to your hip and hold <break time="3s"/>. Keeping holding for, one <break time="1s"/> two <break time="1s"/> three <break time="1s"/> seconds, then slowly bring your DIRECTION leg down to the floor. Then ',
     }    
   },
   'SINGLE_HEAL_LIFTS_INIT': {

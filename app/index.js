@@ -62,55 +62,59 @@ const LaunchRequestHandler = {
         .withSimpleCard('Fit To Go', speechText)
         .getResponse();
     } else {
+     
       // if the application is in its initial state and the user is logged in.
-      if (applicationState.state.type === 'INIT') {
-        try {
-          const accessToken = handlerInput.requestEnvelope.context.System.user.accessToken;
-          const fbUserName = await getFbUser(accessToken);
-          let speechText = "Welcome, " +  fbUserName + " what type of activity or sport will you be doing today?";
+      // if (applicationState.state.type === 'INIT') {
 
-          if (supportsDisplay) {
+      try {
+        const accessToken = handlerInput.requestEnvelope.context.System.user.accessToken;
+        const fbUserName = await getFbUser(accessToken);
+        let speechText = "Welcome, " +  fbUserName + " what type of activity or sport will you be doing today?";
 
-            const myImage = new Alexa.ImageHelper()
-            .addImageInstance('https://media.giphy.com/media/l1J9sqWg6hZnMKrBK/giphy.gif')
-            .getImage();
+        if (supportsDisplay) {
 
-            const primaryText = new Alexa.RichTextContentHelper()
-              .withPrimaryText(speechText)
-              .getTextContent();
+          const myImage = new Alexa.ImageHelper()
+          .addImageInstance('https://media.giphy.com/media/l1J9sqWg6hZnMKrBK/giphy.gif')
+          .getImage();
 
-            handlerInput.responseBuilder
-            .addRenderTemplateDirective({
-              type: 'BodyTemplate1',
-              token: 'string',
-              backButton: 'HIDDEN',
-              backgroundImage: myImage,
-              title: "Fit to Go",
-              textContent: primaryText,
-            })
+          const primaryText = new Alexa.RichTextContentHelper()
+            .withPrimaryText(speechText)
+            .getTextContent();
 
-          } 
+          handlerInput.responseBuilder
+          .addRenderTemplateDirective({
+            type: 'BodyTemplate1',
+            token: 'string',
+            backButton: 'HIDDEN',
+            backgroundImage: myImage,
+            title: "Fit to Go",
+            textContent: primaryText,
+          })
 
-          return handlerInput.responseBuilder
+        } 
+
+        return handlerInput.responseBuilder
+        .speak(speechText)
+        .withShouldEndSession(false)
+        .getResponse();
+
+      } catch (error) {
+        let speechText = "There was an error with fit to go, try again.";
+        return handlerInput.responseBuilder
           .speak(speechText)
+          .withSimpleCard('Error', speechText)
           .withShouldEndSession(false)
           .getResponse();
-
-        } catch (error) {
-          let speechText = "There was an error with fit to go, try again.";
-          return handlerInput.responseBuilder
-            .speak(speechText)
-            .withSimpleCard('Error', speechText)
-            .withShouldEndSession(false)
-            .getResponse();
-        }
-      } else  {
-        let speechText = "TO DO. User has loaded application and it is beyond the INIT state.";
-          return handlerInput.responseBuilder
-            .speak(speechText)
-            .withShouldEndSession(false)
-            .getResponse();
       }
+
+      // } else  { // TODO handle when user comes back at later stage of app
+        // let speechText = "User is at state beyond init:" + applicationState.state.type;
+        //   return handlerInput.responseBuilder
+        //     .speak(speechText)
+        //     .withShouldEndSession(false)
+        //     .getResponse();
+      // }
+
     }
   }
 };
@@ -157,8 +161,7 @@ const InitIntentHandler = {
   }
 };
 
-// Sport handler, responds to a user who is going to do sport such as soccer.
-// TODO - 
+// TODO - Sports is not currently handled.
 const SportIntentHandler = {
   canHandle(handlerInput) {
      return handlerInput.requestEnvelope.request.type === 'IntentRequest' && 
@@ -173,7 +176,7 @@ const SportIntentHandler = {
   }
 };
 
-// Collect data.
+// Collect data. Elicit ensure we have the difficulty and activity
 const ActivityIntentHandlerInit = {
   canHandle(handlerInput) {
     return handlerInput.requestEnvelope.request.type === 'IntentRequest' && 
