@@ -99,7 +99,7 @@ const exerciseStore = {
       type: "SSML",
       method: 'repeatedMiddleStep',
       responseType: ':ask',
-      repetitions: 1,
+      repetitions: 3,
       initialInstruction: 'With your legs inline with your hips in a standing position, ',
       repeatedInstruction: 'Slowly raise both your heals. <break time="1s"/> Hold for one <break time="1s"/> two <break time="1s"/> three <break time="1s"/> now lower your heals slowly so they are almost touching the ground and hold. ',
       about: 'HEAL_LIFTS'

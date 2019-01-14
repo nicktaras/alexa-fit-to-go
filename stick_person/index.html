@@ -32,7 +32,12 @@
     <p><b>Right Ankle:</b> <span id="rightAnkleCircle"></span></p>
     <button onClick="exportData()">Export Data</button>
   </div>
-    
+
+  <audio preload controls autoplay id="ac">
+    <source src="test_sync_audio.mp3" type="audio/mpeg">
+    Your browser does not support the audio tag.
+  </audio>
+
   <canvas id="c" height="550px" width="550px"></canvas>
   <script src="main.js"></script>
   
@@ -70,7 +75,7 @@
     // startRecording();
     // setTimeout(() => {
     //   stopRecording();
-    // }, 14000);
+    // }, 14000);      
   </script>
   
 </body>

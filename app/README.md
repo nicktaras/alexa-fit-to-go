@@ -7,6 +7,8 @@ aws lambda update-function-code --function-name ask-custom-Hello_World-cli-user 
 
 http://ask-sdk-java-javadocs.s3-website-us-west-2.amazonaws.com/com/amazon/ask/response/ResponseBuilder.html
 
+https://ask-sdk-for-nodejs.readthedocs.io/en/latest/Building-Response.html
+
 # Tests
 
 See the tests folder.

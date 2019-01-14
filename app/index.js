@@ -72,9 +72,9 @@ const LaunchRequestHandler = {
         let speechText = "Welcome, " +  fbUserName + " what type of activity or sport will you be doing today?";
 
         if (supportsDisplay) {
-
+            
           const myImage = new Alexa.ImageHelper()
-          .addImageInstance('https://media.giphy.com/media/l1J9sqWg6hZnMKrBK/giphy.gif')
+          .addImageInstance('https://github.com/nicktaras/alexa-physio-me/blob/master/assets/double_heal_lifts.gif?raw=true')
           .getImage();
 
           const primaryText = new Alexa.RichTextContentHelper()
@@ -251,7 +251,28 @@ const ExerciseIntentHandler = {
         routineStore: routineStore
       });
       var speechText = exerciseConversationHandler({ state: applicationState }).text;
+      // test video
+      // handlerInput.responseBuilder.addVideoAppLaunchDirective("https://github.com/nicktaras/alexa-physio-me/blob/master/assets/double_heal_lifts.mp4", "title", "subtitle");
+      const myImage = new Alexa.ImageHelper()
+      .addImageInstance('https://github.com/nicktaras/alexa-physio-me/blob/master/assets/double_heal_lifts.gif?raw=true')
+      .getImage();
+
+      const primaryText = new Alexa.RichTextContentHelper()
+        .withPrimaryText(speechText)
+        .getTextContent();
+
+      handlerInput.responseBuilder
+      .addRenderTemplateDirective({
+        type: 'BodyTemplate1',
+        token: 'string',
+        backButton: 'HIDDEN',
+        backgroundImage: myImage,
+        title: "Fit to Go",
+        textContent: primaryText,
+      })
+      
     } 
+
     return handlerInput.responseBuilder
       .speak(speechText)
       .withShouldEndSession(false)
