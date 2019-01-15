@@ -1,5 +1,8 @@
 // TODO's
 
+TOuch toes...
+Stretch Your Hamstrings and Back. The classic, standing toe-touch exercise primarily stretches your hamstrings, the four-muscle group in the back of each thigh. This exercise also works the erector-spinae muscles in your lower back. Do the exercise by standing with your legs straight and your feet together.
+
 // Test video / gif via Alexa
 // Update design to look good on all devices
 // Add logo, move stickperson etc
