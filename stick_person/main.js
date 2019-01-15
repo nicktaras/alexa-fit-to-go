@@ -72,7 +72,7 @@ canvas.add(
 );
 
 var circles = {
-  headCircle: makeCircle('headCircle', lines.head.get('x1'), lines.head.get('y1'), null, lines.head, null, null, 16),
+  headCircle: makeCircle('headCircle', lines.head.get('x1'), lines.head.get('y1'), null, lines.head, null, null, 24),
   shoulderCircle: makeCircle('shoulderCircle', lines.head.get('x2'), lines.head.get('y2'), lines.head, lines.hips, lines.rightElbow, lines.leftElbow),
   hipsCircle: makeCircle('hipsCircle', lines.hips.get('x2'), lines.hips.get('y2'), lines.hips, lines.rightKnee, lines.leftKnee),
   rightElbowCircle: makeCircle('rightElbowCircle', lines.rightElbow.get('x2'), lines.rightElbow.get('y2'), lines.rightElbow, lines.rightHand),
@@ -88,16 +88,16 @@ var circles = {
 }
 
 canvas.add(
-  circles.headCircle,
   circles.shoulderCircle,
   circles.hipsCircle,
-  circles.rightElbowCircle,
-  circles.rightHandCircle,
-  circles.leftElbowCircle,
-  circles.leftHandCircle,
   circles.rightKneeCircle,
   circles.rightAnkleCircle,
   circles.rightFootCircle,
+  circles.rightElbowCircle,
+  circles.rightHandCircle,
+  circles.leftHandCircle,
+  circles.headCircle,
+  circles.leftElbowCircle,
   circles.leftKneeCircle,
   circles.leftAnkleCircle,
   circles.leftFootCircle
@@ -215,6 +215,8 @@ function animLines (target){
   });
 
   assignDebugCoords(p);
+
+  canvas.bringToFront(circles.headCircle);
 
   // render
   canvas.renderAll();
@@ -3036,21 +3038,21 @@ function ani(state) {
 // STANDING_QUAD_STRETCH tells us what mustlces are being used
 // https://www.self.com/gallery/essential-stretches-slideshow
 
-setTimeout(() => {
-  ani('LAYING_FLAT_INIT');
-}, 0);
-setTimeout(() => {
-  ani('PUSH_UP_DOWN_BEGINNER');
-}, 2000);
-setTimeout(() => {
-  ani('PUSH_UP_UP_BEGINNER');
-}, 5000);
-setTimeout(() => {
-  ani('PUSH_UP_DOWN_BEGINNER');
-}, 7000);
-setTimeout(() => {
-  ani('PUSH_UP_UP_BEGINNER');
-}, 10000);
+// setTimeout(() => {
+//   ani('LAYING_FLAT_INIT');
+// }, 0);
+// setTimeout(() => {
+//   ani('PUSH_UP_DOWN_BEGINNER');
+// }, 2000);
+// setTimeout(() => {
+//   ani('PUSH_UP_UP_BEGINNER');
+// }, 5000);
+// setTimeout(() => {
+//   ani('PUSH_UP_DOWN_BEGINNER');
+// }, 7000);
+// setTimeout(() => {
+//   ani('PUSH_UP_UP_BEGINNER');
+// }, 10000);
 
 // setTimeout(() => {
 //   ani('LUNGING_HIP_FLEXER'); 
@@ -3086,21 +3088,21 @@ setTimeout(() => {
 
 // Hamstrings
 
-// setTimeout(() => {
-//   ani('BUTTERFLY_INIT'); 
-// }, 0);
-// setTimeout(() => {
-//   ani('BUTTERFLY_STRETCH');
-// }, 2000);
-// setTimeout(() => {
-//   ani('BUTTERFLY_INIT');
-// }, 5000);
-// setTimeout(() => {
-//   ani('BUTTERFLY_STRETCH');
-// }, 7000);
-// setTimeout(() => {
-//   ani('BUTTERFLY_INIT');
-// }, 10000);
+setTimeout(() => {
+  ani('BUTTERFLY_INIT'); 
+}, 0);
+setTimeout(() => {
+  ani('BUTTERFLY_STRETCH');
+}, 2000);
+setTimeout(() => {
+  ani('BUTTERFLY_INIT');
+}, 5000);
+setTimeout(() => {
+  ani('BUTTERFLY_STRETCH');
+}, 7000);
+setTimeout(() => {
+  ani('BUTTERFLY_INIT');
+}, 10000);
 
 // squat
 // setTimeout(() => {
