@@ -61,7 +61,7 @@ const chitChatExerciseStore = {
     "Kayaking is a great, low impact sport. Theres never a better excuse to get out there and enjoy the views. ",
     "did you know that Kayaking can improve your aerobic fitness, strength and flexibility. "
   ],
-  "SURF: [
+  "SURF": [
     "Surfers spend a lot of time paddling, this helps you to build stamina and power for when that perfect wave comes along ",
     "did you know that surfing helps you to gain muscle strength and endurance. ",
     "did you know that having good core strength will help you to handle the stronger waves out there. Take care out there today. "
@@ -97,7 +97,7 @@ const chitChatExerciseStore = {
   "CROSS_TRAINING": [
     "did you know that rock climbing can help build strength in your glutes, quadriceps, hamstrings, and the muscles in your hips and lower legs. "
   ],
-  "HORSE_RIDING: [
+  "HORSE_RIDING": [
     "did you know that horse riding can be good for your lower back. "
   ],
   "SKATING": [
