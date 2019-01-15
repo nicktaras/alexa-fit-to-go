@@ -1,4 +1,5 @@
 const congratulateStore = [
+  'Kudos. ',
   'Nice work. ',
   'Well done. ',
   'Great job. ',
@@ -7,9 +8,9 @@ const congratulateStore = [
   'Keep up the great work, well done. ',
   'You did a great job. ',
   'Very well done. ',
-  'There\'s a world class athlete within you, great job. ',
+  'There\'s an athlete within you, great job. ',
   'Congratulations, great job. ',
-  'Congratulations, you\'re a superstar. '
+  'Great job, you\'re a superstar. '
 ]
 
 module.exports = congratulateStore;
