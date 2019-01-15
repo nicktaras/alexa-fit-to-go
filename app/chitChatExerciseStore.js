@@ -71,7 +71,7 @@ const chitChatExerciseStore = {
     "did you know that Frisbee helps build your agility, with those quick turns, pivots, throws and jumps. Enjoy yourself, I would come too if I could. ",
     "did you know that Frisbee helps to boost mood, through team work and exercise in the game. "
   ],
-  "CYCLING": [
+  "CYCLE": [
     "did you know that Cycling is mainly an aerobic activity, which means that your heart, blood vessels and lungs all get a good workout. ",
     "did you know that cycling can increase your overall fitness level, so enjoy the ride! "
   ],
@@ -88,19 +88,19 @@ const chitChatExerciseStore = {
   "PADDLE_BOARD": [
     "did you know that paddle boarding can help increase your balance. ",
   ],
-  "HIKING": [
+  "HIKE": [
     "did you know that hiking can help build strength in your glutes, quadriceps, hamstrings, and the muscles in your hips and lower legs. "
   ],
-  "ROCK_CLIMBING": [
+  "ROCK_CLIMB": [
     "did you know that rock climbing can help build strength in your glutes, quadriceps, hamstrings, and the muscles in your hips and lower legs. "
   ],
-  "CROSS_TRAINING": [
+  "CROSS_TRAIN": [
     "did you know that rock climbing can help build strength in your glutes, quadriceps, hamstrings, and the muscles in your hips and lower legs. "
   ],
-  "HORSE_RIDING": [
+  "HORSE_RIDE": [
     "did you know that horse riding can be good for your lower back. "
   ],
-  "SKATING": [
+  "SKATE": [
     "did you know that skating helps to improve coordination and balance. "
   ]
 }
