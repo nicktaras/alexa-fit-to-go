@@ -211,3 +211,34 @@ if (supportsDisplay(handlerInput) && !testingOnSim) {
 
 Manual video conversion
 https://cloudconvert.com/webm-to-mp4
+
+Exercises - 
+
+Legs:
+
+Calf stretch lower
+Upper leg stretch 
+
+Arms:
+
+Cross-Body Shoulder Stretch
+
+https://www.self.com/gallery/upper-body-stretches
+
+ Over arm strtch
+Push Ups
+
+Back:
+
+Touch toes
+Knee to Chest
+
+
+Stomach:
+
+Sit ups
+Plank
+Squat 
+Bicycle Exercises
+
+
