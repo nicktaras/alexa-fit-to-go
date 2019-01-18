@@ -2,6 +2,10 @@ var canvas = this.__canvas = new fabric.Canvas('c', { selection: false, backgrou
 
 fabric.Object.prototype.originX = fabric.Object.prototype.originY = 'center';
 
+// for MVP only.
+var offsetX = 20;
+var offsetY = 40;
+
 var fillColor = 'white';
 var lineColor = 'black'; //['pink', 'red', 'blue', 'green', 'orange', 'purple', 'grey', 'red', 'brown', 'blue', 'pink', 'purple', 'red'];
 
@@ -20,13 +24,16 @@ function makeCircle(uid, left, top, line1, line2, line3, line4, radius=5) {
     fill: fillColor,
     stroke: lineColor
   });
+
   c.hasControls = c.hasBorders = false;
   c.line1 = line1;
   c.line2 = line2;
   c.line3 = line3;
   c.line4 = line4;
   c.uid = uid;
+
   assignDebugCoords({ uid: uid, left: left, top: top });
+
   return c;
 }
 
@@ -42,18 +49,18 @@ function makeLine(coords) {
 
 //                   sx   sy  ex    ey
 var lines = {
-  head: makeLine([ 250, 125, 250, 175 ]),
-  hips: makeLine([ 250, 175, 250, 250 ]),
-  rightElbow: makeLine([ 250, 175, 285, 200 ]),
-  rightHand: makeLine([ 285, 200, 320, 225 ]),
-  leftElbow: makeLine([ 250, 175, 215, 200 ]),
-  leftHand: makeLine([ 215, 200, 180, 225 ]),
-  rightKnee: makeLine([ 250, 250, 270, 280]),
-  rightAnkle: makeLine([ 270, 280, 280, 315]),
-  rightFoot: makeLine([ 280, 315, 300, 315]),
-  leftKnee: makeLine([ 250, 250, 235, 275]),
-  leftAnkle: makeLine([ 235, 275, 220, 315]),
-  leftFoot: makeLine([ 220, 315, 200, 315])
+  head: makeLine([ 250 + offsetX, 125 + offsetY, 250 + offsetX, 175 + offsetY ]),
+  hips: makeLine([ 250 + offsetX, 175 + offsetY, 250 + offsetX, 250 + offsetY ]),
+  rightElbow: makeLine([ 250 + offsetX, 175 + offsetY, 285 + offsetX, 200 + offsetY ]),
+  rightHand: makeLine([ 285 + offsetX, 200 + offsetY, 320 + offsetX, 225 + offsetY ]),
+  leftElbow: makeLine([ 250 + offsetX, 175 + offsetY, 215 + offsetX, 200 + offsetY ]),
+  leftHand: makeLine([ 215 + offsetX, 200 + offsetY, 180 + offsetX, 225 + offsetY ]),
+  rightKnee: makeLine([ 250 + offsetX, 250 + offsetY, 270 + offsetX, 280 + offsetY]),
+  rightAnkle: makeLine([ 270 + offsetX, 280 + offsetY, 280 + offsetX, 315 + offsetY]),
+  rightFoot: makeLine([ 280 + offsetX, 315 + offsetY, 300 + offsetX, 315 + offsetY]),
+  leftKnee: makeLine([ 250 + offsetX, 250 + offsetY, 235 + offsetX, 275 + offsetY]),
+  leftAnkle: makeLine([ 235 + offsetX, 275 + offsetY, 220 + offsetX, 315 + offsetY]),
+  leftFoot: makeLine([ 220 + offsetX, 315 + offsetY, 200 + offsetX, 315 + offsetY])
 }
     
 canvas.add(
@@ -112,7 +119,25 @@ canvas.on('object:moving', function(e) {
   animLines(e.target);
 });
 
+var cSize = 550;
+var imgURL = 'logo.svg';
+var logoImg = new Image();
+logoImg.onload = function (img) {    
+    var logo = new fabric.Image(logoImg, {
+        angle: 0,
+        width: 1800,
+        height: 550,
+        left: cSize / 2 + 27,
+        top: 60,
+        scaleX: .08,
+        scaleY: .08
+    });
+    canvas.add(logo);
+};
+logoImg.src = imgURL;
+
 function animLines (target){
+
   var p = target;
   // Set lines to meet the circles.
   if (p.line1) {
@@ -139,77 +164,77 @@ function animLines (target){
   // Shoulders are connected to the head
   lines.hips.set({ 
     'x1': circles.shoulderCircle.left,
-    'y1': circles.shoulderCircle.top,
+    'y1': circles.shoulderCircle.top, 
     'x2': circles.hipsCircle.left,
-    'y2': circles.hipsCircle.top
+    'y2': circles.hipsCircle.top  
   });
   // Left Elbow is connected to the 
   lines.leftElbow.set({ 
     'x1': circles.shoulderCircle.left,
-    'y1': circles.shoulderCircle.top,
+    'y1': circles.shoulderCircle.top, 
     'x2': circles.leftElbowCircle.left,
     'y2': circles.leftElbowCircle.top
   });
   // Right Elbow is connected to the 
   lines.rightElbow.set({ 
     'x1': circles.shoulderCircle.left,
-    'y1': circles.shoulderCircle.top,
+    'y1': circles.shoulderCircle.top, 
     'x2': circles.rightElbowCircle.left,
     'y2': circles.rightElbowCircle.top
   });
   // Left Elbow is connected to the 
   lines.leftHand.set({ 
     'x1': circles.leftElbowCircle.left,
-    'y1': circles.leftElbowCircle.top,
+    'y1': circles.leftElbowCircle.top, 
     'x2': circles.leftHandCircle.left,
     'y2': circles.leftHandCircle.top
   });
   // Right Elbow is connected to the 
   lines.rightHand.set({ 
     'x1': circles.rightElbowCircle.left,
-    'y1': circles.rightElbowCircle.top,
+    'y1': circles.rightElbowCircle.top, 
     'x2': circles.rightHandCircle.left,
     'y2': circles.rightHandCircle.top
   });
   // Left Elbow is connected to the 
   lines.leftKnee.set({ 
     'x1': circles.hipsCircle.left,
-    'y1': circles.hipsCircle.top,
+    'y1': circles.hipsCircle.top, 
     'x2': circles.leftKneeCircle.left,
     'y2': circles.leftKneeCircle.top
   });
   // Right Elbow is connected to the 
   lines.rightKnee.set({ 
     'x1': circles.hipsCircle.left,
-    'y1': circles.hipsCircle.top,
+    'y1': circles.hipsCircle.top, 
     'x2': circles.rightKneeCircle.left,
     'y2': circles.rightKneeCircle.top
   });
   // Left Elbow is connected to the 
   lines.leftAnkle.set({ 
     'x1': circles.leftKneeCircle.left,
-    'y1': circles.leftKneeCircle.top,
+    'y1': circles.leftKneeCircle.top, 
     'x2': circles.leftAnkleCircle.left,
     'y2': circles.leftAnkleCircle.top
   });
   // Right Elbow is connected to the 
   lines.rightAnkle.set({ 
     'x1': circles.rightKneeCircle.left,
-    'y1': circles.rightKneeCircle.top,
+    'y1': circles.rightKneeCircle.top, 
     'x2': circles.rightAnkleCircle.left,
     'y2': circles.rightAnkleCircle.top
   });
   // Left Elbow is connected to the 
   lines.leftFoot.set({ 
     'x1': circles.leftAnkleCircle.left,
-    'y1': circles.leftAnkleCircle.top,
+    'y1': circles.leftAnkleCircle.top, 
     'x2': circles.leftFootCircle.left,
     'y2': circles.leftFootCircle.top
   });
   // Right Elbow is connected to the 
   lines.rightFoot.set({ 
     'x1': circles.rightAnkleCircle.left,
-    'y1': circles.rightAnkleCircle.top,
+    'y1': circles.rightAnkleCircle.top, 
     'x2': circles.rightFootCircle.left,
     'y2': circles.rightFootCircle.top
   });
@@ -223,7 +248,28 @@ function animLines (target){
 
 }
 
-// BOTTOM_LIFTS
+// Exercises:
+// LUNGING_HIP_FLEXER
+// STANDING_QUAD_STRETCH
+// KNEE_TO_CHEST
+// BUTTERFLY_STRETCH
+// SQUAT
+// SQUAT_EASY
+// PUSH_UP
+// PUSH_UP_BEGINNER
+// TWIST (WAIST)
+// SIT_UP
+// ARM_RAISE ?
+// BOLT (MOVE)
+// HULK
+// FREDDIE
+// SUPERMAN
+// MICHEALJACKSON
+// JACKIECHAN
+// KARATEKID 
+// JEDI_3
+// HEAL_LIFT_LEFT_UP
+// DOUBLE_HEAL_LIFT
 
 var positionStateStore = {
   STAR_JUMP_LAND: {
@@ -645,7 +691,7 @@ var positionStateStore = {
         "top": 315
       }
     ]
-  }, // TODO code through the other moves...
+  },
   HEAL_LIFT_LEFT_DOWN: {
     speed: 2000,
     coords: [
@@ -925,7 +971,7 @@ var positionStateStore = {
         "top": 324
       }
     ]
-  },    
+  },   
   JEDI_3: {
     speed: 2000,
     coords: [
@@ -2351,76 +2397,6 @@ var positionStateStore = {
       }
     ]
   },
-  ARM_TEST: {
-    speed: 2000,
-    coords: [
-      {
-        "ref": "headCircle",
-        "left": 250,
-        "top": 125
-      },
-      {
-        "ref": "shoulderCircle",
-        "left": 250,
-        "top": 175
-      },
-      {
-        "ref": "hipsCircle",
-        "left": 250,
-        "top": 250
-      },
-      {
-        "ref": "rightElbowCircle",
-        "left": 284,
-        "top": 217
-      },
-      {
-        "ref": "rightHandCircle",
-        "left": 244,
-        "top": 180
-      },
-      {
-        "ref": "leftElbowCircle",
-        "left": 273,
-        "top": 185
-      },
-      {
-        "ref": "leftHandCircle",
-        "left": 316,
-        "top": 190
-      },
-      {
-        "ref": "rightKneeCircle",
-        "left": 270,
-        "top": 280
-      },
-      {
-        "ref": "rightAnkleCircle",
-        "left": 280,
-        "top": 315
-      },
-      {
-        "ref": "rightFootCircle",
-        "left": 300,
-        "top": 315
-      },
-      {
-        "ref": "leftKneeCircle",
-        "left": 235,
-        "top": 275
-      },
-      {
-        "ref": "leftAnkleCircle",
-        "left": 220,
-        "top": 315
-      },
-      {
-        "ref": "leftFootCircle",
-        "left": 200,
-        "top": 315
-      }
-    ]
-  },
   BUTTERFLY_STRETCH: {
     speed: 2000,
     coords: [
@@ -2991,11 +2967,11 @@ function ani(state) {
     var obj = positionStateStore[state].coords[i];
     var speed = positionStateStore[state].speed;
     var ref = circles[obj.ref];
-    ref.animate('top', obj.top, {
+    ref.animate('top', obj.top + offsetY, {
       duration: speed,
       easing: undefined,
       onChange: function (){ animLines(ref); }
-    }).animate('left', obj.left, {
+    }).animate('left', obj.left + offsetX, {
       duration: speed,
       easing: undefined,
       onChange: function (){
