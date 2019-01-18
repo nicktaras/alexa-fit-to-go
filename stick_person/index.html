@@ -13,7 +13,7 @@
   <script src="node_modules/file-saver/dist/FileSaver.min.js"></script>
   <script src="node_modules/canvas-toBlob/canvas-toBlob.js"></script>
 </head>
-<body>
+<body style="background: black"> 
 
   <div style="padding: 20px; float: right; margin: 50px; position: relative; z-index: 100;">
     <p>Coords:</p>
@@ -33,11 +33,6 @@
     <button onClick="exportData()">Export Data</button>
   </div>
 
-  <audio preload controls autoplay id="ac">
-    <source src="test_sync_audio.mp3" type="audio/mpeg">
-    Your browser does not support the audio tag.
-  </audio>
-
   <canvas id="c" height="550px" width="550px"></canvas>
   <script src="main.js"></script>
 
@@ -46,6 +41,11 @@
       <button id="play" disabled>Play</button>
       <button id="download" disabled>Download</button>
   </div>
+
+  <audio preload controls autoplay id="ac">
+    <source src="test_sync_audio.mp3" type="audio/mpeg">
+    Your browser does not support the audio tag.
+  </audio>
 
   <video id="recorded" playsinline loop></video>
 
