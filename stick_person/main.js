@@ -169,7 +169,7 @@ function animLines (target){
     'x1': circles.shoulderCircle.left,
     'y1': circles.shoulderCircle.top, 
     'x2': circles.leftElbowCircle.left,
-    'y2': circles.leftElbowCircle.to
+    'y2': circles.leftElbowCircle.top
   });
   // Right Elbow is connected to the 
   lines.rightElbow.set({ 
