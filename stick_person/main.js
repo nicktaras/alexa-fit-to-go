@@ -2,6 +2,10 @@ var canvas = this.__canvas = new fabric.Canvas('c', { selection: false, backgrou
 
 fabric.Object.prototype.originX = fabric.Object.prototype.originY = 'center';
 
+// for MVP only.
+var offsetX = 20;
+var offsetY = 40;
+
 var fillColor = 'white';
 var lineColor = 'black'; //['pink', 'red', 'blue', 'green', 'orange', 'purple', 'grey', 'red', 'brown', 'blue', 'pink', 'purple', 'red'];
 
@@ -45,18 +49,18 @@ function makeLine(coords) {
 
 //                   sx   sy  ex    ey
 var lines = {
-  head: makeLine([ 250, 125, 250, 175 ]),
-  hips: makeLine([ 250, 175, 250, 250 ]),
-  rightElbow: makeLine([ 250, 175, 285, 200 ]),
-  rightHand: makeLine([ 285, 200, 320, 225 ]),
-  leftElbow: makeLine([ 250, 175, 215, 200 ]),
-  leftHand: makeLine([ 215, 200, 180, 225 ]),
-  rightKnee: makeLine([ 250, 250, 270, 280]),
-  rightAnkle: makeLine([ 270, 280, 280, 315]),
-  rightFoot: makeLine([ 280, 315, 300, 315]),
-  leftKnee: makeLine([ 250, 250, 235, 275]),
-  leftAnkle: makeLine([ 235, 275, 220, 315]),
-  leftFoot: makeLine([ 220, 315, 200, 315])
+  head: makeLine([ 250 + offsetX, 125 + offsetY, 250 + offsetX, 175 + offsetY ]),
+  hips: makeLine([ 250 + offsetX, 175 + offsetY, 250 + offsetX, 250 + offsetY ]),
+  rightElbow: makeLine([ 250 + offsetX, 175 + offsetY, 285 + offsetX, 200 + offsetY ]),
+  rightHand: makeLine([ 285 + offsetX, 200 + offsetY, 320 + offsetX, 225 + offsetY ]),
+  leftElbow: makeLine([ 250 + offsetX, 175 + offsetY, 215 + offsetX, 200 + offsetY ]),
+  leftHand: makeLine([ 215 + offsetX, 200 + offsetY, 180 + offsetX, 225 + offsetY ]),
+  rightKnee: makeLine([ 250 + offsetX, 250 + offsetY, 270 + offsetX, 280 + offsetY]),
+  rightAnkle: makeLine([ 270 + offsetX, 280 + offsetY, 280 + offsetX, 315 + offsetY]),
+  rightFoot: makeLine([ 280 + offsetX, 315 + offsetY, 300 + offsetX, 315 + offsetY]),
+  leftKnee: makeLine([ 250 + offsetX, 250 + offsetY, 235 + offsetX, 275 + offsetY]),
+  leftAnkle: makeLine([ 235 + offsetX, 275 + offsetY, 220 + offsetX, 315 + offsetY]),
+  leftFoot: makeLine([ 220 + offsetX, 315 + offsetY, 200 + offsetX, 315 + offsetY])
 }
     
 canvas.add(
@@ -2963,11 +2967,11 @@ function ani(state) {
     var obj = positionStateStore[state].coords[i];
     var speed = positionStateStore[state].speed;
     var ref = circles[obj.ref];
-    ref.animate('top', obj.top, {
+    ref.animate('top', obj.top + offsetY, {
       duration: speed,
       easing: undefined,
       onChange: function (){ animLines(ref); }
-    }).animate('left', obj.left, {
+    }).animate('left', obj.left + offsetX, {
       duration: speed,
       easing: undefined,
       onChange: function (){
