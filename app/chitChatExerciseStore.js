@@ -1,7 +1,7 @@
 const chitChatExerciseStore = {
   "JOG" : [
     "did you know that jogging helps to strengthen muscles. ",
-    "did you know that jogging helps prevent some cancers. ",
+    "did you know that jogging helps prevent some cancers, so keep up the great work. ",
     "did you know that jogging helps to keep infectious diseases at bay. ",
     "did you know that jogging helps combat stress and improves mental fitness. ",
     "there's nothing better than a short jog to ease some stress. ",

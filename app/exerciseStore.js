@@ -49,7 +49,7 @@ const exerciseStore = {
       type: "SSML",
       responseType: ':ask',
       text: "In this exercise we are going to try to touch our toes, which will help to stretch your hamstrings and back. Don't worry if you can't reach your toes yet, we'll work on it over time. Tell me when you're ready to start.",
-      animationURL: 'https://raw.githubusercontent.com/nicktaras/alexa-physio-me/master/assets/Fit_to_Go_Init_Screen.png'
+      animationURL: 'https://raw.githubusercontent.com/nicktaras/alexa-physio-me/master/assets/ARMS_UP_CELEBRATION.gif'
     }
   },
   'TOUCH_TOES_EASY': {
@@ -58,10 +58,10 @@ const exerciseStore = {
       type: "SSML",
       method: 'repeatedMiddleStep',
       responseType: ':ask',
-      repetitions: 2,
+      repetitions: 1,
       initialInstruction: "",
-      repeatedInstruction: "From a standing position. Slowly reach towards your toes. When you can't go any further hold for a second <break time='2s'/> see if you can push a tiny bit further, just so you can feel a slight strain on the back of your legs. <break time='3s'/> That's the spot ",
-      animationURL: 'https://raw.githubusercontent.com/nicktaras/alexa-physio-me/master/assets/Fit_to_Go_Init_Screen.png'
+      repeatedInstruction: "From a standing position. Slowly reach towards your toes. When you can't go any further without any strain, hold your position. <break time='2s'/> try to reach a tiny bit further, until you can feel a bit of strain on the back of your legs. <break time='3s'/> That's the spot, hold there for a second <break time='3s'/> ",
+      animationURL: 'https://raw.githubusercontent.com/nicktaras/alexa-physio-me/master/assets/ARMS_UP_CELEBRATION.gif'
     }
   },
   'HEAL_DOWN_CALF_STRETCH_RIGHT_INIT': {
@@ -69,8 +69,8 @@ const exerciseStore = {
     config: {
       type: "SSML",
       responseType: ':ask',
-      text: "We're going to do the heal down calf stretch. This will help stretch your calf muscles. To get in to position, stand straight and place your hands on your hips, ensuring you have good balance. ",
-      animationURL: 'https://raw.githubusercontent.com/nicktaras/alexa-physio-me/master/assets/Fit_to_Go_Init_Screen.png'
+      text: "We're going to do the heal down calf stretch. This will help stretch your calf muscles. To get in to position, stand straight and place your hands on your hips, ensuring you have good balance. Let me know when your ready.",
+      animationURL: 'https://raw.githubusercontent.com/nicktaras/alexa-physio-me/master/assets/ARMS_UP_CELEBRATION.gif'
     } 
   },
   'HEAL_DOWN_CALF_STRETCH_RIGHT': {
@@ -79,8 +79,8 @@ const exerciseStore = {
       type: "SSML",
       method: "leftAndRight",
       responseType: ':ask',
-      text: "Take a step forward with your DIRECTION leg, keeping your back leg straight and entire foot firmly on the ground. Bend your front leg forwars slightly so you can feel the stretch. <break time='5s'/> Then move back to the standing position. ",
-      animationURL: 'https://raw.githubusercontent.com/nicktaras/alexa-physio-me/master/assets/Fit_to_Go_Init_Screen.png'
+      text: "From your standing position, take a step forward with your DIRECTION leg, <break time='1s'/> try to keep your back leg straight and with your back foot flat on the ground. <break time='1s'/> To give your calf a bit more of a stretch, bend your front knee forwards slightly. Hold it there for a few seconds <break time='4s'/>. Then move back to a standing position. ",
+      animationURL: 'https://raw.githubusercontent.com/nicktaras/alexa-physio-me/master/assets/ARMS_UP_CELEBRATION.gif'
     }
   },
   'BUTTERFLY_GROIN_STRETCH_INIT': {
@@ -89,7 +89,7 @@ const exerciseStore = {
       type: "SSML",
       responseType: ':ask',
       text: "We're going to do a butterfly groin stretch. Let's get into position, first, sit up tall on the floor. Let me know when you're ready.",
-      animationURL: 'https://raw.githubusercontent.com/nicktaras/alexa-physio-me/master/assets/Fit_to_Go_Init_Screen.png'
+      animationURL: 'https://raw.githubusercontent.com/nicktaras/alexa-physio-me/master/assets/ARMS_UP_CELEBRATION.gif'
     }
   },
   'BUTTERFLY_GROIN_STRETCH': {
@@ -100,8 +100,8 @@ const exerciseStore = {
       responseType: ':ask',
       repetitions: 3,
       initialInstruction: "Bend your knees and relax your calves against the floor, then press the soles of your feet together. For a deeper stretch, push down on your knees. ",
-      repeatedInstruction: "Hold your feet so that they remain touching for 5 seconds, <break time='5s'/>. Now lift your knees so they are no longer stretched. Then ",
-      animationURL: 'https://raw.githubusercontent.com/nicktaras/alexa-physio-me/master/assets/Fit_to_Go_Init_Screen.png'
+      repeatedInstruction: "Hold your feet so that they remain touching for 5 seconds. <break time='5s'/> Now lift your knees so they are no longer stretched. ",
+      animationURL: 'https://raw.githubusercontent.com/nicktaras/alexa-physio-me/master/assets/ARMS_UP_CELEBRATION.gif'
     }
   },
   'ARCHING_ARM_STRETCH': {
@@ -157,7 +157,7 @@ const exerciseStore = {
     config: {
       type: "SSML",
       responseType: ':ask',
-      text: 'We are going to do a few leg exercises to get you warmed up. Lets start by doing some heal lifts. Just tell me when you are ready. ',
+      text: "Right, let's do a few leg exercises to get you warmed up. Just tell me when you are ready. ",
       about: 'HEAL_LIFTS',
       animationURL: 'https://raw.githubusercontent.com/nicktaras/alexa-physio-me/master/assets/Fit_to_Go_Init_Screen.png'
     }
@@ -167,7 +167,7 @@ const exerciseStore = {
     config: {
       type: "SSML",
       responseType: ':ask', 
-      text: 'Ok first, find something you can gently place your hands on whilst standing. For example a kitchen side or work top. Tell me when you are ready. ',
+      text: "We're going to do some heal lifts, which will help strengthen you're calf muscles. First, find something you can gently place your hands on whilst standing. For example a kitchen side or work top. Tell me when you are ready. ",
       about: 'HEAL_LIFTS',
       animationURL: 'https://raw.githubusercontent.com/nicktaras/alexa-physio-me/master/assets/Fit_to_Go_Init_Screen.png'
     }
@@ -178,9 +178,9 @@ const exerciseStore = {
       type: "SSML",
       method: 'repeatedMiddleStep',
       responseType: ':ask',
-      repetitions: 3,
+      repetitions: 2,
       initialInstruction: 'With your legs inline with your hips in a standing position, ',
-      repeatedInstruction: 'Slowly raise both your heals for five seconds <break time="1s"/> one <break time="1s"/> two <break time="1s"/> three <break time="1s"/> four <break time="1s"/> five <break time="1s"/> now lower them over 5 seconds so they are almost touhcing the ground <break time="1s"/> 5 <break time="1s"/> 4 <break time="1s"/> 3 <break time="1s"/> 2 <break time="1s"/> 1. ' ,
+      repeatedInstruction: 'Slowly raise both your heals for five seconds <break time="1s"/> one <break time="1s"/> two <break time="1s"/> three <break time="1s"/> four <break time="1s"/> five <break time="1s"/> now lower them over 5 seconds so they are almost touching the ground <break time="1s"/> 5 <break time="1s"/> 4 <break time="1s"/> 3 <break time="1s"/> 2 <break time="1s"/> 1. ' ,
       about: 'HEAL_LIFTS',
       animationURL: 'https://raw.githubusercontent.com/nicktaras/alexa-physio-me/master/assets/Fit_to_Go_Init_Screen.png'
     }
