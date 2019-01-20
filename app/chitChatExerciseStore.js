@@ -20,8 +20,8 @@ const chitChatExerciseStore = {
     "did you know that swimming helps to build muscle strength and cardiovascular fitness. ",
     "did you know that swimming helps to maintain a healthy weight ",
     "did you know that swimming helps you to maintain a healthy heart and lungs. ",
-    "did you know that swimming helps to tone muscles and build strength. "
-    "did you know that swimming helps to provide an all-over body workout, ", 
+    "did you know that swimming helps to tone muscles and build strength. ",
+    "did you know that swimming helps to provide an all-over body workout ", 
     "did you know that nearly all of your muscles are used during swimming. "
   ],
   "SOCCER" : [
@@ -31,7 +31,7 @@ const chitChatExerciseStore = {
   ],
   "NETBALL": [
     "did you know that the jumping involved in Netball and other physical demands help develop and improve bone health ",
-  ]
+  ],
   "BASKETBALL": [
     "did you know that the jumping involved in Basketball and other physical demands help develop and improve bone health ",
     "did you know that Basketball can help develop your lower back, neck, and core muscles "

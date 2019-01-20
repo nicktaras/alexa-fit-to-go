@@ -1,7 +1,6 @@
 const lastStepMotivationStore = [
   "One last time, you're doing great. ",
-  "Let's do this one last time. ",
-  "One last time. ",
+  "Ok, Let us do this one last time. ",
 ]
 
 module.exports = lastStepMotivationStore;

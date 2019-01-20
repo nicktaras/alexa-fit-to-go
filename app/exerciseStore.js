@@ -6,6 +6,9 @@
 // images to recreate:
 // https://www.swimoutlet.com/guides/stretches-for-swimming
 
+// E2E workflow.
+// Download
+
 // TODO:
 // Add moves for more activities.
 // Add background music during each workout to make it more fun, or use spotify?
