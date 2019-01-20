@@ -10,6 +10,10 @@
 const Alexa = require('ask-sdk-core');
 const https = require('https');
 
+// APL Documents
+const onloadApl = require('./aplDocuments/onload.json');
+const onVideoApl = require('./aplDocuments/video.json');
+
 // Add Stores
 const tipStore = require('./tipStore');
 const jokeStore = require('./jokeStore');
@@ -38,7 +42,7 @@ var applicationStateModelStore = new ApplicationStateModelStore();
 var applicationState = applicationStateModelStore.getApplicationState();
 
 // Does app support the display
-function supportsDisplay(handlerInput) {
+const supportsDisplay =(handlerInput) => {
   var hasDisplay =
     handlerInput.requestEnvelope.context &&
     handlerInput.requestEnvelope.context.System &&
@@ -73,37 +77,110 @@ const LaunchRequestHandler = {
       }
 
       try {
+
+        // {
+        //   "type": "BodyTemplate7",
+        //   "token": "SampleTemplate_3476",
+        //   "backButton": "VISIBLE",
+        //   "title": "Sample BodyTemplate7",
+        //   "backgroundImage": {
+        //     "contentDescription": "Textured grey background",
+        //     "sources": [
+        //       {
+        //         "url": "https://www.example.com/background-image1.png"
+        //       }
+        //     ]
+        //   },
+        //   "image": {
+        //     "contentDescription": "Mount St. Helens landscape",
+        //     "sources": [
+        //       {
+        //         "url": "https://example.com/resources/card-images/mount-saint-helen-small.png"
+        //       }
+        //     ]
+        //   }
+        // }
+
+        // if (supportsDisplay) {
+        //   /*
+        //       // We may need to use withImage instead - see:
+        //       // https://developer.amazon.com/blogs/alexa/post/2aa5353c-a642-4afe-ab82-d476634937aa/how-to-build-skills-for-echo-show-and-echo-spot-using-the-ask-sdk-for-java
+        //   */
+        //   // Fit to Go Init Screen
+        //   var myImage = new Alexa.ImageHelper()
+        //   .addImageInstance('https://raw.githubusercontent.com/nicktaras/alexa-physio-me/master/assets/Fit_to_Go_Init_Screen.png')
+        //   .getImage();
+        //   var primaryText = new Alexa.RichTextContentHelper()
+        //     .withPrimaryText('Hello')
+        //     .getTextContent();
+        //   handlerInput.responseBuilder
+        //   .addRenderTemplateDirective({
+        //     type: 'BodyTemplate7',
+        //     token: 'string',
+        //     // scale: 'fill',
+        //     // width: 300,
+        //     // height: 300,
+        //     backgroundImage: {
+        //       contentDescription: "Textured grey background",
+        //       sources: [
+        //         {
+        //           url: "https://raw.githubusercontent.com/nicktaras/alexa-physio-me/master/assets/Fit_to_Go_Init_Screen.png"
+        //         }
+        //       ]
+        //     },
+        //     image: {
+        //       contentDescription: "Mount St. Helens landscape",
+        //       sources: [
+        //         {
+        //           url: "https://raw.githubusercontent.com/nicktaras/alexa-physio-me/master/assets/Fit_to_Go_Init_Screen.png"
+        //         }
+        //       ]
+        //     },
+        //     backButton: 'HIDDEN',
+        //     // backgroundImage: myImage,
+        //     title: "Fit to Go",
+        //     textContent: primaryText,
+        //   })
+        // } 
         
-        if (supportsDisplay) {
+        // demo ends
 
-          /*
-              // We may need to use withImage instead - see:
-              // https://developer.amazon.com/blogs/alexa/post/2aa5353c-a642-4afe-ab82-d476634937aa/how-to-build-skills-for-echo-show-and-echo-spot-using-the-ask-sdk-for-java
-          */
-          
-          // Fit to Go Init Screen
-          let myImage = new Alexa.ImageHelper()
-          .addImageInstance('https://raw.githubusercontent.com/nicktaras/alexa-physio-me/master/assets/Fit_to_Go_Init_Screen.png')
-          .getImage();
-
-          let primaryText = new Alexa.RichTextContentHelper()
-            .withPrimaryText('')
-            .getTextContent();
-
-          handlerInput.responseBuilder
-          .addRenderTemplateDirective({
-            type: 'BodyTemplate1',
-            token: 'string',
-            backButton: 'HIDDEN',
-            backgroundImage: myImage,
-            title: "Fit to Go",
-            textContent: primaryText,
-          })
-        } 
+        // if (supportsDisplay) {
+        //   /*
+        //       // We may need to use withImage instead - see:
+        //       // https://developer.amazon.com/blogs/alexa/post/2aa5353c-a642-4afe-ab82-d476634937aa/how-to-build-skills-for-echo-show-and-echo-spot-using-the-ask-sdk-for-java
+        //   */
+        //   // Fit to Go Init Screen
+        //   var myImage = new Alexa.ImageHelper()
+        //   .addImageInstance('https://raw.githubusercontent.com/nicktaras/alexa-physio-me/master/assets/Fit_to_Go_Init_Screen.png')
+        //   .getImage();
+        //   var primaryText = new Alexa.RichTextContentHelper()
+        //     .withPrimaryText('Hello')
+        //     .getTextContent();
+        //   handlerInput.responseBuilder
+        //   .addRenderTemplateDirective({
+        //     type: 'BodyTemplate1',
+        //     token: 'string',
+        //     // scale: 'fill',
+        //     // width: 300,
+        //     // height: 300,
+        //     backButton: 'HIDDEN',
+        //     backgroundImage: myImage,
+        //     title: "Fit to Go",
+        //     textContent: primaryText,
+        //   })
+        // } 
         return handlerInput.responseBuilder
         .speak(speechText)
+        .addDirective({
+          type: 'Alexa.Presentation.APL.RenderDocument',
+          version: '1.0',
+          document: onVideoApl,
+          datasources: {}
+        })
         .withShouldEndSession(false)
         .getResponse();
+
       } catch (error) {
         let speechText = "There was an error with fit to go, please try again or restart the application.";
         return handlerInput.responseBuilder
@@ -150,7 +227,7 @@ const InitIntentHandler = {
        handlerInput.requestEnvelope.request.intent.name === 'init_intent'
   },
   handle(handlerInput) {
-    const speechText = 'hello from InitIntentHandler,';
+    const speechText = "Something went wrong, please restart me.";
     return handlerInput.responseBuilder
       .speak(speechText)
       .withShouldEndSession(false)
@@ -165,7 +242,7 @@ const SportIntentHandler = {
        handlerInput.requestEnvelope.request.intent.name === 'sport_intent'
   },
   handle(handlerInput) {
-    const speechText = 'hello from SportIntentHandler';
+    const speechText = "I'm not quite ready to teach sports exercise quite yet. Please come back soon, I'll have some great moves to help you keep safe before your next game.";
     return handlerInput.responseBuilder
       .speak(speechText)
       .withShouldEndSession(false)
@@ -197,22 +274,23 @@ const ActivityIntentHandler = {
       handlerInput.requestEnvelope.request.intent.slots.size.value
   },
   handle(handlerInput) {
+    
     // Update State to 'ACTIVITY'
     applicationState = applicationStateModelStore.updateState({ 
       state: applicationState, 
       stateName: 'ACTIVITY'
     });
-    // Create var reference to difficulty and exercise type.
+    
     var userActivity = handlerInput.requestEnvelope.request.intent.slots.exercise.value.toUpperCase();
     var difficulty = handlerInput.requestEnvelope.request.intent.slots.size.value.toUpperCase();
+    
     // Update 'ACTIVITY' routine state incase they choose to exercise
     applicationState = applicationStateModelStore.updateRoutineState({ 
       state: applicationState, 
       difficulty: difficulty,
       activity: userActivity
     });
-    // BUG FIXME! Try to replicate this.
-    // undefinedTo continue say next or repeat to do the step again.
+
     var speechText = '';
     speechText += getRandomItemFromArr(startSpeechStore);
     speechText += getRandomItemFromArr(chitChatExerciseStore[userActivity.toUpperCase()]);
@@ -231,13 +309,13 @@ const ExerciseIntentHandler = {
   },
   handle(handlerInput) {
     if (!applicationState) { 
-      speechText += 'Something went wrong. ApplicationState is not defined';
+      speechText += 'Sorry something went wrong, my nuts and bolts come loose sometimes. Try restarting me. ';
     }
     if (applicationState && 
         applicationState.state &&
         applicationState.state.type !== 'ACTIVITY'
     ) { 
-      speechText += 'Something went wrong, it appears you got to this stage to early.';
+      speechText += 'Sorry something went wrong, my nuts and bolts come loose sometimes. Try restarting me. ';
     }
     if (applicationState && 
       applicationState.state &&
@@ -247,27 +325,64 @@ const ExerciseIntentHandler = {
         state: applicationState,
         routineStore: routineStore
       });
-      var speechText = exerciseConversationHandler({ state: applicationState }).text;
-      // test video
+
+      // all the data, video, image, text.
+      var response = exerciseConversationHandler({ state: applicationState });
+      let { text, animationURL } = response;
+      speechText = text;
+
+      // BodyTemplate1 Schema.
+      // {
+      //   "type":"BodyTemplate1",
+      //   "token": "string",
+      //   "backButton": "VISIBLE"(default) | "HIDDEN",
+      //   "backgroundImage": Image,
+      //   "title": "string",
+      //   "textContent": TextContent
+      // }
+
+      // // test video
       // handlerInput.responseBuilder.addVideoAppLaunchDirective("https://github.com/nicktaras/alexa-physio-me/blob/master/assets/double_heal_lifts.mp4", "title", "subtitle");
-      const myImage = new Alexa.ImageHelper()
-      .addImageInstance('https://github.com/nicktaras/alexa-physio-me/blob/master/assets/double_heal_lifts.gif?raw=true')
-      .getImage();
+      // var myImage = new Alexa.ImageHelper()
+      // .addImageInstance('https://github.com/nicktaras/alexa-physio-me/blob/master/assets/double_heal_lifts.gif?raw=true')
+      // .getImage();
+      // handlerInput.responseBuilder
+      // .addRenderTemplateDirective({
+      //   type: 'BodyTemplate1',
+      //   token: 'string',
+      //   backButton: 'HIDDEN',
+      //   backgroundImage: myImage,
+      //   title: "Fit to Go",
+      //   textContent: primaryText,
+      // })
 
-      const primaryText = new Alexa.RichTextContentHelper()
-        .withPrimaryText(speechText)
-        .getTextContent();
+      // {
+      //   "type": "Image",
+      //   "source": "http://images.example.com/image/foo.png",
+      //   "scale": "fill",
+      //   "width": 300,
+      //   "height": 300
+      // }
 
-      handlerInput.responseBuilder
-      .addRenderTemplateDirective({
-        type: 'BodyTemplate1',
-        token: 'string',
-        backButton: 'HIDDEN',
-        backgroundImage: myImage,
-        title: "Fit to Go",
-        textContent: primaryText,
-      })
-      
+      // if (supportsDisplay && animationURL) {
+
+        // var myImage = new Alexa.ImageHelper()
+        // .addImageInstance(animationURL)
+        // .getImage();
+        // let primaryText = new Alexa.RichTextContentHelper()
+        //   .withPrimaryText('')
+        //   .getTextContent();
+        // handlerInput.responseBuilder
+        // .addRenderTemplateDirective({
+        //   type: 'BodyTemplate1',
+        //   token: 'string',
+        //   scale: 'fill',
+        //   backButton: 'HIDDEN',
+        //   backgroundImage: myImage,
+        //   title: "Fit to Go",
+        //   textContent: primaryText,
+        // })
+      // }       
     } 
 
     return handlerInput.responseBuilder
@@ -310,6 +425,8 @@ const RepeatIntentHandler = {
     handlerInput.requestEnvelope.request.intent.name === 'repeat_intent'
   },
   handle(handlerInput) {
+
+    // TODO FIX this handler - it appears to be broken.
 
     // Check if its the last exercise
     var isLastExercise = ApplicationStateModelStore.isLastExercise({
@@ -468,17 +585,14 @@ const SessionEndedRequestHandler = {
   },
 };
 
-// Error handler, catches application errors
-// TODO - improve effort to catch errors so fixes can be made
 const ErrorHandler = {
   canHandle() {
     return true;
   },
   handle(handlerInput, error) {
     console.log(handlerInput, error);
-    // Send mishandled text to DynamoDB. Or logs. Read best practice.
     return handlerInput.responseBuilder
-      .speak('Sorry, fit to go can\'t understand the command. Please say again.')
+      .speak("Sorry, fit to go can\'t understand the command. Please say again. If I can't help you find the answer, please restart me.")
       .withShouldEndSession(false)
       .getResponse();
   },

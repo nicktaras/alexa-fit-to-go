@@ -5,7 +5,13 @@ aws lambda update-function-code --function-name ask-custom-Hello_World-cli-user 
 
 # doc / api
 
+video APL
+https://developer.amazon.com/docs/alexa-presentation-language/apl-video.html
+
 http://ask-sdk-java-javadocs.s3-website-us-west-2.amazonaws.com/com/amazon/ask/response/ResponseBuilder.html
+
+// Speech synthesis
+https://developer.amazon.com/docs/custom-skills/speech-synthesis-markup-language-ssml-reference.html
 
 https://ask-sdk-for-nodejs.readthedocs.io/en/latest/Building-Response.html
 

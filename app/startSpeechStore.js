@@ -2,7 +2,7 @@ const startSpeechStore = [
   'Great ',
   'Cool ',
   'Awesome ',
-  'Ok ',
+  'Okay ',
 ]
 
 module.exports = startSpeechStore;

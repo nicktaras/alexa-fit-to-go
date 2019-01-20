@@ -1,7 +1,7 @@
 const halfwayMotivationStore = [
-  "You are doing great, lets keep going. Ok, next ",
+  "You are doing great, keep going. Ok, next ",
   "Keep going, we're half way there. Ok, next, ",
-  "Half way there. So, next, "
+  "We're half way there, nice work. So, next, "
 ]
 
 module.exports = halfwayMotivationStore;

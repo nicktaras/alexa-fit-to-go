@@ -1,6 +1,6 @@
 const restStore = [
-  "rest. ",
-  "take a breath. ",
+  "and rest. ",
+  "and breathe. ",
   "relax. ",
 ]
 

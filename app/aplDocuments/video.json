@@ -13,8 +13,10 @@
     ],
     "items": [
       {
-        "type": "Text",
-        "text": "Hello World"
+        "type": "Video",
+        "source": "http://techslides.com/demos/sample-videos/small.mp4",
+        "autoplay": true,
+        "repeatCount" : 0
       }
     ]
   }

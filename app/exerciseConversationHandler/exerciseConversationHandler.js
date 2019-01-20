@@ -18,7 +18,8 @@ exports.exerciseConversationHandler = ({ state=null }) => {
       */
       return {
         responseType: responseData.config.responseType,
-        text: responseData.config.text
+        text: responseData.config.text,
+        animationURL: responseData.config.animationURL
       }
     case 'exerciseMethod':
       /*
@@ -33,9 +34,13 @@ exports.exerciseConversationHandler = ({ state=null }) => {
       var outputText = exerciseMethods[responseData.config.method](responseData.config);      
       return {
         responseType: responseData.config.responseType,
-        text: outputText
+        text: outputText,
+        animationURL: responseData.config.animationURL
       }
     default:
-      return 'I need to work out which exercise you are doing to ensure I give you the correct routine'
+      return {
+        responseType: ':ask',
+        text: "Sorry, I've forgotten which exercise your doing. I could tell you to do do squats and lunges, when all you want to do is have a light jog. "
+      }
   }
 }

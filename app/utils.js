@@ -3,6 +3,7 @@ const lastStepMotivationStore = require('./lastStepMotivationStore');
 const restStore = require('./restStore');
 const congratulateStore = require('./congratulateStore');
 const continueStore = require('./continueStore');
+const repeatExerciseStore = require('./repeatExerciseStore');
 
 exports.getRandomItemFromArr = (list) => {
   return list[Math.floor((Math.random() * list.length) + 0)];
@@ -49,11 +50,12 @@ exports.exerciseMethods = {
     let output = initialInstruction;
     // Build repeated steps and final instruction.
     for (var i = 0; i < repetitions; i++) {
-      if (i >= repetitions) {    
+      if (i >= repetitions) { // last step
         output += getRandomItemFromArr(lastStepMotivationStore);
-      }
-      if (i === repetitions / 2) { 
+      } else if (i === repetitions / 2) { // half way
         output += getRandomItemFromArr(halfwayMotivationStore);
+      } else if (i > 0) { // 
+        output += getRandomItemFromArr(repeatExerciseStore);
       }
       if (i <= repetitions) {
         output += repeatedInstruction;
