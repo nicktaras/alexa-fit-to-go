@@ -270,7 +270,6 @@ function animLines (target){
 // JEDI_3
 // HEAL_LIFT_LEFT_UP
 // DOUBLE_HEAL_LIFT
-
 var positionStateStore = {
   STAR_JUMP_LAND: {
     speed: 1500,
@@ -3064,21 +3063,21 @@ function ani(state) {
 
 // Hamstrings
 
-setTimeout(() => {
-  ani('BUTTERFLY_INIT'); 
-}, 0);
-setTimeout(() => {
-  ani('BUTTERFLY_STRETCH');
-}, 2000);
-setTimeout(() => {
-  ani('BUTTERFLY_INIT');
-}, 5000);
-setTimeout(() => {
-  ani('BUTTERFLY_STRETCH');
-}, 7000);
-setTimeout(() => {
-  ani('BUTTERFLY_INIT');
-}, 10000);
+// setTimeout(() => {
+//   ani('BUTTERFLY_INIT'); 
+// }, 0);
+// setTimeout(() => {
+//   ani('BUTTERFLY_STRETCH');
+// }, 2000);
+// setTimeout(() => {
+//   ani('BUTTERFLY_INIT');
+// }, 5000);
+// setTimeout(() => {
+//   ani('BUTTERFLY_STRETCH');
+// }, 7000);
+// setTimeout(() => {
+//   ani('BUTTERFLY_INIT');
+// }, 10000);
 
 // squat
 // setTimeout(() => {
