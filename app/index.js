@@ -54,31 +54,40 @@ const LaunchRequestHandler = {
     return handlerInput.requestEnvelope.request.type === 'LaunchRequest';
   },
   async handle(handlerInput) { 
-    var accessToken = handlerInput.requestEnvelope.context.System.user.accessToken;
-    if (accessToken == undefined){
-      let speechText = "You must have a Facebook account to use this app. Please use the Alexa app to link your Amazon account ";        
-      return handlerInput.responseBuilder
-        .speak(speechText)
-        .withSimpleCard('Fit To Go', speechText)
-        .getResponse();
-    } else {
-     
-      // if the application is in its initial state and the user is logged in.
-      // if (applicationState.state.type === 'INIT') {
 
-      try {
+    let speechText = '';
+    let accessToken = handlerInput.requestEnvelope.context.System.user.accessToken;
+
+    if (applicationState.state.type === 'INIT') {
+
+      if(accessToken == undefined) {
+        
+        speechText = "Welcome, what type of activity or sport will you be doing today?";
+
+      } else { // Facebook Account is linked.
+
         const accessToken = handlerInput.requestEnvelope.context.System.user.accessToken;
         const fbUserName = await getFbUser(accessToken);
-        let speechText = "Welcome, " +  fbUserName + " what type of activity or sport will you be doing today?";
+        speechText = "Welcome, " +  fbUserName + " what type of activity or sport will you be doing today?";
 
+      }
+
+      try {
+        
         if (supportsDisplay) {
-            
-          const myImage = new Alexa.ImageHelper()
-          .addImageInstance('https://github.com/nicktaras/alexa-physio-me/blob/master/assets/double_heal_lifts.gif?raw=true')
+
+          /*
+              // We may need to use withImage instead - see:
+              // https://developer.amazon.com/blogs/alexa/post/2aa5353c-a642-4afe-ab82-d476634937aa/how-to-build-skills-for-echo-show-and-echo-spot-using-the-ask-sdk-for-java
+          */
+          
+          // Fit to Go Init Screen
+          let myImage = new Alexa.ImageHelper()
+          .addImageInstance('https://raw.githubusercontent.com/nicktaras/alexa-physio-me/master/assets/Fit_to_Go_Init_Screen.png')
           .getImage();
 
-          const primaryText = new Alexa.RichTextContentHelper()
-            .withPrimaryText(speechText)
+          let primaryText = new Alexa.RichTextContentHelper()
+            .withPrimaryText('')
             .getTextContent();
 
           handlerInput.responseBuilder
@@ -90,31 +99,19 @@ const LaunchRequestHandler = {
             title: "Fit to Go",
             textContent: primaryText,
           })
-
         } 
-
         return handlerInput.responseBuilder
         .speak(speechText)
         .withShouldEndSession(false)
         .getResponse();
-
       } catch (error) {
-        let speechText = "There was an error with fit to go, try again.";
+        let speechText = "There was an error with fit to go, please try again or restart the application.";
         return handlerInput.responseBuilder
           .speak(speechText)
           .withSimpleCard('Error', speechText)
           .withShouldEndSession(false)
           .getResponse();
       }
-
-      // } else  { // TODO handle when user comes back at later stage of app
-        // let speechText = "User is at state beyond init:" + applicationState.state.type;
-        //   return handlerInput.responseBuilder
-        //     .speak(speechText)
-        //     .withShouldEndSession(false)
-        //     .getResponse();
-      // }
-
     }
   }
 };
