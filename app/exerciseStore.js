@@ -88,7 +88,7 @@ const exerciseStore = {
     config: {
       type: "SSML",
       responseType: ':ask',
-      text: "We're going to do a butterfly groin stretch. Let's get into position, first, sit up tall on the floor. Let me know when you're ready.",
+      text: "We're going to do a butterfly groin stretch. Let's get into position, first, sit up tall on the floor, bend your knees and relax your calves against the floor. Let me know when you're ready for the next move.",
       animationURL: 'https://raw.githubusercontent.com/nicktaras/alexa-physio-me/master/assets/ARMS_UP_CELEBRATION.gif'
     }
   },
@@ -99,8 +99,8 @@ const exerciseStore = {
       method: 'repeatedMiddleStep',
       responseType: ':ask',
       repetitions: 3,
-      initialInstruction: "Bend your knees and relax your calves against the floor, then press the soles of your feet together. For a deeper stretch, push down on your knees. ",
-      repeatedInstruction: "Hold your feet so that they remain touching for 5 seconds. <break time='5s'/> Now lift your knees so they are no longer stretched. ",
+      initialInstruction: "",
+      repeatedInstruction: "Press the soles of your feet together, and start to lower your knees to the floor. When you feel a bit of strain, hold the position for 5 seconds. <break time='5s'/> Now lift your knees so they are no longer stretched. ",
       animationURL: 'https://raw.githubusercontent.com/nicktaras/alexa-physio-me/master/assets/ARMS_UP_CELEBRATION.gif'
     }
   },
@@ -179,7 +179,7 @@ const exerciseStore = {
       method: 'repeatedMiddleStep',
       responseType: ':ask',
       repetitions: 2,
-      initialInstruction: 'With your legs inline with your hips in a standing position, ',
+      initialInstruction: '',
       repeatedInstruction: 'Slowly raise both your heals for five seconds <break time="1s"/> one <break time="1s"/> two <break time="1s"/> three <break time="1s"/> four <break time="1s"/> five <break time="1s"/> now lower them over 5 seconds so they are almost touching the ground <break time="1s"/> 5 <break time="1s"/> 4 <break time="1s"/> 3 <break time="1s"/> 2 <break time="1s"/> 1. ' ,
       about: 'HEAL_LIFTS',
       animationURL: 'https://raw.githubusercontent.com/nicktaras/alexa-physio-me/master/assets/Fit_to_Go_Init_Screen.png'
@@ -209,7 +209,7 @@ const exerciseStore = {
     config: {
       type: "SSML",
       responseType: ':ask',
-      text: 'Choose either your left or right heal for this exercise. Before we start, lets get some balance. Find something you can gently place your hands on whilst standing. For example a kitchen side or work top. Tell me when you are ready.',
+      text: 'Before we start, lets get some balance. Find something you can gently place your hands on whilst standing. For example a kitchen side or work top. Tell me when you are ready.',
       animationURL: 'https://raw.githubusercontent.com/nicktaras/alexa-physio-me/master/assets/Fit_to_Go_Init_Screen.png'
     }
   },
@@ -217,15 +217,11 @@ const exerciseStore = {
     type: 'exerciseMethod',
     config: {
       type: "SSML",
-      method: 'repeatedMiddleStep',
-      params: {
-        repetitions: 1,
-        responseType: ':ask',
-        initialInstruction: 'With your legs inline with your hips in a standing position. Lift your foot off the floor, we will not be using this. Now, ',
-        repeatedInstruction: 'Using your foot on the floor, slowly raise your heal. Hold for one, two, three, seconds. Then bring it down close to the floor over one, two, three seconds. Now raise the heal again, and Hold for one, two, three, seconds. ',
-        animationURL: 'https://raw.githubusercontent.com/nicktaras/alexa-physio-me/master/assets/Fit_to_Go_Init_Screen.png'
-      }
-    }
+      method: 'leftAndRight',
+      responseType: ':ask',
+      text: "Lift your OPPOSTITE foot off the floor. <break time='1s'/> Now with your DIRECTION on the floor, slowly raise your heal. Hold for one <break time='1s'/> two <break time='1s'/> three <break time='1s'/> seconds. Then gradually bring it to the floor <break time='3s'/>. Slowly raise the heal again, <break time='3s'/> and Hold for one <break time='1s'/> two <break time='1s'/> three <break time='1s'/> seconds. ",
+      animationURL: 'https://raw.githubusercontent.com/nicktaras/alexa-physio-me/master/assets/Fit_to_Go_Init_Screen.png'
+    }    
   },
   'BOTTOM_LIFTS_INIT': {
     type: 'text',
@@ -243,7 +239,7 @@ const exerciseStore = {
       method: 'repeatedMiddleStep',
       repetitions: 1,
       responseType: ':ask',
-      initialInstruction: 'Great, lets get going. If you can now ',
+      initialInstruction: '',
       repeatedInstruction: 'Slowly raise your bottom off the ground, towards the level of your knees. Holding. For three, two, one seconds. Ok, now lower your bottom to the ground over the span of three seconds, three, two and one. ',
       animationURL: 'https://raw.githubusercontent.com/nicktaras/alexa-physio-me/master/assets/Fit_to_Go_Init_Screen.png'
     }
