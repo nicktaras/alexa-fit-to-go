@@ -23,7 +23,7 @@ console.log('applicationState', applicationState);
 applicationState = applicationStateModelStore.updateRoutineState({ 
   state: applicationState, 
   difficulty: 'LIGHT',
-  activity: 'SWIM'
+  activity: 'JOG'
 });
 console.log('applicationState', applicationState);
 
