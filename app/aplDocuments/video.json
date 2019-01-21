@@ -14,7 +14,7 @@
     "items": [
       {
         "type": "Video",
-        "source": "http://techslides.com/demos/sample-videos/small.mp4",
+        "source": "https://raw.githubusercontent.com/nicktaras/alexa-fit-to-go-media/master/assets/INTRO.png",
         "autoplay": true,
         "repeatCount" : 0
       }

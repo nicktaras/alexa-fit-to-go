@@ -10,9 +10,9 @@
 const Alexa = require('ask-sdk-core');
 const https = require('https');
 
-// APL Documents
+// APL default document.
+// use when no template is provided.
 const onloadApl = require('./aplDocuments/onload.json');
-const onVideoApl = require('./aplDocuments/video.json');
 
 // Add Stores
 const tipStore = require('./tipStore');
@@ -41,8 +41,8 @@ var applicationStateModelStore = new ApplicationStateModelStore();
 // Define the initial application state.
 var applicationState = applicationStateModelStore.getApplicationState();
 
-// Does app support the display
-const supportsDisplay =(handlerInput) => {
+// Does app support the display. This is not required with APL.
+const supportsDisplay = (handlerInput) => {
   var hasDisplay =
     handlerInput.requestEnvelope.context &&
     handlerInput.requestEnvelope.context.System &&
@@ -78,104 +78,13 @@ const LaunchRequestHandler = {
 
       try {
 
-        // {
-        //   "type": "BodyTemplate7",
-        //   "token": "SampleTemplate_3476",
-        //   "backButton": "VISIBLE",
-        //   "title": "Sample BodyTemplate7",
-        //   "backgroundImage": {
-        //     "contentDescription": "Textured grey background",
-        //     "sources": [
-        //       {
-        //         "url": "https://www.example.com/background-image1.png"
-        //       }
-        //     ]
-        //   },
-        //   "image": {
-        //     "contentDescription": "Mount St. Helens landscape",
-        //     "sources": [
-        //       {
-        //         "url": "https://example.com/resources/card-images/mount-saint-helen-small.png"
-        //       }
-        //     ]
-        //   }
-        // }
-
-        // if (supportsDisplay) {
-        //   /*
-        //       // We may need to use withImage instead - see:
-        //       // https://developer.amazon.com/blogs/alexa/post/2aa5353c-a642-4afe-ab82-d476634937aa/how-to-build-skills-for-echo-show-and-echo-spot-using-the-ask-sdk-for-java
-        //   */
-        //   // Fit to Go Init Screen
-        //   var myImage = new Alexa.ImageHelper()
-        //   .addImageInstance('https://raw.githubusercontent.com/nicktaras/alexa-physio-me/master/assets/Fit_to_Go_Init_Screen.png')
-        //   .getImage();
-        //   var primaryText = new Alexa.RichTextContentHelper()
-        //     .withPrimaryText('Hello')
-        //     .getTextContent();
-        //   handlerInput.responseBuilder
-        //   .addRenderTemplateDirective({
-        //     type: 'BodyTemplate7',
-        //     token: 'string',
-        //     // scale: 'fill',
-        //     // width: 300,
-        //     // height: 300,
-        //     backgroundImage: {
-        //       contentDescription: "Textured grey background",
-        //       sources: [
-        //         {
-        //           url: "https://raw.githubusercontent.com/nicktaras/alexa-physio-me/master/assets/Fit_to_Go_Init_Screen.png"
-        //         }
-        //       ]
-        //     },
-        //     image: {
-        //       contentDescription: "Mount St. Helens landscape",
-        //       sources: [
-        //         {
-        //           url: "https://raw.githubusercontent.com/nicktaras/alexa-physio-me/master/assets/Fit_to_Go_Init_Screen.png"
-        //         }
-        //       ]
-        //     },
-        //     backButton: 'HIDDEN',
-        //     // backgroundImage: myImage,
-        //     title: "Fit to Go",
-        //     textContent: primaryText,
-        //   })
-        // } 
-        
-        // demo ends
-
-        // if (supportsDisplay) {
-        //   /*
-        //       // We may need to use withImage instead - see:
-        //       // https://developer.amazon.com/blogs/alexa/post/2aa5353c-a642-4afe-ab82-d476634937aa/how-to-build-skills-for-echo-show-and-echo-spot-using-the-ask-sdk-for-java
-        //   */
-        //   // Fit to Go Init Screen
-        //   var myImage = new Alexa.ImageHelper()
-        //   .addImageInstance('https://raw.githubusercontent.com/nicktaras/alexa-physio-me/master/assets/Fit_to_Go_Init_Screen.png')
-        //   .getImage();
-        //   var primaryText = new Alexa.RichTextContentHelper()
-        //     .withPrimaryText('Hello')
-        //     .getTextContent();
-        //   handlerInput.responseBuilder
-        //   .addRenderTemplateDirective({
-        //     type: 'BodyTemplate1',
-        //     token: 'string',
-        //     // scale: 'fill',
-        //     // width: 300,
-        //     // height: 300,
-        //     backButton: 'HIDDEN',
-        //     backgroundImage: myImage,
-        //     title: "Fit to Go",
-        //     textContent: primaryText,
-        //   })
-        // } 
+        // supportsDisplay
         return handlerInput.responseBuilder
         .speak(speechText)
         .addDirective({
           type: 'Alexa.Presentation.APL.RenderDocument',
           version: '1.0',
-          document: onVideoApl,
+          document: onloadApl,
           datasources: {}
         })
         .withShouldEndSession(false)
@@ -242,7 +151,7 @@ const SportIntentHandler = {
        handlerInput.requestEnvelope.request.intent.name === 'sport_intent'
   },
   handle(handlerInput) {
-    const speechText = "I'm not quite ready to teach sports exercise quite yet. Please come back soon, I'll have some great moves to help you keep safe before your next game.";
+    const speechText = "I'm ready to teach sports exercise quite yet. Please come back soon, I'll have some great moves to help you prepare for your next game.";
     return handlerInput.responseBuilder
       .speak(speechText)
       .withShouldEndSession(false)
@@ -328,65 +237,22 @@ const ExerciseIntentHandler = {
 
       // all the data, video, image, text.
       var response = exerciseConversationHandler({ state: applicationState });
-      let { text, animationURL } = response;
+      let { text, APL } = response;
       speechText = text;
 
-      // BodyTemplate1 Schema.
-      // {
-      //   "type":"BodyTemplate1",
-      //   "token": "string",
-      //   "backButton": "VISIBLE"(default) | "HIDDEN",
-      //   "backgroundImage": Image,
-      //   "title": "string",
-      //   "textContent": TextContent
-      // }
-
-      // // test video
-      // handlerInput.responseBuilder.addVideoAppLaunchDirective("https://github.com/nicktaras/alexa-physio-me/blob/master/assets/double_heal_lifts.mp4", "title", "subtitle");
-      // var myImage = new Alexa.ImageHelper()
-      // .addImageInstance('https://github.com/nicktaras/alexa-physio-me/blob/master/assets/double_heal_lifts.gif?raw=true')
-      // .getImage();
-      // handlerInput.responseBuilder
-      // .addRenderTemplateDirective({
-      //   type: 'BodyTemplate1',
-      //   token: 'string',
-      //   backButton: 'HIDDEN',
-      //   backgroundImage: myImage,
-      //   title: "Fit to Go",
-      //   textContent: primaryText,
-      // })
-
-      // {
-      //   "type": "Image",
-      //   "source": "http://images.example.com/image/foo.png",
-      //   "scale": "fill",
-      //   "width": 300,
-      //   "height": 300
-      // }
-
-      // if (supportsDisplay && animationURL) {
-
-        // var myImage = new Alexa.ImageHelper()
-        // .addImageInstance(animationURL)
-        // .getImage();
-        // let primaryText = new Alexa.RichTextContentHelper()
-        //   .withPrimaryText('')
-        //   .getTextContent();
-        // handlerInput.responseBuilder
-        // .addRenderTemplateDirective({
-        //   type: 'BodyTemplate1',
-        //   token: 'string',
-        //   scale: 'fill',
-        //   backButton: 'HIDDEN',
-        //   backgroundImage: myImage,
-        //   title: "Fit to Go",
-        //   textContent: primaryText,
-        // })
-      // }       
+      // falls back to onloadapl template if not defined.
+      var aplDisplayTemplate = aplDocumentMaker(APL) || onloadApl;
+     
     } 
 
     return handlerInput.responseBuilder
       .speak(speechText)
+      .addDirective({
+        type: 'Alexa.Presentation.APL.RenderDocument',
+        version: '1.0',
+        document: aplDisplayTemplate,
+        datasources: {}
+      })
       .withShouldEndSession(false)
       .getResponse();
   }
@@ -418,35 +284,14 @@ const ReadyIntentHandler = {
   }
 };
 
-// TOOD should be repeat exercise handler.
+// TODO Add directive get method.
 const RepeatIntentHandler = {
   canHandle(handlerInput) {
     return handlerInput.requestEnvelope.request.type === 'IntentRequest' && 
     handlerInput.requestEnvelope.request.intent.name === 'repeat_intent'
   },
   handle(handlerInput) {
-
-    // TODO FIX this handler - it appears to be broken.
-
-    // Check if its the last exercise
-    var isLastExercise = ApplicationStateModelStore.isLastExercise({
-      state: applicationState,
-      routineStore: routineStore
-    });
-
-    var speechText;
-
-    // Exercise reset
-    if(isLastExercise) {
-      applicationState = applicationStateModelStore.getNextExerciseState({
-        state: applicationState,
-        routineStore: routineStore
-      });
-      speechText = exerciseConversationHandler({ state: applicationState }).text;
-    } else {
-      speechText = exerciseConversationHandler({ state: applicationState }).text;
-    }
-
+    speechText = exerciseConversationHandler({ state: applicationState }).text;
     return handlerInput.responseBuilder
       .speak(speechText)
       .withShouldEndSession(false)
@@ -529,7 +374,7 @@ const TermsIntentHandler = {
       && handlerInput.requestEnvelope.request.intent.name === 'terms_intent';
   },
   handle(handlerInput) {
-    var speechText = "For terms and conditions please see the Fit To Go skill page.";
+    var speechText = "Fit to go is an experimental fitness tool, we take no liability or costs for the actions, damage, harm caused by those who use it. For full terms and conditions please see the Fit To Go skill page. We hope you enjoy the skill and find it useful in helping you warm up before activities and sport.";
     return handlerInput.responseBuilder
       .speak(speechText)
       .withShouldEndSession(false)

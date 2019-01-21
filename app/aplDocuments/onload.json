@@ -14,7 +14,7 @@
     "items": [
       {
         "type": "Image",
-        "source": "https://raw.githubusercontent.com/nicktaras/alexa-physio-me/master/assets/Fit_to_Go_Init_Screen.png",
+        "source": "https://raw.githubusercontent.com/nicktaras/alexa-fit-to-go-media/master/assets/INTRO.png",
         "scale": "fill",
         "align": "centre",
         "height": 550,

@@ -134,7 +134,7 @@ welldoneImg.onload = function (img) {
         scaleX: .15,
         scaleY: .15
     });
-    canvas.add(welldone);
+    // canvas.add(welldone);
 };
 welldoneImg.src = welldoneImgURL;
 
@@ -641,7 +641,7 @@ var positionStateStore = {
     ]
   },
   DOUBLE_HEAL_LIFT_UP: {
-    speed: 1000,
+    speed: 2000,
     coords: [
       {
         "ref": "headCircle",
@@ -711,7 +711,7 @@ var positionStateStore = {
     ]
   },
   DOUBLE_HEAL_LIFT_ALMOST_DOWN: {
-    speed: 2000,
+    speed: 5000,
     coords: [
       {
         "ref": "headCircle",
@@ -3185,6 +3185,76 @@ var positionStateStore = {
       }
     ]
   },
+  HEEL_DOWN_CALF_STRETCH_RIGHT_DEEPER: {
+    speed: 2000,
+    coords: [
+      {
+        "ref": "headCircle",
+        "left": 304,
+        "top": 132
+      },
+      {
+        "ref": "shoulderCircle",
+        "left": 303,
+        "top": 182
+      },
+      {
+        "ref": "hipsCircle",
+        "left": 306,
+        "top": 251
+      },
+      {
+        "ref": "rightElbowCircle",
+        "left": 321,
+        "top": 208
+      },
+      {
+        "ref": "rightHandCircle",
+        "left": 307,
+        "top": 251
+      },
+      {
+        "ref": "leftElbowCircle",
+        "left": 271,
+        "top": 212
+      },
+      {
+        "ref": "leftHandCircle",
+        "left": 307,
+        "top": 251
+      },
+      {
+        "ref": "rightKneeCircle",
+        "left": 275,
+        "top": 285
+      },
+      {
+        "ref": "rightAnkleCircle",
+        "left": 251,
+        "top": 316
+      },
+      {
+        "ref": "rightFootCircle",
+        "left": 267,
+        "top": 317
+      },
+      {
+        "ref": "leftKneeCircle",
+        "left": 338,
+        "top": 272
+      },
+      {
+        "ref": "leftAnkleCircle",
+        "left": 325,
+        "top": 315
+      },
+      {
+        "ref": "leftFootCircle",
+        "left": 342,
+        "top": 316
+      }
+    ]
+  },
   HEEL_DOWN_CALF_STRETCH_RIGHT: {
     speed: 2000,
     coords: [
@@ -3395,6 +3465,286 @@ var positionStateStore = {
       }
     ]
   },
+  TOUCH_TOES_STRAIGHT_EASY_STRETCH: {
+    speed: 5000,
+    coords: [
+      {
+        "ref": "headCircle",
+        "left": 250,
+        "top": 210
+      },
+      {
+        "ref": "shoulderCircle",
+        "left": 250,
+        "top": 216
+      },
+      {
+        "ref": "hipsCircle",
+        "left": 250,
+        "top": 257
+      },
+      {
+        "ref": "rightElbowCircle",
+        "left": 277,
+        "top": 254
+      },
+      {
+        "ref": "rightHandCircle",
+        "left": 271,
+        "top": 285
+      },
+      {
+        "ref": "leftElbowCircle",
+        "left": 225,
+        "top": 257
+      },
+      {
+        "ref": "leftHandCircle",
+        "left": 230,
+        "top": 285
+      },
+      {
+        "ref": "rightKneeCircle",
+        "left": 260,
+        "top": 275
+      },
+      {
+        "ref": "rightAnkleCircle",
+        "left": 261,
+        "top": 314
+      },
+      {
+        "ref": "rightFootCircle",
+        "left": 279,
+        "top": 315
+      },
+      {
+        "ref": "leftKneeCircle",
+        "left": 242,
+        "top": 275
+      },
+      {
+        "ref": "leftAnkleCircle",
+        "left": 242,
+        "top": 315
+      },
+      {
+        "ref": "leftFootCircle",
+        "left": 225,
+        "top": 315
+      }
+    ]
+  }, 
+  TOUCH_TOES_STRAIGHT_EASY: {
+    speed: 8000,
+    coords: [
+      {
+        "ref": "headCircle",
+        "left": 250,
+        "top": 209
+      },
+      {
+        "ref": "shoulderCircle",
+        "left": 250,
+        "top": 216
+      },
+      {
+        "ref": "hipsCircle",
+        "left": 250,
+        "top": 257
+      },
+      {
+        "ref": "rightElbowCircle",
+        "left": 277,
+        "top": 252
+      },
+      {
+        "ref": "rightHandCircle",
+        "left": 272,
+        "top": 290
+      },
+      {
+        "ref": "leftElbowCircle",
+        "left": 224,
+        "top": 252
+      },
+      {
+        "ref": "leftHandCircle",
+        "left": 230,
+        "top": 290
+      },
+      {
+        "ref": "rightKneeCircle",
+        "left": 260,
+        "top": 275
+      },
+      {
+        "ref": "rightAnkleCircle",
+        "left": 261,
+        "top": 314
+      },
+      {
+        "ref": "rightFootCircle",
+        "left": 279,
+        "top": 315
+      },
+      {
+        "ref": "leftKneeCircle",
+        "left": 242,
+        "top": 275
+      },
+      {
+        "ref": "leftAnkleCircle",
+        "left": 242,
+        "top": 315
+      },
+      {
+        "ref": "leftFootCircle",
+        "left": 225,
+        "top": 315
+      }
+    ]
+  }, 
+  TOUCH_TOES_STRAIGHT_EASY_START: {
+    speed: 2000,
+    coords: [
+      {
+        "ref": "headCircle",
+        "left": 250,
+        "top": 139
+      },
+      {
+        "ref": "shoulderCircle",
+        "left": 250,
+        "top": 175
+      },
+      {
+        "ref": "hipsCircle",
+        "left": 250,
+        "top": 250
+      },
+      {
+        "ref": "rightElbowCircle",
+        "left": 285,
+        "top": 200
+      },
+      {
+        "ref": "rightHandCircle",
+        "left": 273,
+        "top": 235
+      },
+      {
+        "ref": "leftElbowCircle",
+        "left": 215,
+        "top": 200
+      },
+      {
+        "ref": "leftHandCircle",
+        "left": 225,
+        "top": 235
+      },
+      {
+        "ref": "rightKneeCircle",
+        "left": 260,
+        "top": 275
+      },
+      {
+        "ref": "rightAnkleCircle",
+        "left": 261,
+        "top": 314
+      },
+      {
+        "ref": "rightFootCircle",
+        "left": 279,
+        "top": 315
+      },
+      {
+        "ref": "leftKneeCircle",
+        "left": 242,
+        "top": 275
+      },
+      {
+        "ref": "leftAnkleCircle",
+        "left": 242,
+        "top": 315
+      },
+      {
+        "ref": "leftFootCircle",
+        "left": 225,
+        "top": 315
+      }
+    ]
+  },
+  STANDING_STRAIGHT_LEGS_CLOSE: {
+    speed: 2000,
+    coords: [
+      {
+        "ref": "headCircle",
+        "left": 250,
+        "top": 125
+      },
+      {
+        "ref": "shoulderCircle",
+        "left": 250,
+        "top": 175
+      },
+      {
+        "ref": "hipsCircle",
+        "left": 250,
+        "top": 250
+      },
+      {
+        "ref": "rightElbowCircle",
+        "left": 285,
+        "top": 200
+      },
+      {
+        "ref": "rightHandCircle",
+        "left": 320,
+        "top": 225
+      },
+      {
+        "ref": "leftElbowCircle",
+        "left": 215,
+        "top": 200
+      },
+      {
+        "ref": "leftHandCircle",
+        "left": 180,
+        "top": 225
+      },
+      {
+        "ref": "rightKneeCircle",
+        "left": 260,
+        "top": 275
+      },
+      {
+        "ref": "rightAnkleCircle",
+        "left": 261,
+        "top": 314
+      },
+      {
+        "ref": "rightFootCircle",
+        "left": 279,
+        "top": 315
+      },
+      {
+        "ref": "leftKneeCircle",
+        "left": 242,
+        "top": 275
+      },
+      {
+        "ref": "leftAnkleCircle",
+        "left": 242,
+        "top": 315
+      },
+      {
+        "ref": "leftFootCircle",
+        "left": 225,
+        "top": 315
+      }
+    ]
+  },
   IDLE: {
     speed: 2000,
     coords: [
@@ -3557,12 +3907,32 @@ function ani(state) {
 // setTimeout(() => {
 //   ani('STANDING_HANDS_UP'); 
 // }, 3700);
-setTimeout(() => {
+// setTimeout(() => {
   // ani('STANDING_HANDS_UP'); 
   // stopRecording();
-}, 4100);
+// }, 4100);
 
+// 3 - reach for toes
+// 10 - 
 
+// setTimeout(() => {
+//   startRecording(); 
+//   ani('TOUCH_TOES_STRAIGHT_EASY_START'); 
+// }, 0);
+// setTimeout(() => {
+//   ani('TOUCH_TOES_STRAIGHT_EASY'); 
+// }, 3000);
+// setTimeout(() => {
+//   ani('TOUCH_TOES_STRAIGHT_EASY_STRETCH'); 
+// }, 10000);
+// setTimeout(() => {
+//   ani('IDLE'); 
+// }, 25000);
+// setTimeout(() => {
+//   stopRecording(); 
+// }, 30000);
+
+// Bad animation.
 // setTimeout(() => {
 //   ani('STANDING_RIGHT'); 
 // }, 0);
@@ -3589,6 +3959,46 @@ setTimeout(() => {
 // setTimeout(() => {
 //   ani('HEEL_DOWN_CALF_STRETCH_RIGHT');
 // }, 8000);
+
+// 3 seconds - take step forward.
+// 12-14 seconds - bend knee forward
+// 20 seconds - move back to standing position
+// repeat anim
+
+// setTimeout(() => {
+//   startRecording(); 
+//   ani('STANDING_RIGHT'); 
+// }, 0);
+// setTimeout(() => {
+//   ani('HEEL_DOWN_CALF_STRETCH_RIGHT');
+// }, 2000);
+// setTimeout(() => {
+//   ani('HEEL_DOWN_CALF_STRETCH_RIGHT_DEEPER');
+// }, 10000);
+// setTimeout(() => {
+//   ani('STANDING_RIGHT');
+// }, 20000);
+// setTimeout(() => {
+//   ani('STANDING_RIGHT'); 
+// }, 23000); 
+// setTimeout(() => {
+//   ani('HEEL_DOWN_CALF_STRETCH_RIGHT');
+// }, 24000);
+// setTimeout(() => {
+//   ani('HEEL_DOWN_CALF_STRETCH_RIGHT_DEEPER');
+// }, 33000);
+// setTimeout(() => {
+//   ani('STANDING_RIGHT');
+// }, 43000);
+// setTimeout(() => {
+//   ani('STANDING_RIGHT');
+// }, 43000);
+// setTimeout(() => {
+//   stopRecording();
+// }, 50000);
+
+
+
 
 
 // setTimeout(() => {
@@ -3740,26 +4150,40 @@ setTimeout(() => {
 // }, 6000);
 
 // setTimeout(() => {
+//   ani('STANDING_STRAIGHT');
+// }, 0);
+// setTimeout(() => {
+//   // startRecording(); 
+//   ani('STANDING_STRAIGHT');
+// }, 3000);
+// setTimeout(() => {
+//   ani('IDLE');
+// }, 7000);
+
+// setTimeout(() => {
+//   startRecording(); 
 //   ani('DOUBLE_HEAL_LIFT_DOWN');
 // }, 0);
 // setTimeout(() => {
-//   ani('DOUBLE_HEAL_LIFT_DOWN');
-// }, 3000);
-// setTimeout(() => {
 //   ani('DOUBLE_HEAL_LIFT_UP');
-// }, 5000);
-// setTimeout(() => {
-//   ani('DOUBLE_HEAL_LIFT_UP');
-// }, 10000);
+// }, 2000);
 // setTimeout(() => {
 //   ani('DOUBLE_HEAL_LIFT_ALMOST_DOWN');
-// }, 12000);
+// }, 17000);
+// setTimeout(() => {
+//   ani('DOUBLE_HEAL_LIFT_UP');
+// }, 31000);
 // setTimeout(() => {
 //   ani('DOUBLE_HEAL_LIFT_ALMOST_DOWN');
-// }, 14000);
+// }, 44000);
 // setTimeout(() => {
 //   ani('DOUBLE_HEAL_LIFT_DOWN');
-// }, 16000);
+// }, 52000);
+// setTimeout(() => {
+//   stopRecording(); 
+// }, 58000);
+
+// Single Heal lift.
 // setTimeout(() => {
 //   ani('HEAL_LIFT_LEFT_UP');
 // }, 2000);
