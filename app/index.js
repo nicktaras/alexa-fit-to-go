@@ -340,8 +340,6 @@ const ReadyIntentHandler = {
         aplDisplayTemplate = onloadApl;
       }
 
-      console.log('nicknick: ', aplDisplayTemplate, APL, response, applicationState);
-
       speechText += text;
 
     } else {
@@ -384,8 +382,6 @@ const RepeatIntentHandler = {
       } else {
         aplDisplayTemplate = onloadApl;
       }
-
-      console.log('nicknick: ', aplDisplayTemplate, APL, response, applicationState);
 
       speechText += text;
 
