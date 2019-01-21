@@ -14,9 +14,9 @@
     "items": [
       {
         "type": "Video",
-        "source": "https://github.com/nicktaras/alexa-fit-to-go-media/blob/master/assets/ARMS_UP_CELEBRATION.mp4?raw=true",
+        "source": "https://github.com/nicktaras/alexa-fit-to-go-media/blob/master/assets/HEEL_DOWN_CALF_STRETCH.mp4?raw=true",
         "autoplay": true,
-        "repeatCount": 100,
+        "repeatCount": 0,
         "scale": "best-fit",
         "align": "centre",
         "height": 550,
@@ -25,3 +25,6 @@
     ]
   }
 }
+
+
+

@@ -19,7 +19,7 @@ exports.exerciseConversationHandler = ({ state=null }) => {
       return {
         responseType: responseData.config.responseType,
         text: responseData.config.text,
-        APL: responseData.config.APL
+        APL: responseData.config.APL || undefined
       }
     case 'exerciseMethod':
       /*
@@ -35,7 +35,7 @@ exports.exerciseConversationHandler = ({ state=null }) => {
       return {
         responseType: responseData.config.responseType,
         text: outputText,
-        APL: responseData.config.APL
+        APL: responseData.config.APL || undefined
       }
     default:
       return {
