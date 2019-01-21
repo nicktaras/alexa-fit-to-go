@@ -248,3 +248,49 @@ Squat
 Bicycle Exercises
 
 
+// Stores all exercise types
+
+// Add intitial steps,
+// Do you want to an exercise warm up, warm down, hear some tips or maybe a joke?
+
+// images to recreate:
+// https://www.swimoutlet.com/guides/stretches-for-swimming
+
+// E2E workflow.
+// Download
+
+// TODO:
+// Add moves for more activities.
+// Add background music during each workout to make it more fun, or use spotify?
+// Work out how we can add images for each exercise, maybe static for first release?
+// We need to make a nice look and feel to them etc.
+
+// Exercises in Stick person.
+// LUNGING_HIP_FLEXER
+// STANDING_QUAD_STRETCH
+// KNEE_TO_CHEST
+// BUTTERFLY_STRETCH
+// SQUAT
+// SQUAT_EASY
+// PUSH_UP
+// PUSH_UP_BEGINNER
+// TWIST (WAIST)
+// SIT_UP
+// ARM_RAISE ?
+// BOLT (MOVE)
+// HULK
+// FREDDIE
+// SUPERMAN
+// MICHEALJACKSON
+// JACKIECHAN
+// KARATEKID 
+// JEDI_3
+// HEAL_LIFT_LEFT_UP
+// DOUBLE_HEAL_LIFT
+// HEAL_DOWN_CALF_STRETCH_RIGHT
+
+// return {
+//   responseType: responseData.config.responseType,
+//   text: responseData.config.text,
+//   APL: responseData.config.APL
+// }

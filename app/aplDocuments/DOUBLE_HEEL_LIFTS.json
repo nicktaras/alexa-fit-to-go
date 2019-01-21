@@ -13,9 +13,11 @@
     ],
     "items": [
       {
-        "type": "Image",
-        "source": "https://raw.githubusercontent.com/nicktaras/alexa-fit-to-go-media/master/assets/INTRO.png",
-        "scale": "fill",
+        "type": "Video",
+        "source": "https://github.com/nicktaras/alexa-fit-to-go-media/blob/master/assets/DOUBLE_HEEL_LIFTS.mp4?raw=true",
+        "autoplay": true,
+        "repeatCount": 0,
+        "scale": "best-fit",
         "align": "centre",
         "height": 550,
         "width": 550
@@ -23,3 +25,5 @@
     ]
   }
 }
+
+
