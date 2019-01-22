@@ -1,7 +1,6 @@
 const chitChatExerciseStore = {
   "JOG" : [
     "did you know that jogging helps to strengthen muscles. ",
-    "did you know that jogging helps prevent some cancers, so keep up the great work. ",
     "did you know that jogging helps to keep infectious diseases at bay. ",
     "did you know that jogging helps combat stress and improves mental fitness. ",
     "there's nothing better than a short jog to ease some stress. ",
@@ -85,19 +84,19 @@ const chitChatExerciseStore = {
     "did you know that yoga can help increase your all round fitness. ",
     "did you know that yoga can you to become more mindfull, happy and reduce stress. I hope it does for you today. "
   ],
-  "PADDLE_BOARD": [
+  "PADDLEBOARD": [
     "did you know that paddle boarding can help increase your balance. ",
   ],
   "HIKE": [
     "did you know that hiking can help build strength in your glutes, quadriceps, hamstrings, and the muscles in your hips and lower legs. "
   ],
-  "ROCK_CLIMB": [
+  "ROCKCLIMB": [
     "did you know that rock climbing can help build strength in your glutes, quadriceps, hamstrings, and the muscles in your hips and lower legs. "
   ],
-  "CROSS_TRAIN": [
+  "CROSSTRAIN": [
     "did you know that rock climbing can help build strength in your glutes, quadriceps, hamstrings, and the muscles in your hips and lower legs. "
   ],
-  "HORSE_RIDE": [
+  "HORSERIDE": [
     "did you know that horse riding can be good for your lower back. "
   ],
   "SKATE": [

@@ -45,21 +45,25 @@ const {
 const ApplicationStateModelStore = require('./applicationState/applicationState');
 
 // Create instance of state machine class.
-var applicationStateModelStore = new ApplicationStateModelStore();
-
+var applicationStateModelStore;
 // Define the initial application state.
-var applicationState = applicationStateModelStore.getApplicationState();
+var applicationState;
+
+// Create instance of state machine class.
+// var applicationStateModelStore = new ApplicationStateModelStore();
+// Define the initial application state.
+// var applicationState = applicationStateModelStore.getApplicationState();
 
 // Does app support the display. This is not required with APL.
-const supportsDisplay = (handlerInput) => {
-  var hasDisplay =
-    handlerInput.requestEnvelope.context &&
-    handlerInput.requestEnvelope.context.System &&
-    handlerInput.requestEnvelope.context.System.device &&
-    handlerInput.requestEnvelope.context.System.device.supportedInterfaces &&
-    handlerInput.requestEnvelope.context.System.device.supportedInterfaces.Display
-  return hasDisplay;
-}
+// const supportsDisplay = (handlerInput) => {
+//   var hasDisplay =
+//     handlerInput.requestEnvelope.context &&
+//     handlerInput.requestEnvelope.context.System &&
+//     handlerInput.requestEnvelope.context.System.device &&
+//     handlerInput.requestEnvelope.context.System.device.supportedInterfaces &&
+//     handlerInput.requestEnvelope.context.System.device.supportedInterfaces.Display
+//   return hasDisplay;
+// }
 
 // Application Launch handler.
 const LaunchRequestHandler = {
@@ -67,6 +71,12 @@ const LaunchRequestHandler = {
     return handlerInput.requestEnvelope.request.type === 'LaunchRequest';
   },
   async handle(handlerInput) { 
+
+    // Create instance of state machine class.
+    applicationStateModelStore = new ApplicationStateModelStore();
+
+    // Define the initial application state.
+    applicationState = applicationStateModelStore.getApplicationState();
 
     let speechText = '';
     let accessToken = handlerInput.requestEnvelope.context.System.user.accessToken;
