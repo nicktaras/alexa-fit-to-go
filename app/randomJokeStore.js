@@ -1,4 +1,4 @@
-const jokeStore = [
+const randomJokeStore = [
   'I was in the gym earlier and I decided to jump on the treadmill. People were giving me weird looks, so I started jogging instead.',
   'Treadmills get you nowhere.',
   'I made the mistake of buying a running machine the other day. I Haven\'t seen it since.',
@@ -8,4 +8,4 @@ const jokeStore = [
   'One does not simply get ripped in 3 weeks.'
 ]
 
-module.exports = jokeStore;
+module.exports = randomJokeStore;

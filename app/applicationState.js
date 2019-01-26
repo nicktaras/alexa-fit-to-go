@@ -25,6 +25,10 @@ module.exports = class ApplicationStateModelStore {
   pushNewState(newState) {
     this.stateArray.push(newState);  
   }
+  resetState() {
+    this.pushNewState(initialState);
+    return initialState;
+  }
   updateState({ state=undefined, stateName=undefined }) {
     if (state && stateName) {
       var newState = JSON.parse(JSON.stringify(state));

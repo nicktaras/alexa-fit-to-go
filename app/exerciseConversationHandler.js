@@ -1,8 +1,8 @@
 // Should get the application exercise step
 // and return the correct text.
 
-const exerciseStore = require('./../exerciseStore');
-const { exerciseMethods } = require('./../utils');
+const exerciseStore = require('./exerciseStore');
+const { exerciseMethods } = require('./utils');
 
 exports.exerciseConversationHandler = ({ state=null }) => {
 

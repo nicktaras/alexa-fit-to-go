@@ -1,6 +1,6 @@
 // https://www.betterhealth.vic.gov.au/health/ten-tips/10-tips-to-exercise-safely
 
-const tipStore = [
+const randomTipStore = [
   "Warm up and cool down. Try slow stretches and go through the motions of your sport or activity before starting. Cool down with slow stretching.",
   "Pace yourself. Have at least one recovery day each week to rest. If you are experiencing pain, rest until the pain has gone.",
   "Mix it up. Try other sports and exercises to reduce the risk of overtraining.",
@@ -16,4 +16,4 @@ const tipStore = [
   "Did you know that the most common sports injuries include Ankle sprain, Groin pull, Hamstring strain, Shin splints, Knee injury, Tennis elbow also called epicondylitis"
 ]
 
-module.exports = tipStore;
+module.exports = randomTipStore;

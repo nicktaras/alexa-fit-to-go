@@ -1,87 +1,61 @@
 /*
   Alexa-Fit-To-Go
   author: Nick Taras
-  For more infromation please visit: 
+  For more information please visit: 
   https://github.com/nicktaras/alexa-fit-to-go
 */
 
 /* eslint-disable  func-names */
 /* eslint-disable  no-console */
+
+// Core libs
 const Alexa = require('ask-sdk-core');
-const https = require('https');
 
-// APL default document.
-// use when no template is provided.
-const onloadApl = require('./aplDocuments/onload.json');
-// const onloadAplVideo = require('./aplDocuments/video.json'); // dev only
-const ARMS_UP_CELEBRATION = require('./aplDocuments/ARMS_UP_CELEBRATION.json');
-const DOUBLE_HEAL_LIFTS_INTRO = require('./aplDocuments/DOUBLE_HEAL_LIFTS_INTRO.json');
-const DOUBLE_HEEL_LIFTS = require('./aplDocuments/DOUBLE_HEEL_LIFTS.json');
-const HEEL_DOWN_CALF_STRETCH = require('./aplDocuments/HEEL_DOWN_CALF_STRETCH.json');
-const TOUCH_TOES = require('./aplDocuments/TOUCH_TOES.json');
+// Default APL document
+const defaultAplTemplate = require('./aplDocuments/onload.json');
 
-// Add Stores
-const tipStore = require('./tipStore');
-const jokeStore = require('./jokeStore');
+// Application Stores
+const randomTipStore = require('./randomTipStore');
+const randomJokeStore = require('./randomJokeStore');
 const routineStore = require('./routineStore');
 const chitChatExerciseStore = require('./chitChatExerciseStore');
 const startSpeechStore = require('./startSpeechStore');
 
+// Common Utils
+const { getRandomItemFromArr } = require('./utils');
+
+// Help Utils
+const { helpConversationHandler } = require('./helpConversationHandler');
+
+// Exercise Utils
+const { exerciseConversationHandler } = require('./exerciseConversationHandler');
+
+// State Machine
+const ApplicationStateModelStore = require('./applicationState');
+var applicationStateModelStore = new ApplicationStateModelStore();
+var applicationState = applicationStateModelStore.getApplicationState();
+
+// API's / Facebook
+const { getFbUser, shareToWall } = require('./facebookAPI');
+
+// Method can be used to determine if the user has a screen
+// const supportsDisplay = require('./supportsDisplay');
+
+// TODO - look to re-integrate aplDocumentMaker.
 // Builds APL documents for display devices - TEXT and VIDEO.
 // const aplDocumentMaker = require('./aplDocumentMaker');
 
-// Common Util Methods
-const { getRandomItemFromArr } = require('./utils');
-
-const { 
-  exerciseConversationHandler 
-} = require('./exerciseConversationHandler/exerciseConversationHandler');
-
-// Help Conversation Handler
-const { 
-  helpConversationHandler 
-} = require('./helpConversationHandler/helpConversationHandler');
-
-const ApplicationStateModelStore = require('./applicationState/applicationState');
-
-// Create instance of state machine class.
-var applicationStateModelStore;
-// Define the initial application state.
-var applicationState;
-
-// Create instance of state machine class.
-// var applicationStateModelStore = new ApplicationStateModelStore();
-// Define the initial application state.
-// var applicationState = applicationStateModelStore.getApplicationState();
-
-// Does app support the display. This is not required with APL.
-// const supportsDisplay = (handlerInput) => {
-//   var hasDisplay =
-//     handlerInput.requestEnvelope.context &&
-//     handlerInput.requestEnvelope.context.System &&
-//     handlerInput.requestEnvelope.context.System.device &&
-//     handlerInput.requestEnvelope.context.System.device.supportedInterfaces &&
-//     handlerInput.requestEnvelope.context.System.device.supportedInterfaces.Display
-//   return hasDisplay;
-// }
-
-// Application Launch handler.
+// On Init of application each load.
 const LaunchRequestHandler = {
   canHandle(handlerInput) {
     return handlerInput.requestEnvelope.request.type === 'LaunchRequest';
   },
   async handle(handlerInput) { 
 
-    // Create instance of state machine class.
-    applicationStateModelStore = new ApplicationStateModelStore();
-
-    // Define the initial application state.
-    applicationState = applicationStateModelStore.getApplicationState();
-
     let speechText = '';
     let accessToken = handlerInput.requestEnvelope.context.System.user.accessToken;
 
-    if (applicationState.state.type === 'INIT') {
+    // if (applicationState.state.type === 'INIT') {
 
       if(accessToken == undefined) {
         
@@ -103,7 +77,7 @@ const LaunchRequestHandler = {
         .addDirective({
           type: 'Alexa.Presentation.APL.RenderDocument',
           version: '1.0',
-          document: onloadApl,
+          document: defaultAplTemplate,
           datasources: {}
         })
         .withShouldEndSession(false)
@@ -117,7 +91,7 @@ const LaunchRequestHandler = {
           .addDirective({
             type: 'Alexa.Presentation.APL.RenderDocument',
             version: '1.0',
-            document: onloadApl,
+            document: defaultAplTemplate,
             datasources: {}
           })
           .withSimpleCard('Error', speechText)
@@ -125,55 +99,7 @@ const LaunchRequestHandler = {
           .getResponse();
 
       }
-    }
-  }
-};
-
-const getFbUser = (accessToken) => {
-  let userFBCredentialsURL = 'https://graph.facebook.com/v3.1/me?access_token=' + accessToken;
-  return new Promise(function (resolve, reject) {
-    https.get(userFBCredentialsURL, (resp) => {
-      var results = { response: "" };
-      resp.on('data', (chunk) => {
-        results.response += chunk;
-      });
-      resp.on('end', () => {
-        /*
-          data : {
-            name: String,
-            id: Number,
-            email: String
-          }
-        */
-        let output = JSON.parse(results.response);
-        resolve(output.name);
-      });
-      resp.on('error', (error) => {
-        reject(error);
-      });
-    });
-  });
-};
-
-// Init handler is to allow the user to go back to the start of the application.
-// TODO - Move the state back to 'INIT'.
-const InitIntentHandler = {
-  canHandle(handlerInput) {
-     return handlerInput.requestEnvelope.request.type === 'IntentRequest' && 
-       handlerInput.requestEnvelope.request.intent.name === 'init_intent'
-  },
-  handle(handlerInput) {
-    const speechText = "Something went wrong, please restart me.";
-    return handlerInput.responseBuilder
-      .speak(speechText)
-      .withShouldEndSession(false)
-      .addDirective({
-        type: 'Alexa.Presentation.APL.RenderDocument',
-        version: '1.0',
-        document: onloadApl,
-        datasources: {}
-      })
-      .getResponse();
+    // }
   }
 };
 
@@ -190,7 +116,7 @@ const SportIntentHandler = {
       .addDirective({
         type: 'Alexa.Presentation.APL.RenderDocument',
         version: '1.0',
-        document: onloadApl,
+        document: defaultAplTemplate,
         datasources: {}
       })
       .withShouldEndSession(false)
@@ -213,7 +139,6 @@ const ActivityIntentHandlerInit = {
   }
 }
 
-// Ask if the user would like exercises, tips, or jokes.
 const ActivityIntentHandler = {
   canHandle(handlerInput) {
      return handlerInput.requestEnvelope.request.type === 'IntentRequest' && 
@@ -248,7 +173,7 @@ const ActivityIntentHandler = {
       .addDirective({
         type: 'Alexa.Presentation.APL.RenderDocument',
         version: '1.0',
-        document: onloadApl,
+        document: defaultAplTemplate,
         datasources: {}
       })
       .withShouldEndSession(false)
@@ -263,8 +188,7 @@ const ExerciseIntentHandler = {
   },
   handle(handlerInput) {
 
-    // default template.
-    var aplDisplayTemplate = onloadApl;
+    var aplDisplayTemplate = defaultAplTemplate;
 
     if (!applicationState) { 
       speechText += 'Sorry something went wrong, my nuts and bolts come loose sometimes. Try restarting me. ';
@@ -284,17 +208,12 @@ const ExerciseIntentHandler = {
         routineStore: routineStore
       });
 
-      // all the data, video, image, text.
       var response = exerciseConversationHandler({ state: applicationState });
       var { text, APL } = response;
 
       if (APL) {
         aplDisplayTemplate = require('./aplDocuments/'+ APL +'.json');
-      } else {
-        aplDisplayTemplate = onloadApl;
-      }
-
-      console.log('nicknick: ', aplDisplayTemplate, APL, response, applicationState);
+      } 
 
       speechText = text;
 
@@ -308,7 +227,7 @@ const ExerciseIntentHandler = {
         document: aplDisplayTemplate,
         datasources: {}
       })
-      .withShouldEndSession(false) // Causes the mic to stay open. This isn't so bad for mvp.
+      .withShouldEndSession(false) // Causes the mic to stay open. This isn't so bad.
       .getResponse()
   }
 };
@@ -320,7 +239,6 @@ const ExerciseIntentHandler = {
 // Send a response with shouldEndSession set to false to accept voice input. 
 // Your response should include appropriate outputSpeech and reprompt objects 
 // to ask your Alexa customer for input.
-
 // Ready handler, is used to allow the user to move to the next stage within the applications flow
 // TODO - ensure the conversation handler can manage all types of conversation flow.
 // TODO - Add other ways to allow the user to continue, ready, lets go, yo, fun ways.
@@ -331,8 +249,7 @@ const ReadyIntentHandler = {
   },
   handle(handlerInput) {
 
-    // default template.
-    var aplDisplayTemplate = onloadApl;
+    var aplDisplayTemplate = defaultAplTemplate;
     var speechText = '';
 
     if (applicationState.state.type === 'ACTIVITY') {
@@ -346,9 +263,7 @@ const ReadyIntentHandler = {
 
       if (APL) {
         aplDisplayTemplate = require('./aplDocuments/'+ APL +'.json');
-      } else {
-        aplDisplayTemplate = onloadApl;
-      }
+      } 
 
       speechText += text;
 
@@ -378,8 +293,7 @@ const RepeatIntentHandler = {
   },
   handle(handlerInput) {
 
-    // default template.
-    var aplDisplayTemplate = onloadApl;
+    var aplDisplayTemplate = defaultAplTemplate;
     var speechText = '';
 
     if (applicationState.state.type === 'ACTIVITY') {
@@ -389,9 +303,7 @@ const RepeatIntentHandler = {
 
       if (APL) {
         aplDisplayTemplate = require('./aplDocuments/'+ APL +'.json');
-      } else {
-        aplDisplayTemplate = onloadApl;
-      }
+      } 
 
       speechText += text;
 
@@ -414,21 +326,20 @@ const RepeatIntentHandler = {
   }
 };
 
-// Joke handler, gives some random jokes
 const JokeIntentHandler = {
   canHandle(handlerInput) {
     return handlerInput.requestEnvelope.request.type === 'IntentRequest'
       && handlerInput.requestEnvelope.request.intent.name === 'joke_intent';
   },
   handle(handlerInput) {
-    const speechText = getRandomItemFromArr(jokeStore);
+    const speechText = getRandomItemFromArr(randomJokeStore);
     return handlerInput.responseBuilder
       .speak(speechText)
       .withShouldEndSession(false)
       .addDirective({
         type: 'Alexa.Presentation.APL.RenderDocument',
         version: '1.0',
-        document: onloadApl,
+        document: defaultAplTemplate,
         datasources: {}
       })
       .withSimpleCard('Joke', speechText)
@@ -436,20 +347,19 @@ const JokeIntentHandler = {
   },
 };
 
-// Tip handler, gives some random tips
 const TipIntentHandler = {
   canHandle(handlerInput) {
     return handlerInput.requestEnvelope.request.type === 'IntentRequest'
       && handlerInput.requestEnvelope.request.intent.name === 'tip_intent';
   },
   handle(handlerInput) {
-    const speechText = getRandomItemFromArr(tipStore);
+    const speechText = getRandomItemFromArr(randomTipStore);
     return handlerInput.responseBuilder
       .speak(speechText)
       .addDirective({
         type: 'Alexa.Presentation.APL.RenderDocument',
         version: '1.0',
-        document: onloadApl,
+        document: defaultAplTemplate,
         datasources: {}
       })
       .withShouldEndSession(false)
@@ -458,9 +368,6 @@ const TipIntentHandler = {
   },
 };
 
-// app_function_intent
-// How do I use this App || Tell me how to use this App
-// What does this Application do | How can this Application help me
 const AppFunctionIntentHandler = {
   canHandle(handlerInput) {
     return handlerInput.requestEnvelope.request.type === 'IntentRequest'
@@ -475,7 +382,7 @@ const AppFunctionIntentHandler = {
       .addDirective({
         type: 'Alexa.Presentation.APL.RenderDocument',
         version: '1.0',
-        document: onloadApl,
+        document: defaultAplTemplate,
         datasources: {}
       })
       .withShouldEndSession(false)
@@ -498,7 +405,7 @@ const AuthorIntentHandler = {
       .addDirective({
         type: 'Alexa.Presentation.APL.RenderDocument',
         version: '1.0',
-        document: onloadApl,
+        document: defaultAplTemplate,
         datasources: {}
       })
       .withShouldEndSession(false)
@@ -506,7 +413,6 @@ const AuthorIntentHandler = {
   },
 };
 
-// What are the terms of using this App?
 const TermsIntentHandler = {
   canHandle(handlerInput) {
     return handlerInput.requestEnvelope.request.type === 'IntentRequest'
@@ -519,16 +425,14 @@ const TermsIntentHandler = {
       .addDirective({
         type: 'Alexa.Presentation.APL.RenderDocument',
         version: '1.0',
-        document: onloadApl,
+        document: defaultAplTemplate,
         datasources: {}
       })
       .withShouldEndSession(false)
       .getResponse();
   },
 };
-  
-// Help handler, helps user find their way
-// TODO - build out from insights. log user activity.
+
 const HelpIntentHandler = {
   canHandle(handlerInput) {
     return handlerInput.requestEnvelope.request.type === 'IntentRequest'
@@ -536,7 +440,9 @@ const HelpIntentHandler = {
   },
   handle(handlerInput) {
     
-    var speechText = "How can I help?";
+    var speechText = "Fit to Go is here to help keep you fit and reduce the chances of injury. ";
+    speechText += "You can ask for a tip, a joke and follow sets of exercises that have been designed to help prepare you for further activities and sports when telling me the sport you wish to exercise for. ";
+    speechText += "How can I help you today?";
 
     if (applicationState){
       speechText = helpConversationHandler({
@@ -548,7 +454,7 @@ const HelpIntentHandler = {
       .addDirective({
         type: 'Alexa.Presentation.APL.RenderDocument',
         version: '1.0',
-        document: onloadApl,
+        document: defaultAplTemplate,
         datasources: {}
       })
       .withShouldEndSession(false)
@@ -556,7 +462,6 @@ const HelpIntentHandler = {
   },
 };
 
-// Cancel handler, allow user to leave the app
 const CancelAndStopIntentHandler = {
   canHandle(handlerInput) {
     return handlerInput.requestEnvelope.request.type === 'IntentRequest'
@@ -570,7 +475,7 @@ const CancelAndStopIntentHandler = {
       .addDirective({
         type: 'Alexa.Presentation.APL.RenderDocument',
         version: '1.0',
-        document: onloadApl,
+        document: defaultAplTemplate,
         datasources: {}
       })
       .getResponse();
@@ -599,22 +504,18 @@ const ErrorHandler = {
       .addDirective({
         type: 'Alexa.Presentation.APL.RenderDocument',
         version: '1.0',
-        document: onloadApl,
+        document: defaultAplTemplate,
         datasources: {}
       })
       .getResponse();
   },
 };
 
-// What's the difference?
-// const skillBuilder = Alexa.SkillBuilders.standard();
 const skillBuilder = Alexa.SkillBuilders.custom();
 
-// Assign all app handlers
 exports.handler = skillBuilder
   .addRequestHandlers(
     LaunchRequestHandler,
-    InitIntentHandler,
     JokeIntentHandler,
     TipIntentHandler,
     ActivityIntentHandlerInit,
@@ -633,32 +534,3 @@ exports.handler = skillBuilder
   .addErrorHandlers(ErrorHandler)
   .lambda();
 
-// Dev API options:
-// speak(speechOutput: string): this;
-// reprompt(repromptSpeechOutput: string): this;
-// withSimpleCard(cardTitle: string, cardContent: string): this;
-// withStandardCard(cardTitle: string, cardContent: string, smallImageUrl?: string, largeImageUrl?: string): this;
-// withLinkAccountCard(): this;
-// withAskForPermissionsConsentCard(permissionArray: string[]): this;
-// withCanFulfillIntent(canFulfillIntent : CanFulfillIntent) : this;
-// addDelegateDirective(updatedIntent?: Intent): this;
-// addElicitSlotDirective(slotToElicit: string, updatedIntent?: Intent): this;
-// addConfirmSlotDirective(slotToConfirm: string, updatedIntent?: Intent): this;
-// addConfirmIntentDirective(updatedIntent?: Intent): this;
-// addAudioPlayerPlayDirective(playBehavior: interfaces.audioplayer.PlayBehavior, url: string, token: string, offsetInMilliseconds: number, expectedPreviousToken?: string, audioItemMetadata? : AudioItemMetadata): this;
-// addAudioPlayerStopDirective(): this;
-// addAudioPlayerClearQueueDirective(clearBehavior: interfaces.audioplayer.ClearBehavior): this;
-// addRenderTemplateDirective(template: interfaces.display.Template): this;
-// addHintDirective(text: string): this;
-// addVideoAppLaunchDirective(source: string, title?: string, subtitle?: string): this;
-// withShouldEndSession(val: boolean): this;
-// addDirective(directive: Directive): this;
-// getResponse(): Response;
-// updateRoutineState,
-// updateExerciseState, 
-// getNextExerciseState
-// handlerInput.responseBuilder options:
-// .withSimpleCard('Hello World', speechText)
-// .reprompt(speechText) || .withShouldEndSession(false)
-// ideas: 
-// Send gifs / video to card when exercise of events are complete e.g. linked account.
