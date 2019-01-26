@@ -13,8 +13,13 @@ const { exec, execSync } = require('child_process');
 var removeFiles = ['README.md', '.gitignore', 'package.json'];
 var removeFolders = ['.git'];
 
-// create new copy of folder util
+// create new copy of folder
 var copyRecursiveSync = function(src, dest) {
+  
+  if (src.toString() === 'app/test') return;
+
+  console.log(src);
+
   var exists = fs.existsSync(src);
   var stats = exists && fs.statSync(src);
   var isDirectory = exists && stats.isDirectory();
@@ -36,7 +41,7 @@ removeFiles.map((file) => {
   fs.unlink('./dist/' + file, function (){});
 });
 
-// delete util
+// delete
 var deleteFolderRecursive = function(path) {
   if (fs.existsSync(path)) {
     fs.readdirSync(path).forEach(function(file, index){
@@ -65,12 +70,12 @@ execSync(`zip -r './../dist' *`, {
 deleteFolderRecursive('./dist');
 
 // Send to AWS
-exec('aws lambda update-function-code --function-name ask-custom-Hello_World-cli-user --zip-file fileb://dist.zip --publish', (err, stdout, stderr) => {
-  if (err) {
-    // node couldn't execute the command
-    return;
-  }
-  // the *entire* stdout and stderr (buffered)
-  console.log(`stdout: ${stdout}`);
-  console.log(`stderr: ${stderr}`);
-});
+// exec('aws lambda update-function-code --function-name ask-custom-Hello_World-cli-user --zip-file fileb://dist.zip --publish', (err, stdout, stderr) => {
+//   if (err) {
+//     // node couldn't execute the command
+//     return;
+//   }
+//   // the *entire* stdout and stderr (buffered)
+//   console.log(`stdout: ${stdout}`);
+//   console.log(`stderr: ${stderr}`);
+// });

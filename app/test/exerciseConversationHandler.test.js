@@ -1,4 +1,4 @@
-const { exerciseConversationHandler } = require('./../app/exerciseConversationHandler');
+const { exerciseConversationHandler } = require('./../exerciseConversationHandler');
 
 // Apply a constant math random value for the purpose of this test.
 const mockMath = Object.create(global.Math);

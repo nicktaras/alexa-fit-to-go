@@ -1,5 +1,5 @@
-const routineStore = require('./../app/routineStore');
-const ApplicationStateModelStore = require('./../app/applicationState');
+const routineStore = require('./../routineStore');
+const ApplicationStateModelStore = require('./../applicationState');
 var applicationStateModelStore = new ApplicationStateModelStore();
 
 test('ensures application can get state', () => { 

@@ -5,7 +5,7 @@
   https://github.com/nicktaras/alexa-fit-to-go
 */
 
-const appPath = './../app/';
+const appPath = './../';
 const { exerciseConversationHandler } = require(appPath + '/exerciseConversationHandler');
 const routineStore = require(appPath + 'routineStore');
 const ApplicationStateModelStore = require(appPath + '/applicationState');
