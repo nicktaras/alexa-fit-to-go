@@ -6,9 +6,9 @@
 */
 
 const appPath = './../app/';
-const { exerciseConversationHandler } = require(appPath + 'exerciseConversationHandler/exerciseConversationHandler');
+const { exerciseConversationHandler } = require(appPath + '/exerciseConversationHandler');
 const routineStore = require(appPath + 'routineStore');
-const ApplicationStateModelStore = require(appPath + 'applicationState/applicationState');
+const ApplicationStateModelStore = require(appPath + '/applicationState');
 var applicationStateModelStore = new ApplicationStateModelStore();
 var applicationState = applicationStateModelStore.getApplicationState();
 

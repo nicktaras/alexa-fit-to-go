@@ -1,5 +1,5 @@
 const routineStore = require('./../app/routineStore');
-const ApplicationStateModelStore = require('./../app/applicationState/applicationState');
+const ApplicationStateModelStore = require('./../app/applicationState');
 var applicationStateModelStore = new ApplicationStateModelStore();
 
 test('ensures application can get state', () => { 
@@ -61,7 +61,6 @@ test('ensures application can update state', () => {
     }
   );
 }); 
-
 
 test('ensures application can locate and return the initial routine exercise', () => { 
   var mockState = {
@@ -162,7 +161,7 @@ test('ensures application can locate and return next routine exercise state from
         activity: 'JOG'
       },
       exerciseState: {
-        type: "DOUBLE_HEAL_LIFTS_INIT"
+        type: "HEAL_DOWN_CALF_STRETCH_INIT"
       }
     });
 });

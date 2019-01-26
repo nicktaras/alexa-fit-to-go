@@ -1,0 +1,28 @@
+{
+  "type": "APL",
+  "version": "1.0",
+  "import": [
+    {
+      "name": "alexa-layouts",
+      "version": "1.0.0"
+    }
+  ],
+  "mainTemplate": {
+    "parameters": [
+      "payload"
+    ],
+    "items": [
+      {
+        "type": "Video",
+        "source": "https://github.com/nicktaras/alexa-fit-to-go-media/blob/master/assets/HEEL_DOWN_CALF_STRETCH_INIT.mp4?raw=true",
+        "autoplay": true,
+        "repeatCount": 0,
+        "scale": "best-fit",
+        "align": "centre",
+        "height": 550,
+        "width": 550
+      }
+    ]
+  }
+}
+

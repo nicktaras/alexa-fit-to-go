@@ -3,14 +3,26 @@ An Alexa Skill to enable better fitness
 
 aws lambda update-function-code --function-name ask-custom-Hello_World-cli-user --zip-file fileb://archive.zip --publish
 
-# doc / api
+# visual API 
 
-video APL
+https://developer.amazon.com/docs/alexa-presentation-language/apl-text.html
+https://developer.amazon.com/docs/alexa-presentation-language/apl-image.html
+
+# docs and links for video
+
+https://cloudconvert.com/webm-to-mp4
+https://www.onlineconverter.com/convert/1120a3a545180eb65dc19ac3db931d81a1
+
+https://cloudconvert.com/webm-to-mp4
+
 https://developer.amazon.com/docs/alexa-presentation-language/apl-video.html
+
+# doc / speech api
+
+//https://developer.amazon.com/docs/alexa-presentation-language/apl-support-for-the-nodejs-2-0-sdk-in-your-skill.html
 
 http://ask-sdk-java-javadocs.s3-website-us-west-2.amazonaws.com/com/amazon/ask/response/ResponseBuilder.html
 
-// Speech synthesis
 https://developer.amazon.com/docs/custom-skills/speech-synthesis-markup-language-ssml-reference.html
 
 https://ask-sdk-for-nodejs.readthedocs.io/en/latest/Building-Response.html
@@ -23,11 +35,13 @@ Run 'yarn test'.
 
 # Build
 
-TODO utilise node or similar to zip up files
+1. To build, on root run:
+node index.js
 
-For now
+2. When complete:
+delete dist.zip
 
-To publish, compress all files accept from the test folder (this is too large in size).
+TODO - add to build script: Remove file when loaded to Amazon
 
 # Usage of App
 
@@ -52,115 +66,51 @@ To re-deploy remeber to re-zip the code.
 
 # Project Checklist
 
-DONE:
-
-- create a dynamically built exercise sentence
-- tell a joke
-- give a tip
-- can elicit for difficulty of exercise 
-- can progress through a sequence of exercises
-- can drive different exercises based on the level of difficulty 
-- can help a user when lost
-- context switching, allow user to get tip, then go back to their exercise
-
-TODO:
-
-- If repeat, and last step of exercise, take them to the start.
+- create a dynamically built exercise sentence (Done)
+- tell a joke (Done)
+- give a tip (Done)
+- can elicit for difficulty of exercise (Done)
+- can progress through a sequence of exercises (Done)
+- can drive different exercises based on the level of difficulty (Done)
+- can help a user when lost (In progress)
+- context switching, allow user to get tip, then go back to their exercise (Done)
+- Allow them to repeat any step (Done)
 - Allow them to try something else, think of what the user might want to do
 - Slow down exercises
 - can utilise data to provide a user data related tip
 - can utilise data to provide a user data related joke 
 - can apply a bit of random fun to the experience, throw in a joke, tell a fact, ask a question and reply with a witty answer
-- utilise Facebook somemore / Image API / Invite Friends intent.
+- utilise Facebook somemore
+- Image API (Done)
+- Invite Friends and share progress
 - log exercise time of user each session
 - log all user responses for review 
-- deploy to store
-- create deployment package using Webpack or similar to uglify, minify, zip + push code to AWS
-- streamline cli effort to deploy (zip, deploy - one command)
-
+- deploy to store (In progress)
+- create deployment package using Webpack or similar to uglify, minify, zip + push code to AWS (Done)
 
 DevPost: 
 
 https://devpost.com/software/fit-to-go
 
-APL:
+# SSML API examples:
 
-//https://developer.amazon.com/docs/alexa-presentation-language/apl-support-for-the-nodejs-2-0-sdk-in-your-skill.html
-
-- Adding APL template example:
-const LaunchHandler = (input) => {
-    const speechText = 'Welcome';
-    const repromptText = 'Try to say hello!';
-    return input.responseBuilder
-        .speak(speechText)
-        .reprompt(repromptText)
-        .addDirective({
-            type: 'Alexa.Presentation.APL.RenderDocument',
-            version: '1.0',
-            document: myDocument,
-            datasources: {}
-        })
-        .getResponse();
-  },
-};
-
-// see: https://developer.amazon.com/docs/alexa-presentation-language/apl-text.html
-https://developer.amazon.com/docs/alexa-presentation-language/apl-image.html
-
-// Example of APL Document type.
-
-{
-  "type": "APL",
-  "version": "1.0",
-  "import": [
-    {
-      "name": "alexa-layouts",
-      "version": "1.0.0"
-    }
-  ],
-  "mainTemplate": {
-    "parameters": [
-      "payload"
-    ],
-    "items": [
-      {
-        "type": "Text",
-        "text": "Hello World"
-      }
-    ]
-  }
-}
-
-// SSML:
-https://developer.amazon.com/docs/custom-skills/speech-synthesis-markup-language-ssml-reference.html
-
-"outputSpeech": {
-    "type": "SSML",
-    "ssml": "<speak>This output speech uses SSML.</speak>"
-}
-
-Examples:
-
-Add Audio
-<audio src="soundbank://soundlibrary/transportation/amzn_sfx_car_accelerate_01" />
-
-Add Pause
+Add Pause:
 <break time="3s"/>
 
-Emphasise Speech
+Emphasise Speech:
 <emphasis level="strong">really like</emphasis> 
 
-Lang
+Lang:
 <lang xml:lang="fr-FR">Paris</lang>
 
-Prosody, speed, pitch, volume of speech
+Prosody, speed, pitch, volume of speech:
 <prosody rate="x-slow">I speak quite slowly</prosody>
 <prosody pitch="x-high"> but also with a much higher pitch </prosody>
 
-Interpret text as
+Interpret text as:
 <say-as interpret-as="digits">12345</say-as>
 
-Switch Voices in a conversation
+Switch Voices in a conversation:
 <speak>
     Here's a surprise you did not expect.  
     <voice name="Kendra"><lang xml:lang="en-US">I want to tell you a secret.</lang></voice>
@@ -169,128 +119,52 @@ Switch Voices in a conversation
     Can you believe it?
 </speak>
 
+Whisper:
 <amazon:effect name="whispered">I am not a real human.</amazon:effect>
+
+# Alexa Dashboard:
 
 Steps, to enable APL. CUSTOM > INTERFACE > APL ACTIVATION
 https://developer.amazon.com/docs/alexa-presentation-language/apl-support-for-your-skill.html
 
-example from, https://github.com/alexa/skill-sample-nodejs-berry-bash/blob/master/lambda/custom/index.js
-
- response.addRenderTemplateDirective({
-        type: pListTemplateType,
-        backButton: 'hidden',
-        backgroundImage,
-        title,
-        listItems: itemList,
-    });
-
-// test?
-response.addHintDirective(pHint);
-
-// has display check
-function supportsDisplay(handlerInput) {
-    var hasDisplay =
-        handlerInput.requestEnvelope.context &&
-        handlerInput.requestEnvelope.context.System &&
-        handlerInput.requestEnvelope.context.System.device &&
-        handlerInput.requestEnvelope.context.System.device.supportedInterfaces &&
-        handlerInput.requestEnvelope.context.System.device.supportedInterfaces.Display
-    return hasDisplay;
-}
-
-const myImage = new Alexa.ImageHelper()
-  .withDescription('FooDescription')
-  .addImageInstance('http://BarImageSource')
-  .getImage();
-  
-const myTextContent = new Alexa.PlainTextContentHelper()
-  .withPrimaryText('Foo')
-  .withSecondaryText('Bar')
-  .withTertiaryText('Baz')
-  .getTextContent();
-
-???
-https://ask-sdk-for-nodejs.readthedocs.io/en/latest/Building-Response.html
-
-//
-if (supportsDisplay(handlerInput) && !testingOnSim) {
-
-Manual video conversion
-https://cloudconvert.com/webm-to-mp4
-
-Exercises - 
-
-Legs:
-
-Calf stretch lower
-Upper leg stretch 
-
-Arms:
-
-Cross-Body Shoulder Stretch
+# Exercise Inspircation:
 
 https://www.self.com/gallery/upper-body-stretches
+https://www.swimoutlet.com/guides/stretches-for-swimming
 
- Over arm strtch
-Push Ups
+# ideas:
 
-Back:
+- add spotify or music
+- teach sports, activities
 
-Touch toes
-Knee to Chest
+# API methods: 
 
-
-Stomach:
-
-Sit ups
-Plank
-Squat 
-Bicycle Exercises
-
-
-// Stores all exercise types
-
-// Add intitial steps,
-// Do you want to an exercise warm up, warm down, hear some tips or maybe a joke?
-
-// images to recreate:
-// https://www.swimoutlet.com/guides/stretches-for-swimming
-
-// E2E workflow.
-// Download
-
-// TODO:
-// Add moves for more activities.
-// Add background music during each workout to make it more fun, or use spotify?
-// Work out how we can add images for each exercise, maybe static for first release?
-// We need to make a nice look and feel to them etc.
-
-// Exercises in Stick person.
-// LUNGING_HIP_FLEXER
-// STANDING_QUAD_STRETCH
-// KNEE_TO_CHEST
-// BUTTERFLY_STRETCH
-// SQUAT
-// SQUAT_EASY
-// PUSH_UP
-// PUSH_UP_BEGINNER
-// TWIST (WAIST)
-// SIT_UP
-// ARM_RAISE ?
-// BOLT (MOVE)
-// HULK
-// FREDDIE
-// SUPERMAN
-// MICHEALJACKSON
-// JACKIECHAN
-// KARATEKID 
-// JEDI_3
-// HEAL_LIFT_LEFT_UP
-// DOUBLE_HEAL_LIFT
-// HEAL_DOWN_CALF_STRETCH_RIGHT
-
-// return {
-//   responseType: responseData.config.responseType,
-//   text: responseData.config.text,
-//   APL: responseData.config.APL
-// }
+// Dev API options:
+// speak(speechOutput: string): this;
+// reprompt(repromptSpeechOutput: string): this;
+// withSimpleCard(cardTitle: string, cardContent: string): this;
+// withStandardCard(cardTitle: string, cardContent: string, smallImageUrl?: string, largeImageUrl?: string): this;
+// withLinkAccountCard(): this;
+// withAskForPermissionsConsentCard(permissionArray: string[]): this;
+// withCanFulfillIntent(canFulfillIntent : CanFulfillIntent) : this;
+// addDelegateDirective(updatedIntent?: Intent): this;
+// addElicitSlotDirective(slotToElicit: string, updatedIntent?: Intent): this;
+// addConfirmSlotDirective(slotToConfirm: string, updatedIntent?: Intent): this;
+// addConfirmIntentDirective(updatedIntent?: Intent): this;
+// addAudioPlayerPlayDirective(playBehavior: interfaces.audioplayer.PlayBehavior, url: string, token: string, offsetInMilliseconds: number, expectedPreviousToken?: string, audioItemMetadata? : AudioItemMetadata): this;
+// addAudioPlayerStopDirective(): this;
+// addAudioPlayerClearQueueDirective(clearBehavior: interfaces.audioplayer.ClearBehavior): this;
+// addRenderTemplateDirective(template: interfaces.display.Template): this;
+// addHintDirective(text: string): this;
+// addVideoAppLaunchDirective(source: string, title?: string, subtitle?: string): this;
+// withShouldEndSession(val: boolean): this;
+// addDirective(directive: Directive): this;
+// getResponse(): Response;
+// updateRoutineState,
+// updateExerciseState, 
+// getNextExerciseState
+// handlerInput.responseBuilder options:
+// .withSimpleCard('Hello World', speechText)
+// .reprompt(speechText) || .withShouldEndSession(false)
+// ideas: 
+// Send gifs / video to card when exercise of events are complete e.g. linked account.

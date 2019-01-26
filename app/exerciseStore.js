@@ -25,7 +25,8 @@ const exerciseStore = {
       type: "SSML",
       responseType: ':ask',
       text: "We're going to do the heal down calf stretch. This will help stretch your calf muscles. To get in to position, stand straight and place your hands on your hips, ensuring you have good balance. Let me know when your ready.",
-    } 
+      APL: 'HEEL_DOWN_CALF_STRETCH_INIT'
+    }
   },
   'HEAL_DOWN_CALF_STRETCH': {
     type: 'exerciseMethod',
