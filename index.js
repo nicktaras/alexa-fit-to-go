@@ -8,6 +8,7 @@
 const fs = require('fs');
 const path = require('path');
 const { exec, execSync } = require('child_process');
+const UglifyJS = require("uglify-js");
 
 // Files to remove from output
 var removeFiles = ['README.md', '.gitignore', 'package.json'];
@@ -25,6 +26,19 @@ var copyRecursiveSync = function(src, dest) {
   if (exists && isDirectory) {
     fs.mkdirSync(dest);
     fs.readdirSync(src).forEach(function(childItemName) {
+
+   // TODO
+//  fs.readFile(src, function read(err, data) {
+//   if (err) {
+//     throw err;
+//   }
+//   content = data;
+//   // Invoke the next step here however you like
+//   console.log(content);   // Put all of the code here (not the best solution)
+//   processFile();          // Or put the next step in a function and invoke it
+// });
+
+      // Move from src to dest.
       copyRecursiveSync(path.join(src, childItemName),
                         path.join(dest, childItemName));
     });
@@ -70,12 +84,12 @@ execSync(`zip -r './../dist' *`, {
 deleteFolderRecursive('./dist');
 
 // Send to AWS
-exec('aws lambda update-function-code --function-name ask-custom-Hello_World-cli-user --zip-file fileb://dist.zip --publish', (err, stdout, stderr) => {
-  if (err) {
-    // node couldn't execute the command
-    return;
-  }
-  // the *entire* stdout and stderr (buffered)
-  console.log(`stdout: ${stdout}`);
-  console.log(`stderr: ${stderr}`);
-});
+// exec('aws lambda update-function-code --function-name ask-custom-Hello_World-cli-user --zip-file fileb://dist.zip --publish', (err, stdout, stderr) => {
+//   if (err) {
+//     // node couldn't execute the command
+//     return;
+//   }
+//   // the *entire* stdout and stderr (buffered)
+//   console.log(`stdout: ${stdout}`);
+//   console.log(`stderr: ${stderr}`);
+// });
