@@ -58,7 +58,7 @@ const supportsDisplay = (handlerInput) => {
 // On Init of application each load.
 const LaunchRequestHandler = {
   canHandle(handlerInput) {
-    return handlerInput.requestEnvelope.request.type === 'LaunchRequest';
+    return handlerInput.requestEnvelope.request.type === 'LaunchRequest'
   },
   async handle(handlerInput) { 
 
@@ -437,13 +437,27 @@ const TipIntentHandler = {
 
 const AppFunctionIntentHandler = {
   canHandle(handlerInput) {
-    return handlerInput.requestEnvelope.request.type === 'IntentRequest'
-      && handlerInput.requestEnvelope.request.intent.name === 'app_function_intent';
+    return handlerInput.requestEnvelope.request.type === 'IntentRequest' && 
+           handlerInput.requestEnvelope.request.intent.name === 'app_function_intent';
   },
   handle(handlerInput) {
     var speechText = "Fit to Go is here to help keep you fit and reduce the chances of injury. ";
     speechText += "You can ask for a tip, joke and follow sets of exercises that have been designed to help prepare you for further activities and sports. ";
     speechText += "However, do not follow any instruction of this application if it will put you at risk of hurting yourself, others or damaging objects within your home."
+    return handlerInput.responseBuilder
+      .speak(speechText)
+      .withShouldEndSession(false)
+      .getResponse();
+  },
+};
+
+const InitIntentHandler = {
+  canHandle(handlerInput) {
+    return handlerInput.requestEnvelope.request.type === 'init_intent'
+      && handlerInput.requestEnvelope.request.intent.name === 'author_intent';
+  },
+  handle(handlerInput) {
+    var speechText = "So, what type of activity or sport will you be doing today?";
     return handlerInput.responseBuilder
       .speak(speechText)
       .withShouldEndSession(false)
@@ -560,7 +574,8 @@ exports.handler = skillBuilder
     AppFunctionIntentHandler,
     TermsIntentHandler,
     CancelAndStopIntentHandler,
-    SessionEndedRequestHandler
+    SessionEndedRequestHandler,
+    InitIntentHandler
   )
   .addErrorHandlers(ErrorHandler)
   .lambda();
