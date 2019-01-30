@@ -41,6 +41,16 @@ const { getFbUser, shareToWall } = require('./facebookAPI');
 // Method can be used to determine if the user has a screen
 // const supportsDisplay = require('./supportsDisplay');
 
+const supportsDisplay = (handlerInput) => {
+  var hasDisplay =
+    handlerInput.requestEnvelope.context &&
+    handlerInput.requestEnvelope.context.System &&
+    handlerInput.requestEnvelope.context.System.device &&
+    handlerInput.requestEnvelope.context.System.device.supportedInterfaces &&
+    handlerInput.requestEnvelope.context.System.device.supportedInterfaces.Display
+  return hasDisplay;
+}
+
 // TODO - look to re-integrate aplDocumentMaker.
 // Builds APL documents for display devices - TEXT and VIDEO.
 // const aplDocumentMaker = require('./aplDocumentMaker');
@@ -53,53 +63,51 @@ const LaunchRequestHandler = {
   async handle(handlerInput) { 
 
     let speechText = '';
-    let accessToken = handlerInput.requestEnvelope.context.System.user.accessToken;
+    let accessToken = undefined;
 
-    // if (applicationState.state.type === 'INIT') {
+    if (handlerInput &&
+        handlerInput.requestEnvelope &&
+        handlerInput.requestEnvelope.context &&
+        handlerInput.requestEnvelope.context.System &&
+        handlerInput.requestEnvelope.context.System.user && 
+        handlerInput.requestEnvelope.context.System.user.accessToken
+    ) {
+      accessToken = handlerInput.requestEnvelope.context.System.user.accessToken;
+    }
 
-      if(accessToken == undefined) {
-        
-        speechText = "Welcome, what type of activity or sport will you be doing today?";
+    if(accessToken) { // Facebook Account is linked.
+      
+      const fbUserName = await getFbUser(accessToken);
+      speechText = "Welcome, " +  fbUserName + " what type of activity or sport will you be doing today?";
 
-      } else { // Facebook Account is linked.
+    } else { // Facebook is not linked
 
-        const accessToken = handlerInput.requestEnvelope.context.System.user.accessToken;
-        const fbUserName = await getFbUser(accessToken);
-        speechText = "Welcome, " +  fbUserName + " what type of activity or sport will you be doing today?";
+      speechText = "Welcome, what type of activity or sport will you be doing today?";
+      
+    }
 
-      }
+    if (supportsDisplay(handlerInput)) {
 
-      try {
+      return handlerInput.responseBuilder
+      .speak(speechText)
+      .addDirective({
+        type: 'Alexa.Presentation.APL.RenderDocument',
+        version: '1.0',
+        document: defaultAplTemplate,
+        datasources: {}
+      })
+      .withShouldEndSession(false)
+      .getResponse();
 
-        // supportsDisplay
-        return handlerInput.responseBuilder
-        .speak(speechText)
-        .addDirective({
-          type: 'Alexa.Presentation.APL.RenderDocument',
-          version: '1.0',
-          document: defaultAplTemplate,
-          datasources: {}
-        })
-        .withShouldEndSession(false)
-        .getResponse();
+    } else {
 
-      } catch (error) {
+      return handlerInput.responseBuilder
+      .speak(speechText)
+      .withShouldEndSession(false)
+      .getResponse();
 
-        let speechText = "There was an error with fit to go, please try again or restart the application.";
-        return handlerInput.responseBuilder
-          .speak(speechText)
-          .addDirective({
-            type: 'Alexa.Presentation.APL.RenderDocument',
-            version: '1.0',
-            document: defaultAplTemplate,
-            datasources: {}
-          })
-          .withSimpleCard('Error', speechText)
-          .withShouldEndSession(false)
-          .getResponse();
+    }
 
-      }
-    // }
   }
 };
 
@@ -110,8 +118,12 @@ const SportIntentHandler = {
        handlerInput.requestEnvelope.request.intent.name === 'sport_intent'
   },
   handle(handlerInput) {
-    const speechText = "I'm not ready to teach sports exercise quite yet. Please come back soon, I'll have some great moves to help you prepare for your next game.";
-    return handlerInput.responseBuilder
+
+    let speechText = "I'm not ready to teach sports exercise quite yet. Please come back soon, I'll have some great moves to help you prepare for your next game. Alternativly you can tell me an activity you are doing, for example say, a jog.";
+    
+    if (supportsDisplay(handlerInput)) {
+
+      return handlerInput.responseBuilder
       .speak(speechText)
       .addDirective({
         type: 'Alexa.Presentation.APL.RenderDocument',
@@ -121,6 +133,16 @@ const SportIntentHandler = {
       })
       .withShouldEndSession(false)
       .getResponse();
+
+    } else {
+
+      return handlerInput.responseBuilder
+      .speak(speechText)
+      .withShouldEndSession(false)
+      .getResponse();
+
+    }
+    
   }
 };
 
@@ -168,7 +190,10 @@ const ActivityIntentHandler = {
     speechText += getRandomItemFromArr(startSpeechStore);
     speechText += getRandomItemFromArr(chitChatExerciseStore[userActivity.toUpperCase()]);
     speechText += "So, would you like some tips or warm up exercises before todays " + userActivity;
-    return handlerInput.responseBuilder
+    
+    if (supportsDisplay(handlerInput)) {
+
+      return handlerInput.responseBuilder
       .speak(speechText)
       .addDirective({
         type: 'Alexa.Presentation.APL.RenderDocument',
@@ -178,6 +203,16 @@ const ActivityIntentHandler = {
       })
       .withShouldEndSession(false)
       .getResponse();
+
+    } else {
+
+      return handlerInput.responseBuilder
+      .speak(speechText)
+      .withShouldEndSession(false)
+      .getResponse();
+
+    }
+    
   }
 };
 
@@ -218,8 +253,10 @@ const ExerciseIntentHandler = {
       speechText = text;
 
     }
-    
-    return handlerInput.responseBuilder
+
+    if (supportsDisplay(handlerInput)) {
+
+      return handlerInput.responseBuilder
       .speak(speechText)
       .addDirective({
         type: 'Alexa.Presentation.APL.RenderDocument',
@@ -227,8 +264,18 @@ const ExerciseIntentHandler = {
         document: aplDisplayTemplate,
         datasources: {}
       })
-      .withShouldEndSession(false) // Causes the mic to stay open. This isn't so bad.
-      .getResponse()
+      .withShouldEndSession(false)
+      .getResponse();
+
+    } else {
+
+      return handlerInput.responseBuilder
+      .speak(speechText)
+      .withShouldEndSession(false)
+      .getResponse();
+
+    }
+    
   }
 };
 
@@ -273,7 +320,9 @@ const ReadyIntentHandler = {
 
     }
 
-    return handlerInput.responseBuilder
+    if (supportsDisplay(handlerInput)) {
+
+      return handlerInput.responseBuilder
       .speak(speechText)
       .addDirective({
         type: 'Alexa.Presentation.APL.RenderDocument',
@@ -283,6 +332,16 @@ const ReadyIntentHandler = {
       })
       .withShouldEndSession(false)
       .getResponse();
+
+    } else {
+
+      return handlerInput.responseBuilder
+      .speak(speechText)
+      .withShouldEndSession(false)
+      .getResponse();
+
+    }
+
   }
 };
 
@@ -313,7 +372,9 @@ const RepeatIntentHandler = {
 
     }
 
-    return handlerInput.responseBuilder
+    if (supportsDisplay(handlerInput)) {
+
+      return handlerInput.responseBuilder
       .speak(speechText)
       .addDirective({
         type: 'Alexa.Presentation.APL.RenderDocument',
@@ -323,6 +384,16 @@ const RepeatIntentHandler = {
       })
       .withShouldEndSession(false)
       .getResponse();
+
+    } else {
+
+      return handlerInput.responseBuilder
+      .speak(speechText)
+      .withShouldEndSession(false)
+      .getResponse();
+
+    }
+
   }
 };
 
@@ -332,19 +403,15 @@ const JokeIntentHandler = {
       && handlerInput.requestEnvelope.request.intent.name === 'joke_intent';
   },
   handle(handlerInput) {
-    const speechText = getRandomItemFromArr(randomJokeStore);
+    var speechText = getRandomItemFromArr(randomJokeStore);
+    
     return handlerInput.responseBuilder
       .speak(speechText)
       .withShouldEndSession(false)
-      .addDirective({
-        type: 'Alexa.Presentation.APL.RenderDocument',
-        version: '1.0',
-        document: defaultAplTemplate,
-        datasources: {}
-      })
       .withSimpleCard('Joke', speechText)
       .getResponse();
-  },
+
+  }
 };
 
 const TipIntentHandler = {
@@ -353,7 +420,7 @@ const TipIntentHandler = {
       && handlerInput.requestEnvelope.request.intent.name === 'tip_intent';
   },
   handle(handlerInput) {
-    const speechText = getRandomItemFromArr(randomTipStore);
+    var speechText = getRandomItemFromArr(randomTipStore);
     return handlerInput.responseBuilder
       .speak(speechText)
       .addDirective({
@@ -379,12 +446,6 @@ const AppFunctionIntentHandler = {
     speechText += "However, do not follow any instruction of this application if it will put you at risk of hurting yourself, others or damaging objects within your home."
     return handlerInput.responseBuilder
       .speak(speechText)
-      .addDirective({
-        type: 'Alexa.Presentation.APL.RenderDocument',
-        version: '1.0',
-        document: defaultAplTemplate,
-        datasources: {}
-      })
       .withShouldEndSession(false)
       .getResponse();
   },
@@ -402,12 +463,6 @@ const AuthorIntentHandler = {
     speechText += "We hope you have a long and enjoyable relationship with sport and exercise."
     return handlerInput.responseBuilder
       .speak(speechText)
-      .addDirective({
-        type: 'Alexa.Presentation.APL.RenderDocument',
-        version: '1.0',
-        document: defaultAplTemplate,
-        datasources: {}
-      })
       .withShouldEndSession(false)
       .getResponse();
   },
@@ -422,12 +477,6 @@ const TermsIntentHandler = {
     var speechText = "Fit to go is an experimental fitness tool, we take no liability or costs for the actions, damage, harm caused by those who use it. For full terms and conditions please see the Fit To Go skill page. We hope you enjoy the skill and find it useful in helping you warm up before activities and sport.";
     return handlerInput.responseBuilder
       .speak(speechText)
-      .addDirective({
-        type: 'Alexa.Presentation.APL.RenderDocument',
-        version: '1.0',
-        document: defaultAplTemplate,
-        datasources: {}
-      })
       .withShouldEndSession(false)
       .getResponse();
   },
@@ -451,12 +500,6 @@ const HelpIntentHandler = {
     } 
     return handlerInput.responseBuilder
       .speak(speechText)
-      .addDirective({
-        type: 'Alexa.Presentation.APL.RenderDocument',
-        version: '1.0',
-        document: defaultAplTemplate,
-        datasources: {}
-      })
       .withShouldEndSession(false)
       .getResponse();
   },
@@ -469,15 +512,9 @@ const CancelAndStopIntentHandler = {
         || handlerInput.requestEnvelope.request.intent.name === 'AMAZON.StopIntent');
   },
   handle(handlerInput) {
-    const speechText = 'Goodbye!';
+    var speechText = 'Goodbye!';
     return handlerInput.responseBuilder
       .speak(speechText)
-      .addDirective({
-        type: 'Alexa.Presentation.APL.RenderDocument',
-        version: '1.0',
-        document: defaultAplTemplate,
-        datasources: {}
-      })
       .getResponse();
   },
 };
@@ -501,12 +538,6 @@ const ErrorHandler = {
     return handlerInput.responseBuilder
       .speak("Sorry, fit to go can\'t understand the command. Please say again. If I can't help you find the answer, please restart me.")
       .withShouldEndSession(false)
-      .addDirective({
-        type: 'Alexa.Presentation.APL.RenderDocument',
-        version: '1.0',
-        document: defaultAplTemplate,
-        datasources: {}
-      })
       .getResponse();
   },
 };
