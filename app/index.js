@@ -407,7 +407,7 @@ const JokeIntentHandler = {
     
     return handlerInput.responseBuilder
       .speak(speechText)
-      .withShouldEndSession(false)
+      // .withShouldEndSession(false)
       .withSimpleCard('Joke', speechText)
       .getResponse();
 
@@ -429,7 +429,7 @@ const TipIntentHandler = {
         document: defaultAplTemplate,
         datasources: {}
       })
-      .withShouldEndSession(false)
+      // .withShouldEndSession(false)
       .withSimpleCard('Tip', speechText)
       .getResponse();
   },
@@ -446,7 +446,7 @@ const AppFunctionIntentHandler = {
     speechText += "However, do not follow any instruction of this application if it will put you at risk of hurting yourself, others or damaging objects within your home."
     return handlerInput.responseBuilder
       .speak(speechText)
-      .withShouldEndSession(false)
+      // .withShouldEndSession(false)
       .getResponse();
   },
 };
@@ -488,10 +488,10 @@ const TermsIntentHandler = {
       && handlerInput.requestEnvelope.request.intent.name === 'terms_intent';
   },
   handle(handlerInput) {
-    var speechText = "Fit to go is an experimental fitness tool, we take no liability or costs for the actions, damage, harm caused by those who use it. For full terms and conditions please see the Fit To Go skill page. We hope you enjoy the skill and find it useful in helping you warm up before activities and sport.";
+    var speechText = "Fit to go is an experimental fitness tool, we take no liability or costs for the actions, damage, harm caused by those who use it. For full terms and conditions please see the Fit To Go skill page. We hope you enjoy the skill and find it useful in helping you warm up before activities and sport. ";
     return handlerInput.responseBuilder
       .speak(speechText)
-      .withShouldEndSession(false)
+      // .withShouldEndSession(false)
       .getResponse();
   },
 };
