@@ -80,32 +80,56 @@ const LaunchRequestHandler = {
       const fbUserName = await getFbUser(accessToken);
       speechText = "Welcome, " +  fbUserName + " what type of activity or sport will you be doing today?";
 
+      if (supportsDisplay(handlerInput)) {
+
+        return handlerInput.responseBuilder
+        .speak(speechText)
+        .addDirective({
+          type: 'Alexa.Presentation.APL.RenderDocument',
+          version: '1.0',
+          document: defaultAplTemplate,
+          datasources: {}
+        })
+        .withShouldEndSession(false)
+        .getResponse();
+  
+      } else {
+  
+        return handlerInput.responseBuilder
+        .speak(speechText)
+        .withShouldEndSession(false)
+        .getResponse();
+  
+      }
+
     } else { // Facebook is not linked
 
       speechText = "Welcome, what type of activity or sport will you be doing today?";
+
+      if (supportsDisplay(handlerInput)) {
+
+        return handlerInput.responseBuilder
+        .speak(speechText)
+        .withLinkAccountCard()
+        .addDirective({
+          type: 'Alexa.Presentation.APL.RenderDocument',
+          version: '1.0',
+          document: defaultAplTemplate,
+          datasources: {}
+        })
+        .withShouldEndSession(false)
+        .getResponse();
+  
+      } else {
+  
+        return handlerInput.responseBuilder
+        .speak(speechText)
+        .withLinkAccountCard()
+        .withShouldEndSession(false)
+        .getResponse();
+  
+      }
       
-    }
-
-    if (supportsDisplay(handlerInput)) {
-
-      return handlerInput.responseBuilder
-      .speak(speechText)
-      .addDirective({
-        type: 'Alexa.Presentation.APL.RenderDocument',
-        version: '1.0',
-        document: defaultAplTemplate,
-        datasources: {}
-      })
-      .withShouldEndSession(false)
-      .getResponse();
-
-    } else {
-
-      return handlerInput.responseBuilder
-      .speak(speechText)
-      .withShouldEndSession(false)
-      .getResponse();
-
     }
 
   }
@@ -407,7 +431,7 @@ const JokeIntentHandler = {
     
     return handlerInput.responseBuilder
       .speak(speechText)
-      // .withShouldEndSession(false)
+      .withShouldEndSession(true)
       .withSimpleCard('Joke', speechText)
       .getResponse();
 
@@ -429,7 +453,7 @@ const TipIntentHandler = {
         document: defaultAplTemplate,
         datasources: {}
       })
-      // .withShouldEndSession(false)
+      .withShouldEndSession(true)
       .withSimpleCard('Tip', speechText)
       .getResponse();
   },
@@ -446,7 +470,7 @@ const AppFunctionIntentHandler = {
     speechText += "However, do not follow any instruction of this application if it will put you at risk of hurting yourself, others or damaging objects within your home."
     return handlerInput.responseBuilder
       .speak(speechText)
-      // .withShouldEndSession(false)
+      .withShouldEndSession(true)
       .getResponse();
   },
 };
@@ -458,6 +482,9 @@ const InitIntentHandler = {
   },
   handle(handlerInput) {
     var speechText = "So, what type of activity or sport will you be doing today?";
+
+    // can i do an exercise
+
     return handlerInput.responseBuilder
       .speak(speechText)
       .withShouldEndSession(false)
@@ -491,7 +518,7 @@ const TermsIntentHandler = {
     var speechText = "Fit to go is an experimental fitness tool, we take no liability or costs for the actions, damage, harm caused by those who use it. For full terms and conditions please see the Fit To Go skill page. We hope you enjoy the skill and find it useful in helping you warm up before activities and sport. ";
     return handlerInput.responseBuilder
       .speak(speechText)
-      // .withShouldEndSession(false)
+      .withShouldEndSession(true)
       .getResponse();
   },
 };
