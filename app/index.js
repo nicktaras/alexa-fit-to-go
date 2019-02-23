@@ -88,7 +88,7 @@ const LaunchRequestHandler = {
           version: '1.0',
           document: aplDocumentMaker({
             handlerInput: handlerInput,
-            url: 'to do',
+            url: 'https://raw.githubusercontent.com/nicktaras/alexa-go-fit/master/assets/image/intro.png',
             template: 'IMAGE'
           }),
           datasources: {}
@@ -119,7 +119,7 @@ const LaunchRequestHandler = {
           version: '1.0',
           document: aplDocumentMaker({
             handlerInput: handlerInput,
-            url: 'to do',
+            url: 'https://raw.githubusercontent.com/nicktaras/alexa-go-fit/master/assets/image/intro.png',
             template: 'IMAGE'
           }),
           datasources: {}
@@ -161,7 +161,7 @@ const SportIntentHandler = {
         version: '1.0',
         document: aplDocumentMaker({
           handlerInput: handlerInput,
-          url: 'to do',
+          url: 'https://raw.githubusercontent.com/nicktaras/alexa-go-fit/master/assets/image/intro.png',
           template: 'IMAGE'
         }),
         datasources: {}
@@ -235,7 +235,7 @@ const ActivityIntentHandler = {
         version: '1.0',
         document: aplDocumentMaker({
           handlerInput: handlerInput,
-          url: 'to do',
+          url: 'https://raw.githubusercontent.com/nicktaras/alexa-go-fit/master/assets/image/intro.png',
           template: 'IMAGE'
         }),
         datasources: {}
@@ -302,7 +302,7 @@ const ExerciseIntentHandler = {
         version: '1.0',
         document: aplDocumentMaker({
           handlerInput: handlerInput,
-          url: 'to do',
+          url: 'https://raw.githubusercontent.com/nicktaras/alexa-go-fit/master/assets/image/intro.png',
           template: 'IMAGE'
         }),
         datasources: {}
@@ -372,7 +372,7 @@ const ReadyIntentHandler = {
         version: '1.0',
         document: aplDocumentMaker({
           handlerInput: handlerInput,
-          url: 'to do',
+          url: 'https://raw.githubusercontent.com/nicktaras/alexa-go-fit/master/assets/image/intro.png',
           template: 'IMAGE'
         }),
         datasources: {}
@@ -428,7 +428,7 @@ const RepeatIntentHandler = {
         version: '1.0',
         document: aplDocumentMaker({
           handlerInput: handlerInput,
-          url: 'to do',
+          url: 'https://raw.githubusercontent.com/nicktaras/alexa-go-fit/master/assets/image/intro.png',
           template: 'IMAGE'
         }),
         datasources: {}
@@ -479,7 +479,7 @@ const TipIntentHandler = {
         version: '1.0',
         document: aplDocumentMaker({
           handlerInput: handlerInput,
-          url: 'to do',
+          url: 'https://raw.githubusercontent.com/nicktaras/alexa-go-fit/master/assets/image/intro.png',
           template: 'IMAGE'
         }),
         datasources: {}
