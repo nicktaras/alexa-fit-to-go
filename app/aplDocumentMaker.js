@@ -1,5 +1,3 @@
-const defaultAplDocument = require('./aplDocuments/onload.json');
-
 exports.aplDocumentMaker = (APL) => {
 
   /* 
@@ -14,9 +12,14 @@ exports.aplDocumentMaker = (APL) => {
 
   */ 
 
-  aplDocument = defaultAplDocument;
+  console.log('Hello world: ');
+  console.log('url: ', APL.url);
+  console.log('template: ', APL.template);
+  console.log('Handler input: ', APL.handlerInput.requestEnvelope);
 
-  if (APL.template === "VIDEO" && APL.url) {
+  const { handlerInput, url, template } = APL;
+
+  if (template === "VIDEO" && url) {
     aplDocument = {
       "type": "APL",
       "version": "1.0",
@@ -45,11 +48,11 @@ exports.aplDocumentMaker = (APL) => {
               },
               {
                 "type": "Video",
-                "source": apl.url,
+                "source": url,
                 "autoplay": true,
                 "repeatCount": 0,
-                "width": apl.handlerInput.requestEnvelope.context.Viewport.pixelWidth,
-                "height": apl.handlerInput.requestEnvelope.context.Viewport.pixelHeight,
+                "width": handlerInput.requestEnvelope.context.Viewport.pixelWidth,
+                "height": handlerInput.requestEnvelope.context.Viewport.pixelHeight,
                 "align": "center",
                 "scale": "best-fill"
               }
@@ -60,7 +63,7 @@ exports.aplDocumentMaker = (APL) => {
     }  
   } 
 
-  if (APL.template === "IMAGE" && APL.url) {
+  if (template === "IMAGE" && url) {
     aplDocument = {
       "type": "APL",
       "version": "1.0",
@@ -89,9 +92,9 @@ exports.aplDocumentMaker = (APL) => {
               },
               {
                 "type": "Image",
-                "source": apl.url,
-                "width": apl.handlerInput.requestEnvelope.context.Viewport.pixelWidth,
-                "height": apl.handlerInput.requestEnvelope.context.Viewport.pixelHeight,
+                "source": url,
+                "width": handlerInput.requestEnvelope.context.Viewport.pixelWidth,
+                "height": handlerInput.requestEnvelope.context.Viewport.pixelHeight,
                 "align": "center",
                 "scale": "best-fill"
               }

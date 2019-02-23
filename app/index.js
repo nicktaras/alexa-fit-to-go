@@ -11,9 +11,6 @@
 // Core libs
 const Alexa = require('ask-sdk-core');
 
-// Default APL document
-const defaultAplTemplate = require('./aplDocuments/onload.json');
-
 // Application Stores
 const randomTipStore = require('./randomTipStore');
 const randomJokeStore = require('./randomJokeStore');
@@ -30,13 +27,16 @@ const { helpConversationHandler } = require('./helpConversationHandler');
 // Exercise Utils
 const { exerciseConversationHandler } = require('./exerciseConversationHandler');
 
+// Builds APL documents for display devices - TEXT and VIDEO.
+const { aplDocumentMaker } = require('./aplDocumentMaker');
+
 // State Machine
 const ApplicationStateModelStore = require('./applicationState');
 var applicationStateModelStore = new ApplicationStateModelStore();
 var applicationState = applicationStateModelStore.getApplicationState();
 
 // API's / Facebook
-const { getFbUser, shareToWall } = require('./facebookAPI');
+const { getFbUser } = require('./facebookAPI');
 
 // Method can be used to determine if the user has a screen
 // const supportsDisplay = require('./supportsDisplay');
@@ -50,9 +50,6 @@ const supportsDisplay = (handlerInput) => {
     handlerInput.requestEnvelope.context.System.device.supportedInterfaces.Display
   return hasDisplay;
 }
-
-// Builds APL documents for display devices - TEXT and VIDEO.
-const aplDocumentMaker = require('./aplDocumentMaker');
 
 // On Init of application each load.
 const LaunchRequestHandler = {
@@ -111,6 +108,8 @@ const LaunchRequestHandler = {
 
       if (supportsDisplay(handlerInput)) {
 
+        console.log('Hello world: J');
+
         return handlerInput.responseBuilder
         .speak(speechText)
         .withLinkAccountCard()
@@ -126,7 +125,7 @@ const LaunchRequestHandler = {
         })
         .withShouldEndSession(false)
         .getResponse();
-  
+
       } else {
   
         return handlerInput.responseBuilder
@@ -262,8 +261,6 @@ const ExerciseIntentHandler = {
   },
   handle(handlerInput) {
 
-    var aplDisplayTemplate = defaultAplTemplate;
-
     if (!applicationState) { 
       speechText += 'Sorry something went wrong, my nuts and bolts come loose sometimes. Try restarting me. ';
     }
@@ -286,7 +283,7 @@ const ExerciseIntentHandler = {
       var { text, APL } = response;
 
       if (APL) {
-        aplDisplayTemplate = require('./aplDocuments/'+ APL +'.json');
+        // aplDisplayTemplate = require('./aplDocuments/'+ APL +'.json');
       } 
 
       speechText = text;
@@ -339,7 +336,6 @@ const ReadyIntentHandler = {
   },
   handle(handlerInput) {
 
-    var aplDisplayTemplate = defaultAplTemplate;
     var speechText = '';
 
     if (applicationState.state.type === 'ACTIVITY') {
@@ -352,7 +348,7 @@ const ReadyIntentHandler = {
       var { text, APL } = response;
 
       if (APL) {
-        aplDisplayTemplate = require('./aplDocuments/'+ APL +'.json');
+        // aplDisplayTemplate = require('./aplDocuments/'+ APL +'.json');
       } 
 
       speechText += text;
@@ -399,7 +395,6 @@ const RepeatIntentHandler = {
   },
   handle(handlerInput) {
 
-    var aplDisplayTemplate = defaultAplTemplate;
     var speechText = '';
 
     if (applicationState.state.type === 'ACTIVITY') {
@@ -408,7 +403,7 @@ const RepeatIntentHandler = {
       var { text, APL } = response;
 
       if (APL) {
-        aplDisplayTemplate = require('./aplDocuments/'+ APL +'.json');
+        // aplDisplayTemplate = require('./aplDocuments/'+ APL +'.json');
       } 
 
       speechText += text;
