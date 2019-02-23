@@ -51,9 +51,8 @@ const supportsDisplay = (handlerInput) => {
   return hasDisplay;
 }
 
-// TODO - look to re-integrate aplDocumentMaker.
 // Builds APL documents for display devices - TEXT and VIDEO.
-// const aplDocumentMaker = require('./aplDocumentMaker');
+const aplDocumentMaker = require('./aplDocumentMaker');
 
 // On Init of application each load.
 const LaunchRequestHandler = {
@@ -87,7 +86,11 @@ const LaunchRequestHandler = {
         .addDirective({
           type: 'Alexa.Presentation.APL.RenderDocument',
           version: '1.0',
-          document: defaultAplTemplate,
+          document: aplDocumentMaker({
+            handlerInput: handlerInput,
+            url: 'to do',
+            template: 'IMAGE'
+          }),
           datasources: {}
         })
         .withShouldEndSession(false)
@@ -114,7 +117,11 @@ const LaunchRequestHandler = {
         .addDirective({
           type: 'Alexa.Presentation.APL.RenderDocument',
           version: '1.0',
-          document: defaultAplTemplate,
+          document: aplDocumentMaker({
+            handlerInput: handlerInput,
+            url: 'to do',
+            template: 'IMAGE'
+          }),
           datasources: {}
         })
         .withShouldEndSession(false)
@@ -152,7 +159,11 @@ const SportIntentHandler = {
       .addDirective({
         type: 'Alexa.Presentation.APL.RenderDocument',
         version: '1.0',
-        document: defaultAplTemplate,
+        document: aplDocumentMaker({
+          handlerInput: handlerInput,
+          url: 'to do',
+          template: 'IMAGE'
+        }),
         datasources: {}
       })
       .withShouldEndSession(false)
@@ -222,7 +233,11 @@ const ActivityIntentHandler = {
       .addDirective({
         type: 'Alexa.Presentation.APL.RenderDocument',
         version: '1.0',
-        document: defaultAplTemplate,
+        document: aplDocumentMaker({
+          handlerInput: handlerInput,
+          url: 'to do',
+          template: 'IMAGE'
+        }),
         datasources: {}
       })
       .withShouldEndSession(false)
@@ -285,7 +300,11 @@ const ExerciseIntentHandler = {
       .addDirective({
         type: 'Alexa.Presentation.APL.RenderDocument',
         version: '1.0',
-        document: aplDisplayTemplate,
+        document: aplDocumentMaker({
+          handlerInput: handlerInput,
+          url: 'to do',
+          template: 'IMAGE'
+        }),
         datasources: {}
       })
       .withShouldEndSession(false)
@@ -351,7 +370,11 @@ const ReadyIntentHandler = {
       .addDirective({
         type: 'Alexa.Presentation.APL.RenderDocument',
         version: '1.0',
-        document: aplDisplayTemplate,
+        document: aplDocumentMaker({
+          handlerInput: handlerInput,
+          url: 'to do',
+          template: 'IMAGE'
+        }),
         datasources: {}
       })
       .withShouldEndSession(false)
@@ -403,7 +426,11 @@ const RepeatIntentHandler = {
       .addDirective({
         type: 'Alexa.Presentation.APL.RenderDocument',
         version: '1.0',
-        document: aplDisplayTemplate,
+        document: aplDocumentMaker({
+          handlerInput: handlerInput,
+          url: 'to do',
+          template: 'IMAGE'
+        }),
         datasources: {}
       })
       .withShouldEndSession(false)
@@ -450,7 +477,11 @@ const TipIntentHandler = {
       .addDirective({
         type: 'Alexa.Presentation.APL.RenderDocument',
         version: '1.0',
-        document: defaultAplTemplate,
+        document: aplDocumentMaker({
+          handlerInput: handlerInput,
+          url: 'to do',
+          template: 'IMAGE'
+        }),
         datasources: {}
       })
       .withShouldEndSession(true)
@@ -465,7 +496,7 @@ const AppFunctionIntentHandler = {
            handlerInput.requestEnvelope.request.intent.name === 'app_function_intent';
   },
   handle(handlerInput) {
-    var speechText = "Fit to Go is here to help keep you fit and reduce the chances of injury. ";
+    var speechText = "Go fit is here to help keep you fit and reduce the chances of injury. ";
     speechText += "You can ask for a tip, joke and follow sets of exercises that have been designed to help prepare you for further activities and sports. ";
     speechText += "However, do not follow any instruction of this application if it will put you at risk of hurting yourself, others or damaging objects within your home."
     return handlerInput.responseBuilder
@@ -515,7 +546,7 @@ const TermsIntentHandler = {
       && handlerInput.requestEnvelope.request.intent.name === 'terms_intent';
   },
   handle(handlerInput) {
-    var speechText = "Fit to go is an experimental fitness tool, we take no liability or costs for the actions, damage, harm caused by those who use it. For full terms and conditions please see the Fit To Go skill page. We hope you enjoy the skill and find it useful in helping you warm up before activities and sport. ";
+    var speechText = "Go fit is an experimental fitness tool, we take no liability or costs for the actions, damage, harm caused by those who use it. For full terms and conditions please see the Go fit skill page. We hope you enjoy the skill and find it useful in helping you warm up before activities and sport. ";
     return handlerInput.responseBuilder
       .speak(speechText)
       .withShouldEndSession(true)
@@ -530,7 +561,7 @@ const HelpIntentHandler = {
   },
   handle(handlerInput) {
     
-    var speechText = "Fit to Go is here to help keep you fit and reduce the chances of injury. ";
+    var speechText = "Go fit is here to help keep you fit and reduce the chances of injury. ";
     speechText += "You can ask for a tip, a joke and follow sets of exercises that have been designed to help prepare you for further activities and sports when telling me the sport you wish to exercise for. ";
     speechText += "How can I help you today?";
 
@@ -577,7 +608,7 @@ const ErrorHandler = {
   handle(handlerInput, error) {
     console.log(handlerInput, error);
     return handlerInput.responseBuilder
-      .speak("Sorry, fit to go can\'t understand the command. Please say again. If I can't help you find the answer, please restart me.")
+      .speak("Sorry, Go fit can\'t understand the command. Please say again. If I can't help you find the answer, please restart me.")
       .withShouldEndSession(false)
       .getResponse();
   },
