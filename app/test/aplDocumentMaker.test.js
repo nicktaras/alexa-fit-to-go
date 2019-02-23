@@ -1,7 +1,5 @@
 const { aplDocumentMaker } = require('./../aplDocumentMaker');
 
-// Apply a constant math random value for the purpose of this test.
-
 test('ensures application can build an apl document object', () => { 
   const output = aplDocumentMaker({
     handlerInput: { 
@@ -14,8 +12,10 @@ test('ensures application can build an apl document object', () => {
         }
       }
     },
-    url: 'https://raw.githubusercontent.com/nicktaras/alexa-go-fit/master/assets/image/intro.png',
-    template: 'IMAGE'
+    displayContent: {
+      url: 'https://raw.githubusercontent.com/nicktaras/alexa-go-fit/master/assets/image/intro.png',
+      type: 'Image'
+    }
   });
   expect(output).toEqual({
     "import": [ 

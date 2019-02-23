@@ -17,6 +17,7 @@ const randomJokeStore = require('./randomJokeStore');
 const routineStore = require('./routineStore');
 const chitChatExerciseStore = require('./chitChatExerciseStore');
 const startSpeechStore = require('./startSpeechStore');
+const mediaStore = require('./mediaStore');
 
 // Common Utils
 const { getRandomItemFromArr } = require('./utils');
@@ -51,6 +52,39 @@ const supportsDisplay = (handlerInput) => {
   return hasDisplay;
 }
 
+// A common method to handle the responses for an activity request.
+const activityResponseHandler = (handlerInput) => {
+
+  var speechText = '';
+  var displayContent = null;
+  var response = exerciseConversationHandler({ state: applicationState });
+  var { text, APL } = response;
+  
+  if (APL) { displayContent = mediaStore.video[APL]; }
+  if (text) { speechText += text; }
+
+  if (supportsDisplay(handlerInput) && displayContent) {
+    return handlerInput.responseBuilder
+    .speak(speechText)
+    .addDirective({
+      type: 'Alexa.Presentation.APL.RenderDocument',
+      version: '1.0',
+      document: aplDocumentMaker({
+        handlerInput: handlerInput,
+        displayContent: displayContent
+      }),
+      datasources: {}
+    })
+    .withShouldEndSession(false)
+    .getResponse();
+  } else {
+    return handlerInput.responseBuilder
+    .speak(speechText)
+    .withShouldEndSession(false)
+    .getResponse();
+  }
+}
+
 // On Init of application each load.
 const LaunchRequestHandler = {
   canHandle(handlerInput) {
@@ -77,7 +111,6 @@ const LaunchRequestHandler = {
       speechText = "Welcome, " +  fbUserName + " what type of activity or sport will you be doing today?";
 
       if (supportsDisplay(handlerInput)) {
-
         return handlerInput.responseBuilder
         .speak(speechText)
         .addDirective({
@@ -85,8 +118,7 @@ const LaunchRequestHandler = {
           version: '1.0',
           document: aplDocumentMaker({
             handlerInput: handlerInput,
-            url: 'https://raw.githubusercontent.com/nicktaras/alexa-go-fit/master/assets/image/intro.png',
-            template: 'IMAGE'
+            displayContent: mediaStore.INTRO
           }),
           datasources: {}
         })
@@ -108,8 +140,6 @@ const LaunchRequestHandler = {
 
       if (supportsDisplay(handlerInput)) {
 
-        console.log('Hello world: J');
-
         return handlerInput.responseBuilder
         .speak(speechText)
         .withLinkAccountCard()
@@ -118,8 +148,7 @@ const LaunchRequestHandler = {
           version: '1.0',
           document: aplDocumentMaker({
             handlerInput: handlerInput,
-            url: 'https://raw.githubusercontent.com/nicktaras/alexa-go-fit/master/assets/image/intro.png',
-            template: 'IMAGE'
+            displayContent: mediaStore.INTRO
           }),
           datasources: {}
         })
@@ -160,8 +189,7 @@ const SportIntentHandler = {
         version: '1.0',
         document: aplDocumentMaker({
           handlerInput: handlerInput,
-          url: 'https://raw.githubusercontent.com/nicktaras/alexa-go-fit/master/assets/image/intro.png',
-          template: 'IMAGE'
+          displayContent: mediaStore.INTRO
         }),
         datasources: {}
       })
@@ -234,8 +262,7 @@ const ActivityIntentHandler = {
         version: '1.0',
         document: aplDocumentMaker({
           handlerInput: handlerInput,
-          url: 'https://raw.githubusercontent.com/nicktaras/alexa-go-fit/master/assets/image/intro.png',
-          template: 'IMAGE'
+          displayContent: mediaStore.INTRO
         }),
         datasources: {}
       })
@@ -270,65 +297,30 @@ const ExerciseIntentHandler = {
     ) { 
       speechText += 'Sorry something went wrong, my nuts and bolts come loose sometimes. Try restarting me. ';
     }
+
     if (applicationState && 
       applicationState.state &&
       applicationState.state.type === 'ACTIVITY'
     ) { 
+
+      // Get the next state
       applicationState = applicationStateModelStore.getNextExerciseState({
         state: applicationState,
         routineStore: routineStore
       });
 
-      var response = exerciseConversationHandler({ state: applicationState });
-      var { text, APL } = response;
-
-      if (APL) {
-        // aplDisplayTemplate = require('./aplDocuments/'+ APL +'.json');
-      } 
-
-      speechText = text;
-
-    }
-
-    if (supportsDisplay(handlerInput)) {
-
-      return handlerInput.responseBuilder
-      .speak(speechText)
-      .addDirective({
-        type: 'Alexa.Presentation.APL.RenderDocument',
-        version: '1.0',
-        document: aplDocumentMaker({
-          handlerInput: handlerInput,
-          url: 'https://raw.githubusercontent.com/nicktaras/alexa-go-fit/master/assets/image/intro.png',
-          template: 'IMAGE'
-        }),
-        datasources: {}
-      })
-      .withShouldEndSession(false)
-      .getResponse();
+      activityResponseHandler(handlerInput);
 
     } else {
 
       return handlerInput.responseBuilder
       .speak(speechText)
-      .withShouldEndSession(false)
       .getResponse();
 
-    }
-    
+    }    
   }
 };
 
-// TODO:
-// If you want your skill to play a video and then accept voice input, 
-// use the onEnd event handler to invoke a SendEvent command. 
-// Your skill should handle the subsequent UserEvent request. 
-// Send a response with shouldEndSession set to false to accept voice input. 
-// Your response should include appropriate outputSpeech and reprompt objects 
-// to ask your Alexa customer for input.
-// Ready handler, is used to allow the user to move to the next stage within the applications flow
-// TODO - ensure the conversation handler can manage all types of conversation flow.
-// TODO - Add other ways to allow the user to continue, ready, lets go, yo, fun ways.
 const ReadyIntentHandler = {
   canHandle(handlerInput) {
      return handlerInput.requestEnvelope.request.type === 'IntentRequest' && 
@@ -339,48 +331,21 @@ const ReadyIntentHandler = {
     var speechText = '';
 
     if (applicationState.state.type === 'ACTIVITY') {
+
+      // Get the next state
       applicationState = applicationStateModelStore.getNextExerciseState({
         state: applicationState,
         routineStore: routineStore
       });
 
-      var response = exerciseConversationHandler({ state: applicationState });
-      var { text, APL } = response;
-
-      if (APL) {
-        // aplDisplayTemplate = require('./aplDocuments/'+ APL +'.json');
-      } 
-
-      speechText += text;
+      activityResponseHandler(handlerInput);
 
     } else {
 
-      speechText += "I've got a bit lost, try restarting me.";
-
-    }
-
-    if (supportsDisplay(handlerInput)) {
+      speechText += "Sorry, I've got a bit lost, I'm not sure what you're ready to do exactly. Try restarting me.";
 
       return handlerInput.responseBuilder
       .speak(speechText)
-      .addDirective({
-        type: 'Alexa.Presentation.APL.RenderDocument',
-        version: '1.0',
-        document: aplDocumentMaker({
-          handlerInput: handlerInput,
-          url: 'https://raw.githubusercontent.com/nicktaras/alexa-go-fit/master/assets/image/intro.png',
-          template: 'IMAGE'
-        }),
-        datasources: {}
-      })
-      .withShouldEndSession(false)
-      .getResponse();
-
-    } else {
-
-      return handlerInput.responseBuilder
-      .speak(speechText)
-      .withShouldEndSession(false)
       .getResponse();
 
     }
@@ -395,51 +360,18 @@ const RepeatIntentHandler = {
   },
   handle(handlerInput) {
 
-    var speechText = '';
-
     if (applicationState.state.type === 'ACTIVITY') {
       
-      var response = exerciseConversationHandler({ state: applicationState });
-      var { text, APL } = response;
-
-      if (APL) {
-        // aplDisplayTemplate = require('./aplDocuments/'+ APL +'.json');
-      } 
-
-      speechText += text;
+      activityResponseHandler(handlerInput);
 
     } else {
 
-      speechText += "Sorry, I'm not sure what you want to repeat.";
-
-    }
-
-    if (supportsDisplay(handlerInput)) {
-
+      var speechText = "Sorry, I'm not sure what you want to repeat.";
       return handlerInput.responseBuilder
       .speak(speechText)
-      .addDirective({
-        type: 'Alexa.Presentation.APL.RenderDocument',
-        version: '1.0',
-        document: aplDocumentMaker({
-          handlerInput: handlerInput,
-          url: 'https://raw.githubusercontent.com/nicktaras/alexa-go-fit/master/assets/image/intro.png',
-          template: 'IMAGE'
-        }),
-        datasources: {}
-      })
-      .withShouldEndSession(false)
-      .getResponse();
-
-    } else {
-
-      return handlerInput.responseBuilder
-      .speak(speechText)
-      .withShouldEndSession(false)
       .getResponse();
 
     }
-
   }
 };
 
@@ -474,8 +406,7 @@ const TipIntentHandler = {
         version: '1.0',
         document: aplDocumentMaker({
           handlerInput: handlerInput,
-          url: 'https://raw.githubusercontent.com/nicktaras/alexa-go-fit/master/assets/image/intro.png',
-          template: 'IMAGE'
+          displayContent: mediaStore.INTRO
         }),
         datasources: {}
       })
@@ -527,7 +458,7 @@ const AuthorIntentHandler = {
     var speechText = "A web developer based in Sydney, Australia. ";
     speechText += "He loves sport and exercise, however sometimes struggles to stay fit and has obtained a few injuries from sport. ";
     speechText += "He designed this application for you, to help with your health and fitness. ";
-    speechText += "We hope you have a long and enjoyable relationship with sport and exercise."
+    speechText += "Enjoy and have a long and enjoyable relationship with sport and exercise."
     return handlerInput.responseBuilder
       .speak(speechText)
       .withShouldEndSession(false)
