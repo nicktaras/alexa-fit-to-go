@@ -5,7 +5,8 @@ const mediaStore = {
   }, 
   ARMS_UP_CELEBRATION: {
     url: 'https://github.com/nicktaras/alexa-go-fit/blob/master/assets/mp4/ARMS_UP_CELEBRATION.mp4?raw=true',
-    type: 'Video'
+    type: 'Video',
+    repeat: 3
   },
   DOUBLE_HEAL_LIFTS_INTRO: {
     url: 'https://github.com/nicktaras/alexa-go-fit/blob/master/assets/mp4/DOUBLE_HEAL_LIFTS_INTRO.mp4?raw=true',

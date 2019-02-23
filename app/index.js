@@ -55,34 +55,8 @@ const supportsDisplay = (handlerInput) => {
 // A common method to handle the responses for an activity request.
 const activityResponseHandler = (handlerInput) => {
 
-  var speechText = '';
-  var displayContent = null;
-  var response = exerciseConversationHandler({ state: applicationState });
-  var { text, APL } = response;
   
-  if (APL) { displayContent = mediaStore.video[APL]; }
-  if (text) { speechText += text; }
 
-  if (supportsDisplay(handlerInput) && displayContent) {
-    return handlerInput.responseBuilder
-    .speak(speechText)
-    .addDirective({
-      type: 'Alexa.Presentation.APL.RenderDocument',
-      version: '1.0',
-      document: aplDocumentMaker({
-        handlerInput: handlerInput,
-        displayContent: displayContent
-      }),
-      datasources: {}
-    })
-    .withShouldEndSession(false)
-    .getResponse();
-  } else {
-    return handlerInput.responseBuilder
-    .speak(speechText)
-    .withShouldEndSession(false)
-    .getResponse();
-  }
 }
 
 // On Init of application each load.
@@ -288,6 +262,8 @@ const ExerciseIntentHandler = {
   },
   handle(handlerInput) {
 
+    var speechText = '';
+
     if (!applicationState) { 
       speechText += 'Sorry something went wrong, my nuts and bolts come loose sometimes. Try restarting me. ';
     }
@@ -309,7 +285,44 @@ const ExerciseIntentHandler = {
         routineStore: routineStore
       });
 
-      activityResponseHandler(handlerInput);
+      var displayContent = null;
+      var response = exerciseConversationHandler({ state: applicationState });
+      var { text, APL } = response;
+
+      if (APL) { displayContent = mediaStore[APL]; }
+      if (text) { speechText += text; }
+
+      if (supportsDisplay(handlerInput) && displayContent && text) {
+
+        return handlerInput.responseBuilder
+        .speak(speechText)
+        .addDirective({
+          type: 'Alexa.Presentation.APL.RenderDocument',
+          version: '1.0',
+          document: aplDocumentMaker({
+            handlerInput: handlerInput,
+            displayContent: displayContent
+          }),
+          datasources: {}
+        })
+        .withShouldEndSession(false)
+        .getResponse();
+
+      } else if (text) {
+
+        return handlerInput.responseBuilder
+        .speak(speechText)
+        .withShouldEndSession(false)
+        .getResponse();
+
+      } else {
+
+        speechText += "Something went wrong, please restart me."; 
+
+        return handlerInput.responseBuilder
+        .speak(speechText)
+        .getResponse();
+      }
 
     } else {
 
@@ -338,7 +351,44 @@ const ReadyIntentHandler = {
         routineStore: routineStore
       });
 
-      activityResponseHandler(handlerInput);
+      var displayContent = null;
+      var response = exerciseConversationHandler({ state: applicationState });
+      var { text, APL } = response;
+
+      if (APL) { displayContent = mediaStore[APL]; }
+      if (text) { speechText += text; }
+
+      if (supportsDisplay(handlerInput) && displayContent && text) {
+
+        return handlerInput.responseBuilder
+        .speak(speechText)
+        .addDirective({
+          type: 'Alexa.Presentation.APL.RenderDocument',
+          version: '1.0',
+          document: aplDocumentMaker({
+            handlerInput: handlerInput,
+            displayContent: displayContent
+          }),
+          datasources: {}
+        })
+        .withShouldEndSession(false)
+        .getResponse();
+
+      } else if (text) {
+
+        return handlerInput.responseBuilder
+        .speak(speechText)
+        .withShouldEndSession(false)
+        .getResponse();
+
+      } else {
+
+        speechText += "Something went wrong, please restart me."; 
+
+        return handlerInput.responseBuilder
+        .speak(speechText)
+        .getResponse();
+      }
 
     } else {
 
@@ -360,9 +410,48 @@ const RepeatIntentHandler = {
   },
   handle(handlerInput) {
 
+    var speechText = '';
+
     if (applicationState.state.type === 'ACTIVITY') {
       
-      activityResponseHandler(handlerInput);
+      var displayContent = null;
+      var response = exerciseConversationHandler({ state: applicationState });
+      var { text, APL } = response;
+
+      if (APL) { displayContent = mediaStore[APL]; }
+      if (text) { speechText += text; }
+
+      if (supportsDisplay(handlerInput) && displayContent && text) {
+
+        return handlerInput.responseBuilder
+        .speak(speechText)
+        .addDirective({
+          type: 'Alexa.Presentation.APL.RenderDocument',
+          version: '1.0',
+          document: aplDocumentMaker({
+            handlerInput: handlerInput,
+            displayContent: displayContent
+          }),
+          datasources: {}
+        })
+        .withShouldEndSession(false)
+        .getResponse();
+
+      } else if (text) {
+
+        return handlerInput.responseBuilder
+        .speak(speechText)
+        .withShouldEndSession(false)
+        .getResponse();
+
+      } else {
+
+        speechText += "Something went wrong, please restart me."; 
+
+        return handlerInput.responseBuilder
+        .speak(speechText)
+        .getResponse();
+      }
 
     } else {
 
