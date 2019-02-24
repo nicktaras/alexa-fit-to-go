@@ -1,50 +1,50 @@
 const exerciseStore = {
-  'INTRO_RUN_LIGHT' : {
+  'INTRO_WARMUP_LIGHT': {
     type: 'text',
     config: {
       type: "SSML",
       responseType: ":ask",
-      text: "I'm not quite ready to do show exercises for this activiy. Come back soon."
+      text: "Right, let's do a selected range of exercises. Just tell me when you are ready. ",
     }
   },
-  'INTRO_SOCCER_LIGHT' : {
+  'INTRO_WARMUP_MEDIUM': {
     type: 'text',
     config: {
       type: "SSML",
       responseType: ":ask",
-      text: "I'm not quite ready to do show exercises for this activiy. Come back soon."
+      text: "Right, let's do a selected range of exercises. Just tell me when you are ready. ",
     }
   },
-  'INTRO_NETBALL_LIGHT' : {
+  'INTRO_WARMUP_HARD': {
     type: 'text',
     config: {
       type: "SSML",
       responseType: ":ask",
-      text: "I'm not quite ready to do show exercises for this activiy. Come back soon."
+      text: "Right, let's do a selected range of exercises. Just tell me when you are ready. ",
     }
   },
-  'INTRO_BASKETBALL_LIGHT' : {
+  'INTRO_WALK_MEDIUM' : {
     type: 'text',
     config: {
       type: "SSML",
       responseType: ":ask",
-      text: "I'm not quite ready to do show exercises for this activiy. Come back soon."
+      text: "Right, let's do a few leg exercises to get you warmed up. Just tell me when you are ready. ",
     }
   },
-  'INTRO_GOLF_LIGHT' : {
+  'INTRO_WALK_HARD' : {
     type: 'text',
     config: {
       type: "SSML",
       responseType: ":ask",
-      text: "I'm not quite ready to do show exercises for this activiy. Come back soon."
+      text: "Right, let's do a few leg exercises to get you warmed up. Just tell me when you are ready. ",
     }
   },
-  'INTRO_TENNIS_LIGHT' : {
+  'INTRO_WALK_LIGHT' : {
     type: 'text',
     config: {
       type: "SSML",
       responseType: ":ask",
-      text: "I'm not quite ready to do show exercises for this activiy. Come back soon."
+      text: "Right, let's do a few leg exercises to get you warmed up. Just tell me when you are ready. ",
     }
   },
   'INTRO_WEIGHTS_LIGHT' : {
@@ -52,7 +52,104 @@ const exerciseStore = {
     config: {
       type: "SSML",
       responseType: ":ask",
-      text: "I'm not quite ready to do show exercises for this activiy. Come back soon."
+      text: "I'm not quite ready to do exercises for this activity. Please come back soon."
+    }
+  },
+  'INTRO_RUN_LIGHT' : {
+    type: 'text',
+    config: {
+      type: "SSML",
+      responseType: ":ask",
+      text: "Right, let's do a few leg exercises to get you warmed up. Just tell me when you are ready. ",
+    }
+  },
+  'INTRO_RUN_MEDIUM' : {
+    type: 'text',
+    config: {
+      type: "SSML",
+      responseType: ":ask",
+      text: "I'm not quite ready to do exercises for this activity. Please come back soon."
+    }
+  },
+  'INTRO_RUN_HARD' : {
+    type: 'text',
+    config: {
+      type: "SSML",
+      responseType: ":ask",
+      text: "I'm not quite ready to do exercises for this activity. Please come back soon."
+    }
+  },
+  'INTRO_JOG_LIGHT': {
+    type: 'text',
+    config: {
+      type: "SSML",
+      responseType: ':ask',
+      text: "Right, let's do a few leg exercises to get you warmed up. Just tell me when you are ready. ",
+      about: 'HEAL_LIFTS',
+    }
+  },
+  'INTRO_SOCCER_LIGHT' : {
+    type: 'text',
+    config: {
+      type: "SSML",
+      responseType: ":ask",
+      text: "Right, let's do a few leg exercises to get you warmed up. Just tell me when you are ready. ",
+    }
+  },
+  'INTRO_SOCCER_MEDIUM' : {
+    type: 'text',
+    config: {
+      type: "SSML",
+      responseType: ":ask",
+      text: "Right, let's do a few leg exercises to get you warmed up. Just tell me when you are ready. ",
+    }
+  },
+  'INTRO_SOCCER_HARD' : {
+    type: 'text',
+    config: {
+      type: "SSML",
+      responseType: ":ask",
+      text: "Right, let's do a few leg exercises to get you warmed up. Just tell me when you are ready. ",
+    }
+  },
+  'INTRO_NETBALL_LIGHT' : {
+    type: 'text',
+    config: {
+      type: "SSML",
+      responseType: ":ask",
+      text: "I'm not quite ready to do exercises for this activity. Please come back soon."
+    }
+  },
+  'INTRO_BASKETBALL_LIGHT' : {
+    type: 'text',
+    config: {
+      type: "SSML",
+      responseType: ":ask",
+      text: "I'm not quite ready to do exercises for this activity. Please come back soon."
+    }
+  },
+  'INTRO_GOLF_LIGHT' : {
+    type: 'text',
+    config: {
+      type: "SSML",
+      responseType: ":ask",
+      text: "I'm not quite ready to do exercises for this activity. Please come back soon."
+    }
+  },
+  'INTRO_TENNIS_LIGHT' : {
+    type: 'text',
+    config: {
+      type: "SSML",
+      responseType: ":ask",
+      text: "I'm not quite ready to do exercises for this activity. Please come back soon."
+    }
+  },
+  'INTRO_WEIGHTS_LIGHT' : {
+    type: 'text',
+    config: {
+      type: "SSML",
+      responseType: ":ask",
+      text: "I'm not quite ready to do exercises for this activity. Please come back soon."
     }
   },
   'INTRO_DANCE_LIGHT' : {
@@ -60,7 +157,7 @@ const exerciseStore = {
     config: {
       type: "SSML",
       responseType: ":ask",
-      text: "I'm not quite ready to do show exercises for this activiy. Come back soon."
+      text: "I'm not quite ready to do exercises for this activity. Please come back soon."
     }
   },
   'INTRO_CRICKET_LIGHT' : {
@@ -68,7 +165,7 @@ const exerciseStore = {
     config: {
       type: "SSML",
       responseType: ":ask",
-      text: "I'm not quite ready to do show exercises for this activiy. Come back soon."
+      text: "I'm not quite ready to do exercises for this activity. Please come back soon."
     }
   },
   'INTRO_BOX_LIGHT' : {
@@ -76,7 +173,7 @@ const exerciseStore = {
     config: {
       type: "SSML",
       responseType: ":ask",
-      text: "I'm not quite ready to do show exercises for this activiy. Come back soon."
+      text: "I'm not quite ready to do exercises for this activity. Please come back soon."
     }
   },
   'INTRO_KAYAK_LIGHT' : {
@@ -84,7 +181,7 @@ const exerciseStore = {
     config: {
       type: "SSML",
       responseType: ":ask",
-      text: "I'm not quite ready to do show exercises for this activiy. Come back soon."
+      text: "I'm not quite ready to do exercises for this activity. Please come back soon."
     }
   },
   'INTRO_SURF_LIGHT' : {
@@ -92,7 +189,7 @@ const exerciseStore = {
     config: {
       type: "SSML",
       responseType: ":ask",
-      text: "I'm not quite ready to do show exercises for this activiy. Come back soon."
+      text: "I'm not quite ready to do exercises for this activity. Please come back soon."
     }
   },
   'INTRO_FRISBEE_LIGHT' : {
@@ -100,7 +197,7 @@ const exerciseStore = {
     config: {
       type: "SSML",
       responseType: ":ask",
-      text: "I'm not quite ready to do show exercises for this activiy. Come back soon."
+      text: "I'm not quite ready to do exercises for this activity. Please come back soon."
     }
   },
   'INTRO_CYCLE_LIGHT' : {
@@ -108,7 +205,7 @@ const exerciseStore = {
     config: {
       type: "SSML",
       responseType: ":ask",
-      text: "I'm not quite ready to do show exercises for this activiy. Come back soon."
+      text: "I'm not quite ready to do exercises for this activity. Please come back soon."
     }
   },
   'INTRO_GARDEN_LIGHT' : {
@@ -116,7 +213,7 @@ const exerciseStore = {
     config: {
       type: "SSML",
       responseType: ":ask",
-      text: "I'm not quite ready to do show exercises for this activiy. Come back soon."
+      text: "I'm not quite ready to do exercises for this activity. Please come back soon."
     }
   },
   'INTRO_YOGA_LIGHT' : {
@@ -124,15 +221,15 @@ const exerciseStore = {
     config: {
       type: "SSML",
       responseType: ":ask",
-      text: "I'm not quite ready to do show exercises for this activiy. Come back soon."
+      text: "I'm not quite ready to do exercises for this activity. Please come back soon."
     }
   },
-  'INTRO_PADDLE_BOARD_LIGHT' : {
+  'INTRO_PADDLEBOARD_LIGHT' : {
     type: 'text',
     config: {
       type: "SSML",
       responseType: ":ask",
-      text: "I'm not quite ready to do show exercises for this activiy. Come back soon."
+      text: "I'm not quite ready to do exercises for this activity. Please come back soon."
     }
   },
   'INTRO_HIKE_LIGHT' : {
@@ -140,39 +237,71 @@ const exerciseStore = {
     config: {
       type: "SSML",
       responseType: ":ask",
-      text: "I'm not quite ready to do show exercises for this activiy. Come back soon."
+      text: "I'm not quite ready to do exercises for this activity. Please come back soon."
     }
   },
-  'INTRO_ROCK_CLIMB_LIGHT' : {
+  'INTRO_CLIMBING_LIGHT' : {
     type: 'text',
     config: {
       type: "SSML",
       responseType: ":ask",
-      text: "I'm not quite ready to do show exercises for this activiy. Come back soon."
+      text: "I'm not quite ready to do exercises for this activity. Please come back soon."
     }
   },
-  'INTRO_CROSS_TRAIN_LIGHT' : {
+  'INTRO_CROSSTRAIN_LIGHT' : {
     type: 'text',
     config: {
       type: "SSML",
       responseType: ":ask",
-      text: "I'm not quite ready to do show exercises for this activiy. Come back soon."
+      text: "I'm not quite ready to do exercises for this activity. Please come back soon."
     }
   },
-  'INTRO_HORSE_RIDE_LIGHT' : {
+  'INTRO_HORSERIDE_LIGHT' : {
     type: 'text',
     config: {
       type: "SSML",
       responseType: ":ask",
-      text: "I'm not quite ready to do show exercises for this activiy. Come back soon."
+      text: "I'm not quite ready to do exercises for this activity. Please come back soon."
     }
   },
-  'INTRO_SKATE_LIGHT' : {
+  'INTRO_HORSERIDE_MEDIUM' : {
     type: 'text',
     config: {
       type: "SSML",
       responseType: ":ask",
-      text: "I'm not quite ready to do show exercises for this activiy. Come back soon."
+      text: "I'm not quite ready to do exercises for this activity. Please come back soon."
+    }
+  },
+  'INTRO_HORSERIDE_HARD' : {
+    type: 'text',
+    config: {
+      type: "SSML",
+      responseType: ":ask",
+      text: "I'm not quite ready to do exercises for this activity. Please come back soon."
+    }
+  },
+  'INTRO_SKATING_LIGHT' : {
+    type: 'text',
+    config: {
+      type: "SSML",
+      responseType: ":ask",
+      text: "I'm not quite ready to do exercises for this activity. Please come back soon."
+    }
+  },
+  'INTRO_SKATING_MEDIUM' : {
+    type: 'text',
+    config: {
+      type: "SSML",
+      responseType: ":ask",
+      text: "I'm not quite ready to do exercises for this activity. Please come back soon."
+    }
+  },
+  'INTRO_SKATING_HARD' : {
+    type: 'text',
+    config: {
+      type: "SSML",
+      responseType: ":ask",
+      text: "I'm not quite ready to do exercises for this activity. Please come back soon."
     }
   },
   'TOUCH_TOES_EASY_INIT': {
@@ -276,15 +405,6 @@ const exerciseStore = {
       about: 'HEAL_LIFTS',
     }
   },
-  'INTRO_JOG_LIGHT': {
-    type: 'text',
-    config: {
-      type: "SSML",
-      responseType: ':ask',
-      text: "Right, let's do a few leg exercises to get you warmed up. Just tell me when you are ready. ",
-      about: 'HEAL_LIFTS',
-    }
-  },
   'DOUBLE_HEAL_LIFTS_INIT': {
     type: 'text',
     config: {
@@ -292,6 +412,7 @@ const exerciseStore = {
       responseType: ':ask', 
       text: "We're going to do some heal lifts, which will help strengthen you're calf muscles. First, find something you can gently place your hands on whilst standing. For example a kitchen side or work top. Tell me when you are ready. ",
       about: 'HEAL_LIFTS',
+      APL: 'DOUBLE_HEAL_LIFTS_INIT'
     }
   },
   'DOUBLE_HEAL_LIFTS': {

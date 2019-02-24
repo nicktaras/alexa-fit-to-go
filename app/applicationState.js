@@ -41,6 +41,13 @@ module.exports = class ApplicationStateModelStore {
   }
   updateRoutineState({ state=null, activity=undefined, difficulty=undefined }) {
     if (state && activity && difficulty) {
+
+      // TODO add more smarts to handle these situations.
+      // Correct difficulty if its not correctly recieved.
+      if (['LIGHT', 'MEDIUM', 'HARD'].indexOf(difficulty) < 0) {
+        difficulty = 'LIGHT';
+      }
+
       var newState = JSON.parse(JSON.stringify(state));
       newState.routineState.activity = activity;
       newState.routineState.difficulty = difficulty;

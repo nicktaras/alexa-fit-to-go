@@ -4,13 +4,19 @@ const restStore = require('./restStore');
 const congratulateStore = require('./congratulateStore');
 const continueStore = require('./continueStore');
 const repeatExerciseStore = require('./repeatExerciseStore');
+// const exerciseStore = require('./exerciseStore');
+
+// serviceClientFactory: undefined } TypeError: Cannot read property 'length' of undefined
+// at exports.getRandomItemFromArr (/var/task/utils.js:10:48)
 
 exports.getRandomItemFromArr = (list) => {
+  if (!list) return;
   return list[Math.floor((Math.random() * list.length) + 0)];
 }
 
 // local version
 const getRandomItemFromArr = (list) => {
+  if (!list) return;
   return list[Math.floor((Math.random() * list.length) + 0)];
 }
 
@@ -40,6 +46,19 @@ exports.exerciseMethods = {
     // Continue store.
     output += getRandomItemFromArr(continueStore);
     return output;
+  },
+  randomExercise: function (config) {
+    // TODO retrive an exercise at random
+    // exerciseStore
+    //   var exerciseKeys = [
+    //     'TOUCH_TOES_EASY_INIT', 
+    //     'TOUCH_TOES_EASY',
+    //     'HEAL_DOWN_CALF_STRETCH_INIT',
+    //     'HEAL_DOWN_CALF_STRETCH',
+    //     'BUTTERFLY_GROIN_STRETCH_INIT',
+    //     'BUTTERFLY_GROIN_STRETCH'
+    //   ];
+    //   return exerciseStore[exerciseKeys[0]];
   },
   // Repeats middle step of exercise
   repeatedMiddleStep: function (config) {

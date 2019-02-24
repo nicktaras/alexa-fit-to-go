@@ -1,4 +1,9 @@
 const chitChatExerciseStore = {
+  "WARMUP" : [
+    "did you know that excercise helps to strengthen muscles. ",
+    "did you know that excercise helps to build endurance. ",
+    "did you know that excercise can help your heart. ", 
+  ],
   "JOG" : [
     "did you know that jogging helps to strengthen muscles. ",
     "did you know that jogging helps to keep infectious diseases at bay. ",
@@ -10,35 +15,35 @@ const chitChatExerciseStore = {
     "did you know that running helps to strengthen muscles. ",
     "did you know that running helps combat stress and improves mental fitness. ",
     "there's nothing better than a short run to ease some stress. ",
-    "did you know that running can significantly improve physical and mental health ",
-    "did you know that running can help alleviate symptoms of depression ",
+    "did you know that running can significantly improve physical and mental health. ",
+    "did you know that running can help alleviate symptoms of depression. ",
     "there's nothing better than getting some fresh air, putting some music on and having a run. ",
   ],
   "SWIM" : [
-    "did you know that swimming helps to build endurance ",
+    "did you know that swimming helps to build endurance. ",
     "did you know that swimming helps to build muscle strength and cardiovascular fitness. ",
-    "did you know that swimming helps to maintain a healthy weight ",
+    "did you know that swimming helps to maintain a healthy weight. ",
     "did you know that swimming helps you to maintain a healthy heart and lungs. ",
     "did you know that swimming helps to tone muscles and build strength. ",
-    "did you know that swimming helps to provide an all-over body workout ", 
+    "did you know that swimming helps to provide an all-over body workout. ", 
     "did you know that nearly all of your muscles are used during swimming. "
   ],
   "SOCCER" : [
     "did you know that soccer is a great sport for burning fat. It works the muscles and your heart in different ways. ",
-    "did you know that soccer can help lower body fat and improves muscle tone ",
-    "did you know that soccer can help build strength, flexibility and endurance "
+    "did you know that soccer can help lower body fat and improves muscle tone. ",
+    "did you know that soccer can help build strength, flexibility and endurance. "
   ],
   "NETBALL": [
-    "did you know that the jumping involved in Netball and other physical demands help develop and improve bone health ",
+    "did you know that the jumping involved in Netball and other physical demands help develop and improve bone health. ",
   ],
   "BASKETBALL": [
-    "did you know that the jumping involved in Basketball and other physical demands help develop and improve bone health ",
-    "did you know that Basketball can help develop your lower back, neck, and core muscles "
+    "did you know that the jumping involved in Basketball and other physical demands help develop and improve bone health. ",
+    "did you know that Basketball can help develop your lower back, neck, and core muscles. "
   ],
   "GOLF": [
-    "did you know that golf can help your heart ", 
-    "did you know that by playing golf you can walk an average of five to seven kilometres. If you don't choose to ride the buggy that is ",
-    "did you know that golf can help improve muscle tone and endurance "
+    "did you know that golf can help your heart. ", 
+    "did you know that by playing golf you can walk an average of five to seven kilometres. If you don't choose to ride the buggy that is. ",
+    "did you know that golf can help improve muscle tone and endurance. "
   ],
   "TENNIS": [
     "Tennis requires you to be creative, using tactical thinking which is great for the brain. ", 
@@ -61,7 +66,7 @@ const chitChatExerciseStore = {
     "did you know that Kayaking can improve your aerobic fitness, strength and flexibility. "
   ],
   "SURF": [
-    "Surfers spend a lot of time paddling, this helps you to build stamina and power for when that perfect wave comes along ",
+    "Surfers spend a lot of time paddling, this helps you to build stamina and power for when that perfect wave comes along. ",
     "did you know that surfing helps you to gain muscle strength and endurance. ",
     "did you know that having good core strength will help you to handle the stronger waves out there. Take care out there today. "
   ],
@@ -90,13 +95,14 @@ const chitChatExerciseStore = {
   "HIKE": [
     "did you know that hiking can help build strength in your glutes, quadriceps, hamstrings, and the muscles in your hips and lower legs. "
   ],
-  "ROCKCLIMB": [
+  "CLIMBING": [
     "did you know that rock climbing can help build strength in your glutes, quadriceps, hamstrings, and the muscles in your hips and lower legs. "
   ],
   "CROSSTRAIN": [
     "did you know that rock climbing can help build strength in your glutes, quadriceps, hamstrings, and the muscles in your hips and lower legs. "
   ],
   "HORSERIDE": [
+    "did you know that horse riding can help increase your balance. ",
     "did you know that horse riding can be good for your lower back. "
   ],
   "SKATE": [

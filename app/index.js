@@ -8,6 +8,9 @@
 /* eslint-disable  func-names */
 /* eslint-disable  no-console */
 
+// TODO REWORK ALEXA so all activities and sports can
+// co-exists in one intent.
+
 // Core libs
 const Alexa = require('ask-sdk-core');
 
@@ -50,13 +53,6 @@ const supportsDisplay = (handlerInput) => {
     handlerInput.requestEnvelope.context.System.device.supportedInterfaces &&
     handlerInput.requestEnvelope.context.System.device.supportedInterfaces.Display
   return hasDisplay;
-}
-
-// A common method to handle the responses for an activity request.
-const activityResponseHandler = (handlerInput) => {
-
-  
-
 }
 
 // On Init of application each load.
@@ -144,44 +140,6 @@ const LaunchRequestHandler = {
   }
 };
 
-// TODO - Sports is not currently handled.
-const SportIntentHandler = {
-  canHandle(handlerInput) {
-     return handlerInput.requestEnvelope.request.type === 'IntentRequest' && 
-       handlerInput.requestEnvelope.request.intent.name === 'sport_intent'
-  },
-  handle(handlerInput) {
-
-    let speechText = "I'm not ready to teach sports exercise quite yet. Please come back soon, I'll have some great moves to help you prepare for your next game. Alternativly you can tell me an activity you are doing, for example say, a jog.";
-    
-    if (supportsDisplay(handlerInput)) {
-
-      return handlerInput.responseBuilder
-      .speak(speechText)
-      .addDirective({
-        type: 'Alexa.Presentation.APL.RenderDocument',
-        version: '1.0',
-        document: aplDocumentMaker({
-          handlerInput: handlerInput,
-          displayContent: mediaStore.INTRO
-        }),
-        datasources: {}
-      })
-      .withShouldEndSession(false)
-      .getResponse();
-
-    } else {
-
-      return handlerInput.responseBuilder
-      .speak(speechText)
-      .withShouldEndSession(false)
-      .getResponse();
-
-    }
-    
-  }
-};
-
 // Collect data. Elicit ensure we have the difficulty and activity
 const ActivityIntentHandlerInit = {
   canHandle(handlerInput) {
@@ -200,21 +158,61 @@ const ActivityIntentHandlerInit = {
 const ActivityIntentHandler = {
   canHandle(handlerInput) {
      return handlerInput.requestEnvelope.request.type === 'IntentRequest' && 
-      handlerInput.requestEnvelope.request.intent.name === 'activity_intent' &&
-      handlerInput.requestEnvelope.request.intent.slots.exercise.value &&
-      handlerInput.requestEnvelope.request.intent.slots.size.value
+      handlerInput.requestEnvelope.request.intent.name === 'activity_intent'
   },
   handle(handlerInput) {
-    
+
     // Update State to 'ACTIVITY'
     applicationState = applicationStateModelStore.updateState({ 
       state: applicationState, 
       stateName: 'ACTIVITY'
     });
-    
-    var userActivity = handlerInput.requestEnvelope.request.intent.slots.exercise.value.toUpperCase();
-    var difficulty = handlerInput.requestEnvelope.request.intent.slots.size.value.toUpperCase();
-    
+
+    // Defaults:
+    var userActivity = "WARMUP"
+    var difficulty = "LIGHT";
+
+    // Locate user activity from ID (Ideal way of finding exercise).
+    if (handlerInput.requestEnvelope.request.intent.slots &&
+        handlerInput.requestEnvelope.request.intent.slots.exercise &&
+        handlerInput.requestEnvelope.request.intent.slots.exercise.resolutions &&
+        handlerInput.requestEnvelope.request.intent.slots.exercise.resolutions.resolutionsPerAuthority &&
+        handlerInput.requestEnvelope.request.intent.slots.exercise.resolutions.resolutionsPerAuthority[0] && 
+        handlerInput.requestEnvelope.request.intent.slots.exercise.resolutions.resolutionsPerAuthority[0].values[0] &&
+        handlerInput.requestEnvelope.request.intent.slots.exercise.resolutions.resolutionsPerAuthority[0].values[0].value && 
+        handlerInput.requestEnvelope.request.intent.slots.exercise.resolutions.resolutionsPerAuthority[0].values[0].value.id  
+    ) {
+
+      userActivity = handlerInput.requestEnvelope.request.intent.slots.exercise.resolutions.resolutionsPerAuthority[0].values[0].value.id;
+
+    } else { // fallback. This seems to be an issue with Alexa itself when using the same names.
+
+      if (handlerInput.requestEnvelope.request.intent.slots.exercise.value) {
+
+        userActivity = handlerInput.requestEnvelope.request.intent.slots.exercise.value.toUpperCase().replace(/-/g, "");
+      } 
+
+    }
+
+    // Locate user difficulty from ID (Ideal way of finding the level of exercise).
+    if (handlerInput.requestEnvelope.request.intent.slots &&
+      handlerInput.requestEnvelope.request.intent.slots.exercise &&
+      handlerInput.requestEnvelope.request.intent.slots.size.resolutions &&
+      handlerInput.requestEnvelope.request.intent.slots.size.resolutions.resolutionsPerAuthority &&
+      handlerInput.requestEnvelope.request.intent.slots.size.resolutions.resolutionsPerAuthority[0] && 
+      handlerInput.requestEnvelope.request.intent.slots.size.resolutions.resolutionsPerAuthority[0].values[0] &&
+      handlerInput.requestEnvelope.request.intent.slots.size.resolutions.resolutionsPerAuthority[0].values[0].value &&
+      handlerInput.requestEnvelope.request.intent.slots.size.resolutions.resolutionsPerAuthority[0].values[0].value.id  
+    ) {
+
+      difficulty = handlerInput.requestEnvelope.request.intent.slots.size.resolutions.resolutionsPerAuthority[0].values[0].value.id; 
+
+    } else { // fallback
+
+      difficulty = handlerInput.requestEnvelope.request.intent.slots.size.value.toUpperCase().replace(/-/g, "");
+
+    }
+        
     // Update 'ACTIVITY' routine state incase they choose to exercise
     applicationState = applicationStateModelStore.updateRoutineState({ 
       state: applicationState, 
@@ -222,36 +220,83 @@ const ActivityIntentHandler = {
       activity: userActivity
     });
 
-    var speechText = '';
-    speechText += getRandomItemFromArr(startSpeechStore);
-    speechText += getRandomItemFromArr(chitChatExerciseStore[userActivity.toUpperCase()]);
-    speechText += "So, would you like some tips or warm up exercises before todays " + userActivity;
-    
-    if (supportsDisplay(handlerInput)) {
+    console.log('applicationState: ', applicationState);
 
-      return handlerInput.responseBuilder
-      .speak(speechText)
-      .addDirective({
-        type: 'Alexa.Presentation.APL.RenderDocument',
-        version: '1.0',
-        document: aplDocumentMaker({
-          handlerInput: handlerInput,
-          displayContent: mediaStore.INTRO
-        }),
-        datasources: {}
-      })
-      .withShouldEndSession(false)
-      .getResponse();
+    // If the exercise exists, lets do it. Otherwise we'll 
+    // get the user to try again.
+    var userActivityExists = (routineStore[applicationState.routineState.type]);
+    if (userActivityExists) {
+
+      var speechText = '';
+      speechText += getRandomItemFromArr(startSpeechStore);
+      
+      if (chitChatExerciseStore[userActivity]) {
+        speechText += getRandomItemFromArr(chitChatExerciseStore[userActivity]);
+      }
+
+      var playArray = ['BASKETBALL', 'TENNIS', 'CRICKET', 'GOLF', 'NETBALL', 'SOCCER'];
+      var exerciseOnlyArray = ['WARMUP'];
+
+      if (playArray.indexOf(userActivity) > -1) {
+        speechText += "So, would you like some tips or warm up exercises before you play " + userActivity;
+
+      } else if(exerciseOnlyArray.indexOf(userActivity) > -1) {
+
+        applicationState = applicationStateModelStore.getNextExerciseState({
+          state: applicationState,
+          routineStore: routineStore
+        });
+
+        var response = exerciseConversationHandler({ state: applicationState });
+        var { text } = response;
+
+        if (text) { 
+          speechText += text;
+        } else {
+          speechText += 'Something went wrong, please restart me.';
+          console.log('ERROR: ActivityIntentHandler ', handlerInput);
+        }
+
+      } else {
+        speechText += "So, would you like some tips or warm up exercises before you go for a " + userActivity;
+      }
+
+      if (supportsDisplay(handlerInput)) {
+
+        return handlerInput.responseBuilder
+        .speak(speechText)
+        .addDirective({
+          type: 'Alexa.Presentation.APL.RenderDocument',
+          version: '1.0',
+          document: aplDocumentMaker({
+            handlerInput: handlerInput,
+            displayContent: mediaStore.INTRO
+          }),
+          datasources: {}
+        })
+        .withShouldEndSession(false)
+        .getResponse();
+  
+      } else {
+  
+        return handlerInput.responseBuilder
+        .speak(speechText)
+        .withShouldEndSession(false)
+        .getResponse();
+  
+      }
 
     } else {
 
+      speechText += "I'm not trained to do exercises for that yet. I'll keep improving on what I can do, please come back again soon.";
+
       return handlerInput.responseBuilder
-      .speak(speechText)
-      .withShouldEndSession(false)
-      .getResponse();
+        .speak(speechText)
+        .withShouldEndSession(false)
+        .getResponse();
 
     }
-    
+
   }
 };
 
@@ -266,12 +311,14 @@ const ExerciseIntentHandler = {
 
     if (!applicationState) { 
       speechText += 'Sorry something went wrong, my nuts and bolts come loose sometimes. Try restarting me. ';
+      console.log('ERROR: ExerciseIntentHandler ', handlerInput);
     }
     if (applicationState && 
         applicationState.state &&
         applicationState.state.type !== 'ACTIVITY'
     ) { 
       speechText += 'Sorry something went wrong, my nuts and bolts come loose sometimes. Try restarting me. ';
+      console.log('ERROR: ExerciseIntentHandler ', handlerInput);
     }
 
     if (applicationState && 
@@ -318,6 +365,7 @@ const ExerciseIntentHandler = {
       } else {
 
         speechText += "Something went wrong, please restart me."; 
+        console.log('ERROR: ExerciseIntentHandler ', handlerInput);
 
         return handlerInput.responseBuilder
         .speak(speechText)
@@ -384,6 +432,7 @@ const ReadyIntentHandler = {
       } else {
 
         speechText += "Something went wrong, please restart me."; 
+        console.log('ERROR: ReadyIntentHandler ', handlerInput);
 
         return handlerInput.responseBuilder
         .speak(speechText)
@@ -393,6 +442,7 @@ const ReadyIntentHandler = {
     } else {
 
       speechText += "Sorry, I've got a bit lost, I'm not sure what you're ready to do exactly. Try restarting me.";
+      console.log('ERROR: ReadyIntentHandler ', handlerInput);
 
       return handlerInput.responseBuilder
       .speak(speechText)
@@ -447,6 +497,7 @@ const RepeatIntentHandler = {
       } else {
 
         speechText += "Something went wrong, please restart me."; 
+        console.log('ERROR: RepeatIntentHandler ', handlerInput);
 
         return handlerInput.responseBuilder
         .speak(speechText)
@@ -456,6 +507,7 @@ const RepeatIntentHandler = {
     } else {
 
       var speechText = "Sorry, I'm not sure what you want to repeat.";
+      console.log('ERROR: RepeatIntentHandler ', handlerInput);
       return handlerInput.responseBuilder
       .speak(speechText)
       .getResponse();
@@ -523,14 +575,11 @@ const AppFunctionIntentHandler = {
 
 const InitIntentHandler = {
   canHandle(handlerInput) {
-    return handlerInput.requestEnvelope.request.type === 'init_intent'
-      && handlerInput.requestEnvelope.request.intent.name === 'author_intent';
+    return handlerInput.requestEnvelope.request.type === 'IntentRequest' &&
+           handlerInput.requestEnvelope.request.intent.name === 'init_intent'
   },
   handle(handlerInput) {
     var speechText = "So, what type of activity or sport will you be doing today?";
-
-    // can i do an exercise
-
     return handlerInput.responseBuilder
       .speak(speechText)
       .withShouldEndSession(false)
@@ -550,7 +599,6 @@ const AuthorIntentHandler = {
     speechText += "Enjoy and have a long and enjoyable relationship with sport and exercise."
     return handlerInput.responseBuilder
       .speak(speechText)
-      .withShouldEndSession(false)
       .getResponse();
   },
 };
@@ -564,7 +612,6 @@ const TermsIntentHandler = {
     var speechText = "Go fit is an experimental fitness tool, we take no liability or costs for the actions, damage, harm caused by those who use it. For full terms and conditions please see the Go fit skill page. We hope you enjoy the skill and find it useful in helping you warm up before activities and sport. ";
     return handlerInput.responseBuilder
       .speak(speechText)
-      .withShouldEndSession(true)
       .getResponse();
   },
 };
@@ -621,7 +668,7 @@ const ErrorHandler = {
     return true;
   },
   handle(handlerInput, error) {
-    console.log(handlerInput, error);
+    console.log('ERROR: ErrorHandler ', handlerInput, error);
     return handlerInput.responseBuilder
       .speak("Sorry, Go fit can\'t understand the command. Please say again. If I can't help you find the answer, please restart me.")
       .withShouldEndSession(false)
@@ -638,7 +685,6 @@ exports.handler = skillBuilder
     TipIntentHandler,
     ActivityIntentHandlerInit,
     ActivityIntentHandler,
-    SportIntentHandler,
     HelpIntentHandler,
     ReadyIntentHandler,
     ExerciseIntentHandler,
