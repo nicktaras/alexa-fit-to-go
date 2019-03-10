@@ -556,7 +556,6 @@ const TipIntentHandler = {
     var speechText = "";
     var userActivity = undefined;
 
-    // Activity specific
     if (
       handlerInput.requestEnvelope &&
       handlerInput.requestEnvelope.request &&
@@ -574,7 +573,7 @@ const TipIntentHandler = {
       userActivity = handlerInput.requestEnvelope.request.intent.slots.exercise.resolutions.resolutionsPerAuthority[0].values[0].value.id;
     }
 
-    if (TipStore[userActivity]) {
+    if (TipStore[userActivity]) { // Actvity Specific Tip
       speechText = getRandomItemFromArr(TipStore[userActivity]);
     } else { // Random
       speechText = getRandomItemFromArr(randomTipStore);
