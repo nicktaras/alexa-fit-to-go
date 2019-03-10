@@ -47,6 +47,15 @@ const exerciseStore = {
       text: "Right, let's do a few leg exercises to get you warmed up. Just tell me when you are ready. ",
     }
   },
+  'CLOSE_SESSION_NOT_READY' : {
+    type: 'text',
+    config: {
+      type: "SSML",
+      responseType: ":ask",
+      text: "I'm not quite ready to do exercises for this activity. Please come back soon.",
+      withShouldEndSession: true
+    }
+  },
   'INTRO_WEIGHTS_LIGHT' : {
     type: 'text',
     config: {

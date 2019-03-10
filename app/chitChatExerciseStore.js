@@ -1,17 +1,23 @@
 const chitChatExerciseStore = {
-  "WARMUP" : [
+  "WARMUP": [
     "did you know that excercise helps to strengthen muscles. ",
     "did you know that excercise helps to build endurance. ",
-    "did you know that excercise can help your heart. ", 
+    "did you know that excercise can help your heart. ",
   ],
-  "JOG" : [
+  "JOG": [
     "did you know that jogging helps to strengthen muscles. ",
     "did you know that jogging helps to keep infectious diseases at bay. ",
     "did you know that jogging helps combat stress and improves mental fitness. ",
     "there's nothing better than a short jog to ease some stress. ",
     "there's nothing better than getting some fresh air, putting some music on and jogging. ",
   ],
-  "RUN" : [
+  "DANCE": [
+    "did you know that dancing can help strengthen muscles. ",
+    "did you know that dancing helps to increase muscular strength, endurance and motor fitness. ",
+    "did you know that dancing will help you develop stronger bones and reduce the risk of osteoporosis",
+    "did you know that dancing can help weight management"
+  ],
+  "RUN": [
     "did you know that running helps to strengthen muscles. ",
     "did you know that running helps combat stress and improves mental fitness. ",
     "there's nothing better than a short run to ease some stress. ",
@@ -19,16 +25,16 @@ const chitChatExerciseStore = {
     "did you know that running can help alleviate symptoms of depression. ",
     "there's nothing better than getting some fresh air, putting some music on and having a run. ",
   ],
-  "SWIM" : [
+  "SWIM": [
     "did you know that swimming helps to build endurance. ",
     "did you know that swimming helps to build muscle strength and cardiovascular fitness. ",
     "did you know that swimming helps to maintain a healthy weight. ",
     "did you know that swimming helps you to maintain a healthy heart and lungs. ",
     "did you know that swimming helps to tone muscles and build strength. ",
-    "did you know that swimming helps to provide an all-over body workout. ", 
+    "did you know that swimming helps to provide an all-over body workout. ",
     "did you know that nearly all of your muscles are used during swimming. "
   ],
-  "SOCCER" : [
+  "SOCCER": [
     "did you know that soccer is a great sport for burning fat. It works the muscles and your heart in different ways. ",
     "did you know that soccer can help lower body fat and improves muscle tone. ",
     "did you know that soccer can help build strength, flexibility and endurance. "
@@ -41,12 +47,12 @@ const chitChatExerciseStore = {
     "did you know that Basketball can help develop your lower back, neck, and core muscles. "
   ],
   "GOLF": [
-    "did you know that golf can help your heart. ", 
+    "did you know that golf can help your heart. ",
     "did you know that by playing golf you can walk an average of five to seven kilometres. If you don't choose to ride the buggy that is. ",
     "did you know that golf can help improve muscle tone and endurance. "
   ],
   "TENNIS": [
-    "Tennis requires you to be creative, using tactical thinking which is great for the brain. ", 
+    "Tennis requires you to be creative, using tactical thinking which is great for the brain. ",
     "Playing Tennis will help you to build up better coordination. ",
     "Tennis helps to exericse the legs, shoulders, arms and many other areas of your body, its a great body workout. ",
     "did you know that a singles match of Tennis can help you to burn around 600 calories. "
@@ -99,14 +105,18 @@ const chitChatExerciseStore = {
     "did you know that rock climbing can help build strength in your glutes, quadriceps, hamstrings, and the muscles in your hips and lower legs. "
   ],
   "CROSSTRAIN": [
-    "did you know that rock climbing can help build strength in your glutes, quadriceps, hamstrings, and the muscles in your hips and lower legs. "
+    "did you know that cross training helps to strengthen muscles. ",
+    "did you know that cross training helps to build endurance. ",
+    "did you know that cross training can help your heart. ",
   ],
   "HORSERIDE": [
     "did you know that horse riding can help increase your balance. ",
-    "did you know that horse riding can be good for your lower back. "
+    "did you know that horse riding can be good for your lower back. ",
+    "did you know that horse riding can help strengthen muscles. ",
   ],
   "SKATE": [
-    "did you know that skating helps to improve coordination and balance. "
+    "did you know that skating helps to improve coordination and balance. ",
+    "did you know that skating can help strengthen muscles. "
   ]
 }
 
