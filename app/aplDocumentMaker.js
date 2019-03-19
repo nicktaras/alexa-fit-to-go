@@ -1,22 +1,27 @@
 
 exports.aplDocumentMaker = (APL) => {
 
-    /* 
-    Input: 
+  /* 
+  Input: 
 
-    APL: {
-      displayContent: {
-        type: "STRING"
-        url:  "STRING"
-      },
-      handlerInput: { OBJECT }
-    }
+  APL: {
+    displayContent: {
+      type: "STRING"
+      url:  "STRING"
+    },
+    handlerInput: { OBJECT }
+  }
 
-  */ 
+*/
 
 
   const { handlerInput, displayContent } = APL;
   const { url, type, repeat } = displayContent;
+
+  // https://developer.amazon.com/docs/alexa-presentation-language/apl-video.html
+  // https://developer.amazon.com/es/docs/custom-skills/videoapp-interface-reference.html
+  // https://developer.amazon.com/docs/alexa-presentation-language/apl-commands-media.html
+  // https://github.com/alexa-labs/skill-sample-nodejs-firetv-vlogs/blob/896f0f4a93293315327a9e12dde65940ce1d3fc6/lambda/custom/videoPlayer.json#L305
 
   if (type === "Video" && url) {
     aplDocument = {
@@ -48,6 +53,7 @@ exports.aplDocumentMaker = (APL) => {
               {
                 "type": type,
                 "source": url,
+                "id": "videoDisplay",
                 "autoplay": true,
                 "repeatCount": repeat || 0,
                 "width": handlerInput.requestEnvelope.context.Viewport.pixelWidth,
@@ -59,7 +65,7 @@ exports.aplDocumentMaker = (APL) => {
           }
         ]
       }
-    }  
+    }
   }
 
   if (type === "Image" && url) {
@@ -101,7 +107,7 @@ exports.aplDocumentMaker = (APL) => {
           }
         ]
       }
-    }  
+    }
   }
 
   return aplDocument;

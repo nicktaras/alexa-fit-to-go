@@ -28,7 +28,7 @@ const TipStore = {
 		"Check your gear. Make sure your shoes and equipment fit properly and are right for the activity. Look after your equipment and check it regularly for safety."
 	],
 	SWIM: [
-		"When swimmig it is possible to gain groin injuries, especially in breaststroke. To help prevent such an injury make sure you stretch your lower body well.",
+		"When swimming it is possible to gain groin injuries, especially in breaststroke. To help prevent such an injury make sure you stretch your lower body well.",
 		"Warm up and cool down. Try slow stretches and go through the motions of your sport or activity before starting. Cool down with slow stretching.",
 		"Try and mix up your routine. Try other sports and exercises to reduce the risk of overtraining in one specific area.",
 		"Pace yourself. Have at least one recovery day each week to rest. ",

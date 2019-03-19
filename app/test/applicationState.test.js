@@ -2,7 +2,7 @@ const routineStore = require('./../routineStore');
 const ApplicationStateModelStore = require('./../applicationState');
 var applicationStateModelStore = new ApplicationStateModelStore();
 
-test('ensures application can get state', () => { 
+test('ensures application can get state', () => {
   var appState = applicationStateModelStore.getApplicationState();
   expect(appState).toEqual(
     {
@@ -10,7 +10,7 @@ test('ensures application can get state', () => {
         type: 'INIT'
       },
       routineState: {
-        type: undefined, 
+        type: undefined,
         difficulty: undefined,
         activity: undefined
       },
@@ -19,9 +19,9 @@ test('ensures application can get state', () => {
       }
     }
   );
-});  
+});
 
-test('ensures application can update state', () => { 
+test('ensures application can update state', () => {
   var mockState = {
     stateArray: [
       {
@@ -29,7 +29,7 @@ test('ensures application can update state', () => {
           type: 'INIT'
         },
         routineState: {
-          type: undefined, 
+          type: undefined,
           difficulty: undefined,
           activity: undefined
         },
@@ -41,7 +41,7 @@ test('ensures application can update state', () => {
   };
   var nextState = applicationStateModelStore.updateState(
     {
-      state: mockState.stateArray[0], 
+      state: mockState.stateArray[0],
       stateName: 'ACTIVITY'
     }
   );
@@ -51,7 +51,7 @@ test('ensures application can update state', () => {
         type: 'ACTIVITY'
       },
       routineState: {
-        type: undefined, 
+        type: undefined,
         difficulty: undefined,
         activity: undefined
       },
@@ -60,9 +60,9 @@ test('ensures application can update state', () => {
       }
     }
   );
-}); 
+});
 
-test('ensures application can locate and return the initial routine exercise', () => { 
+test('ensures application can locate and return the initial routine exercise', () => {
   var mockState = {
     stateArray: [
       {
@@ -80,8 +80,8 @@ test('ensures application can locate and return the initial routine exercise', (
       }
     ]
   };
-  var nextExercise = applicationStateModelStore.getNextExerciseState({ 
-    state: mockState.stateArray[0], 
+  var nextExercise = applicationStateModelStore.getNextExerciseState({
+    state: mockState.stateArray[0],
     routineStore: routineStore
   });
   expect(nextExercise).toEqual(
@@ -101,11 +101,11 @@ test('ensures application can locate and return the initial routine exercise', (
   );
 });
 
-test('ensures application can determine if we are at the last exercise in the routine', () => { 
+test('ensures application can determine if we are at the last exercise in the routine', () => {
 
   var mockState = {
     stateArray: [
-       {
+      {
         state: {
           type: 'ACTIVITY'
         },
@@ -122,13 +122,13 @@ test('ensures application can determine if we are at the last exercise in the ro
   };
 
   var isLastExercise = applicationStateModelStore.isLastExercise({
-    state: mockState.stateArray[0], 
+    state: mockState.stateArray[0],
     routineStore: routineStore
   });
   expect(isLastExercise).toEqual(false);
 });
 
-test('ensures application can locate and return next routine exercise state from array of steps', () => { 
+test('ensures application can locate and return next routine exercise state from array of steps', () => {
   var mockState = {
     stateArray: [
       {
@@ -136,7 +136,7 @@ test('ensures application can locate and return next routine exercise state from
           type: 'ACTIVITY'
         },
         routineState: {
-          type: 'JOG_LIGHT', 
+          type: 'JOG_LIGHT',
           difficulty: 'LIGHT',
           activity: 'JOG'
         },
@@ -147,7 +147,7 @@ test('ensures application can locate and return next routine exercise state from
     ]
   };
   var nextExercise = applicationStateModelStore.getNextExerciseState({
-    state: mockState.stateArray[0], 
+    state: mockState.stateArray[0],
     routineStore: routineStore
   });
   expect(nextExercise).toEqual(
@@ -166,7 +166,7 @@ test('ensures application can locate and return next routine exercise state from
     });
 });
 
-test('ensures application can update routine state', () => { 
+test('ensures application can update routine state', () => {
 
   var appState = applicationStateModelStore.updateRoutineState({
     state: {
@@ -174,7 +174,7 @@ test('ensures application can update routine state', () => {
         type: 'ACTIVITY'
       },
       routineState: {
-        type: undefined, 
+        type: undefined,
         difficulty: undefined,
         activity: undefined
       },
@@ -186,8 +186,8 @@ test('ensures application can update routine state', () => {
     difficulty: 'LIGHT'
   });
   expect(appState).toEqual(
-    { 
-      state: {  
+    {
+      state: {
         type: 'ACTIVITY'
       },
       routineState: {
@@ -200,5 +200,5 @@ test('ensures application can update routine state', () => {
       }
     }
   );
-});  
+});
 

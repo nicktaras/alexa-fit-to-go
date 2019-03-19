@@ -4,7 +4,7 @@ const initialState = [{
     type: 'INIT'
   },
   routineState: {
-    type: undefined, 
+    type: undefined,
     difficulty: undefined,
     activity: undefined
   },
@@ -16,20 +16,20 @@ const initialState = [{
 // Similar to a Redux pattern.
 // All the methods return a new application state.
 module.exports = class ApplicationStateModelStore {
-  constructor(stateArray=initialState) {
+  constructor(stateArray = initialState) {
     this.stateArray = stateArray;
   }
   getFullHistory() {
     return this.stateArray;
   }
   pushNewState(newState) {
-    this.stateArray.push(newState);  
+    this.stateArray.push(newState);
   }
   resetState() {
     this.pushNewState(initialState);
     return initialState;
   }
-  updateState({ state=undefined, stateName=undefined }) {
+  updateState({ state = undefined, stateName = undefined }) {
     if (state && stateName) {
       var newState = JSON.parse(JSON.stringify(state));
       newState.state.type = stateName;
@@ -39,7 +39,7 @@ module.exports = class ApplicationStateModelStore {
     console.warn('updateState: state or stateName were missing');
     return null;
   }
-  updateRoutineState({ state=null, activity=undefined, difficulty=undefined }) {
+  updateRoutineState({ state = null, activity = undefined, difficulty = undefined }) {
     if (state && activity && difficulty) {
 
       // TODO add more smarts to handle these situations.
@@ -58,7 +58,7 @@ module.exports = class ApplicationStateModelStore {
     console.warn('updateRoutineState: data was missing', state, activity, difficulty);
     return;
   }
-  updateExerciseState({ state=null, exerciseStateName=undefined }) {
+  updateExerciseState({ state = null, exerciseStateName = undefined }) {
     if (state && exerciseStateName) {
       var newState = JSON.parse(JSON.stringify(state));
       newState.exerciseState.type = exerciseStateName;
@@ -69,23 +69,23 @@ module.exports = class ApplicationStateModelStore {
     }
     return;
   }
-  isLastExercise({ state=null, routineStore=routineStore }){
+  isLastExercise({ state = null, routineStore = routineStore }) {
     if (state && routineStore) {
       // find the list of steps within the current exercise
       var currentRoutineSteps = routineStore[state.routineState.type];
       // find out which step in the routine they have reached
       var currentExerciseStateIndex = currentRoutineSteps.indexOf(state.exerciseState.type) || 0;
       // return true or false
-      if(currentExerciseStateIndex > -1 && currentExerciseStateIndex !== currentRoutineSteps.length -1) {
+      if (currentExerciseStateIndex > -1 && currentExerciseStateIndex !== currentRoutineSteps.length - 1) {
         return false;
       } else {
         return true;
       }
-    } 
+    }
     console.warn('getNextExerciseState: state or routineStore were missing');
     return;
   }
-  getNextExerciseState({ state=null, routineStore=routineStore }) {
+  getNextExerciseState({ state = null, routineStore = routineStore }) {
     if (state && routineStore) {
       var exerciseStateName;
       // find the list of steps within the current exercise
@@ -104,16 +104,16 @@ module.exports = class ApplicationStateModelStore {
       } else {
         exerciseStateName = currentRoutineSteps[0];
       }
-      return this.updateExerciseState({ 
-        state: state, 
-        exerciseStateName: exerciseStateName 
+      return this.updateExerciseState({
+        state: state,
+        exerciseStateName: exerciseStateName
       });
-    } 
+    }
     console.warn('getNextExerciseState: state or routineStore were missing');
     return;
   }
   getApplicationState() {
-    return this.stateArray[this.stateArray.length -1];
+    return this.stateArray[this.stateArray.length - 1];
   }
 }
 

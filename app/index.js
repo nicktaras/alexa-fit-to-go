@@ -15,8 +15,8 @@
 const Alexa = require('ask-sdk-core');
 
 // Application Stores
-// const randomTipStore = require('./randomTipStore');
-const TipStore = require('./tipStore');
+const randomTipStore = require('./randomTipStore');
+const tipStore = require('./tipStore');
 const randomJokeStore = require('./randomJokeStore');
 const routineStore = require('./routineStore');
 const chitChatExerciseStore = require('./chitChatExerciseStore');
@@ -110,7 +110,7 @@ const LaunchRequestHandler = {
       speechText = "Welcome to Go Fit, ";
       speechText += "I'm here to help you warm up before leaving the house to do more strenuous activities or sport. ";
       speechText += "A link Account home card was sent to your Alexa App in case you wish to connect to us via Facebook. ";
-      speechText += "In the meantime let's do some exercises. What type of activity or sport will you be doing today? ";
+      speechText += "In the meantime, let's do some exercises. What type of activity or sport will you be doing today? ";
 
       if (supportsDisplay(handlerInput)) {
 
@@ -323,14 +323,14 @@ const ExerciseIntentHandler = {
     var speechText = '';
 
     if (!applicationState) {
-      speechText += 'Sorry something went wrong, my nuts and bolts come loose sometimes. Try restarting me. ';
+      speechText += 'Sorry something went wrong, my nuts and bolts come loose sometimes. Ask me to start over. ';
       console.log('ERROR: ExerciseIntentHandler ', handlerInput);
     }
     if (applicationState &&
       applicationState.state &&
       applicationState.state.type !== 'ACTIVITY'
     ) {
-      speechText += 'Sorry something went wrong, my nuts and bolts come loose sometimes. Try restarting me. ';
+      speechText += 'Sorry something went wrong, my nuts and bolts come loose sometimes. Ask me to start over. ';
       console.log('ERROR: ExerciseIntentHandler ', handlerInput);
     }
 
@@ -454,7 +454,7 @@ const ReadyIntentHandler = {
 
     } else {
 
-      speechText += "Sorry, I've got a bit lost, I'm not sure what you're ready to do exactly. Try restarting me.";
+      speechText += "Sorry, I've got a bit lost, I'm not sure what you're ready to do exactly. Ask me to start over.";
       console.log('ERROR: ReadyIntentHandler ', handlerInput);
 
       return handlerInput.responseBuilder
@@ -554,27 +554,14 @@ const TipIntentHandler = {
   handle(handlerInput) {
 
     var speechText = "";
-    var userActivity = undefined;
 
     if (
-      handlerInput.requestEnvelope &&
-      handlerInput.requestEnvelope.request &&
-      handlerInput.requestEnvelope.request.intent &&
-      handlerInput.requestEnvelope.request.intent.slots &&
-      handlerInput.requestEnvelope.request.intent.slots.exercise &&
-      handlerInput.requestEnvelope.request.intent.slots.exercise.resolutions &&
-      handlerInput.requestEnvelope.request.intent.slots.exercise.resolutions.resolutionsPerAuthority &&
-      handlerInput.requestEnvelope.request.intent.slots.exercise.resolutions.resolutionsPerAuthority[0] &&
-      handlerInput.requestEnvelope.request.intent.slots.exercise.resolutions.resolutionsPerAuthority[0].values &&
-      handlerInput.requestEnvelope.request.intent.slots.exercise.resolutions.resolutionsPerAuthority[0].values[0] &&
-      handlerInput.requestEnvelope.request.intent.slots.exercise.resolutions.resolutionsPerAuthority[0].values[0].value &&
-      handlerInput.requestEnvelope.request.intent.slots.exercise.resolutions.resolutionsPerAuthority[0].values[0].value.id
-    ) {
-      userActivity = handlerInput.requestEnvelope.request.intent.slots.exercise.resolutions.resolutionsPerAuthority[0].values[0].value.id;
-    }
-
-    if (TipStore[userActivity]) { // Actvity Specific Tip
-      speechText = getRandomItemFromArr(TipStore[userActivity]);
+      applicationState &&
+      applicationState.routineState &&
+      applicationState.routineState.activity &&
+      tipStore[applicationState.routineState.activity]
+    ) { // Actvity Specific Tip
+      speechText = getRandomItemFromArr(tipStore[applicationState.routineState.activity]);
     } else { // Random
       speechText = getRandomItemFromArr(randomTipStore);
     }
@@ -715,6 +702,53 @@ const ErrorHandler = {
   },
 };
 
+
+const PauseIntentHandler = {
+  canHandle(handlerInput) {
+    return handlerInput.requestEnvelope.request.type === 'IntentRequest'
+      && (handlerInput.requestEnvelope.request.intent.name === 'AMAZON.PauseIntent')
+  },
+  handle(handlerInput) {
+    return handlerInput.responseBuilder
+      .speak("Hello pause")
+      .addDirective({
+        type: "Alexa.Presentation.APL.ExecuteCommands",
+        commands: [
+          {
+            id: "videoDisplay",
+            type: "ControlMedia",
+            command: "pause"
+          }
+        ]
+      })
+      .withShouldEndSession(false)
+      .getResponse();
+  }
+}
+
+const ResumeIntentHandler = {
+  canHandle(handlerInput) {
+    return handlerInput.requestEnvelope.request.type === 'IntentRequest'
+      && (handlerInput.requestEnvelope.request.intent.name === 'AMAZON.ResumeIntent')
+  },
+  handle(handlerInput) {
+    return handlerInput.responseBuilder
+      .speak("Hello resume")
+      .addDirective({
+        type: "Alexa.Presentation.APL.ExecuteCommands",
+        commands: [
+          {
+            id: "videoDisplay",
+            type: "ControlMedia",
+            command: "play"
+          }
+        ]
+      })
+      .withShouldEndSession(false)
+      .getResponse();
+  },
+}
+
 const skillBuilder = Alexa.SkillBuilders.custom();
 
 exports.handler = skillBuilder
@@ -733,7 +767,9 @@ exports.handler = skillBuilder
     TermsIntentHandler,
     CancelAndStopIntentHandler,
     SessionEndedRequestHandler,
-    InitIntentHandler
+    InitIntentHandler,
+    PauseIntentHandler,
+    ResumeIntentHandler
   )
   .addErrorHandlers(ErrorHandler)
   .lambda();
