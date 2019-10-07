@@ -1,14 +1,18 @@
 const appStartConversationFlow = [
-  "Hi, how are you. What type of activity or sport are you interested in today?",
-  "Hola como estas. What type of activity or sport are you interested in today?",
-  "Bonjour. What type of activity or sport are you interested in today?",
-  "Kon nichiwa to you. What type of activity or sport are you interested in today?",
-  "Why Howdy to you. What type of activity or sport are you interested in today?",
-  "Hey, looking good as always. What type of activity or sport are you interested in today?",
-  "Whats up. What type of activity or sport are you interested in today?",
-  "How is it going, I have been just chilling mostly. How about you? What type of activity or sport are you interested in today?",
-  "Good ay, have you ever tried surfing like they do in Australia. What type of activity or sport are you interested in today?",
-  "Yo yo yo, thats right im cool too. What type of activity or sport are you interested in today?",
+  "Hi, I am go fit. how are you. ",
+  "Hola como estas. I am Go Fit. ",
+  "Bonjour. Je mappelle Go Fit. ",
+  "I am Go Fit, ",
+  "I am your father. Just kidding, I am Go Fit, here to help you learn more about exercise. ",
+  "Kon nichiwa. I am Go Fit. ",
+  "Hey, I am Go Fit, hope you are ready to learn some new cray cray new things with me today. ",
+  "Howdy partner. I am Go fit. ",
+  "Hey there good looking. I am Go Fit, ",
+  "Hello stranger. I am Go Fit. ",
+  "Whats up. I am Go Fit. ",
+  "How is it going, I am Go Fit. ",
+  "Good ay, from down under. I am Go Fit.",
+  "Hey dude, I am Go Fit. "
 ];
 
 module.exports = appStartConversationFlow;

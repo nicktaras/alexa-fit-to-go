@@ -17,6 +17,8 @@ const Alexa = require('ask-sdk-core');
 
 // General conversation flow speech store
 const appStartConversationFlow = require('./appStartConversationFlow');
+// random conversation
+const chitChatStore = require('./chitChatStore');
 // Contains activity routines
 const routineStore = require('./routineStore');
 // Used to create a more natural conversation with user at the start of each comment
@@ -70,7 +72,9 @@ const LaunchRequestHandler = {
     return handlerInput.requestEnvelope.request.type === 'LaunchRequest'
   },
   handle(handlerInput) {
-    const speechText = getRandomItemFromArr(appStartConversationFlow);
+    let speechText = getRandomItemFromArr(appStartConversationFlow);
+    speechText += getRandomItemFromArr(chitChatStore);
+    speechText += "What type of activity or sport are you interested in today?";
     if (supportsDisplay(handlerInput)) {
       return handlerInput.responseBuilder
         .speak(speechText)
