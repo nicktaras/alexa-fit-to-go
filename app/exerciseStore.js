@@ -23,7 +23,7 @@ const exerciseStore = {
       text: "Right, let's do a selected range of exercises. Just tell me when you are ready. ",
     }
   },
-  'INTRO_WALK_MEDIUM' : {
+  'INTRO_WALK_MEDIUM': {
     type: 'text',
     config: {
       type: "SSML",
@@ -31,7 +31,7 @@ const exerciseStore = {
       text: "Right, let's do a few leg exercises to get you warmed up. Just tell me when you are ready. ",
     }
   },
-  'INTRO_WALK_HARD' : {
+  'INTRO_WALK_HARD': {
     type: 'text',
     config: {
       type: "SSML",
@@ -39,7 +39,7 @@ const exerciseStore = {
       text: "Right, let's do a few leg exercises to get you warmed up. Just tell me when you are ready. ",
     }
   },
-  'INTRO_WALK_LIGHT' : {
+  'INTRO_WALK_LIGHT': {
     type: 'text',
     config: {
       type: "SSML",
@@ -47,7 +47,7 @@ const exerciseStore = {
       text: "Right, let's do a few leg exercises to get you warmed up. Just tell me when you are ready. ",
     }
   },
-  'CLOSE_SESSION_NOT_READY' : {
+  'CLOSE_SESSION_NOT_READY': {
     type: 'text',
     config: {
       type: "SSML",
@@ -56,7 +56,7 @@ const exerciseStore = {
       withShouldEndSession: true
     }
   },
-  'INTRO_WEIGHTS_LIGHT' : {
+  'INTRO_WEIGHTS_LIGHT': {
     type: 'text',
     config: {
       type: "SSML",
@@ -64,7 +64,7 @@ const exerciseStore = {
       text: "I'm not quite ready to do exercises for this activity. Please come back soon."
     }
   },
-  'INTRO_RUN_LIGHT' : {
+  'INTRO_RUN_LIGHT': {
     type: 'text',
     config: {
       type: "SSML",
@@ -72,7 +72,7 @@ const exerciseStore = {
       text: "Right, let's do a few leg exercises to get you warmed up. Just tell me when you are ready. ",
     }
   },
-  'INTRO_RUN_MEDIUM' : {
+  'INTRO_RUN_MEDIUM': {
     type: 'text',
     config: {
       type: "SSML",
@@ -80,7 +80,7 @@ const exerciseStore = {
       text: "I'm not quite ready to do exercises for this activity. Please come back soon."
     }
   },
-  'INTRO_RUN_HARD' : {
+  'INTRO_RUN_HARD': {
     type: 'text',
     config: {
       type: "SSML",
@@ -97,7 +97,7 @@ const exerciseStore = {
       about: 'HEAL_LIFTS',
     }
   },
-  'INTRO_SOCCER_LIGHT' : {
+  'INTRO_SOCCER_LIGHT': {
     type: 'text',
     config: {
       type: "SSML",
@@ -105,7 +105,7 @@ const exerciseStore = {
       text: "Right, let's do a few leg exercises to get you warmed up. Just tell me when you are ready. ",
     }
   },
-  'INTRO_SOCCER_MEDIUM' : {
+  'INTRO_SOCCER_MEDIUM': {
     type: 'text',
     config: {
       type: "SSML",
@@ -113,7 +113,7 @@ const exerciseStore = {
       text: "Right, let's do a few leg exercises to get you warmed up. Just tell me when you are ready. ",
     }
   },
-  'INTRO_SOCCER_HARD' : {
+  'INTRO_SOCCER_HARD': {
     type: 'text',
     config: {
       type: "SSML",
@@ -121,7 +121,7 @@ const exerciseStore = {
       text: "Right, let's do a few leg exercises to get you warmed up. Just tell me when you are ready. ",
     }
   },
-  'INTRO_NETBALL_LIGHT' : {
+  'INTRO_NETBALL_LIGHT': {
     type: 'text',
     config: {
       type: "SSML",
@@ -129,7 +129,7 @@ const exerciseStore = {
       text: "I'm not quite ready to do exercises for this activity. Please come back soon."
     }
   },
-  'INTRO_BASKETBALL_LIGHT' : {
+  'INTRO_BASKETBALL_LIGHT': {
     type: 'text',
     config: {
       type: "SSML",
@@ -137,7 +137,7 @@ const exerciseStore = {
       text: "I'm not quite ready to do exercises for this activity. Please come back soon."
     }
   },
-  'INTRO_GOLF_LIGHT' : {
+  'INTRO_GOLF_LIGHT': {
     type: 'text',
     config: {
       type: "SSML",
@@ -145,7 +145,7 @@ const exerciseStore = {
       text: "I'm not quite ready to do exercises for this activity. Please come back soon."
     }
   },
-  'INTRO_TENNIS_LIGHT' : {
+  'INTRO_TENNIS_LIGHT': {
     type: 'text',
     config: {
       type: "SSML",
@@ -153,7 +153,7 @@ const exerciseStore = {
       text: "I'm not quite ready to do exercises for this activity. Please come back soon."
     }
   },
-  'INTRO_WEIGHTS_LIGHT' : {
+  'INTRO_WEIGHTS_LIGHT': {
     type: 'text',
     config: {
       type: "SSML",
@@ -161,7 +161,7 @@ const exerciseStore = {
       text: "I'm not quite ready to do exercises for this activity. Please come back soon."
     }
   },
-  'INTRO_DANCE_LIGHT' : {
+  'INTRO_DANCE_LIGHT': {
     type: 'text',
     config: {
       type: "SSML",
@@ -169,7 +169,7 @@ const exerciseStore = {
       text: "I'm not quite ready to do exercises for this activity. Please come back soon."
     }
   },
-  'INTRO_CRICKET_LIGHT' : {
+  'INTRO_CRICKET_LIGHT': {
     type: 'text',
     config: {
       type: "SSML",
@@ -177,7 +177,7 @@ const exerciseStore = {
       text: "I'm not quite ready to do exercises for this activity. Please come back soon."
     }
   },
-  'INTRO_BOX_LIGHT' : {
+  'INTRO_BOX_LIGHT': {
     type: 'text',
     config: {
       type: "SSML",
@@ -185,7 +185,7 @@ const exerciseStore = {
       text: "I'm not quite ready to do exercises for this activity. Please come back soon."
     }
   },
-  'INTRO_KAYAK_LIGHT' : {
+  'INTRO_KAYAK_LIGHT': {
     type: 'text',
     config: {
       type: "SSML",
@@ -193,7 +193,7 @@ const exerciseStore = {
       text: "I'm not quite ready to do exercises for this activity. Please come back soon."
     }
   },
-  'INTRO_SURF_LIGHT' : {
+  'INTRO_SURF_LIGHT': {
     type: 'text',
     config: {
       type: "SSML",
@@ -201,7 +201,7 @@ const exerciseStore = {
       text: "I'm not quite ready to do exercises for this activity. Please come back soon."
     }
   },
-  'INTRO_FRISBEE_LIGHT' : {
+  'INTRO_FRISBEE_LIGHT': {
     type: 'text',
     config: {
       type: "SSML",
@@ -209,7 +209,7 @@ const exerciseStore = {
       text: "I'm not quite ready to do exercises for this activity. Please come back soon."
     }
   },
-  'INTRO_CYCLE_LIGHT' : {
+  'INTRO_CYCLE_LIGHT': {
     type: 'text',
     config: {
       type: "SSML",
@@ -217,7 +217,7 @@ const exerciseStore = {
       text: "I'm not quite ready to do exercises for this activity. Please come back soon."
     }
   },
-  'INTRO_GARDEN_LIGHT' : {
+  'INTRO_GARDEN_LIGHT': {
     type: 'text',
     config: {
       type: "SSML",
@@ -225,7 +225,7 @@ const exerciseStore = {
       text: "I'm not quite ready to do exercises for this activity. Please come back soon."
     }
   },
-  'INTRO_YOGA_LIGHT' : {
+  'INTRO_YOGA_LIGHT': {
     type: 'text',
     config: {
       type: "SSML",
@@ -233,7 +233,7 @@ const exerciseStore = {
       text: "I'm not quite ready to do exercises for this activity. Please come back soon."
     }
   },
-  'INTRO_PADDLEBOARD_LIGHT' : {
+  'INTRO_PADDLEBOARD_LIGHT': {
     type: 'text',
     config: {
       type: "SSML",
@@ -241,7 +241,7 @@ const exerciseStore = {
       text: "I'm not quite ready to do exercises for this activity. Please come back soon."
     }
   },
-  'INTRO_HIKE_LIGHT' : {
+  'INTRO_HIKE_LIGHT': {
     type: 'text',
     config: {
       type: "SSML",
@@ -249,7 +249,7 @@ const exerciseStore = {
       text: "I'm not quite ready to do exercises for this activity. Please come back soon."
     }
   },
-  'INTRO_CLIMBING_LIGHT' : {
+  'INTRO_CLIMBING_LIGHT': {
     type: 'text',
     config: {
       type: "SSML",
@@ -257,7 +257,7 @@ const exerciseStore = {
       text: "I'm not quite ready to do exercises for this activity. Please come back soon."
     }
   },
-  'INTRO_CROSSTRAIN_LIGHT' : {
+  'INTRO_CROSSTRAIN_LIGHT': {
     type: 'text',
     config: {
       type: "SSML",
@@ -265,7 +265,7 @@ const exerciseStore = {
       text: "I'm not quite ready to do exercises for this activity. Please come back soon."
     }
   },
-  'INTRO_HORSERIDE_LIGHT' : {
+  'INTRO_HORSERIDE_LIGHT': {
     type: 'text',
     config: {
       type: "SSML",
@@ -273,7 +273,7 @@ const exerciseStore = {
       text: "I'm not quite ready to do exercises for this activity. Please come back soon."
     }
   },
-  'INTRO_HORSERIDE_MEDIUM' : {
+  'INTRO_HORSERIDE_MEDIUM': {
     type: 'text',
     config: {
       type: "SSML",
@@ -281,7 +281,7 @@ const exerciseStore = {
       text: "I'm not quite ready to do exercises for this activity. Please come back soon."
     }
   },
-  'INTRO_HORSERIDE_HARD' : {
+  'INTRO_HORSERIDE_HARD': {
     type: 'text',
     config: {
       type: "SSML",
@@ -289,7 +289,7 @@ const exerciseStore = {
       text: "I'm not quite ready to do exercises for this activity. Please come back soon."
     }
   },
-  'INTRO_SKATING_LIGHT' : {
+  'INTRO_SKATING_LIGHT': {
     type: 'text',
     config: {
       type: "SSML",
@@ -297,7 +297,7 @@ const exerciseStore = {
       text: "I'm not quite ready to do exercises for this activity. Please come back soon."
     }
   },
-  'INTRO_SKATING_MEDIUM' : {
+  'INTRO_SKATING_MEDIUM': {
     type: 'text',
     config: {
       type: "SSML",
@@ -305,7 +305,7 @@ const exerciseStore = {
       text: "I'm not quite ready to do exercises for this activity. Please come back soon."
     }
   },
-  'INTRO_SKATING_HARD' : {
+  'INTRO_SKATING_HARD': {
     type: 'text',
     config: {
       type: "SSML",
@@ -418,7 +418,7 @@ const exerciseStore = {
     type: 'text',
     config: {
       type: "SSML",
-      responseType: ':ask', 
+      responseType: ':ask',
       text: "We're going to do some heal lifts, which will help strengthen you're calf muscles. First, find something you can gently place your hands on whilst standing. For example a kitchen side or work top. Tell me when you are ready. ",
       about: 'HEAL_LIFTS',
       APL: 'DOUBLE_HEAL_LIFTS_INIT'
@@ -432,7 +432,7 @@ const exerciseStore = {
       responseType: ':ask',
       repetitions: 2,
       initialInstruction: '',
-      repeatedInstruction: 'Slowly raise both your heals for five seconds <break time="1s"/> one <break time="1s"/> two <break time="1s"/> three <break time="1s"/> four <break time="1s"/> five <break time="1s"/> now hold them over 5 seconds so they are almost touching the ground <break time="1s"/> 5 <break time="1s"/> 4 <break time="1s"/> 3 <break time="1s"/> 2 <break time="1s"/> 1. ' ,
+      repeatedInstruction: 'Slowly raise both your heals for five seconds <break time="1s"/> one <break time="1s"/> two <break time="1s"/> three <break time="1s"/> four <break time="1s"/> five <break time="1s"/> now hold them over 5 seconds so they are almost touching the ground <break time="1s"/> 5 <break time="1s"/> 4 <break time="1s"/> 3 <break time="1s"/> 2 <break time="1s"/> 1. ',
       about: 'HEAL_LIFTS',
       APL: 'DOUBLE_HEEL_LIFTS'
     }
@@ -441,7 +441,7 @@ const exerciseStore = {
     type: 'text',
     config: {
       type: "SSML",
-      responseType: ':ask', 
+      responseType: ':ask',
       text: 'Ok lets do some leg lifts. First find a bit of space where you can lift your legs in front of you. Place your legs inline with your hips, with your arms by your side.<break time="1s"/> Tell me when you are ready.',
     }
   },
@@ -452,7 +452,7 @@ const exerciseStore = {
       method: 'leftAndRight',
       responseType: ':ask',
       text: 'Over the span of 5 around seconds, slowly start to lift your DIRECTION leg from the floor, this until your thigh is parellel to your hip and hold <break time="3s"/>. Keeping holding for, one <break time="1s"/> two <break time="1s"/> three <break time="1s"/> seconds, then slowly bring your DIRECTION leg down to the floor. Then ',
-    }    
+    }
   },
   'SINGLE_HEAL_LIFTS_INIT': {
     type: 'text',
@@ -469,7 +469,7 @@ const exerciseStore = {
       method: 'leftAndRight',
       responseType: ':ask',
       text: "Lift your OPPOSTITE foot off the floor. <break time='1s'/> Now with your DIRECTION on the floor, slowly raise your heal. Hold for one <break time='1s'/> two <break time='1s'/> three <break time='1s'/> seconds. Then gradually bring it to the floor <break time='3s'/>. Slowly raise the heal again, <break time='3s'/> and Hold for one <break time='1s'/> two <break time='1s'/> three <break time='1s'/> seconds. ",
-    }    
+    }
   },
   'BOTTOM_LIFTS_INIT': {
     type: 'text',
@@ -494,7 +494,7 @@ const exerciseStore = {
     type: 'text',
     config: {
       type: "SSML",
-      responseType: ':ask', 
+      responseType: ':ask',
       text: 'Great work, you have completed this routine. If you want to do this routine from the top, say next. Otherwise, I hope you enjoy the rest of your day.',
       APL: 'ARMS_UP_CELEBRATION'
     }

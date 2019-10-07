@@ -1,0 +1,112 @@
+Terms and Conditions ("Terms")  
+==============================
+
+Last updated: March 09, 2019
+
+Please read these Terms and Conditions ("Terms", "Terms and Conditions")
+carefully before using the Go Fit Alexa Skill (the "Service") developed by Nicholas Taras ("us", "we", or "our").
+
+Your access to and use of the Service is conditioned on your acceptance of and
+compliance with these Terms. These Terms apply to all users and
+others who access or use the Service.
+
+By accessing or using the Service you agree to be bound by these Terms. If you
+disagree with any part of the terms then you may not access the Service.
+
+Use  
+--------
+
+Go Fit is an experimental Alexa skill, designed to help people who wish to do a pre-work out and stretch before taking on
+more strenuous fitness activies or sport. 
+
+When following along to Go Fit, via voice / video stream, ensure you have enough room around you to carry out the moves, and most 
+importantly, you are in good enough fitness to do the exercise. 
+
+Go Fit does not take any liability for any type of damage or injury caused by using the service, please manage the risk of using this application before use.
+
+Tip: If in doubt of how much space you need for and exercise, or if you may injure yourself - listen / watch it through, 
+then ask to repeat the exercise via the prompts given if you feel the exercise poses no risk of injury or damage to your surrounding. 
+
+Tip: Tell others around you that you are going to need space to exercise. 
+
+Accounts  
+--------
+
+Go Fit allows for an account to be linked to other services.
+We do not store any data with regards to your personal information.
+
+At this time, the only data we collect are logs to ensure our services are up and running.
+When any defects occur the logs help us to find out how an error happended and how we might fix it. 
+
+Your authenticated session with thrid party services are driven through the use of a token, 
+rather than your actual personal user name and password.
+
+Links / Account Linking To Other Web Sites  
+------------------------------------------
+
+Our Service contain links to third-party web sites or services that are
+not owned or controlled by Go Fit.
+
+Go Fit has no control over, and assumes no responsibility for, the
+content, privacy policies, or practices of any third party web sites or
+services. You further acknowledge and agree that Go Fit shall not be
+responsible or liable, directly or indirectly, for any damage or loss caused
+or alleged to be caused by or in connection with use of or reliance on any
+such content, goods or services available on or through any such web sites or
+services.
+
+We strongly advise you to read the terms and conditions and privacy policies
+of any third-party web sites or services that you visit.
+
+Termination  
+-----------
+
+We may terminate or suspend access to our Service immediately, without prior
+notice or liability, for any reason whatsoever, including without limitation
+if you breach the Terms.
+
+All provisions of the Terms which by their nature should survive termination
+shall survive termination, including, without limitation, ownership
+provisions, warranty disclaimers, indemnity and limitations of liability.
+
+We may terminate or suspend your account immediately, without prior notice or
+liability, for any reason whatsoever, including without limitation if you
+breach the Terms.
+
+Upon termination, your right to use the Service will immediately cease. If you
+wish to terminate your account, you may simply discontinue using the Service.
+
+All provisions of the Terms which by their nature should survive termination
+shall survive termination, including, without limitation, ownership
+provisions, warranty disclaimers, indemnity and limitations of liability.
+
+Governing Law  
+-------------
+
+These Terms shall be governed and construed in accordance with the laws of New
+South Wales, Australia, without regard to its conflict of law provisions.
+
+Our failure to enforce any right or provision of these Terms will not be
+considered a waiver of those rights. If any provision of these Terms is held
+to be invalid or unenforceable by a court, the remaining provisions of these
+Terms will remain in effect. These Terms constitute the entire agreement
+between us regarding our Service, and supersede and replace any prior
+agreements we might have between us regarding the Service.
+
+Changes  
+-------
+
+We reserve the right, at our sole discretion, to modify or replace these Terms
+at any time. What constitutes a material change will be determined at our sole discretion.
+
+By continuing to access or use our Service after those revisions become
+effective, you agree to be bound by the revised terms. If you do not agree to
+the new terms, please stop using the Service.
+
+Contact Us  
+----------
+
+If you have any questions about these Terms, please contact us. 
+
+We hope you enjoy about product.
+

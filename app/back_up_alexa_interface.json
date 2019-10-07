@@ -1,0 +1,632 @@
+{
+  "interactionModel": {
+    "languageModel": {
+      "invocationName": "go fit",
+      "intents": [
+        {
+          "name": "AMAZON.FallbackIntent",
+          "samples": []
+        },
+        {
+          "name": "AMAZON.CancelIntent",
+          "samples": []
+        },
+        {
+          "name": "AMAZON.HelpIntent",
+          "samples": []
+        },
+        {
+          "name": "AMAZON.StopIntent",
+          "samples": []
+        },
+        {
+          "name": "AMAZON.NavigateHomeIntent",
+          "samples": []
+        },
+        {
+          "name": "activity_intent",
+          "slots": [
+            {
+              "name": "exercise",
+              "type": "exercise"
+            },
+            {
+              "name": "size",
+              "type": "size",
+              "samples": [
+                "{size} exercises would be good",
+                "just {size} is fine",
+                "some {size} exercises",
+                "some {size} exercises please",
+                "{size} exercises",
+                "{size} exercises please",
+                "{size}"
+              ]
+            }
+          ],
+          "samples": [
+            "I want to go for a {size} {exercise}",
+            "I want to go for a {exercise}",
+            "I want to {exercise}",
+            "{exercise}",
+            "Can I do some warm up exercises please",
+            "Can I do some warm ups please",
+            "I have no plans can I do an exercise",
+            "I don't know can I do an exercise",
+            "Exercises please",
+            "Show me an exercise",
+            "I want to exercise",
+            "Can I do an exercise",
+            "I want to do an exercise",
+            "I'll be going for a {size} {exercise}",
+            "I'll be going for a {exercise}",
+            "I'm going for a {exercise}",
+            "I'm going for a {size} {exercise}",
+            "I might go for a {exercise}",
+            "today I will be going for a {exercise}",
+            "today I will be going for a {size} {exercise}",
+            "a {exercise}",
+            "I will be going for a {size} {exercise}",
+            "I will be playing {exercise}"
+          ]
+        },
+        {
+          "name": "joke_intent",
+          "slots": [],
+          "samples": [
+            "whats a funny joke",
+            "I want to laugh",
+            "make me laugh",
+            "lets hear another joke",
+            "another joke please",
+            "can I head another joke",
+            "I want another joke",
+            "tell me another joke",
+            "I want to hear a joke",
+            "let me hear a joke",
+            "what jokes do you have",
+            "tell me a funny joke",
+            "jokes",
+            "jokes please",
+            "give me a joke",
+            "joke",
+            "joke please",
+            "do you know any jokes",
+            "tell me a joke"
+          ]
+        },
+        {
+          "name": "tip_intent",
+          "slots": [],
+          "samples": [
+            "give me a tip",
+            "tip please",
+            "tip",
+            "Have you got any advice",
+            "can I have a tip",
+            "have you got any tips"
+          ]
+        },
+        {
+          "name": "ready_intent",
+          "slots": [],
+          "samples": [
+            "next please",
+            "move to next step",
+            "keep rolling",
+            "next step",
+            "alexa keep going",
+            "keep going",
+            "can I continue",
+            "can I continue please",
+            "continue",
+            "next exercise test",
+            "yep i'm ready",
+            "next step please",
+            "next",
+            "I'm ready",
+            "ready"
+          ]
+        },
+        {
+          "name": "repeat_intent",
+          "slots": [],
+          "samples": [
+            "head back to exercise",
+            "go back to exercise please",
+            "back to exercise please",
+            "back to exercises please",
+            "can I do that again please",
+            "can I do that again",
+            "can I do that exercise again",
+            "again",
+            "repeat",
+            "repeat please"
+          ]
+        },
+        {
+          "name": "exercise_intent",
+          "slots": [],
+          "samples": [
+            "a warm up routine please",
+            "routine",
+            "routine please",
+            "exercise routine please",
+            "exercise routine ",
+            "exercise",
+            "exercises",
+            "exercises please",
+            "warmups",
+            "yes",
+            "I'll do some warm ups",
+            "yep warm ups please",
+            "Lets do some warm ups please",
+            "I'd like to do some warm ups",
+            "I'd like to do some warm ups please",
+            "a warm up please",
+            "warm ups please",
+            "warm up routine please",
+            "warm up routine",
+            "warm ups",
+            "a warm up",
+            "warm up",
+            "warm up please"
+          ]
+        },
+        {
+          "name": "init_intent",
+          "slots": [],
+          "samples": [
+            "go from the start",
+            "reset",
+            "I want to start again",
+            "I want to start over",
+            "start over",
+            "restart",
+            "restart the app",
+            "restart app"
+          ]
+        },
+        {
+          "name": "author_intent",
+          "slots": [],
+          "samples": [
+            "Who is your creator",
+            "Who is the author of Fit to Go",
+            "Who is the author",
+            "Who made you"
+          ]
+        },
+        {
+          "name": "app_function_intent",
+          "slots": [],
+          "samples": [
+            "I'm lost",
+            "What should I do here",
+            "How should I use this app",
+            "How can this Application help me",
+            "What does this Application do",
+            "Tell me how to use this app",
+            "How do I use this App"
+          ]
+        },
+        {
+          "name": "terms_intent",
+          "slots": [],
+          "samples": [
+            "What are the conditions of using this app",
+            "What are the terms of using this app",
+            "What are the terms",
+            "What are the terms and conditions of using this app"
+          ]
+        },
+        {
+          "name": "AMAZON.MoreIntent",
+          "samples": []
+        },
+        {
+          "name": "AMAZON.NavigateSettingsIntent",
+          "samples": []
+        },
+        {
+          "name": "AMAZON.NextIntent",
+          "samples": []
+        },
+        {
+          "name": "AMAZON.PageUpIntent",
+          "samples": []
+        },
+        {
+          "name": "AMAZON.PageDownIntent",
+          "samples": []
+        },
+        {
+          "name": "AMAZON.PreviousIntent",
+          "samples": []
+        },
+        {
+          "name": "AMAZON.ScrollRightIntent",
+          "samples": []
+        },
+        {
+          "name": "AMAZON.ScrollDownIntent",
+          "samples": []
+        },
+        {
+          "name": "AMAZON.ScrollLeftIntent",
+          "samples": []
+        },
+        {
+          "name": "AMAZON.ScrollUpIntent",
+          "samples": []
+        },
+        {
+          "name": "AMAZON.PauseIntent",
+          "samples": []
+        },
+        {
+          "name": "AMAZON.ResumeIntent",
+          "samples": []
+        }
+      ],
+      "types": [
+        {
+          "name": "exercise",
+          "values": [
+            {
+              "id": "BASKETBALL",
+              "name": {
+                "value": "basketball",
+                "synonyms": [
+                  "basketball"
+                ]
+              }
+            },
+            {
+              "id": "TENNIS",
+              "name": {
+                "value": "tennis",
+                "synonyms": [
+                  "tennis"
+                ]
+              }
+            },
+            {
+              "id": "ROW",
+              "name": {
+                "value": "row",
+                "synonyms": [
+                  "rowing"
+                ]
+              }
+            },
+            {
+              "id": "CRICKET",
+              "name": {
+                "value": "cricket",
+                "synonyms": [
+                  "cricket"
+                ]
+              }
+            },
+            {
+              "id": "BOX",
+              "name": {
+                "value": "box",
+                "synonyms": [
+                  "boxing"
+                ]
+              }
+            },
+            {
+              "id": "HORSERIDE",
+              "name": {
+                "value": "horse riding",
+                "synonyms": [
+                  "horse ride"
+                ]
+              }
+            },
+            {
+              "id": "GOLF",
+              "name": {
+                "value": "golf",
+                "synonyms": [
+                  "off for a round of golf",
+                  "golf",
+                  "go for a round of golf"
+                ]
+              }
+            },
+            {
+              "id": "NETBALL",
+              "name": {
+                "value": "netball",
+                "synonyms": [
+                  "netball"
+                ]
+              }
+            },
+            {
+              "id": "SOCCER",
+              "name": {
+                "value": "soccer",
+                "synonyms": [
+                  "football",
+                  "soccer"
+                ]
+              }
+            },
+            {
+              "id": "WARMUP",
+              "name": {
+                "value": "exercise",
+                "synonyms": [
+                  "some warm ups",
+                  "warm up",
+                  "exercise",
+                  "exercises",
+                  "exercise routine"
+                ]
+              }
+            },
+            {
+              "id": "DANCE",
+              "name": {
+                "value": "dance",
+                "synonyms": [
+                  "jiving",
+                  "jive",
+                  "ballet",
+                  "rave",
+                  "raving",
+                  "dancing"
+                ]
+              }
+            },
+            {
+              "id": "GARDEN",
+              "name": {
+                "value": "garden",
+                "synonyms": [
+                  "gardening"
+                ]
+              }
+            },
+            {
+              "id": "SKATEBOARD",
+              "name": {
+                "value": "skateboard",
+                "synonyms": [
+                  "board"
+                ]
+              }
+            },
+            {
+              "id": "KAYAK",
+              "name": {
+                "value": "kayak",
+                "synonyms": [
+                  "canoeing",
+                  "kayaking",
+                  "canoe"
+                ]
+              }
+            },
+            {
+              "id": "PADDLEBOARD",
+              "name": {
+                "value": "Paddleboard",
+                "synonyms": [
+                  "paddle boarding",
+                  "paddle board"
+                ]
+              }
+            },
+            {
+              "id": "SKATING",
+              "name": {
+                "value": "skate",
+                "synonyms": [
+                  "rollerblade"
+                ]
+              }
+            },
+            {
+              "id": "CROSSTRAIN",
+              "name": {
+                "value": "crosstrain",
+                "synonyms": [
+                  "cross train",
+                  "workout",
+                  "gym"
+                ]
+              }
+            },
+            {
+              "id": "HIKE",
+              "name": {
+                "value": "hike",
+                "synonyms": [
+                  "long walk",
+                  "hiking"
+                ]
+              }
+            },
+            {
+              "id": "CLIMB",
+              "name": {
+                "value": "climb",
+                "synonyms": [
+                  "rock climb",
+                  "climbing",
+                  "climb"
+                ]
+              }
+            },
+            {
+              "id": "WEIGHTS",
+              "name": {
+                "value": "weights",
+                "synonyms": [
+                  "weights",
+                  "lifting weights"
+                ]
+              }
+            },
+            {
+              "id": "SWIM",
+              "name": {
+                "value": "swim",
+                "synonyms": [
+                  "swim",
+                  "swimming"
+                ]
+              }
+            },
+            {
+              "id": "RUN",
+              "name": {
+                "value": "run",
+                "synonyms": [
+                  "run",
+                  "running",
+                  "sprint"
+                ]
+              }
+            },
+            {
+              "id": "WALK",
+              "name": {
+                "value": "walk",
+                "synonyms": [
+                  "walk",
+                  "walk the dog",
+                  "walking the dog",
+                  "walking"
+                ]
+              }
+            },
+            {
+              "id": "JOG",
+              "name": {
+                "value": "jog",
+                "synonyms": [
+                  "jog",
+                  "jogging"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "size",
+          "values": [
+            {
+              "id": "HARD",
+              "name": {
+                "value": "hard",
+                "synonyms": [
+                  "work me hard",
+                  "give me a good warm up",
+                  "hit me hard",
+                  "full on",
+                  "tough",
+                  "tough please",
+                  "demandingly hard",
+                  "hardcore",
+                  "hard please",
+                  "difficult"
+                ]
+              }
+            },
+            {
+              "id": "LIGHT",
+              "name": {
+                "value": "light",
+                "synonyms": [
+                  "dont push me too hard",
+                  "go easy on me please",
+                  "just light for today",
+                  "take it easy on me",
+                  "easy please",
+                  "light one please",
+                  "light please",
+                  "small",
+                  "little",
+                  "quick",
+                  "easy"
+                ]
+              }
+            },
+            {
+              "id": "MEDIUM",
+              "name": {
+                "value": "medium",
+                "synonyms": [
+                  "middle spot",
+                  "not too easy not too hard",
+                  "a good warm up",
+                  "not too easy",
+                  "in the middle",
+                  "medium please",
+                  "fairly long",
+                  "large",
+                  "big"
+                ]
+              }
+            }
+          ]
+        }
+      ]
+    },
+    "dialog": {
+      "intents": [
+        {
+          "name": "activity_intent",
+          "confirmationRequired": false,
+          "prompts": {},
+          "slots": [
+            {
+              "name": "exercise",
+              "type": "exercise",
+              "confirmationRequired": false,
+              "elicitationRequired": false,
+              "prompts": {}
+            },
+            {
+              "name": "size",
+              "type": "size",
+              "confirmationRequired": false,
+              "elicitationRequired": true,
+              "prompts": {
+                "elicitation": "Elicit.Slot.1224267222685.298655705534"
+              }
+            }
+          ]
+        }
+      ],
+      "delegationStrategy": "SKILL_RESPONSE"
+    },
+    "prompts": [
+      {
+        "id": "Elicit.Slot.1261133036087.1095158037567",
+        "variations": [
+          {
+            "type": "PlainText",
+            "value": "When you {sport} will it be light, medium or hard?"
+          }
+        ]
+      },
+      {
+        "id": "Elicit.Slot.1224267222685.298655705534",
+        "variations": [
+          {
+            "type": "PlainText",
+            "value": "Would you like to do some light, medium or hard exercises?"
+          }
+        ]
+      }
+    ]
+  }
+}
