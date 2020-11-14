@@ -1,7 +1,7 @@
 Terms and Conditions ("Terms")  
 ==============================
 
-Last updated: March 09, 2019
+Last updated: November 14, 2020
 
 Please read these Terms and Conditions ("Terms", "Terms and Conditions")
 carefully before using the Go Fit Alexa Skill (the "Service") developed by Nicholas Taras ("us", "we", or "our").
@@ -19,7 +19,7 @@ Use
 Go Fit is an experimental Alexa skill, designed to help people who wish to do a pre-work out and stretch before taking on
 more strenuous fitness activies or sport. 
 
-When following along to Go Fit, via voice / video stream, ensure you have enough room around you to carry out the moves, and most 
+When following along to Go Fit, ensure you have enough room around you to carry out the moves, and most 
 importantly, you are in good enough fitness to do the exercise. 
 
 Go Fit does not take any liability for any type of damage or injury caused by using the service, please manage the risk of using this application before use.
@@ -32,14 +32,10 @@ Tip: Tell others around you that you are going to need space to exercise.
 Accounts  
 --------
 
-Go Fit allows for an account to be linked to other services.
 We do not store any data with regards to your personal information.
 
 At this time, the only data we collect are logs to ensure our services are up and running.
 When any defects occur the logs help us to find out how an error happended and how we might fix it. 
-
-Your authenticated session with thrid party services are driven through the use of a token, 
-rather than your actual personal user name and password.
 
 Links / Account Linking To Other Web Sites  
 ------------------------------------------
@@ -110,6 +106,6 @@ If you have any questions about these Terms, please contact us.
 
 We hope you enjoy fit.
 
-gofitskill@gmail.com 
+nicktaras83@gmail.com
 
 
