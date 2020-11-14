@@ -11,15 +11,9 @@ Go Fit does not store any personal information.
 
 We respect you, your privacy and we want you to feel safe that you can use Go Fit without being monitored as an individual.
 
-During a session if you choose to link your account we will use your any personal information given during the session only.
+What data is stored and what do we do with it. 
 
-What data is stored and what do we do with it.
-
-When an account is linked we will store an id account reference in our database. 
-This will help us to improve your experience with Go Fit as we deliver new features to the skill over time.
-
-We will use analytics to better understand how people are using the skill, which are the most popular exercises, uses, how it breaks down, so we can fix and improve the 
-application.
+We will use analytics data to better understand how people are using the skill, which are the most popular exercises, uses, how it breaks down, so we can fix and improve the application. This will capture the number of times a skill is used, defects, errors that have occured - no personal information will be kept in this process.
 
 Sensitive Information
 
