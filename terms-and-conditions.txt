@@ -19,12 +19,14 @@ Use
 Go Fit is an experimental Alexa skill, designed to help people who wish to do a pre-work out and stretch before taking on
 more strenuous fitness activies or sport. 
 
+The information in this skill is provided for informational and educational purposes only. It is not a substitute for professional medical advice, treatment or diagnosis. Call your doctor to receive medical advice. If you think you may have a medical emergency, please dial your local emergency response phone number
+
 When following along to Go Fit, ensure you have enough room around you to carry out the moves, and most 
 importantly, you are in good enough fitness to do the exercise. 
 
 Go Fit does not take any liability for any type of damage or injury caused by using the service, please manage the risk of using this application before use.
 
-Tip: If in doubt of how much space you need for and exercise, or if you may injure yourself - listen / watch it through, 
+Tip: If in doubt of how much space you need for and exercise, or if you may injure yourself - listen to the routine before doing the exercises, 
 then ask to repeat the exercise via the prompts given if you feel the exercise poses no risk of injury or damage to your surrounding. 
 
 Tip: Tell others around you that you are going to need space to exercise. 
